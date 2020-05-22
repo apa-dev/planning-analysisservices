@@ -1,0 +1,471 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1500,
+  "model": {
+    "culture": "en-US",
+    "dataSources": [
+      {
+        "type": "structured",
+        "name": "SQL/apadwprod database windows net;apaprod",
+        "connectionDetails": {
+          "protocol": "tds",
+          "address": {
+            "server": "apadwprod.database.windows.net",
+            "database": "apaprod"
+          },
+          "authentication": null,
+          "query": null
+        },
+        "credential": {
+          "AuthenticationKind": "UsernamePassword",
+          "Username": "sqladm",
+          "EncryptConnection": true
+        }
+      }
+    ],
+    "tables": [
+      {
+        "name": "vw_dj_jobs_job",
+        "columns": [
+          {
+            "name": "content_ptr_id",
+            "dataType": "int64",
+            "sourceColumn": "content_ptr_id"
+          },
+          {
+            "name": "user_address_num",
+            "dataType": "int64",
+            "sourceColumn": "user_address_num"
+          },
+          {
+            "name": "address1",
+            "dataType": "string",
+            "sourceColumn": "address1"
+          },
+          {
+            "name": "address2",
+            "dataType": "string",
+            "sourceColumn": "address2"
+          },
+          {
+            "name": "city",
+            "dataType": "string",
+            "sourceColumn": "city"
+          },
+          {
+            "name": "state",
+            "dataType": "string",
+            "sourceColumn": "state"
+          },
+          {
+            "name": "zip_code",
+            "dataType": "string",
+            "sourceColumn": "zip_code"
+          },
+          {
+            "name": "country",
+            "dataType": "string",
+            "sourceColumn": "country"
+          },
+          {
+            "name": "job_type",
+            "dataType": "string",
+            "sourceColumn": "job_type"
+          },
+          {
+            "name": "display_contact_info",
+            "dataType": "boolean",
+            "sourceColumn": "display_contact_info"
+          },
+          {
+            "name": "contact_us_first_name",
+            "dataType": "string",
+            "sourceColumn": "contact_us_first_name"
+          },
+          {
+            "name": "contact_us_last_name",
+            "dataType": "string",
+            "sourceColumn": "contact_us_last_name"
+          },
+          {
+            "name": "contact_us_email",
+            "dataType": "string",
+            "sourceColumn": "contact_us_email"
+          },
+          {
+            "name": "contact_us_phone",
+            "dataType": "string",
+            "sourceColumn": "contact_us_phone"
+          },
+          {
+            "name": "company",
+            "dataType": "string",
+            "sourceColumn": "company"
+          },
+          {
+            "name": "contact_us_address1",
+            "dataType": "string",
+            "sourceColumn": "contact_us_address1"
+          },
+          {
+            "name": "contact_us_address2",
+            "dataType": "string",
+            "sourceColumn": "contact_us_address2"
+          },
+          {
+            "name": "contact_us_city",
+            "dataType": "string",
+            "sourceColumn": "contact_us_city"
+          },
+          {
+            "name": "contact_us_country",
+            "dataType": "string",
+            "sourceColumn": "contact_us_country"
+          },
+          {
+            "name": "contact_us_state",
+            "dataType": "string",
+            "sourceColumn": "contact_us_state"
+          },
+          {
+            "name": "contact_us_user_address_num",
+            "dataType": "int64",
+            "sourceColumn": "contact_us_user_address_num"
+          },
+          {
+            "name": "contact_us_zip_code",
+            "dataType": "string",
+            "sourceColumn": "contact_us_zip_code"
+          },
+          {
+            "name": "salary_range",
+            "dataType": "string",
+            "sourceColumn": "salary_range"
+          },
+          {
+            "name": "post_time",
+            "dataType": "dateTime",
+            "sourceColumn": "post_time"
+          },
+          {
+            "name": "legacy_id",
+            "dataType": "int64",
+            "sourceColumn": "legacy_id"
+          },
+          {
+            "name": "voter_voice_checksum",
+            "dataType": "string",
+            "sourceColumn": "voter_voice_checksum"
+          },
+          {
+            "name": "latitude",
+            "dataType": "double",
+            "sourceColumn": "latitude"
+          },
+          {
+            "name": "longitude",
+            "dataType": "double",
+            "sourceColumn": "longitude"
+          },
+          {
+            "name": "zip_code_extension",
+            "dataType": "string",
+            "sourceColumn": "zip_code_extension"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dj_jobs_job = Source{[Schema=\"dbo\",Item=\"vw_dj_jobs_job\"]}[Data]",
+                "in",
+                "    dbo_vw_dj_jobs_job"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "roles": [
+      {
+        "name": "Admin",
+        "modelPermission": "administrator",
+        "members": [
+          {
+            "memberName": "rwest@planning.org",
+            "memberId": "rwest@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "Morgan.Diestler@rsmus.com",
+            "memberId": "Morgan.Diestler@rsmus.com",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "tjohnson@planning.org",
+            "memberId": "tjohnson@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "plowe@planning.org",
+            "memberId": "plowe@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "cmollet@planning.org",
+            "memberId": "cmollet@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "msullivan@planning.org",
+            "memberId": "msullivan@planning.org",
+            "identityProvider": "AzureAD"
+          }
+        ]
+      },
+      {
+        "name": "SuperUser",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "mferguson@planning.org",
+            "memberId": "mferguson@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "Akrakos@planning.org",
+            "memberId": "Akrakos@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mwalsh@planning.org",
+            "memberId": "mwalsh@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "jrolla@planning.org",
+            "memberId": "jrolla@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "RJassen@planning.org",
+            "memberId": "RJassen@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "balbrecht@planning.org",
+            "memberId": "balbrecht@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "amoore@planning.org",
+            "memberId": "amoore@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "bmissaggia@planning.org",
+            "memberId": "bmissaggia@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mjohnson@planning.org",
+            "memberId": "mjohnson@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "kkazmierczak@planning.org",
+            "memberId": "kkazmierczak@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "crahill@planning.org",
+            "memberId": "crahill@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "MWelch@planning.org",
+            "memberId": "MWelch@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "kschmidt@planning.org",
+            "memberId": "kschmidt@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "klennon@planning.org",
+            "memberId": "klennon@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mjimenez@planning.org",
+            "memberId": "mjimenez@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "llang@planning.org",
+            "memberId": "llang@planning.org",
+            "identityProvider": "AzureAD"
+          }
+        ]
+      },
+      {
+        "name": "Read",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "fbraunstein@planning.org",
+            "memberId": "fbraunstein@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "ewilczek@planning.org",
+            "memberId": "ewilczek@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "Sarteaga@planning.org",
+            "memberId": "Sarteaga@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "rrewers@planning.org",
+            "memberId": "rrewers@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "rhoffman@planning.org",
+            "memberId": "rhoffman@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "kgems@planning.org",
+            "memberId": "kgems@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "rscherzinger@planning.org",
+            "memberId": "rscherzinger@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "epasi@planning.org",
+            "memberId": "epasi@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "CParra@planning.org",
+            "memberId": "CParra@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "rzack@planning.org",
+            "memberId": "rzack@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "chinshaw@planning.org",
+            "memberId": "chinshaw@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mmarrero@planning.org",
+            "memberId": "mmarrero@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "JJordan@planning.org",
+            "memberId": "JJordan@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "ajimenez@planning.org",
+            "memberId": "ajimenez@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "LJorgenson@planning.org",
+            "memberId": "LJorgenson@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "kjacques@planning.org",
+            "memberId": "kjacques@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "bdonegan@planning.org",
+            "memberId": "bdonegan@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "anavarro@planning.org",
+            "memberId": "anavarro@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "wfrench@planning.org",
+            "memberId": "wfrench@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "ynoonoo@planning.org",
+            "memberId": "ynoonoo@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "usaenz@planning.org",
+            "memberId": "usaenz@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mkraus@planning.org",
+            "memberId": "mkraus@planning.org",
+            "identityProvider": "AzureAD"
+          }
+        ],
+        "tablePermissions": [
+          {
+            "name": "vw_dj_jobs_job",
+            "columnPermissions": [
+              {
+                "name": "address1",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "address2",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "zip_code",
+                "metadataPermission": "none"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "600"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}

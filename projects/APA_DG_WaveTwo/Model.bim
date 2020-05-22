@@ -1,0 +1,2427 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1500,
+  "model": {
+    "culture": "en-US",
+    "dataSources": [
+      {
+        "type": "structured",
+        "name": "SQL/apadwprod database windows net;apaprod",
+        "connectionDetails": {
+          "protocol": "tds",
+          "address": {
+            "server": "apadwprod.database.windows.net",
+            "database": "apaprod"
+          },
+          "authentication": null,
+          "query": null
+        },
+        "credential": {
+          "AuthenticationKind": "UsernamePassword",
+          "kind": "SQL",
+          "path": "apadwprod.database.windows.net;apaprod",
+          "Username": "sqladm",
+          "EncryptConnection": true
+        }
+      }
+    ],
+    "tables": [
+      {
+        "name": "vw_dimClaimLogStatus",
+        "columns": [
+          {
+            "name": "LogStatusKey",
+            "dataType": "int64",
+            "sourceColumn": "LogStatusKey"
+          },
+          {
+            "name": "Log_Status",
+            "dataType": "string",
+            "sourceColumn": "Log_Status"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "LastUpdatedby",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedby"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimClaimLogStatus = Source{[Schema=\"dbo\",Item=\"vw_dimClaimLogStatus\"]}[Data]",
+                "in",
+                "    dbo_vw_dimClaimLogStatus"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_dimClaimsFlags",
+        "columns": [
+          {
+            "name": "FlagKey",
+            "dataType": "int64",
+            "sourceColumn": "FlagKey"
+          },
+          {
+            "name": "Verified",
+            "dataType": "boolean",
+            "sourceColumn": "Verified"
+          },
+          {
+            "name": "Is_Speaker",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Speaker"
+          },
+          {
+            "name": "Is_Author",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Author"
+          },
+          {
+            "name": "Self_Reported",
+            "dataType": "boolean",
+            "sourceColumn": "Self_Reported"
+          },
+          {
+            "name": "Is_CarryOver",
+            "dataType": "boolean",
+            "sourceColumn": "Is_CarryOver"
+          },
+          {
+            "name": "Is_Probono",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Probono"
+          },
+          {
+            "name": "Is_Deleted",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Deleted"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "LastUpdatedby",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedby"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimClaimsFlags = Source{[Schema=\"dbo\",Item=\"vw_dimClaimsFlags\"]}[Data]",
+                "in",
+                "    dbo_vw_dimClaimsFlags"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_dimClaimsProduct",
+        "columns": [
+          {
+            "name": "ClaimsProductKey",
+            "dataType": "int64",
+            "sourceColumn": "ClaimsProductKey"
+          },
+          {
+            "name": "ClaimsProduct_Major",
+            "dataType": "string",
+            "sourceColumn": "ClaimsProduct_Major"
+          },
+          {
+            "name": "ClaimsProduct_Minor",
+            "dataType": "string",
+            "sourceColumn": "ClaimsProduct_Minor"
+          },
+          {
+            "name": "ClaimsProduct_Description",
+            "dataType": "string",
+            "sourceColumn": "ClaimsProduct_Description"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "LastUpdatedby",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedby"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimClaimsProduct = Source{[Schema=\"dbo\",Item=\"vw_dimClaimsProduct\"]}[Data]",
+                "in",
+                "    dbo_vw_dimClaimsProduct"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_dimCMPeriod",
+        "columns": [
+          {
+            "name": "CMPeriodKey",
+            "dataType": "int64",
+            "sourceColumn": "CMPeriodKey"
+          },
+          {
+            "name": "CM_PeriodCode",
+            "dataType": "string",
+            "sourceColumn": "CM_PeriodCode"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "LastUpdatedby",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedby"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimCMPeriod = Source{[Schema=\"dbo\",Item=\"vw_dimCMPeriod\"]}[Data]",
+                "in",
+                "    dbo_vw_dimCMPeriod"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_dimDate",
+        "columns": [
+          {
+            "name": "Date_Key",
+            "dataType": "int64",
+            "sourceColumn": "Date_Key"
+          },
+          {
+            "name": "date",
+            "dataType": "dateTime",
+            "sourceColumn": "date"
+          },
+          {
+            "name": "Day",
+            "dataType": "int64",
+            "sourceColumn": "Day"
+          },
+          {
+            "name": "FiscalMonth",
+            "dataType": "int64",
+            "sourceColumn": "FiscalMonth"
+          },
+          {
+            "name": "FiscalQuarter",
+            "dataType": "int64",
+            "sourceColumn": "FiscalQuarter"
+          },
+          {
+            "name": "FiscalYear",
+            "dataType": "int64",
+            "sourceColumn": "FiscalYear"
+          },
+          {
+            "name": "CalendarMonth",
+            "dataType": "int64",
+            "sourceColumn": "CalendarMonth"
+          },
+          {
+            "name": "CalendarQuarter",
+            "dataType": "int64",
+            "sourceColumn": "CalendarQuarter"
+          },
+          {
+            "name": "CalendarYear",
+            "dataType": "int64",
+            "sourceColumn": "CalendarYear"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimDate = Source{[Schema=\"dbo\",Item=\"vw_dimDate\"]}[Data]",
+                "in",
+                "    dbo_vw_dimDate"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_dimDate_PaidThru",
+        "columns": [
+          {
+            "name": "Date_Key",
+            "dataType": "int64",
+            "sourceColumn": "Date_Key"
+          },
+          {
+            "name": "date",
+            "dataType": "dateTime",
+            "sourceColumn": "date"
+          },
+          {
+            "name": "Day",
+            "dataType": "int64",
+            "sourceColumn": "Day"
+          },
+          {
+            "name": "FiscalMonth",
+            "dataType": "int64",
+            "sourceColumn": "FiscalMonth"
+          },
+          {
+            "name": "FiscalQuarter",
+            "dataType": "int64",
+            "sourceColumn": "FiscalQuarter"
+          },
+          {
+            "name": "FiscalYear",
+            "dataType": "int64",
+            "sourceColumn": "FiscalYear"
+          },
+          {
+            "name": "CalendarMonth",
+            "dataType": "int64",
+            "sourceColumn": "CalendarMonth"
+          },
+          {
+            "name": "CalendarQuarter",
+            "dataType": "int64",
+            "sourceColumn": "CalendarQuarter"
+          },
+          {
+            "name": "CalendarYear",
+            "dataType": "int64",
+            "sourceColumn": "CalendarYear"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimDate_PaidThru = Source{[Schema=\"dbo\",Item=\"vw_dimDate_PaidThru\"]}[Data]",
+                "in",
+                "    dbo_vw_dimDate_PaidThru"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_dimMember",
+        "columns": [
+          {
+            "name": "MemberIDKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberIDKey"
+          },
+          {
+            "name": "Parent",
+            "dataType": "string",
+            "sourceColumn": "Parent"
+          },
+          {
+            "name": "Member_ID",
+            "dataType": "string",
+            "sourceColumn": "Member_ID"
+          },
+          {
+            "name": "First_Name",
+            "dataType": "string",
+            "sourceColumn": "First_Name"
+          },
+          {
+            "name": "Middle_Name",
+            "dataType": "string",
+            "sourceColumn": "Middle_Name"
+          },
+          {
+            "name": "Last_Name",
+            "dataType": "string",
+            "sourceColumn": "Last_Name"
+          },
+          {
+            "name": "Full_Name",
+            "dataType": "string",
+            "sourceColumn": "Full_Name"
+          },
+          {
+            "name": "Email",
+            "dataType": "string",
+            "sourceColumn": "Email"
+          },
+          {
+            "name": "Home_Phone",
+            "dataType": "string",
+            "sourceColumn": "Home_Phone"
+          },
+          {
+            "name": "Mobile_Phone",
+            "dataType": "string",
+            "sourceColumn": "Mobile_Phone"
+          },
+          {
+            "name": "Work_Phone",
+            "dataType": "string",
+            "sourceColumn": "Work_Phone"
+          },
+          {
+            "name": "Designation",
+            "dataType": "string",
+            "sourceColumn": "Designation"
+          },
+          {
+            "name": "Functional_Title",
+            "dataType": "string",
+            "sourceColumn": "Functional_Title"
+          },
+          {
+            "name": "Birth_Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Birth_Date"
+          },
+          {
+            "name": "JoinDate",
+            "dataType": "dateTime",
+            "sourceColumn": "JoinDate"
+          },
+          {
+            "name": "Cohort",
+            "dataType": "string",
+            "sourceColumn": "Cohort"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate"
+          },
+          {
+            "name": "Merged_Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Merged_Date"
+          },
+          {
+            "name": "Cohortquarter",
+            "dataType": "string",
+            "sourceColumn": "Cohortquarter"
+          },
+          {
+            "name": "Cohort_MemberType",
+            "dataType": "string",
+            "sourceColumn": "Cohort_MemberType"
+          },
+          {
+            "name": "Isactive",
+            "dataType": "boolean",
+            "sourceColumn": "Isactive"
+          },
+          {
+            "name": "AICP_START",
+            "dataType": "dateTime",
+            "sourceColumn": "AICP_START"
+          },
+          {
+            "name": "CO_ID",
+            "dataType": "string",
+            "sourceColumn": "CO_ID"
+          },
+          {
+            "name": "Date_Added",
+            "dataType": "dateTime",
+            "sourceColumn": "Date_Added"
+          },
+          {
+            "type": "calculated",
+            "name": "_Designation",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": [
+              " if('vw_dimMember'[Designation]=\"AICP CANDIDATE\", \"AICP CANDIDATE\", ",
+              "if('vw_dimMember'[Designation]in {\"AICP\", \"AICP Candidate\", \"AICP CEP\", \"AICP CEP CTP\", \"AICP CEP CUD\", \"AICP CTP\",",
+              "\"AICP CUD\", \"AICP, AICP CUD\", \"AICP, CTP\"}, \"AICP\",",
+              "if('vw_dimMember'[Designation] in {\"FAICP\", \"FAICP CTP\", \"FAICP CTP CEP\", \"FAICP CUD\"}, \"FAICP\", \"Unmapped\")))"
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimMember = Source{[Schema=\"dbo\",Item=\"vw_dimMember\"]}[Data]",
+                "in",
+                "    dbo_vw_dimMember"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "_AICPStartNoDesignation",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT(vw_dimMember[Member_ID]),",
+              "FILTER(vw_dimMember, vw_dimMember[AICP_START] <> BLANK()), ",
+              "FILTER(vw_dimMember, vw_dimMember[_Designation] = BLANK()))"
+            ]
+          },
+          {
+            "name": "_AICPPaidThruNull",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT(vw_dimMember[Member_ID]),",
+              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] = BLANK()), ",
+              "FILTER(vw_dimMember, vw_dimMember[_Designation] = \"AICP\"))"
+            ]
+          },
+          {
+            "name": "_AICPPaidThruNoStart",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT(vw_dimMember[Member_ID]),",
+              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] <> BLANK()), ",
+              "FILTER(vw_dimMember, vw_dimMember[AICP_START] = BLANK()), ",
+              "FILTER(vw_dimMember, vw_dimMember[_Designation] = \"AICP\"))"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "vw_dimProductCode",
+        "columns": [
+          {
+            "name": "ProductCodeKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductCodeKey"
+          },
+          {
+            "name": "ParentID",
+            "dataType": "string",
+            "sourceColumn": "ParentID"
+          },
+          {
+            "name": "Product_Code",
+            "dataType": "string",
+            "sourceColumn": "Product_Code"
+          },
+          {
+            "name": "Product_Major",
+            "dataType": "string",
+            "sourceColumn": "Product_Major"
+          },
+          {
+            "name": "Product_Minor",
+            "dataType": "string",
+            "sourceColumn": "Product_Minor"
+          },
+          {
+            "name": "Title",
+            "dataType": "string",
+            "sourceColumn": "Title"
+          },
+          {
+            "name": "Description",
+            "dataType": "string",
+            "sourceColumn": "Description"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate"
+          },
+          {
+            "name": "Prod_Type",
+            "dataType": "string",
+            "sourceColumn": "Prod_Type"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimProductCode = Source{[Schema=\"dbo\",Item=\"vw_dimProductCode\"]}[Data]",
+                "in",
+                "    dbo_vw_dimProductCode"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_dimMemberType",
+        "columns": [
+          {
+            "name": "MemberTypeIDKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberTypeIDKey"
+          },
+          {
+            "name": "Member_Type",
+            "dataType": "string",
+            "sourceColumn": "Member_Type"
+          },
+          {
+            "name": "Description",
+            "dataType": "string",
+            "sourceColumn": "Description"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate"
+          },
+          {
+            "name": "Member_Record",
+            "dataType": "boolean",
+            "sourceColumn": "Member_Record"
+          },
+          {
+            "name": "Company_Record",
+            "dataType": "boolean",
+            "sourceColumn": "Company_Record"
+          },
+          {
+            "name": "Dues_Code_1",
+            "dataType": "string",
+            "sourceColumn": "Dues_Code_1"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimMemberType = Source{[Schema=\"dbo\",Item=\"vw_dimMemberType\"]}[Data]",
+                "in",
+                "    dbo_vw_dimMemberType"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_dimRegistrantStatus",
+        "columns": [
+          {
+            "name": "RegistrantStatusKey",
+            "dataType": "int64",
+            "sourceColumn": "RegistrantStatusKey"
+          },
+          {
+            "name": "Registrant_Status",
+            "dataType": "string",
+            "sourceColumn": "Registrant_Status"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimRegistrantStatus = Source{[Schema=\"dbo\",Item=\"vw_dimRegistrantStatus\"]}[Data]",
+                "in",
+                "    dbo_vw_dimRegistrantStatus"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_dimRegistrantClass",
+        "columns": [
+          {
+            "name": "RegistrantClassKey",
+            "dataType": "int64",
+            "sourceColumn": "RegistrantClassKey"
+          },
+          {
+            "name": "Registrant_Class",
+            "dataType": "string",
+            "sourceColumn": "Registrant_Class"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimRegistrantClass = Source{[Schema=\"dbo\",Item=\"vw_dimRegistrantClass\"]}[Data]",
+                "in",
+                "    dbo_vw_dimRegistrantClass"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_dimStatus",
+        "columns": [
+          {
+            "name": "StatusKey",
+            "dataType": "int64",
+            "sourceColumn": "StatusKey"
+          },
+          {
+            "name": "Status",
+            "dataType": "string",
+            "sourceColumn": "Status"
+          },
+          {
+            "name": "Gender",
+            "dataType": "string",
+            "sourceColumn": "Gender"
+          },
+          {
+            "name": "Category",
+            "dataType": "string",
+            "sourceColumn": "Category"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimStatus = Source{[Schema=\"dbo\",Item=\"vw_dimStatus\"]}[Data]",
+                "in",
+                "    dbo_vw_dimStatus"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_FactClaims",
+        "columns": [
+          {
+            "name": "ID_Claim",
+            "dataType": "int64",
+            "sourceColumn": "ID_Claim"
+          },
+          {
+            "name": "LogStatusKey",
+            "dataType": "int64",
+            "sourceColumn": "LogStatusKey"
+          },
+          {
+            "name": "CMPeriodKey",
+            "dataType": "int64",
+            "sourceColumn": "CMPeriodKey"
+          },
+          {
+            "name": "ProductIDKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductIDKey"
+          },
+          {
+            "name": "FlagKey",
+            "dataType": "int64",
+            "sourceColumn": "FlagKey"
+          },
+          {
+            "name": "MemberIDKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberIDKey"
+          },
+          {
+            "name": "Credits",
+            "dataType": "double",
+            "sourceColumn": "Credits"
+          },
+          {
+            "name": "Law_Credits",
+            "dataType": "double",
+            "sourceColumn": "Law_Credits"
+          },
+          {
+            "name": "Ethics_Credits",
+            "dataType": "double",
+            "sourceColumn": "Ethics_Credits"
+          },
+          {
+            "name": "SubmittedDateKey",
+            "dataType": "int64",
+            "sourceColumn": "SubmittedDateKey"
+          },
+          {
+            "name": "MemberTypeKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberTypeKey"
+          },
+          {
+            "name": "ChapterKey",
+            "dataType": "int64",
+            "sourceColumn": "ChapterKey"
+          },
+          {
+            "name": "SalaryKey",
+            "dataType": "int64",
+            "sourceColumn": "SalaryKey"
+          },
+          {
+            "name": "RaceKey",
+            "dataType": "int64",
+            "sourceColumn": "RaceKey"
+          },
+          {
+            "name": "StatusKey",
+            "dataType": "int64",
+            "sourceColumn": "StatusKey"
+          },
+          {
+            "name": "MemberStatusKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberStatusKey"
+          },
+          {
+            "name": "Addressnum1key",
+            "dataType": "int64",
+            "sourceColumn": "Addressnum1key"
+          },
+          {
+            "name": "Addressnum2key",
+            "dataType": "int64",
+            "sourceColumn": "Addressnum2key"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "LastUpdatedby",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedby"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_FactClaims = Source{[Schema=\"dbo\",Item=\"vw_FactClaims\"]}[Data]",
+                "in",
+                "    dbo_vw_FactClaims"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_tbl_Fact_Registrations",
+        "columns": [
+          {
+            "name": "Seqn",
+            "dataType": "int64",
+            "sourceColumn": "Seqn"
+          },
+          {
+            "name": "MemberIDKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberIDKey"
+          },
+          {
+            "name": "ProductCodeKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductCodeKey"
+          },
+          {
+            "name": "Order_Number",
+            "dataType": "int64",
+            "sourceColumn": "Order_Number"
+          },
+          {
+            "name": "Line_Number",
+            "dataType": "int64",
+            "sourceColumn": "Line_Number"
+          },
+          {
+            "name": "Quantity_Ordered",
+            "dataType": "double",
+            "sourceColumn": "Quantity_Ordered"
+          },
+          {
+            "name": "Quantity_Shipped",
+            "dataType": "double",
+            "sourceColumn": "Quantity_Shipped"
+          },
+          {
+            "name": "Quantity_Backordered",
+            "dataType": "double",
+            "sourceColumn": "Quantity_Backordered"
+          },
+          {
+            "name": "Unit_Price",
+            "dataType": "decimal",
+            "sourceColumn": "Unit_Price"
+          },
+          {
+            "name": "MemberTypeIDKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberTypeIDKey"
+          },
+          {
+            "name": "SalaryIDKey",
+            "dataType": "int64",
+            "sourceColumn": "SalaryIDKey"
+          },
+          {
+            "name": "RaceIDKey",
+            "dataType": "int64",
+            "sourceColumn": "RaceIDKey"
+          },
+          {
+            "name": "StatusKey",
+            "dataType": "int64",
+            "sourceColumn": "StatusKey"
+          },
+          {
+            "name": "RegistrantStatusKey",
+            "dataType": "int64",
+            "sourceColumn": "RegistrantStatusKey"
+          },
+          {
+            "name": "RegistrationClassKey",
+            "dataType": "int64",
+            "sourceColumn": "RegistrationClassKey"
+          },
+          {
+            "name": "ChapterKey",
+            "dataType": "int64",
+            "sourceColumn": "ChapterKey"
+          },
+          {
+            "name": "MemberStatus_Key",
+            "dataType": "int64",
+            "sourceColumn": "MemberStatus_Key"
+          },
+          {
+            "name": "Address_Num1_Key",
+            "dataType": "int64",
+            "sourceColumn": "Address_Num1_Key"
+          },
+          {
+            "name": "Address_Num2_Key",
+            "dataType": "int64",
+            "sourceColumn": "Address_Num2_Key"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_tbl_Fact_Registrations = Source{[Schema=\"dbo\",Item=\"vw_tbl_Fact_Registrations\"]}[Data]",
+                "in",
+                "    dbo_vw_tbl_Fact_Registrations"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_tblFactMember_IS",
+        "columns": [
+          {
+            "name": "MemberIDKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberIDKey"
+          },
+          {
+            "name": "ProductTypeKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductTypeKey"
+          },
+          {
+            "name": "ProductCodeKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductCodeKey"
+          },
+          {
+            "name": "MemberTypeIDKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberTypeIDKey"
+          },
+          {
+            "name": "SalaryIDKey",
+            "dataType": "int64",
+            "sourceColumn": "SalaryIDKey"
+          },
+          {
+            "name": "RaceIDKey",
+            "dataType": "int64",
+            "sourceColumn": "RaceIDKey"
+          },
+          {
+            "name": "OrgKey",
+            "dataType": "int64",
+            "sourceColumn": "OrgKey"
+          },
+          {
+            "name": "ChapterKey",
+            "dataType": "int64",
+            "sourceColumn": "ChapterKey"
+          },
+          {
+            "name": "Trans_Date_Key",
+            "dataType": "int64",
+            "sourceColumn": "Trans_Date_Key"
+          },
+          {
+            "name": "Paid_Through_Key",
+            "dataType": "int64",
+            "sourceColumn": "Paid_Through_Key"
+          },
+          {
+            "name": "Home_Address_Key",
+            "dataType": "int64",
+            "sourceColumn": "Home_Address_Key"
+          },
+          {
+            "name": "Work_Address_Key",
+            "dataType": "int64",
+            "sourceColumn": "Work_Address_Key"
+          },
+          {
+            "name": "StatusKey",
+            "dataType": "int64",
+            "sourceColumn": "StatusKey"
+          },
+          {
+            "name": "MemberStatusKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberStatusKey"
+          },
+          {
+            "name": "IsCurrent",
+            "dataType": "boolean",
+            "sourceColumn": "IsCurrent"
+          },
+          {
+            "name": "member_id",
+            "dataType": "string",
+            "sourceColumn": "member_id"
+          },
+          {
+            "name": "address_num",
+            "dataType": "int64",
+            "sourceColumn": "address_num"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_tblFactMember_IS = Source{[Schema=\"dbo\",Item=\"vw_tblFactMember_IS\"]}[Data]",
+                "in",
+                "    dbo_vw_tblFactMember_IS"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_stg_Fact_Claims",
+        "columns": [
+          {
+            "name": "ID_Claim",
+            "dataType": "int64",
+            "sourceColumn": "ID_Claim"
+          },
+          {
+            "name": "Log_Status",
+            "dataType": "string",
+            "sourceColumn": "Log_Status"
+          },
+          {
+            "name": "CM_Period_Code",
+            "dataType": "string",
+            "sourceColumn": "CM_Period_Code"
+          },
+          {
+            "name": "Member_ID",
+            "dataType": "string",
+            "sourceColumn": "Member_ID"
+          },
+          {
+            "name": "Product_Major",
+            "dataType": "string",
+            "sourceColumn": "Product_Major"
+          },
+          {
+            "name": "Product_Minor",
+            "dataType": "string",
+            "sourceColumn": "Product_Minor"
+          },
+          {
+            "name": "Verified",
+            "dataType": "boolean",
+            "sourceColumn": "Verified"
+          },
+          {
+            "name": "Credits",
+            "dataType": "double",
+            "sourceColumn": "Credits"
+          },
+          {
+            "name": "Law_Credits",
+            "dataType": "double",
+            "sourceColumn": "Law_Credits"
+          },
+          {
+            "name": "Ethics_Credits",
+            "dataType": "double",
+            "sourceColumn": "Ethics_Credits"
+          },
+          {
+            "name": "Is_Speaker",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Speaker"
+          },
+          {
+            "name": "Is_Author",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Author"
+          },
+          {
+            "name": "Self_Reported",
+            "dataType": "boolean",
+            "sourceColumn": "Self_Reported"
+          },
+          {
+            "name": "Is_CarryOver",
+            "dataType": "boolean",
+            "sourceColumn": "Is_CarryOver"
+          },
+          {
+            "name": "Is_Probono",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Probono"
+          },
+          {
+            "name": "Is_Deleted",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Deleted"
+          },
+          {
+            "name": "Submitted_Time",
+            "dataType": "dateTime",
+            "sourceColumn": "Submitted_Time"
+          },
+          {
+            "name": "Member_Type",
+            "dataType": "string",
+            "sourceColumn": "Member_Type"
+          },
+          {
+            "name": "Salary_Range",
+            "dataType": "string",
+            "sourceColumn": "Salary_Range"
+          },
+          {
+            "name": "Race_ID",
+            "dataType": "string",
+            "sourceColumn": "Race_ID"
+          },
+          {
+            "name": "Origin",
+            "dataType": "string",
+            "sourceColumn": "Origin"
+          },
+          {
+            "name": "Primary_Chapter",
+            "dataType": "string",
+            "sourceColumn": "Primary_Chapter"
+          },
+          {
+            "name": "Gender",
+            "dataType": "string",
+            "sourceColumn": "Gender"
+          },
+          {
+            "name": "Status",
+            "dataType": "string",
+            "sourceColumn": "Status"
+          },
+          {
+            "name": "Category",
+            "dataType": "string",
+            "sourceColumn": "Category"
+          },
+          {
+            "name": "Member_Status",
+            "dataType": "string",
+            "sourceColumn": "Member_Status"
+          },
+          {
+            "name": "Address_Num1",
+            "dataType": "int64",
+            "sourceColumn": "Address_Num1"
+          },
+          {
+            "name": "Address_Num2",
+            "dataType": "int64",
+            "sourceColumn": "Address_Num2"
+          },
+          {
+            "name": "Lastupdated",
+            "dataType": "dateTime",
+            "sourceColumn": "Lastupdated"
+          },
+          {
+            "name": "LastModifiedBy",
+            "dataType": "string",
+            "sourceColumn": "LastModifiedBy"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_stg_Fact_Claims = Source{[Schema=\"dbo\",Item=\"vw_stg_Fact_Claims\"]}[Data]",
+                "in",
+                "    dbo_vw_stg_Fact_Claims"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "_selfreportedclaims",
+            "expression": [
+              "CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
+              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Self_Reported]=TRUE() && ",
+              "vw_stg_Fact_Claims[Verified]=TRUE() &&",
+              "vw_stg_Fact_Claims[Credits]>8))"
+            ]
+          },
+          {
+            "name": "_AICPNoReporting",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
+              "FILTER(vw_dimMember, vw_dimMember[Designation] = \"AICP\"), ",
+              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[CM_Period_Code] = BLANK()),",
+              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] = \"A\"))"
+            ]
+          },
+          {
+            "name": "_NotRetExemption",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
+              "FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] <> \"RET\"),",
+              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] = \"E_01\"))"
+            ]
+          },
+          {
+            "name": "_RetExemption",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
+              "FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] = \"RET\"),",
+              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] <> \"E_01\"))"
+            ]
+          },
+          {
+            "name": "_NotLifeExemption",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
+              "FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] = \"LIFE\"),",
+              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] <> \"E_12\"))"
+            ]
+          },
+          {
+            "name": "_UnEmployedExemption",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
+              "FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] = \"MEM\"),",
+              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] = \"E_02\"))"
+            ]
+          },
+          {
+            "name": "_ActiveNoReportingPeriod",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
+              "FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] = \"MEM\"),",
+              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] >= TODAY()),",
+              "FILTER(vw_dimStatus, vw_dimStatus[Status] = \"A\"),",
+              "FILTER(vw_dimProductCode, vw_dimProductCode[Product_Code] = \"APA\"),",
+              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] <> \"A\"))"
+            ]
+          },
+          {
+            "name": "_MoreActivePeriod",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
+              "FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] = \"MEM\"),",
+              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] >= TODAY()),",
+              "FILTER(vw_dimStatus, vw_dimStatus[Status] = \"A\"),",
+              "FILTER(vw_dimProductCode, vw_dimProductCode[Product_Code] = \"APA\"),",
+              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] = \"A\"),",
+              "FILTER(vw_stg_Fact_Claims, COUNT(vw_stg_Fact_Claims[Log_Status]) > 2))"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "stg dj_jobs_job",
+        "columns": [
+          {
+            "name": "content_ptr_id",
+            "dataType": "int64",
+            "sourceColumn": "content_ptr_id"
+          },
+          {
+            "name": "user_address_num",
+            "dataType": "int64",
+            "sourceColumn": "user_address_num"
+          },
+          {
+            "name": "address1",
+            "dataType": "string",
+            "sourceColumn": "address1"
+          },
+          {
+            "name": "address2",
+            "dataType": "string",
+            "sourceColumn": "address2"
+          },
+          {
+            "name": "city",
+            "dataType": "string",
+            "sourceColumn": "city"
+          },
+          {
+            "name": "state",
+            "dataType": "string",
+            "sourceColumn": "state"
+          },
+          {
+            "name": "zip_code",
+            "dataType": "string",
+            "sourceColumn": "zip_code"
+          },
+          {
+            "name": "country",
+            "dataType": "string",
+            "sourceColumn": "country"
+          },
+          {
+            "name": "job_type",
+            "dataType": "string",
+            "sourceColumn": "job_type"
+          },
+          {
+            "name": "display_contact_info",
+            "dataType": "boolean",
+            "sourceColumn": "display_contact_info"
+          },
+          {
+            "name": "contact_us_first_name",
+            "dataType": "string",
+            "sourceColumn": "contact_us_first_name"
+          },
+          {
+            "name": "contact_us_last_name",
+            "dataType": "string",
+            "sourceColumn": "contact_us_last_name"
+          },
+          {
+            "name": "contact_us_email",
+            "dataType": "string",
+            "sourceColumn": "contact_us_email"
+          },
+          {
+            "name": "contact_us_phone",
+            "dataType": "string",
+            "sourceColumn": "contact_us_phone"
+          },
+          {
+            "name": "company",
+            "dataType": "string",
+            "sourceColumn": "company"
+          },
+          {
+            "name": "contact_us_address1",
+            "dataType": "string",
+            "sourceColumn": "contact_us_address1"
+          },
+          {
+            "name": "contact_us_address2",
+            "dataType": "string",
+            "sourceColumn": "contact_us_address2"
+          },
+          {
+            "name": "contact_us_city",
+            "dataType": "string",
+            "sourceColumn": "contact_us_city"
+          },
+          {
+            "name": "contact_us_country",
+            "dataType": "string",
+            "sourceColumn": "contact_us_country"
+          },
+          {
+            "name": "contact_us_state",
+            "dataType": "string",
+            "sourceColumn": "contact_us_state"
+          },
+          {
+            "name": "contact_us_user_address_num",
+            "dataType": "int64",
+            "sourceColumn": "contact_us_user_address_num"
+          },
+          {
+            "name": "contact_us_zip_code",
+            "dataType": "string",
+            "sourceColumn": "contact_us_zip_code"
+          },
+          {
+            "name": "salary_range",
+            "dataType": "string",
+            "sourceColumn": "salary_range"
+          },
+          {
+            "name": "post_time",
+            "dataType": "dateTime",
+            "sourceColumn": "post_time"
+          },
+          {
+            "name": "legacy_id",
+            "dataType": "int64",
+            "sourceColumn": "legacy_id"
+          },
+          {
+            "name": "voter_voice_checksum",
+            "dataType": "string",
+            "sourceColumn": "voter_voice_checksum"
+          },
+          {
+            "name": "latitude",
+            "dataType": "double",
+            "sourceColumn": "latitude"
+          },
+          {
+            "name": "longitude",
+            "dataType": "double",
+            "sourceColumn": "longitude"
+          },
+          {
+            "name": "zip_code_extension",
+            "dataType": "string",
+            "sourceColumn": "zip_code_extension"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    stg_dj_jobs_job = Source{[Schema=\"stg\",Item=\"dj_jobs_job\"]}[Data]",
+                "in",
+                "    stg_dj_jobs_job"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "_NullContactUsPhone",
+            "expression": [
+              "CALCULATE(COUNTROWS('stg dj_jobs_job'),'stg dj_jobs_job'[contact_us_phone] = BLANK())",
+              ""
+            ]
+          },
+          {
+            "name": "_NullSalaryRange",
+            "expression": [
+              "CALCULATE(COUNTROWS('stg dj_jobs_job'),'stg dj_jobs_job'[salary_range] = BLANK())",
+              ""
+            ]
+          },
+          {
+            "name": "_NullCity",
+            "expression": [
+              "CALCULATE(COUNTROWS('stg dj_jobs_job'),'stg dj_jobs_job'[city] = BLANK())",
+              ""
+            ]
+          },
+          {
+            "name": "_NullAddress1",
+            "expression": [
+              "CALCULATE(COUNTROWS('stg dj_jobs_job'),'stg dj_jobs_job'[address1] = BLANK())",
+              ""
+            ]
+          },
+          {
+            "name": "_NullCountry",
+            "expression": [
+              "CALCULATE(COUNTROWS('stg dj_jobs_job'),'stg dj_jobs_job'[country] = BLANK())",
+              ""
+            ]
+          },
+          {
+            "name": "_NullContactUsEmail",
+            "expression": [
+              "CALCULATE(COUNTROWS('stg dj_jobs_job'),'stg dj_jobs_job'[contact_us_email] = BLANK())",
+              ""
+            ]
+          },
+          {
+            "name": "_NullCompany",
+            "expression": [
+              "CALCULATE(COUNTROWS('stg dj_jobs_job'),'stg dj_jobs_job'[company] = BLANK())",
+              ""
+            ]
+          },
+          {
+            "name": "_NullState",
+            "expression": [
+              "CALCULATE(COUNTROWS('stg dj_jobs_job'),'stg dj_jobs_job'[state] = BLANK())",
+              ""
+            ]
+          },
+          {
+            "name": "_NullJobType",
+            "expression": [
+              "CALCULATE(COUNTROWS('stg dj_jobs_job'),'stg dj_jobs_job'[job_type] = BLANK())",
+              ""
+            ]
+          }
+        ]
+      },
+      {
+        "name": "vw_DJ_IMIS_UserMapping",
+        "columns": [
+          {
+            "name": "member_ID",
+            "dataType": "string",
+            "sourceColumn": "member_ID"
+          },
+          {
+            "name": "contact_ID",
+            "dataType": "int64",
+            "sourceColumn": "contact_ID"
+          },
+          {
+            "name": "contact_type",
+            "dataType": "string",
+            "sourceColumn": "contact_type"
+          },
+          {
+            "name": "status",
+            "dataType": "string",
+            "sourceColumn": "status"
+          },
+          {
+            "name": "address_type",
+            "dataType": "string",
+            "sourceColumn": "address_type"
+          },
+          {
+            "name": "address1",
+            "dataType": "string",
+            "sourceColumn": "address1"
+          },
+          {
+            "name": "address2",
+            "dataType": "string",
+            "sourceColumn": "address2"
+          },
+          {
+            "name": "city",
+            "dataType": "string",
+            "sourceColumn": "city"
+          },
+          {
+            "name": "state",
+            "dataType": "string",
+            "sourceColumn": "state"
+          },
+          {
+            "name": "zip_code",
+            "dataType": "string",
+            "sourceColumn": "zip_code"
+          },
+          {
+            "name": "country",
+            "dataType": "string",
+            "sourceColumn": "country"
+          },
+          {
+            "name": "user_address_num",
+            "dataType": "int64",
+            "sourceColumn": "user_address_num"
+          },
+          {
+            "name": "title",
+            "dataType": "string",
+            "sourceColumn": "title"
+          },
+          {
+            "name": "prefix_name",
+            "dataType": "string",
+            "sourceColumn": "prefix_name"
+          },
+          {
+            "name": "first_name",
+            "dataType": "string",
+            "sourceColumn": "first_name"
+          },
+          {
+            "name": "middle_name",
+            "dataType": "string",
+            "sourceColumn": "middle_name"
+          },
+          {
+            "name": "last_name",
+            "dataType": "string",
+            "sourceColumn": "last_name"
+          },
+          {
+            "name": "suffix_name",
+            "dataType": "string",
+            "sourceColumn": "suffix_name"
+          },
+          {
+            "name": "designation",
+            "dataType": "string",
+            "sourceColumn": "designation"
+          },
+          {
+            "name": "salary_range",
+            "dataType": "string",
+            "sourceColumn": "salary_range"
+          },
+          {
+            "name": "chapter",
+            "dataType": "string",
+            "sourceColumn": "chapter"
+          },
+          {
+            "name": "secondary_email",
+            "dataType": "string",
+            "sourceColumn": "secondary_email"
+          },
+          {
+            "name": "secondary_phone",
+            "dataType": "string",
+            "sourceColumn": "secondary_phone"
+          },
+          {
+            "name": "latitude",
+            "dataType": "double",
+            "sourceColumn": "latitude"
+          },
+          {
+            "name": "longitude",
+            "dataType": "double",
+            "sourceColumn": "longitude"
+          },
+          {
+            "name": "voter_voice_checksum",
+            "dataType": "string",
+            "sourceColumn": "voter_voice_checksum"
+          },
+          {
+            "name": "phone",
+            "dataType": "string",
+            "sourceColumn": "phone"
+          },
+          {
+            "name": "cell_phone",
+            "dataType": "string",
+            "sourceColumn": "cell_phone"
+          },
+          {
+            "name": "email",
+            "dataType": "string",
+            "sourceColumn": "email"
+          },
+          {
+            "name": "job_title",
+            "dataType": "string",
+            "sourceColumn": "job_title"
+          },
+          {
+            "name": "member_type",
+            "dataType": "string",
+            "sourceColumn": "member_type"
+          },
+          {
+            "name": "company",
+            "dataType": "string",
+            "sourceColumn": "company"
+          },
+          {
+            "name": "birth_date",
+            "dataType": "dateTime",
+            "sourceColumn": "birth_date"
+          },
+          {
+            "name": "bio",
+            "dataType": "string",
+            "sourceColumn": "bio"
+          },
+          {
+            "name": "about_me",
+            "dataType": "string",
+            "sourceColumn": "about_me"
+          },
+          {
+            "name": "personal_url",
+            "dataType": "string",
+            "sourceColumn": "personal_url"
+          },
+          {
+            "name": "linkedin_url",
+            "dataType": "string",
+            "sourceColumn": "linkedin_url"
+          },
+          {
+            "name": "facebook_url",
+            "dataType": "string",
+            "sourceColumn": "facebook_url"
+          },
+          {
+            "name": "instagram_url",
+            "dataType": "string",
+            "sourceColumn": "instagram_url"
+          },
+          {
+            "name": "slug",
+            "dataType": "string",
+            "sourceColumn": "slug"
+          },
+          {
+            "name": "pas_type",
+            "dataType": "string",
+            "sourceColumn": "pas_type"
+          },
+          {
+            "name": "ein_number",
+            "dataType": "string",
+            "sourceColumn": "ein_number"
+          },
+          {
+            "name": "organization_type",
+            "dataType": "string",
+            "sourceColumn": "organization_type"
+          },
+          {
+            "name": "parent_organization_id",
+            "dataType": "int64",
+            "sourceColumn": "parent_organization_id"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_DJ_IMIS_UserMapping = Source{[Schema=\"dbo\",Item=\"vw_DJ_IMIS_UserMapping\"]}[Data]",
+                "in",
+                "    dbo_vw_DJ_IMIS_UserMapping"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "ad1d9035-f7d5-4885-aefa-d3232ebe21ee",
+        "fromTable": "vw_FactClaims",
+        "fromColumn": "LogStatusKey",
+        "toTable": "vw_dimClaimLogStatus",
+        "toColumn": "LogStatusKey"
+      },
+      {
+        "name": "2af640da-72a8-4a29-83e7-740ee5d4022f",
+        "fromTable": "vw_FactClaims",
+        "fromColumn": "FlagKey",
+        "toTable": "vw_dimClaimsFlags",
+        "toColumn": "FlagKey"
+      },
+      {
+        "name": "17d338a6-8fac-46fd-a244-4a8903cc1f9e",
+        "fromTable": "vw_FactClaims",
+        "fromColumn": "CMPeriodKey",
+        "toTable": "vw_dimCMPeriod",
+        "toColumn": "CMPeriodKey"
+      },
+      {
+        "name": "72311351-51cd-45bf-b3f9-4c2375155985",
+        "fromCardinality": "one",
+        "fromTable": "vw_stg_Fact_Claims",
+        "fromColumn": "ID_Claim",
+        "toTable": "vw_FactClaims",
+        "toColumn": "ID_Claim",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "a8da065f-b61e-4b74-b22e-06cb18b7d03d",
+        "toCardinality": "many",
+        "fromTable": "vw_tblFactMember_IS",
+        "fromColumn": "MemberIDKey",
+        "toTable": "vw_FactClaims",
+        "toColumn": "MemberIDKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "1dfc4084-7562-4c89-927d-bd3ee03e6d21",
+        "fromTable": "vw_tblFactMember_IS",
+        "fromColumn": "ProductCodeKey",
+        "toTable": "vw_dimProductCode",
+        "toColumn": "ProductCodeKey"
+      },
+      {
+        "name": "b4ecf256-8dcc-4cba-8d7e-0da782a64f1e",
+        "fromTable": "vw_tblFactMember_IS",
+        "fromColumn": "Paid_Through_Key",
+        "toTable": "vw_dimDate_PaidThru",
+        "toColumn": "Date_Key"
+      },
+      {
+        "name": "5d29465c-d32c-455c-a42e-3f8a1e63808f",
+        "fromTable": "vw_tblFactMember_IS",
+        "fromColumn": "MemberIDKey",
+        "toTable": "vw_dimMember",
+        "toColumn": "MemberIDKey"
+      },
+      {
+        "name": "b9ef9dcf-1a65-4d9e-8d4f-1318f53c660e",
+        "fromTable": "vw_tblFactMember_IS",
+        "fromColumn": "StatusKey",
+        "toTable": "vw_dimStatus",
+        "toColumn": "StatusKey"
+      },
+      {
+        "name": "7e5108b1-073f-47e9-b1a3-ea02054c7f1d",
+        "fromTable": "vw_tblFactMember_IS",
+        "fromColumn": "MemberTypeIDKey",
+        "toTable": "vw_dimMemberType",
+        "toColumn": "MemberTypeIDKey"
+      },
+      {
+        "name": "f66bd388-697c-4d27-b10f-bb012653c121",
+        "toCardinality": "many",
+        "fromTable": "vw_tbl_Fact_Registrations",
+        "fromColumn": "MemberIDKey",
+        "toTable": "vw_tblFactMember_IS",
+        "toColumn": "MemberIDKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "e603d593-f74b-4bfd-9559-b396a11a030f",
+        "fromTable": "vw_tbl_Fact_Registrations",
+        "fromColumn": "RegistrantStatusKey",
+        "toTable": "vw_dimRegistrantStatus",
+        "toColumn": "RegistrantStatusKey"
+      },
+      {
+        "name": "117f9110-d11d-4efd-bf87-86a820bfb44e",
+        "fromTable": "vw_tbl_Fact_Registrations",
+        "fromColumn": "RegistrationClassKey",
+        "toTable": "vw_dimRegistrantClass",
+        "toColumn": "RegistrantClassKey"
+      },
+      {
+        "name": "07d0b937-c3ce-4441-ae11-ce405705f321",
+        "toCardinality": "many",
+        "fromTable": "vw_DJ_IMIS_UserMapping",
+        "fromColumn": "member_ID",
+        "toTable": "vw_dimMember",
+        "toColumn": "Member_ID",
+        "crossFilteringBehavior": "bothDirections"
+      }
+    ],
+    "roles": [
+      {
+        "name": "Admin",
+        "modelPermission": "administrator",
+        "members": [
+          {
+            "memberName": "rwest@planning.org",
+            "memberId": "rwest@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "Morgan.Diestler@rsmus.com",
+            "memberId": "Morgan.Diestler@rsmus.com",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "tjohnson@planning.org",
+            "memberId": "tjohnson@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "plowe@planning.org",
+            "memberId": "plowe@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "cmollet@planning.org",
+            "memberId": "cmollet@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "msullivan@planning.org",
+            "memberId": "msullivan@planning.org",
+            "identityProvider": "AzureAD"
+          }
+        ]
+      },
+      {
+        "name": "SuperUser",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "mferguson@planning.org",
+            "memberId": "mferguson@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "Akrakos@planning.org",
+            "memberId": "Akrakos@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mwalsh@planning.org",
+            "memberId": "mwalsh@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "jrolla@planning.org",
+            "memberId": "jrolla@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "RJassen@planning.org",
+            "memberId": "RJassen@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "balbrecht@planning.org",
+            "memberId": "balbrecht@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "amoore@planning.org",
+            "memberId": "amoore@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "bmissaggia@planning.org",
+            "memberId": "bmissaggia@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mjohnson@planning.org",
+            "memberId": "mjohnson@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "kkazmierczak@planning.org",
+            "memberId": "kkazmierczak@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "crahill@planning.org",
+            "memberId": "crahill@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "MWelch@planning.org",
+            "memberId": "MWelch@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "kschmidt@planning.org",
+            "memberId": "kschmidt@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "klennon@planning.org",
+            "memberId": "klennon@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mjimenez@planning.org",
+            "memberId": "mjimenez@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "llang@planning.org",
+            "memberId": "llang@planning.org",
+            "identityProvider": "AzureAD"
+          }
+        ]
+      },
+      {
+        "name": "Read",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "fbraunstein@planning.org",
+            "memberId": "fbraunstein@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "ewilczek@planning.org",
+            "memberId": "ewilczek@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "Sarteaga@planning.org",
+            "memberId": "Sarteaga@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "rrewers@planning.org",
+            "memberId": "rrewers@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "rhoffman@planning.org",
+            "memberId": "rhoffman@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "kgems@planning.org",
+            "memberId": "kgems@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "rscherzinger@planning.org",
+            "memberId": "rscherzinger@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "epasi@planning.org",
+            "memberId": "epasi@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "CParra@planning.org",
+            "memberId": "CParra@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "rzack@planning.org",
+            "memberId": "rzack@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "chinshaw@planning.org",
+            "memberId": "chinshaw@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mmarrero@planning.org",
+            "memberId": "mmarrero@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "JJordan@planning.org",
+            "memberId": "JJordan@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "ajimenez@planning.org",
+            "memberId": "ajimenez@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "LJorgenson@planning.org",
+            "memberId": "LJorgenson@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "kjacques@planning.org",
+            "memberId": "kjacques@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "bdonegan@planning.org",
+            "memberId": "bdonegan@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "anavarro@planning.org",
+            "memberId": "anavarro@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "wfrench@planning.org",
+            "memberId": "wfrench@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "ynoonoo@planning.org",
+            "memberId": "ynoonoo@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "usaenz@planning.org",
+            "memberId": "usaenz@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mkraus@planning.org",
+            "memberId": "mkraus@planning.org",
+            "identityProvider": "AzureAD"
+          }
+        ],
+        "tablePermissions": [
+          {
+            "name": "vw_dimMember",
+            "columnPermissions": [
+              {
+                "name": "First_Name",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "Middle_Name",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "Last_Name",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "Full_Name",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "Email",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "Home_Phone",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "Mobile_Phone",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "Work_Phone",
+                "metadataPermission": "none"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "600"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}

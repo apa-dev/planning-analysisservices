@@ -1,0 +1,1419 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1500,
+  "model": {
+    "name": "Events",
+    "culture": "en-US",
+    "dataSources": [
+      {
+        "type": "structured",
+        "name": "SQL/apadwdev database windows net;apadev",
+        "connectionDetails": {
+          "protocol": "tds",
+          "address": {
+            "server": "apadwprod.database.windows.net",
+            "database": "apaprod"
+          },
+          "authentication": null,
+          "query": null
+        },
+        "credential": {
+          "AuthenticationKind": "UsernamePassword",
+          "kind": "SQL",
+          "path": "apadwprod.database.windows.net;apaprod",
+          "Username": "sqladm",
+          "EncryptConnection": true
+        }
+      }
+    ],
+    "tables": [
+      {
+        "name": "vw_tbl_Fact_Registrations",
+        "isHidden": true,
+        "columns": [
+          {
+            "name": "Seqn",
+            "dataType": "int64",
+            "sourceColumn": "Seqn"
+          },
+          {
+            "name": "MemberIDKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberIDKey"
+          },
+          {
+            "name": "ProductCodeKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductCodeKey"
+          },
+          {
+            "name": "Quantity_Ordered",
+            "dataType": "double",
+            "sourceColumn": "Quantity_Ordered"
+          },
+          {
+            "name": "Quantity_Shipped",
+            "dataType": "double",
+            "sourceColumn": "Quantity_Shipped"
+          },
+          {
+            "name": "Quantity_Backordered",
+            "dataType": "double",
+            "sourceColumn": "Quantity_Backordered"
+          },
+          {
+            "name": "Unit_Price",
+            "dataType": "decimal",
+            "sourceColumn": "Unit_Price"
+          },
+          {
+            "name": "MemberTypeIDKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberTypeIDKey"
+          },
+          {
+            "name": "SalaryIDKey",
+            "dataType": "int64",
+            "sourceColumn": "SalaryIDKey"
+          },
+          {
+            "name": "RaceIDKey",
+            "dataType": "int64",
+            "sourceColumn": "RaceIDKey"
+          },
+          {
+            "name": "StatusKey",
+            "dataType": "int64",
+            "sourceColumn": "StatusKey"
+          },
+          {
+            "name": "RegistrantStatusKey",
+            "dataType": "int64",
+            "sourceColumn": "RegistrantStatusKey"
+          },
+          {
+            "name": "RegistrationClassKey",
+            "dataType": "int64",
+            "sourceColumn": "RegistrationClassKey"
+          },
+          {
+            "name": "ChapterKey",
+            "dataType": "int64",
+            "sourceColumn": "ChapterKey"
+          },
+          {
+            "name": "MemberStatus_Key",
+            "dataType": "int64",
+            "sourceColumn": "MemberStatus_Key"
+          },
+          {
+            "name": "Address_Num1_Key",
+            "dataType": "int64",
+            "sourceColumn": "Address_Num1_Key"
+          },
+          {
+            "name": "Address_Num2_Key",
+            "dataType": "int64",
+            "sourceColumn": "Address_Num2_Key"
+          },
+          {
+            "name": "LastUpdatedby",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedby"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwdev database windows net;apadev\",",
+                "    dbo_vw_tbl_Fact_Registrations = Source{[Schema=\"dbo\",Item=\"vw_tbl_Fact_Registrations\"]}[Data]",
+                "in",
+                "    dbo_vw_tbl_Fact_Registrations"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Member",
+        "columns": [
+          {
+            "name": "MemberIDKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "MemberIDKey"
+          },
+          {
+            "name": "Parent",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Parent"
+          },
+          {
+            "name": "Member_ID",
+            "dataType": "string",
+            "sourceColumn": "Member_ID"
+          },
+          {
+            "name": "First_Name",
+            "dataType": "string",
+            "sourceColumn": "First_Name"
+          },
+          {
+            "name": "Middle_Name",
+            "dataType": "string",
+            "sourceColumn": "Middle_Name"
+          },
+          {
+            "name": "Last_Name",
+            "dataType": "string",
+            "sourceColumn": "Last_Name"
+          },
+          {
+            "name": "Full_Name",
+            "dataType": "string",
+            "sourceColumn": "Full_Name"
+          },
+          {
+            "name": "Email",
+            "dataType": "string",
+            "sourceColumn": "Email"
+          },
+          {
+            "name": "Home_Phone",
+            "dataType": "string",
+            "sourceColumn": "Home_Phone"
+          },
+          {
+            "name": "Mobile_Phone",
+            "dataType": "string",
+            "sourceColumn": "Mobile_Phone"
+          },
+          {
+            "name": "Work_Phone",
+            "dataType": "string",
+            "sourceColumn": "Work_Phone"
+          },
+          {
+            "name": "Designation",
+            "dataType": "string",
+            "sourceColumn": "Designation"
+          },
+          {
+            "name": "Functional_Title",
+            "dataType": "string",
+            "sourceColumn": "Functional_Title"
+          },
+          {
+            "name": "Birth_Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Birth_Date"
+          },
+          {
+            "name": "JoinDate",
+            "dataType": "dateTime",
+            "sourceColumn": "JoinDate"
+          },
+          {
+            "name": "Cohort",
+            "dataType": "string",
+            "sourceColumn": "Cohort"
+          },
+          {
+            "name": "Merged_Date",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "Merged_Date"
+          },
+          {
+            "name": "Cohortquarter",
+            "dataType": "string",
+            "sourceColumn": "Cohortquarter"
+          },
+          {
+            "name": "AICP_START",
+            "dataType": "dateTime",
+            "sourceColumn": "AICP_START"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          },
+          {
+            "name": "Cohort_MemberType",
+            "dataType": "string",
+            "sourceColumn": "Cohort_MemberType"
+          },
+          {
+            "name": "Isactive",
+            "dataType": "boolean",
+            "sourceColumn": "Isactive"
+          },
+          {
+            "name": "CO_ID",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "CO_ID"
+          },
+          {
+            "name": "Date_Added",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "Date_Added"
+          },
+          {
+            "type": "calculated",
+            "name": "_Designation",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": [
+              " if('Member'[Designation]=\"AICP CANDIDATE\", \"AICP CANDIDATE\", ",
+              "if('Member'[Designation] in {\"AICP\", \"AICP Candidate\", \"AICP CEP\", \"AICP CEP CTP\", \"AICP CEP CUD\", \"AICP CTP\",",
+              " \"AICP CUD\", \"AICP, AICP CUD\", \"AICP, CTP\"}, \"AICP\",",
+              "if('Member'[Designation] in {\"FAICP\", \"FAICP CTP\", \"FAICP CTP CEP\", \"FAICP CUD\"}, \"FAICP\", \"Unmapped\")))"
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwdev database windows net;apadev\",",
+                "    dbo_vw_dimMember = Source{[Schema=\"dbo\",Item=\"vw_dimMember\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_vw_dimMember, each ([Isactive] = true))",
+                "in",
+                "    #\"Filtered Rows\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Product",
+        "columns": [
+          {
+            "name": "ProductCodeKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "ProductCodeKey"
+          },
+          {
+            "name": "ParentID",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "ParentID"
+          },
+          {
+            "name": "Product_Code",
+            "dataType": "string",
+            "sourceColumn": "Product_Code"
+          },
+          {
+            "name": "Product_Major",
+            "dataType": "string",
+            "sourceColumn": "Product_Major"
+          },
+          {
+            "name": "Product_Minor",
+            "dataType": "string",
+            "sourceColumn": "Product_Minor"
+          },
+          {
+            "name": "Title",
+            "dataType": "string",
+            "sourceColumn": "Title"
+          },
+          {
+            "name": "Description",
+            "dataType": "string",
+            "sourceColumn": "Description"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          },
+          {
+            "name": "Prod_Type",
+            "dataType": "string",
+            "sourceColumn": "Prod_Type"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwdev database windows net;apadev\",",
+                "    dbo_vw_dimProductCode = Source{[Schema=\"dbo\",Item=\"vw_dimProductCode\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_vw_dimProductCode, each ([IsActive] = true))",
+                "in",
+                "    #\"Filtered Rows\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Max Action Status",
+        "columns": [
+          {
+            "name": "MemberStatusKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "MemberStatusKey"
+          },
+          {
+            "name": "Member_Status",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Member_Status"
+          },
+          {
+            "name": "Description",
+            "dataType": "string",
+            "sourceColumn": "Description"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          },
+          {
+            "name": "Complimentary",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "Complimentary"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwdev database windows net;apadev\",",
+                "    dbo_vw_dimMemberStatus = Source{[Schema=\"dbo\",Item=\"vw_dimMemberStatus\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_vw_dimMemberStatus, each [IsActive] = true)",
+                "in",
+                "    #\"Filtered Rows\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Member Type",
+        "columns": [
+          {
+            "name": "MemberTypeIDKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "MemberTypeIDKey"
+          },
+          {
+            "name": "Member_Type",
+            "dataType": "string",
+            "sourceColumn": "Member_Type"
+          },
+          {
+            "name": "Description",
+            "dataType": "string",
+            "sourceColumn": "Description"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          },
+          {
+            "name": "Member_Record",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "Member_Record"
+          },
+          {
+            "name": "Company_Record",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "Company_Record"
+          },
+          {
+            "name": "Dues_Code_1",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Dues_Code_1"
+          },
+          {
+            "type": "calculated",
+            "name": "_STU/MEM/Other",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": "IF('Member Type'[Member_Type]=\"MEM\",\"MEM\",IF('Member Type'[Member_Type]=\"STU\",\"STU\",\"Other\"))"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwdev database windows net;apadev\",",
+                "    dbo_vw_dimMemberType = Source{[Schema=\"dbo\",Item=\"vw_dimMemberType\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_vw_dimMemberType, each [IsActive] = true)",
+                "in",
+                "    #\"Filtered Rows\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Salary",
+        "columns": [
+          {
+            "name": "SalaryIDKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "SalaryIDKey"
+          },
+          {
+            "name": "SalaryID",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "SalaryID"
+          },
+          {
+            "name": "Description",
+            "dataType": "string",
+            "sourceColumn": "Description"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwdev database windows net;apadev\",",
+                "    dbo_vw_dimSalary = Source{[Schema=\"dbo\",Item=\"vw_dimSalary\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_vw_dimSalary, each [IsActive] = true)",
+                "in",
+                "    #\"Filtered Rows\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Status",
+        "columns": [
+          {
+            "name": "StatusKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "StatusKey"
+          },
+          {
+            "name": "Status",
+            "dataType": "string",
+            "sourceColumn": "Status"
+          },
+          {
+            "name": "Gender",
+            "dataType": "string",
+            "sourceColumn": "Gender"
+          },
+          {
+            "name": "Category",
+            "dataType": "string",
+            "sourceColumn": "Category"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          },
+          {
+            "type": "calculated",
+            "name": "Gender Description",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": [
+              "IF('Status'[Gender]=\"M\",\"Male\",",
+              "IF('Status'[Gender]=\"F\",\"Female\",",
+              "IF('Status'[Gender]=BLANK(),\"Unmapped\",\"Prefer to self-describe",
+              "\")))"
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwdev database windows net;apadev\",",
+                "    dbo_vw_dimStatus = Source{[Schema=\"dbo\",Item=\"vw_dimStatus\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_vw_dimStatus, each ([IsActive] = true))",
+                "in",
+                "    #\"Filtered Rows\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Registrant Status",
+        "columns": [
+          {
+            "name": "RegistrantStatusKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "RegistrantStatusKey"
+          },
+          {
+            "name": "Registrant_Status",
+            "dataType": "string",
+            "sourceColumn": "Registrant_Status"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwdev database windows net;apadev\",",
+                "    dbo_vw_dimRegistrantStatus = Source{[Schema=\"dbo\",Item=\"vw_dimRegistrantStatus\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_vw_dimRegistrantStatus, each [IsActive] = true)",
+                "in",
+                "    #\"Filtered Rows\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Registrant Class",
+        "columns": [
+          {
+            "name": "RegistrantClassKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "RegistrantClassKey"
+          },
+          {
+            "name": "Registrant_Class",
+            "dataType": "string",
+            "sourceColumn": "Registrant_Class"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwdev database windows net;apadev\",",
+                "    dbo_vw_dimRegistrantClass = Source{[Schema=\"dbo\",Item=\"vw_dimRegistrantClass\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_vw_dimRegistrantClass, each [IsActive] = true)",
+                "in",
+                "    #\"Filtered Rows\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Ethnicity_Origin",
+        "columns": [
+          {
+            "name": "RaceIDKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "RaceIDKey"
+          },
+          {
+            "name": "RaceID",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "RaceID"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          },
+          {
+            "name": "Origin",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Origin"
+          },
+          {
+            "name": "Origin - Detailed",
+            "dataType": "string",
+            "sourceColumn": "OriginDescription"
+          },
+          {
+            "type": "calculated",
+            "name": "Origin - Simple",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": [
+              "   IF(Ethnicity_Origin[Origin - Detailed]=\"Not Spanish, Hispanic, Latino\",\"Not Spanish, Hispanic, Latino\",",
+              "    IF(Ethnicity_Origin[Origin - Detailed]=\"Mexican, Mexican American, Chicano\", \"Spanish, Hispanic, Latino\",     ",
+              "    IF(Ethnicity_Origin[Origin - Detailed]=\"Other Spanish, Hispanic, Latino (please specify)\",\"Spanish, Hispanic, Latino\",",
+              "    IF(Ethnicity_Origin[Origin - Detailed]=\"Puerto Rican\",\"Spanish, Hispanic, Latino\",IF(Ethnicity_Origin[Origin - Detailed]=\"Cuban\",\"Spanish, Hispanic, Latino\",\"Unmapped\")))))"
+            ]
+          },
+          {
+            "name": "Ethnicity - Detailed",
+            "dataType": "string",
+            "sourceColumn": "Ethnicity"
+          },
+          {
+            "name": "Ethnicity - Simple",
+            "dataType": "string",
+            "sourceColumn": "Custom_Rollup"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwdev database windows net;apadev\",",
+                "    dbo_vw_dimRace = Source{[Schema=\"dbo\",Item=\"vw_dimRace\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_vw_dimRace, each [IsActive] = true)",
+                "in",
+                "    #\"Filtered Rows\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Chapter",
+        "columns": [
+          {
+            "name": "ChapterKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "ChapterKey"
+          },
+          {
+            "name": "Chapter_Code",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Chapter_Code"
+          },
+          {
+            "name": "Primary Chapter",
+            "dataType": "string",
+            "sourceColumn": "Chapter_Minor"
+          },
+          {
+            "name": "Chapter_Major",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Chapter_Major"
+          },
+          {
+            "name": "Chapter Description",
+            "dataType": "string",
+            "sourceColumn": "Description"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwdev database windows net;apadev\",",
+                "    dbo_vw_dimChapter = Source{[Schema=\"dbo\",Item=\"vw_dimChapter\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_vw_dimChapter, each [IsActive] = true)",
+                "in",
+                "    #\"Filtered Rows\""
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "ca407116-d037-478f-b727-c5b026c4cef4",
+        "fromTable": "vw_tbl_Fact_Registrations",
+        "fromColumn": "MemberIDKey",
+        "toTable": "Member",
+        "toColumn": "MemberIDKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "085628c2-b46e-4375-9862-b97fc1714e52",
+        "fromTable": "vw_tbl_Fact_Registrations",
+        "fromColumn": "ChapterKey",
+        "toTable": "Chapter",
+        "toColumn": "ChapterKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "8cc47c84-1174-427e-ba99-0dcc77bc2a3a",
+        "fromTable": "vw_tbl_Fact_Registrations",
+        "fromColumn": "RaceIDKey",
+        "toTable": "Ethnicity_Origin",
+        "toColumn": "RaceIDKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "1cb374d8-7faf-4432-a58b-f6cdca6882d3",
+        "fromTable": "vw_tbl_Fact_Registrations",
+        "fromColumn": "RegistrantStatusKey",
+        "toTable": "Registrant Status",
+        "toColumn": "RegistrantStatusKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "61348ed0-5f7b-40dc-b114-2b0de8d9d1b7",
+        "fromTable": "vw_tbl_Fact_Registrations",
+        "fromColumn": "StatusKey",
+        "toTable": "Status",
+        "toColumn": "StatusKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "ee94615d-f629-4c1c-a272-0369c4caa99f",
+        "fromTable": "vw_tbl_Fact_Registrations",
+        "fromColumn": "MemberTypeIDKey",
+        "toTable": "Member Type",
+        "toColumn": "MemberTypeIDKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "f9265f55-1722-4fcd-9528-2f03d4ac3349",
+        "fromTable": "vw_tbl_Fact_Registrations",
+        "fromColumn": "MemberStatus_Key",
+        "toTable": "Max Action Status",
+        "toColumn": "MemberStatusKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "9f2cacf5-0966-4194-972b-1a1a2c5b194c",
+        "fromTable": "vw_tbl_Fact_Registrations",
+        "fromColumn": "RegistrationClassKey",
+        "toTable": "Registrant Class",
+        "toColumn": "RegistrantClassKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "72401435-cd8a-488a-88fa-8cfa379f3535",
+        "fromTable": "vw_tbl_Fact_Registrations",
+        "fromColumn": "SalaryIDKey",
+        "toTable": "Salary",
+        "toColumn": "SalaryIDKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "bb0aec39-d8f8-4d60-92cd-391eb5191a6e",
+        "fromTable": "vw_tbl_Fact_Registrations",
+        "fromColumn": "ProductCodeKey",
+        "toTable": "Product",
+        "toColumn": "ProductCodeKey",
+        "crossFilteringBehavior": "bothDirections"
+      }
+    ],
+    "roles": [
+      {
+        "name": "Admin",
+        "modelPermission": "administrator",
+        "members": [
+          {
+            "memberName": "Morgan.Diestler@rsmus.com",
+            "memberId": "Morgan.Diestler@rsmus.com",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "cmollet@planning.org",
+            "memberId": "cmollet@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "rwest@planning.org",
+            "memberId": "rwest@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "plowe@planning.org",
+            "memberId": "plowe@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "msullivan@planning.org",
+            "memberId": "msullivan@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "tjohnson@planning.org",
+            "memberId": "tjohnson@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "jacob.petraitis@rsmus.com",
+            "memberId": "jacob.petraitis@rsmus.com",
+            "identityProvider": "AzureAD"
+          }
+        ]
+      },
+      {
+        "name": "Read Users",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "Sarteaga@planning.org",
+            "memberId": "Sarteaga@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mmarrero@planning.org",
+            "memberId": "mmarrero@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "kgems@planning.org",
+            "memberId": "kgems@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "CParra@planning.org",
+            "memberId": "CParra@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "rhoffman@planning.org",
+            "memberId": "rhoffman@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "LJorgenson@planning.org",
+            "memberId": "LJorgenson@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "ynoonoo@planning.org",
+            "memberId": "ynoonoo@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mkraus@planning.org",
+            "memberId": "mkraus@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "bdonegan@planning.org",
+            "memberId": "bdonegan@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "rrewers@planning.org",
+            "memberId": "rrewers@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "epasi@planning.org",
+            "memberId": "epasi@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "JJordan@planning.org",
+            "memberId": "JJordan@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "chinshaw@planning.org",
+            "memberId": "chinshaw@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "kjacques@planning.org",
+            "memberId": "kjacques@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "ewilczek@planning.org",
+            "memberId": "ewilczek@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "anavarro@planning.org",
+            "memberId": "anavarro@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "ajimenez@planning.org",
+            "memberId": "ajimenez@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "fbraunstein@planning.org",
+            "memberId": "fbraunstein@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "rscherzinger@planning.org",
+            "memberId": "rscherzinger@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "rzack@planning.org",
+            "memberId": "rzack@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "wfrench@planning.org",
+            "memberId": "wfrench@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "usaenz@planning.org",
+            "memberId": "usaenz@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          }
+        ],
+        "tablePermissions": [
+          {
+            "name": "Member",
+            "columnPermissions": [
+              {
+                "name": "First_Name",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "Middle_Name",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "Last_Name",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "Full_Name",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "Email",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "Home_Phone",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "Mobile_Phone",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "Work_Phone",
+                "metadataPermission": "none"
+              },
+              {
+                "name": "Birth_Date",
+                "metadataPermission": "none"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Super Users",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "Akrakos@planning.org",
+            "memberId": "Akrakos@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mferguson@planning.org",
+            "memberId": "mferguson@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "klennon@planning.org",
+            "memberId": "klennon@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "llang@planning.org",
+            "memberId": "llang@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "kkazmierczak@planning.org",
+            "memberId": "kkazmierczak@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mwalsh@planning.org",
+            "memberId": "mwalsh@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "kschmidt@planning.org",
+            "memberId": "kschmidt@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mjimenez@planning.org",
+            "memberId": "mjimenez@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "MWelch@planning.org",
+            "memberId": "MWelch@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "balbrecht@planning.org",
+            "memberId": "balbrecht@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mjohnson@planning.org",
+            "memberId": "mjohnson@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "RJassen@planning.org",
+            "memberId": "RJassen@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "crahill@planning.org",
+            "memberId": "crahill@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "bmissaggia@planning.org",
+            "memberId": "bmissaggia@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "RRegalado@planning.org",
+            "memberId": "RRegalado@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "amoore@planning.org",
+            "memberId": "amoore@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "jrolla@planning.org",
+            "memberId": "jrolla@planning.org#AzureAD",
+            "identityProvider": "AzureAD"
+          }
+        ]
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "600"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}
