@@ -1,0 +1,2030 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1200,
+  "model": {
+    "culture": "en-US",
+    "dataSources": [
+      {
+        "name": "AzureSqlDW apadwdev.database.windows.net apadev",
+        "connectionString": "Data Source=apadwdev.database.windows.net;User ID=sqladm;Persist Security Info=true;Encrypt=true;TrustServerCertificate=false;Initial Catalog=apadev",
+        "impersonationMode": "impersonateServiceAccount",
+        "provider": "System.Data.SqlClient",
+        "annotations": [
+          {
+            "name": "ConnectionEditUISource",
+            "value": "AzureSqlDW"
+          }
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "name": "Race",
+        "columns": [
+          {
+            "name": "RaceIDKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "RaceIDKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "RaceID",
+            "dataType": "string",
+            "sourceColumn": "RaceID",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Ethnicity",
+            "dataType": "string",
+            "sourceColumn": "Ethnicity",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Custom_Rollup",
+            "dataType": "string",
+            "sourceColumn": "Custom_Rollup",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "IsActive",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "bit"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "Origin",
+            "dataType": "string",
+            "sourceColumn": "Origin",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "OriginDescription",
+            "dataType": "string",
+            "sourceColumn": "OriginDescription",
+            "sourceProviderType": "varchar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "vw_dimRace",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[vw_dimRace].* FROM [dbo].[vw_dimRace] ",
+              "dataSource": "AzureSqlDW apadwdev.database.windows.net apadev"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[vw_dimRace].* FROM [dbo].[vw_dimRace] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "vw_dimRace"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Content Publish Status",
+        "columns": [
+          {
+            "name": "ContentPublishStatusKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "ContentPublishStatusKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "PublishStatus",
+            "dataType": "string",
+            "sourceColumn": "PublishStatus",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Title",
+            "dataType": "string",
+            "sourceColumn": "Title",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "IsActive",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "bit"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "vw_dimContentPublishStatus",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[vw_dimContentPublishStatus].* FROM [dbo].[vw_dimContentPublishStatus] ",
+              "dataSource": "AzureSqlDW apadwdev.database.windows.net apadev"
+            },
+            "annotations": [
+              {
+                "name": "TableWidgetSerialization",
+                "value": [
+                  "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"TableWidgetSerialization\"><AnnotationContent><![CDATA[<?xml version=\"1.0\"?>",
+                  "<TableWidgetGridSerialization xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">",
+                  "  <ColumnSuggestedType />",
+                  "  <ColumnFormat />",
+                  "  <ColumnAccuracy />",
+                  "  <ColumnCurrencySymbol />",
+                  "  <ColumnPositivePattern />",
+                  "  <ColumnNegativePattern />",
+                  "  <ColumnWidths>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ContentPublishStatusKey</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>151</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>PublishStatus</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>94</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Title</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>50</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>LastUpdatedBy</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>103</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>LastModified</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>90</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>IsActive</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>69</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>StartDate</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>77</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>EndDate</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>71</int>",
+                  "      </value>",
+                  "    </item>",
+                  "  </ColumnWidths>",
+                  "  <ColumnDisplayIndex>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ContentPublishStatusKey</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>0</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>PublishStatus</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>1</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Title</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>2</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>LastUpdatedBy</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>3</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>LastModified</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>4</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>IsActive</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>5</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>StartDate</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>6</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>EndDate</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>7</int>",
+                  "      </value>",
+                  "    </item>",
+                  "  </ColumnDisplayIndex>",
+                  "  <ColumnFrozen />",
+                  "  <ColumnChecked />",
+                  "  <ColumnFilter />",
+                  "  <SelectionFilter />",
+                  "  <FilterParameters />",
+                  "  <IsSortDescending>false</IsSortDescending>",
+                  "</TableWidgetGridSerialization>]]></AnnotationContent></Gemini>"
+                ]
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[vw_dimContentPublishStatus].* FROM [dbo].[vw_dimContentPublishStatus] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "vw_dimContentPublishStatus"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          },
+          {
+            "name": "TableWidgetSerialization",
+            "value": [
+              "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"TableWidgetSerialization\"><AnnotationContent><![CDATA[<?xml version=\"1.0\"?>",
+              "<TableWidgetGridSerialization xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">",
+              "  <ColumnSuggestedType />",
+              "  <ColumnFormat />",
+              "  <ColumnAccuracy />",
+              "  <ColumnCurrencySymbol />",
+              "  <ColumnPositivePattern />",
+              "  <ColumnNegativePattern />",
+              "  <ColumnWidths>",
+              "    <item>",
+              "      <key>",
+              "        <string>ContentPublishStatusKey</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>151</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>PublishStatus</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>94</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Title</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>50</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>LastUpdatedBy</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>103</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>LastModified</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>90</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>IsActive</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>69</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>StartDate</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>77</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>EndDate</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>71</int>",
+              "      </value>",
+              "    </item>",
+              "  </ColumnWidths>",
+              "  <ColumnDisplayIndex>",
+              "    <item>",
+              "      <key>",
+              "        <string>ContentPublishStatusKey</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>0</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>PublishStatus</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>1</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Title</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>2</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>LastUpdatedBy</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>3</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>LastModified</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>4</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>IsActive</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>5</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>StartDate</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>6</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>EndDate</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>7</int>",
+              "      </value>",
+              "    </item>",
+              "  </ColumnDisplayIndex>",
+              "  <ColumnFrozen />",
+              "  <ColumnChecked />",
+              "  <ColumnFilter />",
+              "  <SelectionFilter />",
+              "  <FilterParameters />",
+              "  <IsSortDescending>false</IsSortDescending>",
+              "</TableWidgetGridSerialization>]]></AnnotationContent></Gemini>"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Member",
+        "columns": [
+          {
+            "name": "MemberIDKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberIDKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "Parent",
+            "dataType": "string",
+            "sourceColumn": "Parent",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Member_ID",
+            "dataType": "string",
+            "sourceColumn": "Member_ID",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "First_Name",
+            "dataType": "string",
+            "sourceColumn": "First_Name",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Middle_Name",
+            "dataType": "string",
+            "sourceColumn": "Middle_Name",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Last_Name",
+            "dataType": "string",
+            "sourceColumn": "Last_Name",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Full_Name",
+            "dataType": "string",
+            "sourceColumn": "Full_Name",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Email",
+            "dataType": "string",
+            "sourceColumn": "Email",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Home_Phone",
+            "dataType": "string",
+            "sourceColumn": "Home_Phone",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Mobile_Phone",
+            "dataType": "string",
+            "sourceColumn": "Mobile_Phone",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Work_Phone",
+            "dataType": "string",
+            "sourceColumn": "Work_Phone",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Designation",
+            "dataType": "string",
+            "sourceColumn": "Designation",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Functional_Title",
+            "dataType": "string",
+            "sourceColumn": "Functional_Title",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Birth_Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Birth_Date",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "JoinDate",
+            "dataType": "dateTime",
+            "sourceColumn": "JoinDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "Cohort",
+            "dataType": "string",
+            "sourceColumn": "Cohort",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "Merged_Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Merged_Date",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "Cohortquarter",
+            "dataType": "string",
+            "sourceColumn": "Cohortquarter",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Cohort_MemberType",
+            "dataType": "string",
+            "sourceColumn": "Cohort_MemberType",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Isactive",
+            "dataType": "boolean",
+            "sourceColumn": "Isactive",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "bit"
+          },
+          {
+            "name": "AICP_START",
+            "dataType": "dateTime",
+            "sourceColumn": "AICP_START",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "CO_ID",
+            "dataType": "string",
+            "sourceColumn": "CO_ID",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Date_Added",
+            "dataType": "dateTime",
+            "sourceColumn": "Date_Added",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "vw_dimMember",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[vw_dimMember].* FROM [dbo].[vw_dimMember] ",
+              "dataSource": "AzureSqlDW apadwdev.database.windows.net apadev"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[vw_dimMember].* FROM [dbo].[vw_dimMember] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "vw_dimMember"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Member_Status",
+        "columns": [
+          {
+            "name": "MemberStatusKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberStatusKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "Member_Status",
+            "dataType": "string",
+            "sourceColumn": "Member_Status",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Description",
+            "dataType": "string",
+            "sourceColumn": "Description",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "bit"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "Complimentary",
+            "dataType": "boolean",
+            "sourceColumn": "Complimentary",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "bit"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "vw_dimMemberStatus",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[vw_dimMemberStatus].* FROM [dbo].[vw_dimMemberStatus] ",
+              "dataSource": "AzureSqlDW apadwdev.database.windows.net apadev"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[vw_dimMemberStatus].* FROM [dbo].[vw_dimMemberStatus] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "vw_dimMemberStatus"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Content__FACT",
+        "isHidden": true,
+        "columns": [
+          {
+            "name": "ContentIDKey",
+            "dataType": "int64",
+            "sourceColumn": "ContentIDKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "TagTypeKey",
+            "dataType": "int64",
+            "sourceColumn": "TagTypeKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "TagKey",
+            "dataType": "int64",
+            "sourceColumn": "TagKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "ContentPublishStatusKey",
+            "dataType": "int64",
+            "sourceColumn": "ContentPublishStatusKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "ContentStatusKey",
+            "dataType": "int64",
+            "sourceColumn": "ContentStatusKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "ContentTypeKey",
+            "dataType": "int64",
+            "sourceColumn": "ContentTypeKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "ContactRoleTypeKey",
+            "dataType": "int64",
+            "sourceColumn": "ContactRoleTypeKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "MemberIDKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberIDKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "MemberTypeIDKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberTypeIDKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "MemberStatus_Key",
+            "dataType": "int64",
+            "sourceColumn": "MemberStatus_Key",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "SalaryIDKey",
+            "dataType": "int64",
+            "sourceColumn": "SalaryIDKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "RaceIDKey",
+            "dataType": "int64",
+            "sourceColumn": "RaceIDKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "ChapterKey",
+            "dataType": "int64",
+            "sourceColumn": "ChapterKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "StatusKey",
+            "dataType": "int64",
+            "sourceColumn": "StatusKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "Addressnum1key",
+            "dataType": "int64",
+            "sourceColumn": "Addressnum1key",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "Addressnum2key",
+            "dataType": "int64",
+            "sourceColumn": "Addressnum2key",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "Parent_ID",
+            "dataType": "int64",
+            "sourceColumn": "Parent_ID",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "Master_ID",
+            "dataType": "int64",
+            "sourceColumn": "Master_ID",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "UpdatedTimeKey",
+            "dataType": "int64",
+            "sourceColumn": "UpdatedTimeKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "LastUpdatedby",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedby",
+            "sourceProviderType": "varchar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "vw_tblFactContent",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[vw_tblFactContent].* FROM [dbo].[vw_tblFactContent] ",
+              "dataSource": "AzureSqlDW apadwdev.database.windows.net apadev"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[vw_tblFactContent].* FROM [dbo].[vw_tblFactContent] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "vw_tblFactContent"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Chapter",
+        "columns": [
+          {
+            "name": "ChapterKey",
+            "dataType": "int64",
+            "sourceColumn": "ChapterKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "Chapter_Code",
+            "dataType": "string",
+            "sourceColumn": "Chapter_Code",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Chapter_Minor",
+            "dataType": "string",
+            "sourceColumn": "Chapter_Minor",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Chapter_Major",
+            "dataType": "string",
+            "sourceColumn": "Chapter_Major",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Description",
+            "dataType": "string",
+            "sourceColumn": "Description",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "bit"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "vw_dimChapter",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[vw_dimChapter].* FROM [dbo].[vw_dimChapter] ",
+              "dataSource": "AzureSqlDW apadwdev.database.windows.net apadev"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[vw_dimChapter].* FROM [dbo].[vw_dimChapter] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "vw_dimChapter"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Content_Status",
+        "columns": [
+          {
+            "name": "ContentStatusKey",
+            "dataType": "int64",
+            "sourceColumn": "ContentStatusKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "Status",
+            "dataType": "string",
+            "sourceColumn": "Status",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Title",
+            "dataType": "string",
+            "sourceColumn": "Title",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "bit"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "vw_dimContentStatus",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[vw_dimContentStatus].* FROM [dbo].[vw_dimContentStatus] ",
+              "dataSource": "AzureSqlDW apadwdev.database.windows.net apadev"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[vw_dimContentStatus].* FROM [dbo].[vw_dimContentStatus] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "vw_dimContentStatus"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Content_Type",
+        "columns": [
+          {
+            "name": "ContentTypeKey",
+            "dataType": "int64",
+            "sourceColumn": "ContentTypeKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "ContentType",
+            "dataType": "string",
+            "sourceColumn": "ContentType",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Title",
+            "dataType": "string",
+            "sourceColumn": "Title",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "bit"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "vw_dimContentType",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[vw_dimContentType].* FROM [dbo].[vw_dimContentType] ",
+              "dataSource": "AzureSqlDW apadwdev.database.windows.net apadev"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[vw_dimContentType].* FROM [dbo].[vw_dimContentType] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "vw_dimContentType"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "vw_dimDate",
+        "columns": [
+          {
+            "name": "Date_Key",
+            "dataType": "int64",
+            "sourceColumn": "Date_Key",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "date",
+            "dataType": "dateTime",
+            "sourceColumn": "date",
+            "formatString": "General Date",
+            "sourceProviderType": "date"
+          },
+          {
+            "name": "Day",
+            "dataType": "int64",
+            "sourceColumn": "Day",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "FiscalMonth",
+            "dataType": "int64",
+            "sourceColumn": "FiscalMonth",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "FiscalQuarter",
+            "dataType": "int64",
+            "sourceColumn": "FiscalQuarter",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "FiscalYear",
+            "dataType": "int64",
+            "sourceColumn": "FiscalYear",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "CalendarMonth",
+            "dataType": "int64",
+            "sourceColumn": "CalendarMonth",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "CalendarQuarter",
+            "dataType": "int64",
+            "sourceColumn": "CalendarQuarter",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "CalendarYear",
+            "dataType": "int64",
+            "sourceColumn": "CalendarYear",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "vw_dimDate",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[vw_dimDate].* FROM [dbo].[vw_dimDate] ",
+              "dataSource": "AzureSqlDW apadwdev.database.windows.net apadev"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[vw_dimDate].* FROM [dbo].[vw_dimDate] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "vw_dimDate"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Tag",
+        "columns": [
+          {
+            "name": "TagKey",
+            "dataType": "int64",
+            "sourceColumn": "TagKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "TagID",
+            "dataType": "string",
+            "sourceColumn": "TagID",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Code",
+            "dataType": "string",
+            "sourceColumn": "Code",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Title",
+            "dataType": "string",
+            "sourceColumn": "Title",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Status",
+            "dataType": "string",
+            "sourceColumn": "Status",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Description",
+            "dataType": "string",
+            "sourceColumn": "Description",
+            "sourceProviderType": "nvarchar"
+          },
+          {
+            "name": "Taxo_Term",
+            "dataType": "string",
+            "sourceColumn": "Taxo_Term",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Parent_ID",
+            "dataType": "int64",
+            "sourceColumn": "Parent_ID",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "TagType_ID",
+            "dataType": "int64",
+            "sourceColumn": "TagType_ID",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "bit"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "vw_dimTag",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[vw_dimTag].* FROM [dbo].[vw_dimTag] ",
+              "dataSource": "AzureSqlDW apadwdev.database.windows.net apadev"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[vw_dimTag].* FROM [dbo].[vw_dimTag] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "vw_dimTag"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "TagType",
+        "columns": [
+          {
+            "name": "TagTypeKey",
+            "dataType": "int64",
+            "sourceColumn": "TagTypeKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "TagTypeID",
+            "dataType": "int64",
+            "sourceColumn": "TagTypeID",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "Code",
+            "dataType": "string",
+            "sourceColumn": "Code",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Title",
+            "dataType": "string",
+            "sourceColumn": "Title",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Status",
+            "dataType": "string",
+            "sourceColumn": "Status",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Description",
+            "dataType": "string",
+            "sourceColumn": "Description",
+            "sourceProviderType": "nvarchar"
+          },
+          {
+            "name": "Taxo_Term",
+            "dataType": "string",
+            "sourceColumn": "Taxo_Term",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Parent_ID",
+            "dataType": "int64",
+            "sourceColumn": "Parent_ID",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "Sort_Number",
+            "dataType": "int64",
+            "sourceColumn": "Sort_Number",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "bit"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "vw_dimTagType",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[vw_dimTagType].* FROM [dbo].[vw_dimTagType] ",
+              "dataSource": "AzureSqlDW apadwdev.database.windows.net apadev"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[vw_dimTagType].* FROM [dbo].[vw_dimTagType] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "vw_dimTagType"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Contact_Role_Type",
+        "columns": [
+          {
+            "name": "ContactRoleTypeKey",
+            "dataType": "int64",
+            "sourceColumn": "ContactRoleTypeKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "Role_Type",
+            "dataType": "string",
+            "sourceColumn": "Role_Type",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Title",
+            "dataType": "string",
+            "sourceColumn": "Title",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "bit"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "vw_dimContactRoleType",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[vw_dimContactRoleType].* FROM [dbo].[vw_dimContactRoleType] ",
+              "dataSource": "AzureSqlDW apadwdev.database.windows.net apadev"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[vw_dimContactRoleType].* FROM [dbo].[vw_dimContactRoleType] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "vw_dimContactRoleType"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Member_Type",
+        "columns": [
+          {
+            "name": "MemberTypeIDKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberTypeIDKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "Member_Type",
+            "dataType": "string",
+            "sourceColumn": "Member_Type",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Description",
+            "dataType": "string",
+            "sourceColumn": "Description",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "bit"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "Member_Record",
+            "dataType": "boolean",
+            "sourceColumn": "Member_Record",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "bit"
+          },
+          {
+            "name": "Company_Record",
+            "dataType": "boolean",
+            "sourceColumn": "Company_Record",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "bit"
+          },
+          {
+            "name": "Dues_Code_1",
+            "dataType": "string",
+            "sourceColumn": "Dues_Code_1",
+            "sourceProviderType": "varchar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "vw_dimMemberType",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[vw_dimMemberType].* FROM [dbo].[vw_dimMemberType] ",
+              "dataSource": "AzureSqlDW apadwdev.database.windows.net apadev"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[vw_dimMemberType].* FROM [dbo].[vw_dimMemberType] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "vw_dimMemberType"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Salary",
+        "columns": [
+          {
+            "name": "SalaryIDKey",
+            "dataType": "int64",
+            "sourceColumn": "SalaryIDKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "SalaryID",
+            "dataType": "string",
+            "sourceColumn": "SalaryID",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Description",
+            "dataType": "string",
+            "sourceColumn": "Description",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "bit"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "vw_dimSalary",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[vw_dimSalary].* FROM [dbo].[vw_dimSalary] ",
+              "dataSource": "AzureSqlDW apadwdev.database.windows.net apadev"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[vw_dimSalary].* FROM [dbo].[vw_dimSalary] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "vw_dimSalary"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Status",
+        "columns": [
+          {
+            "name": "StatusKey",
+            "dataType": "int64",
+            "sourceColumn": "StatusKey",
+            "sourceProviderType": "int"
+          },
+          {
+            "name": "Status",
+            "dataType": "string",
+            "sourceColumn": "Status",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Gender",
+            "dataType": "string",
+            "sourceColumn": "Gender",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "Category",
+            "dataType": "string",
+            "sourceColumn": "Category",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy",
+            "sourceProviderType": "varchar"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "bit"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate",
+            "formatString": "General Date",
+            "sourceProviderType": "datetime"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "vw_dimStatus",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[vw_dimStatus].* FROM [dbo].[vw_dimStatus] ",
+              "dataSource": "AzureSqlDW apadwdev.database.windows.net apadev"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[vw_dimStatus].* FROM [dbo].[vw_dimStatus] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "vw_dimStatus"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "1a637b3a-4450-499f-9a60-3174449ba79c",
+        "fromTable": "Content__FACT",
+        "fromColumn": "RaceIDKey",
+        "toTable": "Race",
+        "toColumn": "RaceIDKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "018b1b96-1405-4246-a92c-906fb08fab78",
+        "fromTable": "Content__FACT",
+        "fromColumn": "ContentPublishStatusKey",
+        "toTable": "Content Publish Status",
+        "toColumn": "ContentPublishStatusKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "75b58047-de89-4fb8-a3fb-1f2e043731ee",
+        "fromTable": "Content__FACT",
+        "fromColumn": "MemberIDKey",
+        "toTable": "Member",
+        "toColumn": "MemberIDKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "f7a6a284-e087-466a-9ee4-3a5b6b720441",
+        "fromTable": "Content__FACT",
+        "fromColumn": "MemberStatus_Key",
+        "toTable": "Member_Status",
+        "toColumn": "MemberStatusKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "c01448fb-96e8-4155-b01f-e3eaad79cc3f",
+        "fromTable": "Content__FACT",
+        "fromColumn": "ContentTypeKey",
+        "toTable": "Content_Type",
+        "toColumn": "ContentTypeKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "ffbc3537-c6b9-485e-9f50-077833f08725",
+        "fromTable": "Content__FACT",
+        "fromColumn": "TagTypeKey",
+        "toTable": "TagType",
+        "toColumn": "TagTypeKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "e43a5a59-1ed4-4274-b602-7888dd040d4a",
+        "fromTable": "Content__FACT",
+        "fromColumn": "TagKey",
+        "toTable": "Tag",
+        "toColumn": "TagKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "549bb9dc-cd04-40bb-a048-ee5ed5e7bfb4",
+        "fromTable": "Content__FACT",
+        "fromColumn": "ContentStatusKey",
+        "toTable": "Content_Status",
+        "toColumn": "ContentStatusKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "6e057f8c-685c-4286-be44-bd24a6a79a62",
+        "fromTable": "Contact_Role_Type",
+        "fromColumn": "ContactRoleTypeKey",
+        "toTable": "Content__FACT",
+        "toColumn": "ContactRoleTypeKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "14360335-f6f5-4ba3-9138-36cd37736083",
+        "fromTable": "Chapter",
+        "fromColumn": "ChapterKey",
+        "toTable": "Content__FACT",
+        "toColumn": "ChapterKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "6f827298-db06-46bc-9a99-46dafc3cb54c",
+        "fromTable": "Member_Type",
+        "fromColumn": "MemberTypeIDKey",
+        "toTable": "Content__FACT",
+        "toColumn": "MemberTypeIDKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "a17fa70d-99d0-4ef0-bded-4ca00acff514",
+        "fromTable": "Salary",
+        "fromColumn": "SalaryIDKey",
+        "toTable": "Content__FACT",
+        "toColumn": "SalaryIDKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "ce5f1774-8d40-412a-8f81-262a120a644a",
+        "fromTable": "Status",
+        "fromColumn": "StatusKey",
+        "toTable": "Content__FACT",
+        "toColumn": "StatusKey",
+        "crossFilteringBehavior": "bothDirections"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "400"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}
