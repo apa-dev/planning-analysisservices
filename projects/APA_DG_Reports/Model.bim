@@ -47,7 +47,8 @@
     ],
     "tables": [
       {
-        "name": "vw_tblFactMember_IS",
+        "name": "FactMember_IS",
+        "isHidden": true,
         "columns": [
           {
             "name": "MemberIDKey",
@@ -154,7 +155,7 @@
         ]
       },
       {
-        "name": "vw_dimAddress_Preferred",
+        "name": "Address Preferred",
         "columns": [
           {
             "name": "Address_Key",
@@ -214,26 +215,31 @@
           {
             "name": "LastUpdatedBy",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "LastUpdatedBy"
           },
           {
             "name": "LastModified",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LastModified"
           },
           {
             "name": "IsActive",
             "dataType": "boolean",
+            "isHidden": true,
             "sourceColumn": "IsActive"
           },
           {
             "name": "StartDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "StartDate"
           },
           {
             "name": "EndDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "EndDate"
           },
           {
@@ -273,13 +279,13 @@
               "FILTER('Status','Status'[Status]=\"A\"),",
               "FILTER('Product','Product'[Product_Code]=\"APA\"),",
               "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
-              "FILTER(vw_dimAddress_Preferred,[_ Address Preffered]>1))"
+              "FILTER('Address Preferred',[_ Address Preffered]>1))"
             ]
           }
         ]
       },
       {
-        "name": "vw_student",
+        "name": "Student",
         "columns": [
           {
             "name": "ID",
@@ -374,41 +380,49 @@
           {
             "name": "Id_Identitycolumn",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Id_Identitycolumn"
           },
           {
             "name": "LastUpdatedBy",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "LastUpdatedBy"
           },
           {
             "name": "LastModified",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LastModified"
           },
           {
             "name": "IsActive",
             "dataType": "boolean",
+            "isHidden": true,
             "sourceColumn": "IsActive"
           },
           {
             "name": "StartDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "StartDate"
           },
           {
             "name": "EndDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "EndDate"
           },
           {
             "name": "memberidkey",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "memberidkey"
           },
           {
             "name": "member_id",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "member_id"
           },
           {
@@ -451,14 +465,14 @@
             "name": "GradYearLimit",
             "dataType": "int64",
             "isDataTypeInferred": true,
-            "expression": "IF(vw_student[GradYear]> (YEAR(TODAY())+5),1,0)"
+            "expression": "IF(Student[GradYear]> (YEAR(TODAY())+5),1,0)"
           },
           {
             "type": "calculated",
             "name": "GradYear",
             "dataType": "int64",
             "isDataTypeInferred": true,
-            "expression": "YEAR(vw_student[DEGREE_DATE])"
+            "expression": "YEAR(Student[DEGREE_DATE])"
           },
           {
             "type": "calculated",
@@ -472,14 +486,14 @@
             "name": "MoreThan4",
             "dataType": "int64",
             "isDataTypeInferred": true,
-            "expression": "if((DATEDIFF(TODAY(),vw_student[DEGREE_DATE],YEAR))>4,1,0)"
+            "expression": "if((DATEDIFF(TODAY(),Student[DEGREE_DATE],YEAR))>4,1,0)"
           },
           {
             "type": "calculated",
             "name": "DG<Today",
             "dataType": "int64",
             "isDataTypeInferred": true,
-            "expression": "IF(vw_student[DEGREE_DATE]<TODAY(),1,0)"
+            "expression": "IF(Student[DEGREE_DATE]<TODAY(),1,0)"
           }
         ],
         "partitions": [
@@ -502,8 +516,8 @@
           {
             "name": "_DGD>CurrentDate",
             "expression": [
-              "CALCULATE(DISTINCTCOUNT(vw_student[ID]),",
-              "vw_student[GradYearLimit]=1",
+              "CALCULATE(DISTINCTCOUNT(Student[ID]),",
+              "Student[GradYearLimit]=1",
               ")"
             ],
             "formatString": "#,0"
@@ -511,24 +525,24 @@
           {
             "name": "_DGD<CurrentDate",
             "expression": [
-              "CALCULATE(DISTINCTCOUNT(vw_student[ID]),",
-              "FILTER(vw_student,vw_student[DEGREE_DATE]<TODAY()))"
+              "CALCULATE(DISTINCTCOUNT(Student[ID]),",
+              "FILTER(Student,Student[DEGREE_DATE]<TODAY()))"
             ],
             "formatString": "#,0"
           },
           {
             "name": "_DGD (Null)",
             "expression": [
-              "CALCULATE(DISTINCTCOUNT(vw_student[ID]),",
-              "vw_student[DEGREE_DATE]=BLANK())"
+              "CALCULATE(DISTINCTCOUNT(Student[ID]),",
+              "Student[DEGREE_DATE]=BLANK())"
             ],
             "formatString": "#,0"
           },
           {
             "name": "_Stu>4",
             "expression": [
-              "CALCULATE(DISTINCTCOUNT(vw_student[ID]),",
-              "vw_student[MoreThan4]=1",
+              "CALCULATE(DISTINCTCOUNT(Student[ID]),",
+              "Student[MoreThan4]=1",
               ")"
             ],
             "formatString": "#,0"
@@ -536,16 +550,18 @@
         ]
       },
       {
-        "name": "vw_iMIS_Name_Address",
+        "name": "Name Address",
         "columns": [
           {
             "name": "ID",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "ID"
           },
           {
             "name": "ADDRESS_NUM",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "ADDRESS_NUM"
           },
           {
@@ -591,26 +607,31 @@
           {
             "name": "CRRT",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "CRRT"
           },
           {
             "name": "DPB",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "DPB"
           },
           {
             "name": "BAR_CODE",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "BAR_CODE"
           },
           {
             "name": "COUNTRY_CODE",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "COUNTRY_CODE"
           },
           {
             "name": "ADDRESS_FORMAT",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "ADDRESS_FORMAT"
           },
           {
@@ -626,21 +647,25 @@
           {
             "name": "US_CONGRESS",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "US_CONGRESS"
           },
           {
             "name": "STATE_SENATE",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "STATE_SENATE"
           },
           {
             "name": "STATE_HOUSE",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "STATE_HOUSE"
           },
           {
             "name": "MAIL_CODE",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "MAIL_CODE"
           },
           {
@@ -676,11 +701,13 @@
           {
             "name": "LAST_UPDATED",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LAST_UPDATED"
           },
           {
             "name": "LIST_STRING",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "LIST_STRING"
           },
           {
@@ -696,6 +723,7 @@
           {
             "name": "LAST_VERIFIED",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LAST_VERIFIED"
           },
           {
@@ -731,51 +759,61 @@
           {
             "name": "INFORMAL",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "INFORMAL"
           },
           {
             "name": "TITLE",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "TITLE"
           },
           {
             "name": "TIME_STAMP",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "TIME_STAMP"
           },
           {
             "name": "Id_Identity",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Id_Identity"
           },
           {
             "name": "LastUpdatedBy",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "LastUpdatedBy"
           },
           {
             "name": "LastModified",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LastModified"
           },
           {
             "name": "IsActive",
             "dataType": "boolean",
+            "isHidden": true,
             "sourceColumn": "IsActive"
           },
           {
             "name": "StartDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "StartDate"
           },
           {
             "name": "EndDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "EndDate"
           },
           {
             "name": "address_key",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "address_key"
           }
         ],
@@ -908,7 +946,7 @@
         ]
       },
       {
-        "name": "vw_iMIS_Race",
+        "name": "Race",
         "columns": [
           {
             "name": "ID",
@@ -968,41 +1006,49 @@
           {
             "name": "TIME_STAMP",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "TIME_STAMP"
           },
           {
             "name": "Id_Identitycolumn",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Id_Identitycolumn"
           },
           {
             "name": "LastUpdatedBy",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "LastUpdatedBy"
           },
           {
             "name": "LastModified",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LastModified"
           },
           {
             "name": "IsActive",
             "dataType": "boolean",
+            "isHidden": true,
             "sourceColumn": "IsActive"
           },
           {
             "name": "StartDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "StartDate"
           },
           {
             "name": "EndDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "EndDate"
           },
           {
             "name": "raceidkey",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "raceidkey"
           }
         ],
@@ -1024,7 +1070,7 @@
         ]
       },
       {
-        "name": "vw_iMIS_Name",
+        "name": "Name",
         "columns": [
           {
             "name": "ID",
@@ -1179,16 +1225,19 @@
           {
             "name": "MAIL_CODE",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "MAIL_CODE"
           },
           {
             "name": "CRRT",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "CRRT"
           },
           {
             "name": "BAR_CODE",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "BAR_CODE"
           },
           {
@@ -1209,6 +1258,7 @@
           {
             "name": "GENDER",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "GENDER"
           },
           {
@@ -1219,21 +1269,25 @@
           {
             "name": "US_CONGRESS",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "US_CONGRESS"
           },
           {
             "name": "STATE_SENATE",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "STATE_SENATE"
           },
           {
             "name": "STATE_HOUSE",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "STATE_HOUSE"
           },
           {
             "name": "SIC_CODE",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "SIC_CODE"
           },
           {
@@ -1249,6 +1303,7 @@
           {
             "name": "CONTACT_RANK",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "CONTACT_RANK"
           },
           {
@@ -1319,31 +1374,37 @@
           {
             "name": "LAST_UPDATED",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LAST_UPDATED"
           },
           {
             "name": "UPDATED_BY",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "UPDATED_BY"
           },
           {
             "name": "INTENT_TO_EDIT",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "INTENT_TO_EDIT"
           },
           {
             "name": "ADDRESS_NUM_1",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "ADDRESS_NUM_1"
           },
           {
             "name": "ADDRESS_NUM_2",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "ADDRESS_NUM_2"
           },
           {
             "name": "ADDRESS_NUM_3",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "ADDRESS_NUM_3"
           },
           {
@@ -1359,6 +1420,7 @@
           {
             "name": "SHIP_ADDRESS_NUM",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "SHIP_ADDRESS_NUM"
           },
           {
@@ -1384,26 +1446,31 @@
           {
             "name": "LastUpdatedBy",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "LastUpdatedBy"
           },
           {
             "name": "LastModified",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LastModified"
           },
           {
             "name": "IsActive",
             "dataType": "boolean",
+            "isHidden": true,
             "sourceColumn": "IsActive"
           },
           {
             "name": "StartDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "StartDate"
           },
           {
             "name": "EndDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "EndDate"
           },
           {
@@ -1755,6 +1822,23 @@
             "name": "Date_Added",
             "dataType": "dateTime",
             "sourceColumn": "Date_Added"
+          },
+          {
+            "type": "calculated",
+            "name": "_Has_Duplicated_Email",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "expression": [
+              " IF(",
+              "          CALCULATE(",
+              "                 COUNTA('Member'[Email]),",
+              "                 FILTER('Member', 'Member'[Email] = EARLIEST('Member'[Email]) && SEARCH(\"@\", 'Member'[Email],1,0) <> 0)",
+              "           )>1, ",
+              "           1,",
+              "           0",
+              "     )",
+              ""
+            ]
           }
         ],
         "partitions": [
@@ -1782,18 +1866,6 @@
           {
             "name": "_JoinDateGreaterThanToday",
             "expression": " COUNTROWS(FILTER('Member',NOT(ISBLANK('Member'[JoinDate]))&&'Member'[JoinDate]>TODAY()))",
-            "formatString": "#,0"
-          },
-          {
-            "name": "_NullEmail",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
-              "FILTER('Member','Member'[Email]=BLANK()||'Member'[Email]=\"UNMAPPED\"),",
-              "FILTER('Status','Status'[Status]=\"A\"),",
-              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
-              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()))",
-              ""
-            ],
             "formatString": "#,0"
           },
           {
@@ -1839,7 +1911,7 @@
               "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
               "FILTER('Product','Product'[Product_Code]=\"APA\"),",
               "FILTER(Chapter,Chapter[Primary Chapter]=BLANK()||Chapter[Primary Chapter]=\"UNMAPPED\"),",
-              "FILTER(vw_iMIS_Name,vw_iMIS_Name[COUNTRY]=\"UNITED STATES\"))"
+              "FILTER('Name','Name'[COUNTRY]=\"UNITED STATES\"))"
             ],
             "formatString": "#,0"
           },
@@ -1886,6 +1958,18 @@
               "FILTER('Product','Product'[Product_Code]=\"APA\"),",
               "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
               "FILTER('Member','Member'[JoinDateFlag]=1))"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "_NullEmail",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "FILTER('Member','Member'[Email]=BLANK()||'Member'[Email]=\"UNMAPPED\"),",
+              "FILTER('Status','Status'[Status]=\"A\"),",
+              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
+              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()))",
+              ""
             ],
             "formatString": "#,0"
           }
@@ -2529,6 +2613,7 @@
           {
             "name": "Address_Key",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Address_Key"
           },
           {
@@ -2584,26 +2669,31 @@
           {
             "name": "LastUpdatedBy",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "LastUpdatedBy"
           },
           {
             "name": "LastModified",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LastModified"
           },
           {
             "name": "IsActive",
             "dataType": "boolean",
+            "isHidden": true,
             "sourceColumn": "IsActive"
           },
           {
             "name": "StartDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "StartDate"
           },
           {
             "name": "EndDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "EndDate"
           }
         ],
@@ -2652,6 +2742,7 @@
           {
             "name": "Address_Key",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Address_Key"
           },
           {
@@ -2707,26 +2798,31 @@
           {
             "name": "LastUpdatedBy",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "LastUpdatedBy"
           },
           {
             "name": "LastModified",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LastModified"
           },
           {
             "name": "IsActive",
             "dataType": "boolean",
+            "isHidden": true,
             "sourceColumn": "IsActive"
           },
           {
             "name": "StartDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "StartDate"
           },
           {
             "name": "EndDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "EndDate"
           }
         ],
@@ -2769,28 +2865,28 @@
     "relationships": [
       {
         "name": "18481ea8-e51a-4c86-996b-247ec431b167",
-        "fromTable": "vw_tblFactMember_IS",
+        "fromTable": "FactMember_IS",
         "fromColumn": "ChapterKey",
         "toTable": "Chapter",
         "toColumn": "ChapterKey"
       },
       {
         "name": "9764ae75-0201-403e-afe5-3614918d916a",
-        "fromTable": "vw_tblFactMember_IS",
+        "fromTable": "FactMember_IS",
         "fromColumn": "MemberStatusKey",
         "toTable": "Max Action Status",
         "toColumn": "MemberStatusKey"
       },
       {
         "name": "416540b5-6e37-49ab-a957-d0334c6ceda8",
-        "fromTable": "vw_tblFactMember_IS",
+        "fromTable": "FactMember_IS",
         "fromColumn": "ProductTypeKey",
         "toTable": "Product Type",
         "toColumn": "ProductTypeKey"
       },
       {
         "name": "f8b1053f-a297-4f47-85c6-d603dd7ee80b",
-        "fromTable": "vw_tblFactMember_IS",
+        "fromTable": "FactMember_IS",
         "fromColumn": "SalaryIDKey",
         "toTable": "Salary",
         "toColumn": "SalaryIDKey"
@@ -2798,7 +2894,7 @@
       {
         "name": "fa930e63-dd94-4478-a37c-3d5f8ef84055",
         "fromCardinality": "one",
-        "fromTable": "vw_iMIS_Name",
+        "fromTable": "Name",
         "fromColumn": "memberidkey",
         "toTable": "Member",
         "toColumn": "MemberIDKey",
@@ -2806,14 +2902,14 @@
       },
       {
         "name": "b1424fe2-31a8-4139-ae9e-8fd9f0af10f9",
-        "fromTable": "vw_iMIS_Race",
+        "fromTable": "Race",
         "fromColumn": "raceidkey",
         "toTable": "Ethnicity_Origin",
         "toColumn": "RaceIDKey"
       },
       {
         "name": "524bb4fd-2ddb-4a16-b37b-84824cd24b53",
-        "fromTable": "vw_tblFactMember_IS",
+        "fromTable": "FactMember_IS",
         "fromColumn": "MemberIDKey",
         "toTable": "Member",
         "toColumn": "MemberIDKey",
@@ -2821,7 +2917,7 @@
       },
       {
         "name": "b6d5a75c-5a07-4070-aeba-18c89c74e3ee",
-        "fromTable": "vw_tblFactMember_IS",
+        "fromTable": "FactMember_IS",
         "fromColumn": "RaceIDKey",
         "toTable": "Ethnicity_Origin",
         "toColumn": "RaceIDKey",
@@ -2829,7 +2925,7 @@
       },
       {
         "name": "9d2c04cd-0642-4e8b-b823-f8b60f60d2aa",
-        "fromTable": "vw_tblFactMember_IS",
+        "fromTable": "FactMember_IS",
         "fromColumn": "MemberTypeIDKey",
         "toTable": "Member Type",
         "toColumn": "MemberTypeIDKey",
@@ -2837,7 +2933,7 @@
       },
       {
         "name": "74dadda1-f6e9-41bb-93d4-024be7d4b043",
-        "fromTable": "vw_tblFactMember_IS",
+        "fromTable": "FactMember_IS",
         "fromColumn": "Home_Address_Key",
         "toTable": "Work Address",
         "toColumn": "Address_Key",
@@ -2845,7 +2941,7 @@
       },
       {
         "name": "848a1e95-f2f2-444b-a7ab-c7626e1f1fac",
-        "fromTable": "vw_tblFactMember_IS",
+        "fromTable": "FactMember_IS",
         "fromColumn": "Work_Address_Key",
         "toTable": "Home Address",
         "toColumn": "Address_Key",
@@ -2853,15 +2949,15 @@
       },
       {
         "name": "f813c9e9-ee2b-4562-9ed0-ddbed0bb20eb",
-        "fromTable": "vw_tblFactMember_IS",
+        "fromTable": "FactMember_IS",
         "fromColumn": "address_num",
-        "toTable": "vw_dimAddress_Preferred",
+        "toTable": "Address Preferred",
         "toColumn": "Address_Num",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "10cadbf0-5ce9-4f26-917c-10ef093cd658",
-        "fromTable": "vw_tblFactMember_IS",
+        "fromTable": "FactMember_IS",
         "fromColumn": "Paid_Through_Key",
         "toTable": "Paid Thru Date",
         "toColumn": "Date_Key",
@@ -2869,7 +2965,7 @@
       },
       {
         "name": "eeea049b-a418-45f6-8ad9-2d02b626a9b5",
-        "fromTable": "vw_tblFactMember_IS",
+        "fromTable": "FactMember_IS",
         "fromColumn": "StatusKey",
         "toTable": "Status",
         "toColumn": "StatusKey",
@@ -2877,7 +2973,7 @@
       },
       {
         "name": "0fba4069-0253-4ff8-89b0-bd703d3dc6b6",
-        "fromTable": "vw_tblFactMember_IS",
+        "fromTable": "FactMember_IS",
         "fromColumn": "ProductCodeKey",
         "toTable": "Product",
         "toColumn": "ProductCodeKey",
@@ -2885,7 +2981,7 @@
       },
       {
         "name": "1555da4f-deca-4c7d-875a-4cefa3d73dab",
-        "fromTable": "vw_student",
+        "fromTable": "Student",
         "fromColumn": "memberidkey",
         "toTable": "Member",
         "toColumn": "MemberIDKey",
@@ -3083,7 +3179,7 @@
             ]
           },
           {
-            "name": "vw_dimAddress_Preferred",
+            "name": "Address Preferred",
             "columnPermissions": [
               {
                 "name": "FullAddress",

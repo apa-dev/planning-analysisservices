@@ -1,5 +1,5 @@
 {
-  "name": "APA_Wave1_AS",
+  "name": "SemanticModel",
   "compatibilityLevel": 1500,
   "model": {
     "culture": "en-US",
@@ -111,8 +111,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "dataSource": "SQL_apadwprod database windows net;apaprod",
-              "query": " SELECT [dbo].[vw_dimChapter].* FROM [dbo].[vw_dimChapter] "
+              "query": " SELECT [dbo].[vw_dimChapter].* FROM [dbo].[vw_dimChapter] ",
+              "dataSource": "SQL_apadwprod database windows net;apaprod"
             },
             "annotations": [
               {
@@ -668,8 +668,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "dataSource": "SQL_apadwprod database windows net;apaprod",
-              "query": " SELECT [dbo].[vw_dimDate_PaidThru].* FROM [dbo].[vw_dimDate_PaidThru] "
+              "query": " SELECT [dbo].[vw_dimDate_PaidThru].* FROM [dbo].[vw_dimDate_PaidThru] ",
+              "dataSource": "SQL_apadwprod database windows net;apaprod"
             },
             "annotations": [
               {
@@ -1202,8 +1202,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "dataSource": "SQL_apadwprod database windows net;apaprod",
-              "query": " SELECT [dbo].[vw_dimDate_Trans].* FROM [dbo].[vw_dimDate_Trans] "
+              "query": " SELECT [dbo].[vw_dimDate_Trans].* FROM [dbo].[vw_dimDate_Trans] ",
+              "dataSource": "SQL_apadwprod database windows net;apaprod"
             },
             "annotations": [
               {
@@ -1818,6 +1818,22 @@
             "name": "Cohort_MemberType",
             "dataType": "string",
             "sourceColumn": "Cohort_MemberType"
+          },
+          {
+            "type": "calculated",
+            "name": "Has_Duplicated_Email",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "expression": [
+              " IF(",
+              "          CALCULATE(",
+              "                 COUNTA('Member'[Email]),",
+              "                 FILTER('Member', 'Member'[Email] = MAX('Member'[Email]))",
+              "           )>1, ",
+              "           1,",
+              "           0",
+              "     )"
+            ]
           }
         ],
         "partitions": [
@@ -1826,8 +1842,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "dataSource": "SQL_apadwprod database windows net;apaprod",
-              "query": " SELECT [dbo].[vw_dimMember].[MemberIDKey],[dbo].[vw_dimMember].[Parent],[dbo].[vw_dimMember].[Member_ID],[dbo].[vw_dimMember].[First_Name],[dbo].[vw_dimMember].[Middle_Name],[dbo].[vw_dimMember].[Last_Name],[dbo].[vw_dimMember].[Full_Name],[dbo].[vw_dimMember].[Email],[dbo].[vw_dimMember].[Home_Phone],[dbo].[vw_dimMember].[Mobile_Phone],[dbo].[vw_dimMember].[Work_Phone],[dbo].[vw_dimMember].[Designation],[dbo].[vw_dimMember].[Functional_Title],[dbo].[vw_dimMember].[Birth_Date],[dbo].[vw_dimMember].[JoinDate],[dbo].[vw_dimMember].[Cohort],[dbo].[vw_dimMember].[Merged_Date],[dbo].[vw_dimMember].[Cohortquarter],[dbo].[vw_dimMember].[Cohort_MemberType],[dbo].[vw_dimMember].[Isactive],[dbo].[vw_dimMember].[AICP_START] FROM [dbo].[vw_dimMember] "
+              "query": " SELECT [dbo].[vw_dimMember].[MemberIDKey],[dbo].[vw_dimMember].[Parent],[dbo].[vw_dimMember].[Member_ID],[dbo].[vw_dimMember].[First_Name],[dbo].[vw_dimMember].[Middle_Name],[dbo].[vw_dimMember].[Last_Name],[dbo].[vw_dimMember].[Full_Name],[dbo].[vw_dimMember].[Email],[dbo].[vw_dimMember].[Home_Phone],[dbo].[vw_dimMember].[Mobile_Phone],[dbo].[vw_dimMember].[Work_Phone],[dbo].[vw_dimMember].[Designation],[dbo].[vw_dimMember].[Functional_Title],[dbo].[vw_dimMember].[Birth_Date],[dbo].[vw_dimMember].[JoinDate],[dbo].[vw_dimMember].[Cohort],[dbo].[vw_dimMember].[Merged_Date],[dbo].[vw_dimMember].[Cohortquarter],[dbo].[vw_dimMember].[Cohort_MemberType],[dbo].[vw_dimMember].[Isactive],[dbo].[vw_dimMember].[AICP_START] FROM [dbo].[vw_dimMember] ",
+              "dataSource": "SQL_apadwprod database windows net;apaprod"
             },
             "annotations": [
               {
@@ -3017,8 +3033,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "dataSource": "SQL_apadwprod database windows net;apaprod",
-              "query": " SELECT [dbo].[vw_dimMemberStatus].* FROM [dbo].[vw_dimMemberStatus] "
+              "query": " SELECT [dbo].[vw_dimMemberStatus].* FROM [dbo].[vw_dimMemberStatus] ",
+              "dataSource": "SQL_apadwprod database windows net;apaprod"
             },
             "annotations": [
               {
@@ -3542,8 +3558,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "dataSource": "SQL_apadwprod database windows net;apaprod",
-              "query": " SELECT [dbo].[vw_dimMemberType].* FROM [dbo].[vw_dimMemberType] "
+              "query": " SELECT [dbo].[vw_dimMemberType].* FROM [dbo].[vw_dimMemberType] ",
+              "dataSource": "SQL_apadwprod database windows net;apaprod"
             },
             "annotations": [
               {
@@ -4169,8 +4185,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "dataSource": "SQL_apadwprod database windows net;apaprod",
-              "query": " SELECT [dbo].[vw_dimProductCode].* FROM [dbo].[vw_dimProductCode] "
+              "query": " SELECT [dbo].[vw_dimProductCode].* FROM [dbo].[vw_dimProductCode] ",
+              "dataSource": "SQL_apadwprod database windows net;apaprod"
             },
             "annotations": [
               {
@@ -4839,8 +4855,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "dataSource": "SQL_apadwprod database windows net;apaprod",
-              "query": " SELECT [dbo].[vw_dimRace].[RaceIDKey],[dbo].[vw_dimRace].[RaceID],[dbo].[vw_dimRace].[Ethnicity],[dbo].[vw_dimRace].[Custom_Rollup],[dbo].[vw_dimRace].[LastUpdatedBy],[dbo].[vw_dimRace].[IsActive],[dbo].[vw_dimRace].[StartDate],[dbo].[vw_dimRace].[EndDate],[dbo].[vw_dimRace].[Origin],[dbo].[vw_dimRace].[OriginDescription] FROM [dbo].[vw_dimRace] "
+              "query": " SELECT [dbo].[vw_dimRace].[RaceIDKey],[dbo].[vw_dimRace].[RaceID],[dbo].[vw_dimRace].[Ethnicity],[dbo].[vw_dimRace].[Custom_Rollup],[dbo].[vw_dimRace].[LastUpdatedBy],[dbo].[vw_dimRace].[IsActive],[dbo].[vw_dimRace].[StartDate],[dbo].[vw_dimRace].[EndDate],[dbo].[vw_dimRace].[Origin],[dbo].[vw_dimRace].[OriginDescription] FROM [dbo].[vw_dimRace] ",
+              "dataSource": "SQL_apadwprod database windows net;apaprod"
             },
             "annotations": [
               {
@@ -5387,8 +5403,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "dataSource": "SQL_apadwprod database windows net;apaprod",
-              "query": " SELECT [dbo].[vw_dimSalary].* FROM [dbo].[vw_dimSalary] "
+              "query": " SELECT [dbo].[vw_dimSalary].* FROM [dbo].[vw_dimSalary] ",
+              "dataSource": "SQL_apadwprod database windows net;apaprod"
             },
             "annotations": [
               {
@@ -5870,8 +5886,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "dataSource": "SQL_apadwprod database windows net;apaprod",
-              "query": " SELECT [dbo].[vw_dimStatus].* FROM [dbo].[vw_dimStatus] "
+              "query": " SELECT [dbo].[vw_dimStatus].* FROM [dbo].[vw_dimStatus] ",
+              "dataSource": "SQL_apadwprod database windows net;apaprod"
             },
             "annotations": [
               {
@@ -6439,8 +6455,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "dataSource": "SQL_apadwprod database windows net;apaprod",
-              "query": " SELECT [dbo].[FUNC_DESC].[CODE],[dbo].[FUNC_DESC].[DESCRIPTION] FROM [dbo].[FUNC_DESC] "
+              "query": " SELECT [dbo].[FUNC_DESC].[CODE],[dbo].[FUNC_DESC].[DESCRIPTION] FROM [dbo].[FUNC_DESC] ",
+              "dataSource": "SQL_apadwprod database windows net;apaprod"
             },
             "annotations": [
               {
@@ -7516,112 +7532,112 @@
     "relationships": [
       {
         "name": "71bf853c-3822-4628-9f01-d613a7863a25",
-        "toTable": "Functional Title Desc",
-        "toColumn": "CODE",
         "fromTable": "Member",
-        "fromColumn": "Functional_Title"
+        "fromColumn": "Functional_Title",
+        "toTable": "Functional Title Desc",
+        "toColumn": "CODE"
       },
       {
         "name": "537dad2e-6367-4ab8-92ae-77255816f5f5",
+        "fromTable": "vw_tblFactMember_IS",
+        "fromColumn": "Home_Address_Key",
         "toTable": "Work Address",
         "toColumn": "Address_Key",
-        "fromColumn": "Home_Address_Key",
-        "fromTable": "vw_tblFactMember_IS",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "831e0fdb-719a-41cb-9975-0bdc8072e79f",
-        "toTable": "Trans Date",
-        "toColumn": "Date_Key",
         "fromTable": "vw_tblFactMember_IS",
-        "fromColumn": "Trans_Date_Key"
+        "fromColumn": "Trans_Date_Key",
+        "toTable": "Trans Date",
+        "toColumn": "Date_Key"
       },
       {
         "name": "6f21406d-f3fe-45d8-8c3f-30af51301541",
+        "fromTable": "vw_tblFactMember_IS",
+        "fromColumn": "Work_Address_Key",
         "toTable": "Home Address",
         "toColumn": "Address_Key",
-        "fromColumn": "Work_Address_Key",
-        "fromTable": "vw_tblFactMember_IS",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "c93b2c6e-d986-4af2-befa-48a68819caf2",
+        "fromTable": "vw_tblFactMember_IS",
+        "fromColumn": "address_num",
         "toTable": "Preferred Mail",
         "toColumn": "Address_Num",
-        "fromColumn": "address_num",
-        "fromTable": "vw_tblFactMember_IS",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "4a8e5e0f-3a76-489f-bacc-51dadbc6ad22",
+        "fromTable": "vw_tblFactMember_IS",
+        "fromColumn": "MemberStatusKey",
         "toTable": "Max Action Status",
         "toColumn": "MemberStatusKey",
-        "fromColumn": "MemberStatusKey",
-        "fromTable": "vw_tblFactMember_IS",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "afd8cbef-2610-447d-b63a-764a695229f5",
+        "fromTable": "vw_tblFactMember_IS",
+        "fromColumn": "MemberTypeIDKey",
         "toTable": "Member Type",
         "toColumn": "MemberTypeIDKey",
-        "fromColumn": "MemberTypeIDKey",
-        "fromTable": "vw_tblFactMember_IS",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "fa91e7b2-917f-4727-9be9-0a49bf799bd6",
+        "fromTable": "vw_tblFactMember_IS",
+        "fromColumn": "ProductCodeKey",
         "toTable": "Product",
         "toColumn": "ProductCodeKey",
-        "fromColumn": "ProductCodeKey",
-        "fromTable": "vw_tblFactMember_IS",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "b8bde7f2-2f90-4832-a7c4-3fdfea7298c5",
+        "fromTable": "vw_tblFactMember_IS",
+        "fromColumn": "MemberIDKey",
         "toTable": "Member",
         "toColumn": "MemberIDKey",
-        "fromColumn": "MemberIDKey",
-        "fromTable": "vw_tblFactMember_IS",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "203eca9d-e8fd-4e9d-a2c5-5f240b0473db",
+        "fromTable": "vw_tblFactMember_IS",
+        "fromColumn": "StatusKey",
         "toTable": "Status",
         "toColumn": "StatusKey",
-        "fromColumn": "StatusKey",
-        "fromTable": "vw_tblFactMember_IS",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "a83d3d31-e2f3-4b53-919b-1609f0bd0b7a",
+        "fromTable": "vw_tblFactMember_IS",
+        "fromColumn": "Paid_Through_Key",
         "toTable": "Paid Thru Date",
         "toColumn": "Date_Key",
-        "fromColumn": "Paid_Through_Key",
-        "fromTable": "vw_tblFactMember_IS",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "26c8ee41-a791-4806-817b-1d8d9a419a2e",
+        "fromTable": "vw_tblFactMember_IS",
+        "fromColumn": "ChapterKey",
         "toTable": "Chapter",
         "toColumn": "ChapterKey",
-        "fromColumn": "ChapterKey",
-        "fromTable": "vw_tblFactMember_IS",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "7c087aef-f15e-4adb-86af-aa7db5ae2aba",
+        "fromTable": "vw_tblFactMember_IS",
+        "fromColumn": "SalaryIDKey",
         "toTable": "Salary",
         "toColumn": "SalaryIDKey",
-        "fromColumn": "SalaryIDKey",
-        "fromTable": "vw_tblFactMember_IS",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "8105630f-0b16-48be-b59e-06b5861e4e3a",
+        "fromTable": "vw_tblFactMember_IS",
+        "fromColumn": "RaceIDKey",
         "toTable": "Ethnicity_Origin",
         "toColumn": "RaceIDKey",
-        "fromColumn": "RaceIDKey",
-        "fromTable": "vw_tblFactMember_IS",
         "crossFilteringBehavior": "bothDirections"
       }
     ],
@@ -7632,30 +7648,37 @@
         "members": [
           {
             "memberName": "Ajay.Punyapu@rsmus.com",
+            "memberId": "Ajay.Punyapu@rsmus.com#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "Morgan.Diestler@rsmus.com",
+            "memberId": "Morgan.Diestler@rsmus.com#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "cmollet@planning.org",
+            "memberId": "cmollet@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rwest@planning.org",
+            "memberId": "rwest@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "plowe@planning.org",
+            "memberId": "plowe@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "msullivan@planning.org",
+            "memberId": "msullivan@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "tjohnson@planning.org",
+            "memberId": "tjohnson@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           }
         ]
@@ -7666,74 +7689,92 @@
         "members": [
           {
             "memberName": "Joy.Cruz@rsmus.com",
+            "memberId": "Joy.Cruz@rsmus.com#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "Akrakos@planning.org",
+            "memberId": "Akrakos@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mferguson@planning.org",
+            "memberId": "mferguson@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "klennon@planning.org",
+            "memberId": "klennon@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "llang@planning.org",
+            "memberId": "llang@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kkazmierczak@planning.org",
+            "memberId": "kkazmierczak@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mwalsh@planning.org",
+            "memberId": "mwalsh@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kschmidt@planning.org",
+            "memberId": "kschmidt@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mjimenez@planning.org",
+            "memberId": "mjimenez@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "MWelch@planning.org",
+            "memberId": "MWelch@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "balbrecht@planning.org",
+            "memberId": "balbrecht@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mjohnson@planning.org",
+            "memberId": "mjohnson@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "RJassen@planning.org",
+            "memberId": "RJassen@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "crahill@planning.org",
+            "memberId": "crahill@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "bmissaggia@planning.org",
+            "memberId": "bmissaggia@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "RRegalado@planning.org",
+            "memberId": "RRegalado@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "amoore@planning.org",
+            "memberId": "amoore@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "jrolla@planning.org",
+            "memberId": "jrolla@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           }
         ]
@@ -7744,90 +7785,112 @@
         "members": [
           {
             "memberName": "Sarteaga@planning.org",
+            "memberId": "Sarteaga@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mmarrero@planning.org",
+            "memberId": "mmarrero@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kgems@planning.org",
+            "memberId": "kgems@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "CParra@planning.org",
+            "memberId": "CParra@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rhoffman@planning.org",
+            "memberId": "rhoffman@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "LJorgenson@planning.org",
+            "memberId": "LJorgenson@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "ynoonoo@planning.org",
+            "memberId": "ynoonoo@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mkraus@planning.org",
+            "memberId": "mkraus@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "bdonegan@planning.org",
+            "memberId": "bdonegan@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rrewers@planning.org",
+            "memberId": "rrewers@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "epasi@planning.org",
+            "memberId": "epasi@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "JJordan@planning.org",
+            "memberId": "JJordan@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "chinshaw@planning.org",
+            "memberId": "chinshaw@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kjacques@planning.org",
+            "memberId": "kjacques@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "ewilczek@planning.org",
+            "memberId": "ewilczek@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "anavarro@planning.org",
+            "memberId": "anavarro@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "ajimenez@planning.org",
+            "memberId": "ajimenez@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "fbraunstein@planning.org",
+            "memberId": "fbraunstein@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rscherzinger@planning.org",
+            "memberId": "rscherzinger@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rzack@planning.org",
+            "memberId": "rzack@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "wfrench@planning.org",
+            "memberId": "wfrench@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "usaenz@planning.org",
+            "memberId": "usaenz@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           }
         ],
@@ -7929,5 +7992,6 @@
         "value": "600"
       }
     ]
-  }
+  },
+  "id": "SemanticModel"
 }
