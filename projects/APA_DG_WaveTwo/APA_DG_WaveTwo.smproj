@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Development</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{334adf90-f8cf-4fe6-b865-430ce5cffb1d}</ProjectGuid>
+    <ProjectGuid>{0f62ed34-c2a5-4ff3-b8fc-85793cd03f60}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>APA_DG_WaveTwo</RootNamespace>
     <AssemblyName>APA_DG_WaveTwo</AssemblyName>
@@ -22,10 +22,9 @@
     <DeploymentOptionTransactionalDeployment>False</DeploymentOptionTransactionalDeployment>
     <DeploymentOptionDirectQueryMode>InMemory</DeploymentOptionDirectQueryMode>
     <DeploymentOptionQueryImpersonation>Default</DeploymentOptionQueryImpersonation>
-    <DeploymentOptionADALCache>Default</DeploymentOptionADALCache>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == '' ">
-    <DeploymentServerName>localhost</DeploymentServerName>
+    <DeploymentServerName>asazure://northcentralus.asazure.windows.net/apaprodas:rw</DeploymentServerName>
     <DeploymentServerEdition>Developer</DeploymentServerEdition>
     <DeploymentServerVersion>Unknown</DeploymentServerVersion>
     <DeploymentServerDatabase>APA_DG_WaveTwo</DeploymentServerDatabase>
@@ -34,7 +33,6 @@
     <DeploymentOptionTransactionalDeployment>False</DeploymentOptionTransactionalDeployment>
     <DeploymentOptionDirectQueryMode>InMemory</DeploymentOptionDirectQueryMode>
     <DeploymentOptionQueryImpersonation>Default</DeploymentOptionQueryImpersonation>
-    <DeploymentOptionADALCache>Default</DeploymentOptionADALCache>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Model.bim">
