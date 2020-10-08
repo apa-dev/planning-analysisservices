@@ -17,11 +17,11 @@
           "query": null
         },
         "credential": {
-          "AuthenticationKind": "UsernamePassword",
+          "AuthenticationKind": "OAuth2",
           "kind": "SQL",
           "path": "apadwprod.database.windows.net;apaprod",
-          "Username": "sqladm",
-          "EncryptConnection": true
+          "Expires": "Fri, 18 Sep 2020 15:20:04 GMT",
+          "RefreshToken": "********"
         }
       },
       {
@@ -37,11 +37,11 @@
           "query": null
         },
         "credential": {
-          "AuthenticationKind": "UsernamePassword",
+          "AuthenticationKind": "OAuth2",
           "kind": "SQL",
           "path": "apadwprod.database.windows.net;APAPROD",
-          "Username": "sqladm",
-          "EncryptConnection": true
+          "Expires": "Fri, 18 Sep 2020 15:20:26 GMT",
+          "RefreshToken": "********"
         }
       }
     ],
@@ -298,62 +298,62 @@
             "sourceColumn": "SEQN"
           },
           {
-            "name": "SCHOOL_ID",
+            "name": "School_ID",
             "dataType": "string",
             "sourceColumn": "SCHOOL_ID"
           },
           {
-            "name": "SCHOOL_OTHER",
+            "name": "School_Name",
             "dataType": "string",
             "sourceColumn": "SCHOOL_OTHER"
           },
           {
-            "name": "DEGREE_LEVEL",
+            "name": "Degree_Level",
             "dataType": "string",
             "sourceColumn": "DEGREE_LEVEL"
           },
           {
-            "name": "DEGREE_DATE",
+            "name": "Degree_Date",
             "dataType": "dateTime",
             "sourceColumn": "DEGREE_DATE"
           },
           {
-            "name": "DEGREE_PLANNING",
+            "name": "Degree_Planning",
             "dataType": "boolean",
             "sourceColumn": "DEGREE_PLANNING"
           },
           {
-            "name": "MAJOR",
+            "name": "Major",
             "dataType": "string",
             "sourceColumn": "MAJOR"
           },
           {
-            "name": "ACCREDITED_PROGRAM",
+            "name": "Accredited_Program",
             "dataType": "string",
             "sourceColumn": "ACCREDITED_PROGRAM"
           },
           {
-            "name": "DEGREE_COMPLETE",
+            "name": "Degree_Complete",
             "dataType": "boolean",
             "sourceColumn": "DEGREE_COMPLETE"
           },
           {
-            "name": "SCHOOL_STUDENT_ID",
+            "name": "School_Student_ID",
             "dataType": "string",
             "sourceColumn": "SCHOOL_STUDENT_ID"
           },
           {
-            "name": "ALL_SCHOOLS",
+            "name": "All_Schools",
             "dataType": "string",
             "sourceColumn": "ALL_SCHOOLS"
           },
           {
-            "name": "ACCRED_SCHOOLS",
+            "name": "Accred_Schools",
             "dataType": "string",
             "sourceColumn": "ACCRED_SCHOOLS"
           },
           {
-            "name": "DEGREE_PROGRAM",
+            "name": "Degree_Program",
             "dataType": "string",
             "sourceColumn": "DEGREE_PROGRAM"
           },
@@ -363,18 +363,19 @@
             "sourceColumn": "IS_CURRENT"
           },
           {
-            "name": "SCHOOL_SEQN",
+            "name": "School_SEQN",
             "dataType": "int64",
             "sourceColumn": "SCHOOL_SEQN"
           },
           {
-            "name": "DEGREE_LEVEL_OTHER",
+            "name": "Degree_Level_Other",
             "dataType": "string",
             "sourceColumn": "DEGREE_LEVEL_OTHER"
           },
           {
             "name": "TIME_STAMP",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "TIME_STAMP"
           },
           {
@@ -426,22 +427,22 @@
             "sourceColumn": "member_id"
           },
           {
-            "name": "first_name",
+            "name": "First_Name",
             "dataType": "string",
             "sourceColumn": "first_name"
           },
           {
-            "name": "last_name",
+            "name": "Last_Name",
             "dataType": "string",
             "sourceColumn": "last_name"
           },
           {
-            "name": "email",
+            "name": "Email",
             "dataType": "string",
             "sourceColumn": "email"
           },
           {
-            "name": "member_type",
+            "name": "Member_Type",
             "dataType": "string",
             "sourceColumn": "member_type"
           },
@@ -472,7 +473,7 @@
             "name": "GradYear",
             "dataType": "int64",
             "isDataTypeInferred": true,
-            "expression": "YEAR(Student[DEGREE_DATE])"
+            "expression": "YEAR(Student[Degree_Date])"
           },
           {
             "type": "calculated",
@@ -486,14 +487,14 @@
             "name": "MoreThan4",
             "dataType": "int64",
             "isDataTypeInferred": true,
-            "expression": "if((DATEDIFF(TODAY(),Student[DEGREE_DATE],YEAR))>4,1,0)"
+            "expression": "if((DATEDIFF(TODAY(),Student[Degree_Date],YEAR))>4,1,0)"
           },
           {
             "type": "calculated",
-            "name": "DG<Today",
+            "name": "DegreeDate<Today",
             "dataType": "int64",
             "isDataTypeInferred": true,
-            "expression": "IF(Student[DEGREE_DATE]<TODAY(),1,0)"
+            "expression": "IF(Student[Degree_Date]<TODAY(),1,0)"
           }
         ],
         "partitions": [
@@ -514,7 +515,7 @@
         ],
         "measures": [
           {
-            "name": "_DGD>CurrentDate",
+            "name": "_DegreeDate>CurrentDate",
             "expression": [
               "CALCULATE(DISTINCTCOUNT(Student[ID]),",
               "Student[GradYearLimit]=1",
@@ -523,18 +524,18 @@
             "formatString": "#,0"
           },
           {
-            "name": "_DGD<CurrentDate",
+            "name": "_DegreeDate<CurrentDate",
             "expression": [
               "CALCULATE(DISTINCTCOUNT(Student[ID]),",
-              "FILTER(Student,Student[DEGREE_DATE]<TODAY()))"
+              "FILTER(Student,Student[Degree_Date]<TODAY()))"
             ],
             "formatString": "#,0"
           },
           {
-            "name": "_DGD (Null)",
+            "name": "_Null DegreeDate",
             "expression": [
               "CALCULATE(DISTINCTCOUNT(Student[ID]),",
-              "Student[DEGREE_DATE]=BLANK())"
+              "Student[Degree_Date]=BLANK())"
             ],
             "formatString": "#,0"
           },
@@ -922,7 +923,7 @@
             "formatString": "#,0"
           },
           {
-            "name": "_Adderess Null Active Members (Work)",
+            "name": "_Address Null Active Members (Work)",
             "expression": [
               "CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
               "FILTER('Status','Status'[Status]=\"A\"),",
@@ -933,7 +934,7 @@
             "formatString": "#,0"
           },
           {
-            "name": "_Adderess Null Active Members (Home)",
+            "name": "_Address Null Active Members (Home)",
             "expression": [
               "CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
               "FILTER('Status','Status'[Status]=\"A\"),",
@@ -1832,7 +1833,7 @@
               " IF(",
               "          CALCULATE(",
               "                 COUNTA('Member'[Email]),",
-              "                 FILTER('Member', 'Member'[Email] = EARLIEST('Member'[Email]) && SEARCH(\"@\", 'Member'[Email],1,0) <> 0)",
+              "                 FILTER('Member', 'Member'[Email] = EARLIEST('Member'[Email]) && SEARCH(\"@\", 'Member'[Email],1,0) <> 0 && 'Member'[Isactive]=TRUE )",
               "           )>1, ",
               "           1,",
               "           0",
@@ -1972,6 +1973,16 @@
               ""
             ],
             "formatString": "#,0"
+          },
+          {
+            "name": "_DupeEmaill",
+            "expression": [
+              " Format(CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "FILTER('Member','Member'[_Has_Duplicated_Email]=1),",
+              "FILTER('Status','Status'[Status]=\"A\"),",
+              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
+              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY())),\"#,0\")"
+            ]
           }
         ]
       },

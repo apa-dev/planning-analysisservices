@@ -1,5 +1,5 @@
 {
-  "name": "SemanticModel",
+  "name": "APA_DG_WaveTwo",
   "compatibilityLevel": 1500,
   "model": {
     "culture": "en-US",
@@ -393,6 +393,13 @@
             "name": "LastModified",
             "dataType": "dateTime",
             "sourceColumn": "LastModified"
+          },
+          {
+            "type": "calculated",
+            "name": "PaidThruFlag",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "expression": "if(vw_dimDate_PaidThru[date]>=TODAY(), 1,0)"
           }
         ],
         "partitions": [
@@ -561,6 +568,13 @@
               "\"AICP CUD\", \"AICP, AICP CUD\", \"AICP, CTP\"}, \"AICP\",",
               "if('vw_dimMember'[Designation] in {\"FAICP\", \"FAICP CTP\", \"FAICP CTP CEP\", \"FAICP CUD\"}, \"FAICP\", \"Unmapped\")))"
             ]
+          },
+          {
+            "type": "calculated",
+            "name": "Age",
+            "dataType": "double",
+            "isDataTypeInferred": true,
+            "expression": " (DATEDIFF('vw_dimMember'[Birth_Date],TODAY(),DAY))/365"
           }
         ],
         "partitions": [
@@ -585,15 +599,24 @@
             "expression": [
               " CALCULATE(DISTINCTCOUNT(vw_dimMember[Member_ID]),",
               "FILTER(vw_dimMember, vw_dimMember[AICP_START] <> BLANK()), ",
-              "FILTER(vw_dimMember, vw_dimMember[_Designation] = BLANK()))"
+              "FILTER(vw_dimProductCode, vw_dimProductCode[Product_Code] = \"APA\"),",
+              "FILTER(vw_dimStatus, vw_dimStatus[Status] = \"A\"),",
+              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] > TODAY()),",
+              "FILTER(vw_dimMember, vw_dimMember[_Designation] <> \"AICP\"))"
             ]
           },
           {
             "name": "_AICPPaidThruNull",
             "expression": [
               " CALCULATE(DISTINCTCOUNT(vw_dimMember[Member_ID]),",
-              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] = BLANK()), ",
-              "FILTER(vw_dimMember, vw_dimMember[_Designation] = \"AICP\"))"
+              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] = BLANK()),",
+              "FILTER(vw_dimProductCode, vw_dimProductCode[Product_Code] = \"APA\"),",
+              "FILTER(vw_dimStatus, vw_dimStatus[Status] = \"A\"), ",
+              "FILTER(vw_dimMember, vw_dimMember[_Designation] = \"AICP\"))",
+              "",
+              "",
+              "",
+              ""
             ]
           },
           {
@@ -1477,7 +1500,10 @@
               "CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
               "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Self_Reported]=TRUE() && ",
               "vw_stg_Fact_Claims[Verified]=TRUE() &&",
-              "vw_stg_Fact_Claims[Credits]>8))"
+              "vw_stg_Fact_Claims[Credits]>8),",
+              "FILTER(vw_dimProductCode, vw_dimProductCode[Product_Code] = \"APA\"),",
+              "FILTER(vw_dimStatus, vw_dimStatus[Status] = \"A\"),",
+              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] > TODAY()))"
             ]
           },
           {
@@ -1494,7 +1520,10 @@
             "expression": [
               " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
               "FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] <> \"RET\"),",
-              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] = \"E_01\"))"
+              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] = \"E_01\"),",
+              "FILTER(vw_dimProductCode, vw_dimProductCode[Product_Code] = \"APA\"),",
+              "FILTER(vw_dimStatus, vw_dimStatus[Status] = \"A\"),",
+              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] > TODAY()))"
             ]
           },
           {
@@ -1502,7 +1531,10 @@
             "expression": [
               " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
               "FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] = \"RET\"),",
-              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] <> \"E_01\"))"
+              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] <> \"E_01\"),",
+              "FILTER(vw_dimProductCode, vw_dimProductCode[Product_Code] = \"APA\"),",
+              "FILTER(vw_dimStatus, vw_dimStatus[Status] = \"A\"),",
+              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] > TODAY()))"
             ]
           },
           {
@@ -1510,7 +1542,10 @@
             "expression": [
               " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
               "FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] = \"LIFE\"),",
-              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] <> \"E_12\"))"
+              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] <> \"E_12\"),",
+              "FILTER(vw_dimProductCode, vw_dimProductCode[Product_Code] = \"APA\"),",
+              "FILTER(vw_dimStatus, vw_dimStatus[Status] = \"A\"),",
+              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] > TODAY()))"
             ]
           },
           {
@@ -1518,14 +1553,17 @@
             "expression": [
               " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
               "FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] = \"MEM\"),",
-              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] = \"E_02\"))"
+              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] = \"E_02\"),",
+              "FILTER(vw_dimProductCode, vw_dimProductCode[Product_Code] = \"APA\"),",
+              "FILTER(vw_dimStatus, vw_dimStatus[Status] = \"A\"),",
+              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] > TODAY()))"
             ]
           },
           {
             "name": "_ActiveNoReportingPeriod",
             "expression": [
               " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
-              "FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] = \"MEM\"),",
+              "--FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] = \"MEM\"),",
               "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] >= TODAY()),",
               "FILTER(vw_dimStatus, vw_dimStatus[Status] = \"A\"),",
               "FILTER(vw_dimProductCode, vw_dimProductCode[Product_Code] = \"APA\"),",
@@ -1542,6 +1580,44 @@
               "FILTER(vw_dimProductCode, vw_dimProductCode[Product_Code] = \"APA\"),",
               "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] = \"A\"),",
               "FILTER(vw_stg_Fact_Claims, COUNT(vw_stg_Fact_Claims[Log_Status]) > 2))"
+            ]
+          },
+          {
+            "name": "_AuthoringCredits",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
+              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Self_Reported] = TRUE()),",
+              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Verified] = TRUE()),",
+              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Is_Author] = TRUE()),",
+              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Credits] > 16))"
+            ]
+          },
+          {
+            "name": "_ReinstatedNotEnoughCredits",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
+              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] = \"R\"),",
+              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Credits] < 32),",
+              "FILTER(vw_dimProductCode, vw_dimProductCode[Product_Code] = \"APA\"),",
+              "FILTER(vw_dimStatus, vw_dimStatus[Status] = \"A\"),",
+              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] > TODAY()))"
+            ]
+          },
+          {
+            "name": "_Member65ZeroCreditCheck",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
+              "FILTER(vw_dimMember, vw_dimMember[Age] >= 65),",
+              "FILTER(vw_stg_cm_log, vw_stg_cm_log[credits_required] = 0),",
+              "FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] = \"RET\"))"
+            ]
+          },
+          {
+            "name": "_VoluntaryLifeCreditCheck",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
+              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] = \"E_13\"),",
+              "FILTER(vw_stg_cm_log, vw_stg_cm_log[credits_required] <> 16))"
             ]
           }
         ]
@@ -2027,393 +2103,633 @@
             }
           }
         ]
+      },
+      {
+        "name": "vw_stg_cm_log",
+        "columns": [
+          {
+            "name": "id",
+            "dataType": "int64",
+            "sourceColumn": "id"
+          },
+          {
+            "name": "status",
+            "dataType": "string",
+            "sourceColumn": "status"
+          },
+          {
+            "name": "is_current",
+            "dataType": "boolean",
+            "sourceColumn": "is_current"
+          },
+          {
+            "name": "contact_id",
+            "dataType": "int64",
+            "sourceColumn": "contact_id"
+          },
+          {
+            "name": "period_id",
+            "dataType": "int64",
+            "sourceColumn": "period_id"
+          },
+          {
+            "name": "credits_required",
+            "dataType": "double",
+            "sourceColumn": "credits_required"
+          },
+          {
+            "name": "ethics_credits_required",
+            "dataType": "double",
+            "sourceColumn": "ethics_credits_required"
+          },
+          {
+            "name": "law_credits_required",
+            "dataType": "double",
+            "sourceColumn": "law_credits_required"
+          },
+          {
+            "name": "begin_time",
+            "dataType": "dateTime",
+            "sourceColumn": "begin_time"
+          },
+          {
+            "name": "end_time",
+            "dataType": "dateTime",
+            "sourceColumn": "end_time"
+          },
+          {
+            "name": "reinstatement_end_time",
+            "dataType": "dateTime",
+            "sourceColumn": "reinstatement_end_time"
+          },
+          {
+            "name": "updated_time",
+            "dataType": "dateTime",
+            "sourceColumn": "updated_time"
+          },
+          {
+            "name": "created_time",
+            "dataType": "dateTime",
+            "sourceColumn": "created_time"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_stg_cm_log = Source{[Schema=\"dbo\",Item=\"vw_stg_cm_log\"]}[Data]",
+                "in",
+                "    dbo_vw_stg_cm_log"
+              ]
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Hierarchy1"
+          }
+        ]
+      },
+      {
+        "name": "vw_dimAICPExam",
+        "columns": [
+          {
+            "name": "ExamIDKey",
+            "dataType": "int64",
+            "sourceColumn": "ExamIDKey"
+          },
+          {
+            "name": "ExamCode",
+            "dataType": "string",
+            "sourceColumn": "ExamCode"
+          },
+          {
+            "name": "Title",
+            "dataType": "string",
+            "sourceColumn": "Title"
+          },
+          {
+            "name": "Status",
+            "dataType": "string",
+            "sourceColumn": "Status"
+          },
+          {
+            "name": "ExamStartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "ExamStartDate"
+          },
+          {
+            "name": "ExamEndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "ExamEndDate"
+          },
+          {
+            "name": "RegistrationStartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "RegistrationStartDate"
+          },
+          {
+            "name": "RegistrationEndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "RegistrationEndDate"
+          },
+          {
+            "name": "ApplicationStartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "ApplicationStartDate"
+          },
+          {
+            "name": "ApplicationEndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "ApplicationEndDate"
+          },
+          {
+            "name": "IsAdvanced",
+            "dataType": "boolean",
+            "sourceColumn": "IsAdvanced"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimAICPExam = Source{[Schema=\"dbo\",Item=\"vw_dimAICPExam\"]}[Data]",
+                "in",
+                "    dbo_vw_dimAICPExam"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "_AICPExamNotPassed",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT(vw_dimMember[Member_ID]),",
+              "FILTER(vw_tblFactAICPExamScores, vw_tblFactAICPExamScores[Pass] = 0),",
+              "FILTER(vw_dimMember, vw_dimMember[_Designation] = \"AICP\"),",
+              "FILTER(vw_dimAICPExam, vw_dimAICPExam[IsActive] = TRUE()))"
+            ]
+          },
+          {
+            "name": "_ExamStartAfterEnd",
+            "expression": [
+              " CALCULATE(DISTINCT(vw_dimAICPExam[ExamCode]), ",
+              "FILTER(vw_dimAICPExam, vw_dimAICPExam[ExamStartDate] > vw_dimAICPExam[ExamEndDate]))"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "vw_dimAICPExamRegistrantType",
+        "columns": [
+          {
+            "name": "RegistrantTypeIDKey",
+            "dataType": "int64",
+            "sourceColumn": "RegistrantTypeIDKey"
+          },
+          {
+            "name": "Registrant_Type",
+            "dataType": "string",
+            "sourceColumn": "Registrant_Type"
+          },
+          {
+            "name": "Title",
+            "dataType": "string",
+            "sourceColumn": "Title"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimAICPExamRegistrantType = Source{[Schema=\"dbo\",Item=\"vw_dimAICPExamRegistrantType\"]}[Data]",
+                "in",
+                "    dbo_vw_dimAICPExamRegistrantType"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_tblFactAICPExamScores",
+        "columns": [
+          {
+            "name": "MemberIDKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberIDKey"
+          },
+          {
+            "name": "SEQN",
+            "dataType": "int64",
+            "sourceColumn": "SEQN"
+          },
+          {
+            "name": "ExamIDKey",
+            "dataType": "int64",
+            "sourceColumn": "ExamIDKey"
+          },
+          {
+            "name": "RegistrantTypeIDKey",
+            "dataType": "int64",
+            "sourceColumn": "RegistrantTypeIDKey"
+          },
+          {
+            "name": "MemberTypeIDKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberTypeIDKey"
+          },
+          {
+            "name": "ChapterKey",
+            "dataType": "int64",
+            "sourceColumn": "ChapterKey"
+          },
+          {
+            "name": "SalaryIDKey",
+            "dataType": "int64",
+            "sourceColumn": "SalaryIDKey"
+          },
+          {
+            "name": "RaceIDKey",
+            "dataType": "int64",
+            "sourceColumn": "RaceIDKey"
+          },
+          {
+            "name": "StatusKey",
+            "dataType": "int64",
+            "sourceColumn": "StatusKey"
+          },
+          {
+            "name": "MemberStatusKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberStatusKey"
+          },
+          {
+            "name": "AddressNum1Key",
+            "dataType": "int64",
+            "sourceColumn": "AddressNum1Key"
+          },
+          {
+            "name": "AddressNum2Key",
+            "dataType": "int64",
+            "sourceColumn": "AddressNum2Key"
+          },
+          {
+            "name": "ScaledScore",
+            "dataType": "int64",
+            "sourceColumn": "ScaledScore"
+          },
+          {
+            "name": "RawScore",
+            "dataType": "int64",
+            "sourceColumn": "RawScore"
+          },
+          {
+            "name": "Section_AreasOfPractice",
+            "dataType": "int64",
+            "sourceColumn": "Section_AreasOfPractice"
+          },
+          {
+            "name": "Section_PlanMaking",
+            "dataType": "int64",
+            "sourceColumn": "Section_PlanMaking"
+          },
+          {
+            "name": "Section_PlanKnowledge",
+            "dataType": "int64",
+            "sourceColumn": "Section_PlanKnowledge"
+          },
+          {
+            "name": "Section_CodeOfEthics",
+            "dataType": "int64",
+            "sourceColumn": "Section_CodeOfEthics"
+          },
+          {
+            "name": "Section_Leadership",
+            "dataType": "int64",
+            "sourceColumn": "Section_Leadership"
+          },
+          {
+            "name": "Pass",
+            "dataType": "int64",
+            "sourceColumn": "Pass"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_tblFactAICPExamScores = Source{[Schema=\"dbo\",Item=\"vw_tblFactAICPExamScores\"]}[Data]",
+                "in",
+                "    dbo_vw_tblFactAICPExamScores"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "vw_dg_historical_metrics",
+        "columns": [
+          {
+            "name": "ReportName",
+            "dataType": "string",
+            "sourceColumn": "ReportName"
+          },
+          {
+            "name": "MetricName",
+            "dataType": "string",
+            "sourceColumn": "MetricName"
+          },
+          {
+            "name": "Count",
+            "dataType": "int64",
+            "sourceColumn": "Count"
+          },
+          {
+            "name": "Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Date"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "sourceColumn": "LastModified"
+          },
+          {
+            "type": "calculated",
+            "name": "Calculated Column 1",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "expression": "YEAR(vw_dg_historical_metrics[LastModified])"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dg_historical_metrics = Source{[Schema=\"dbo\",Item=\"vw_dg_historical_metrics\"]}[Data]",
+                "in",
+                "    dbo_vw_dg_historical_metrics"
+              ]
+            }
+          }
+        ]
       }
     ],
     "relationships": [
       {
         "name": "ad1d9035-f7d5-4885-aefa-d3232ebe21ee",
-        "fromTable": "vw_FactClaims",
-        "fromColumn": "LogStatusKey",
         "toTable": "vw_dimClaimLogStatus",
-        "toColumn": "LogStatusKey"
+        "toColumn": "LogStatusKey",
+        "fromTable": "vw_FactClaims",
+        "fromColumn": "LogStatusKey"
       },
       {
         "name": "2af640da-72a8-4a29-83e7-740ee5d4022f",
-        "fromTable": "vw_FactClaims",
-        "fromColumn": "FlagKey",
         "toTable": "vw_dimClaimsFlags",
-        "toColumn": "FlagKey"
+        "toColumn": "FlagKey",
+        "fromTable": "vw_FactClaims",
+        "fromColumn": "FlagKey"
       },
       {
         "name": "17d338a6-8fac-46fd-a244-4a8903cc1f9e",
-        "fromTable": "vw_FactClaims",
-        "fromColumn": "CMPeriodKey",
         "toTable": "vw_dimCMPeriod",
-        "toColumn": "CMPeriodKey"
+        "toColumn": "CMPeriodKey",
+        "fromTable": "vw_FactClaims",
+        "fromColumn": "CMPeriodKey"
       },
       {
         "name": "72311351-51cd-45bf-b3f9-4c2375155985",
-        "fromCardinality": "one",
-        "fromTable": "vw_stg_Fact_Claims",
         "fromColumn": "ID_Claim",
         "toTable": "vw_FactClaims",
         "toColumn": "ID_Claim",
+        "fromCardinality": "one",
+        "fromTable": "vw_stg_Fact_Claims",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "a8da065f-b61e-4b74-b22e-06cb18b7d03d",
-        "toCardinality": "many",
-        "fromTable": "vw_tblFactMember_IS",
         "fromColumn": "MemberIDKey",
         "toTable": "vw_FactClaims",
         "toColumn": "MemberIDKey",
+        "toCardinality": "many",
+        "fromTable": "vw_tblFactMember_IS",
         "crossFilteringBehavior": "bothDirections"
       },
       {
-        "name": "1dfc4084-7562-4c89-927d-bd3ee03e6d21",
-        "fromTable": "vw_tblFactMember_IS",
-        "fromColumn": "ProductCodeKey",
-        "toTable": "vw_dimProductCode",
-        "toColumn": "ProductCodeKey"
-      },
-      {
-        "name": "b4ecf256-8dcc-4cba-8d7e-0da782a64f1e",
-        "fromTable": "vw_tblFactMember_IS",
-        "fromColumn": "Paid_Through_Key",
-        "toTable": "vw_dimDate_PaidThru",
-        "toColumn": "Date_Key"
-      },
-      {
-        "name": "5d29465c-d32c-455c-a42e-3f8a1e63808f",
-        "fromTable": "vw_tblFactMember_IS",
-        "fromColumn": "MemberIDKey",
-        "toTable": "vw_dimMember",
-        "toColumn": "MemberIDKey"
-      },
-      {
-        "name": "b9ef9dcf-1a65-4d9e-8d4f-1318f53c660e",
-        "fromTable": "vw_tblFactMember_IS",
-        "fromColumn": "StatusKey",
-        "toTable": "vw_dimStatus",
-        "toColumn": "StatusKey"
-      },
-      {
         "name": "7e5108b1-073f-47e9-b1a3-ea02054c7f1d",
-        "fromTable": "vw_tblFactMember_IS",
-        "fromColumn": "MemberTypeIDKey",
         "toTable": "vw_dimMemberType",
-        "toColumn": "MemberTypeIDKey"
+        "toColumn": "MemberTypeIDKey",
+        "fromTable": "vw_tblFactMember_IS",
+        "fromColumn": "MemberTypeIDKey"
       },
       {
         "name": "f66bd388-697c-4d27-b10f-bb012653c121",
-        "toCardinality": "many",
-        "fromTable": "vw_tbl_Fact_Registrations",
         "fromColumn": "MemberIDKey",
         "toTable": "vw_tblFactMember_IS",
         "toColumn": "MemberIDKey",
+        "toCardinality": "many",
+        "fromTable": "vw_tbl_Fact_Registrations",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "e603d593-f74b-4bfd-9559-b396a11a030f",
-        "fromTable": "vw_tbl_Fact_Registrations",
-        "fromColumn": "RegistrantStatusKey",
         "toTable": "vw_dimRegistrantStatus",
-        "toColumn": "RegistrantStatusKey"
+        "toColumn": "RegistrantStatusKey",
+        "fromTable": "vw_tbl_Fact_Registrations",
+        "fromColumn": "RegistrantStatusKey"
       },
       {
         "name": "117f9110-d11d-4efd-bf87-86a820bfb44e",
-        "fromTable": "vw_tbl_Fact_Registrations",
-        "fromColumn": "RegistrationClassKey",
         "toTable": "vw_dimRegistrantClass",
-        "toColumn": "RegistrantClassKey"
+        "toColumn": "RegistrantClassKey",
+        "fromTable": "vw_tbl_Fact_Registrations",
+        "fromColumn": "RegistrationClassKey"
       },
       {
         "name": "07d0b937-c3ce-4441-ae11-ce405705f321",
-        "toCardinality": "many",
-        "fromTable": "vw_DJ_IMIS_UserMapping",
         "fromColumn": "member_ID",
         "toTable": "vw_dimMember",
         "toColumn": "Member_ID",
+        "toCardinality": "many",
+        "fromTable": "vw_DJ_IMIS_UserMapping",
         "crossFilteringBehavior": "bothDirections"
-      }
-    ],
-    "roles": [
-      {
-        "name": "Admin",
-        "modelPermission": "administrator",
-        "members": [
-          {
-            "memberName": "rwest@planning.org",
-            "memberId": "rwest@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "Morgan.Diestler@rsmus.com",
-            "memberId": "Morgan.Diestler@rsmus.com",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "tjohnson@planning.org",
-            "memberId": "tjohnson@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "plowe@planning.org",
-            "memberId": "plowe@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "cmollet@planning.org",
-            "memberId": "cmollet@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "msullivan@planning.org",
-            "memberId": "msullivan@planning.org",
-            "identityProvider": "AzureAD"
-          }
-        ]
       },
       {
-        "name": "SuperUser",
-        "modelPermission": "read",
-        "members": [
-          {
-            "memberName": "mferguson@planning.org",
-            "memberId": "mferguson@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "Akrakos@planning.org",
-            "memberId": "Akrakos@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "mwalsh@planning.org",
-            "memberId": "mwalsh@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "jrolla@planning.org",
-            "memberId": "jrolla@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "RJassen@planning.org",
-            "memberId": "RJassen@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "balbrecht@planning.org",
-            "memberId": "balbrecht@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "amoore@planning.org",
-            "memberId": "amoore@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "bmissaggia@planning.org",
-            "memberId": "bmissaggia@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "mjohnson@planning.org",
-            "memberId": "mjohnson@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "kkazmierczak@planning.org",
-            "memberId": "kkazmierczak@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "crahill@planning.org",
-            "memberId": "crahill@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "MWelch@planning.org",
-            "memberId": "MWelch@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "kschmidt@planning.org",
-            "memberId": "kschmidt@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "klennon@planning.org",
-            "memberId": "klennon@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "mjimenez@planning.org",
-            "memberId": "mjimenez@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "llang@planning.org",
-            "memberId": "llang@planning.org",
-            "identityProvider": "AzureAD"
-          }
-        ]
+        "name": "a6b77621-0d9d-4d39-99d9-ef5d1c55ee64",
+        "toTable": "vw_dimDate_PaidThru",
+        "toColumn": "Date_Key",
+        "fromColumn": "Paid_Through_Key",
+        "fromTable": "vw_tblFactMember_IS",
+        "crossFilteringBehavior": "bothDirections"
       },
       {
-        "name": "Read",
-        "modelPermission": "read",
-        "members": [
-          {
-            "memberName": "fbraunstein@planning.org",
-            "memberId": "fbraunstein@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "ewilczek@planning.org",
-            "memberId": "ewilczek@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "Sarteaga@planning.org",
-            "memberId": "Sarteaga@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "rrewers@planning.org",
-            "memberId": "rrewers@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "rhoffman@planning.org",
-            "memberId": "rhoffman@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "kgems@planning.org",
-            "memberId": "kgems@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "rscherzinger@planning.org",
-            "memberId": "rscherzinger@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "epasi@planning.org",
-            "memberId": "epasi@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "CParra@planning.org",
-            "memberId": "CParra@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "rzack@planning.org",
-            "memberId": "rzack@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "chinshaw@planning.org",
-            "memberId": "chinshaw@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "mmarrero@planning.org",
-            "memberId": "mmarrero@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "JJordan@planning.org",
-            "memberId": "JJordan@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "ajimenez@planning.org",
-            "memberId": "ajimenez@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "LJorgenson@planning.org",
-            "memberId": "LJorgenson@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "kjacques@planning.org",
-            "memberId": "kjacques@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "bdonegan@planning.org",
-            "memberId": "bdonegan@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "anavarro@planning.org",
-            "memberId": "anavarro@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "wfrench@planning.org",
-            "memberId": "wfrench@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "ynoonoo@planning.org",
-            "memberId": "ynoonoo@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "usaenz@planning.org",
-            "memberId": "usaenz@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "mkraus@planning.org",
-            "memberId": "mkraus@planning.org",
-            "identityProvider": "AzureAD"
-          }
-        ],
-        "tablePermissions": [
-          {
-            "name": "vw_dimMember",
-            "columnPermissions": [
-              {
-                "name": "First_Name",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "Middle_Name",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "Last_Name",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "Full_Name",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "Email",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "Home_Phone",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "Mobile_Phone",
-                "metadataPermission": "none"
-              },
-              {
-                "name": "Work_Phone",
-                "metadataPermission": "none"
-              }
-            ]
-          }
-        ]
+        "name": "617e728d-06a3-492e-8e1b-e4307519ff13",
+        "toTable": "vw_dimMember",
+        "toColumn": "MemberIDKey",
+        "fromColumn": "MemberIDKey",
+        "fromTable": "vw_tblFactMember_IS",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "571ce7e9-0fcc-49df-ba72-902a74a8af9c",
+        "toTable": "vw_dimProductCode",
+        "toColumn": "ProductCodeKey",
+        "fromColumn": "ProductCodeKey",
+        "fromTable": "vw_tblFactMember_IS",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "87d4dacb-824a-493d-90f2-6301b055ace4",
+        "toTable": "vw_dimStatus",
+        "toColumn": "StatusKey",
+        "fromColumn": "StatusKey",
+        "fromTable": "vw_tblFactMember_IS",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "44aa1972-daff-4a51-a182-9977adad07a2",
+        "toTable": "vw_FactClaims",
+        "toColumn": "ID_Claim",
+        "fromTable": "vw_stg_cm_log",
+        "fromColumn": "id"
+      },
+      {
+        "name": "51436946-f016-4efc-8e2a-d74098d8006a",
+        "toTable": "vw_dimAICPExam",
+        "toColumn": "ExamIDKey",
+        "fromTable": "vw_tblFactAICPExamScores",
+        "fromColumn": "ExamIDKey"
+      },
+      {
+        "name": "6735a402-0fd8-4abe-ac1e-5fc671447af9",
+        "toTable": "vw_dimAICPExamRegistrantType",
+        "toColumn": "RegistrantTypeIDKey",
+        "fromTable": "vw_tblFactAICPExamScores",
+        "fromColumn": "RegistrantTypeIDKey"
+      },
+      {
+        "name": "18656181-07ff-480c-ac12-8012ff48c703",
+        "fromColumn": "MemberIDKey",
+        "toTable": "vw_tblFactMember_IS",
+        "toColumn": "MemberIDKey",
+        "toCardinality": "many",
+        "fromTable": "vw_tblFactAICPExamScores",
+        "crossFilteringBehavior": "bothDirections"
       }
     ],
     "annotations": [
@@ -2422,6 +2738,5 @@
         "value": "600"
       }
     ]
-  },
-  "id": "SemanticModel"
+  }
 }

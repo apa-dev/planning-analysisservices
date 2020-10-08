@@ -29,11 +29,11 @@
           "query": null
         },
         "credential": {
-          "AuthenticationKind": "UsernamePassword",
+          "AuthenticationKind": "OAuth2",
           "kind": "SQL",
           "path": "apadwprod.database.windows.net;apaprod",
-          "Username": "sqladm",
-          "EncryptConnection": true
+          "Expires": "Thu, 24 Sep 2020 22:26:12 GMT",
+          "RefreshToken": "********"
         }
       }
     ],
@@ -2968,7 +2968,7 @@
         ]
       },
       {
-        "name": "Max Action Status",
+        "name": "Member Status",
         "columns": [
           {
             "name": "MemberStatusKey",
@@ -4827,7 +4827,7 @@
             "expression": [
               "   IF(Ethnicity_Origin[Origin - Detailed]=\"Not Spanish, Hispanic, Latino\",\"Not Spanish, Hispanic, Latino\",",
               "    IF(Ethnicity_Origin[Origin - Detailed]=\"Mexican, Mexican American, Chicano\", \"Spanish, Hispanic, Latino\",     IF(Ethnicity_Origin[Origin - Detailed]=\"Other Spanish, Hispanic, Latino (please specify)\",\"Spanish, Hispanic, Latino\",",
-              "    IF(Ethnicity_Origin[Origin - Detailed]=\"Puerto Rican\",\"Spanish, Hispanic, Latino\",IF(Ethnicity_Origin[Origin - Detailed]=\"Cuban\",\"Spanish, Hispanic, Latino\",\"Unmapped\")))))"
+              "    IF(Ethnicity_Origin[Origin - Detailed]=\"Puerto Rican\",\"Spanish, Hispanic, Latino\",IF(Ethnicity_Origin[Origin - Detailed]=\"Cuban\",\"Spanish, Hispanic, Latino\",\"Data not reported\")))))"
             ]
           },
           {
@@ -4847,6 +4847,34 @@
             "dataType": "dateTime",
             "isHidden": true,
             "sourceColumn": "EndDate"
+          },
+          {
+            "type": "calculated",
+            "name": "Ethnicity(Detail)",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": "IF(Ethnicity_Origin[Ethnicity - Detailed] = \"Unmapped\",\"Data not reported\",Ethnicity_Origin[Ethnicity - Detailed])"
+          },
+          {
+            "type": "calculated",
+            "name": "Ethnicity(Simple)",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": "IF(Ethnicity_Origin[Ethnicity - Simple] = \"Unmapped\", \"Data not reported\",Ethnicity_Origin[Ethnicity - Simple])"
+          },
+          {
+            "type": "calculated",
+            "name": "Origin(Detail)",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": "IF(Ethnicity_Origin[Origin - Detailed]=\"Unmapped\",\"Data not reported\",Ethnicity_Origin[Origin - Detailed])"
+          },
+          {
+            "type": "calculated",
+            "name": "Origin(Simple)",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": "if(Ethnicity_Origin[Origin - Simple]=\"Unmapped\",\"Data not reported\", Ethnicity_Origin[Origin - Simple])"
           }
         ],
         "partitions": [
@@ -7572,7 +7600,7 @@
         "name": "4a8e5e0f-3a76-489f-bacc-51dadbc6ad22",
         "fromTable": "vw_tblFactMember_IS",
         "fromColumn": "MemberStatusKey",
-        "toTable": "Max Action Status",
+        "toTable": "Member Status",
         "toColumn": "MemberStatusKey",
         "crossFilteringBehavior": "bothDirections"
       },

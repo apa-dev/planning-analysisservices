@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Development</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{334adf90-f8cf-4fe6-b865-430ce5cffb1d}</ProjectGuid>
+    <ProjectGuid>{507fec18-e7b5-4044-9c88-af5807b197c6}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>APA_DG_WaveTwo</RootNamespace>
     <AssemblyName>APA_DG_WaveTwo</AssemblyName>

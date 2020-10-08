@@ -4,6 +4,7 @@
   "model": {
     "name": "Events",
     "culture": "en-US",
+    "discourageImplicitMeasures": true,
     "dataSources": [
       {
         "type": "structured",
@@ -17,12 +18,11 @@
           "authentication": null,
           "query": null
         },
+        "options": {},
         "credential": {
-          "AuthenticationKind": "UsernamePassword",
-          "kind": "SQL",
-          "path": "apadwprod.database.windows.net;apaprod",
-          "Username": "sqladm",
-          "EncryptConnection": true
+          "AuthenticationKind": "OAuth2",
+          "Expires": "Fri, 25 Sep 2020 18:47:36 GMT",
+          "RefreshToken": "********"
         }
       }
     ],
@@ -323,100 +323,7 @@
         ]
       },
       {
-        "name": "Product",
-        "columns": [
-          {
-            "name": "ProductCodeKey",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "ProductCodeKey"
-          },
-          {
-            "name": "ParentID",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "ParentID"
-          },
-          {
-            "name": "Product_Code",
-            "dataType": "string",
-            "sourceColumn": "Product_Code"
-          },
-          {
-            "name": "Product_Major",
-            "dataType": "string",
-            "sourceColumn": "Product_Major"
-          },
-          {
-            "name": "Product_Minor",
-            "dataType": "string",
-            "sourceColumn": "Product_Minor"
-          },
-          {
-            "name": "Title",
-            "dataType": "string",
-            "sourceColumn": "Title"
-          },
-          {
-            "name": "Description",
-            "dataType": "string",
-            "sourceColumn": "Description"
-          },
-          {
-            "name": "LastUpdatedBy",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedBy"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "StartDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "StartDate"
-          },
-          {
-            "name": "EndDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "EndDate"
-          },
-          {
-            "name": "Prod_Type",
-            "dataType": "string",
-            "sourceColumn": "Prod_Type"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwdev database windows net;apadev\",",
-                "    dbo_vw_dimProductCode = Source{[Schema=\"dbo\",Item=\"vw_dimProductCode\"]}[Data],",
-                "    #\"Filtered Rows\" = Table.SelectRows(dbo_vw_dimProductCode, each ([IsActive] = true))",
-                "in",
-                "    #\"Filtered Rows\""
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "Max Action Status",
+        "name": "Member Status",
         "columns": [
           {
             "name": "MemberStatusKey",
@@ -642,90 +549,6 @@
                 "    Source = #\"SQL/apadwdev database windows net;apadev\",",
                 "    dbo_vw_dimSalary = Source{[Schema=\"dbo\",Item=\"vw_dimSalary\"]}[Data],",
                 "    #\"Filtered Rows\" = Table.SelectRows(dbo_vw_dimSalary, each [IsActive] = true)",
-                "in",
-                "    #\"Filtered Rows\""
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "Status",
-        "columns": [
-          {
-            "name": "StatusKey",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "StatusKey"
-          },
-          {
-            "name": "Status",
-            "dataType": "string",
-            "sourceColumn": "Status"
-          },
-          {
-            "name": "Gender",
-            "dataType": "string",
-            "sourceColumn": "Gender"
-          },
-          {
-            "name": "Category",
-            "dataType": "string",
-            "sourceColumn": "Category"
-          },
-          {
-            "name": "LastUpdatedBy",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedBy"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "StartDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "StartDate"
-          },
-          {
-            "name": "EndDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "EndDate"
-          },
-          {
-            "type": "calculated",
-            "name": "Gender Description",
-            "dataType": "string",
-            "isDataTypeInferred": true,
-            "expression": [
-              "IF('Status'[Gender]=\"M\",\"Male\",",
-              "IF('Status'[Gender]=\"F\",\"Female\",",
-              "IF('Status'[Gender]=BLANK(),\"Unmapped\",\"Prefer to self-describe",
-              "\")))"
-            ]
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwdev database windows net;apadev\",",
-                "    dbo_vw_dimStatus = Source{[Schema=\"dbo\",Item=\"vw_dimStatus\"]}[Data],",
-                "    #\"Filtered Rows\" = Table.SelectRows(dbo_vw_dimStatus, each ([IsActive] = true))",
                 "in",
                 "    #\"Filtered Rows\""
               ]
@@ -1031,6 +854,208 @@
             }
           }
         ]
+      },
+      {
+        "name": "Product",
+        "columns": [
+          {
+            "name": "ProductCodeKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "ProductCodeKey"
+          },
+          {
+            "name": "ParentID",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "ParentID"
+          },
+          {
+            "name": "Product_Code",
+            "dataType": "string",
+            "sourceColumn": "Product_Code"
+          },
+          {
+            "name": "Product_Major",
+            "dataType": "string",
+            "sourceColumn": "Product_Major"
+          },
+          {
+            "name": "Product_Minor",
+            "dataType": "string",
+            "sourceColumn": "Product_Minor"
+          },
+          {
+            "name": "Title",
+            "dataType": "string",
+            "sourceColumn": "Title"
+          },
+          {
+            "name": "Description",
+            "dataType": "string",
+            "sourceColumn": "Description"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          },
+          {
+            "name": "Prod_Type",
+            "dataType": "string",
+            "sourceColumn": "Prod_Type"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwdev database windows net;apadev\",",
+                "    dbo_vw_dimProductCode = Source{[Schema=\"dbo\",Item=\"vw_dimProductCode\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_vw_dimProductCode, each ([IsActive] = true))",
+                "in",
+                "    #\"Filtered Rows\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Status",
+        "columns": [
+          {
+            "name": "StatusKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "StatusKey"
+          },
+          {
+            "name": "Status",
+            "dataType": "string",
+            "sourceColumn": "Status"
+          },
+          {
+            "name": "Gender",
+            "dataType": "string",
+            "sourceColumn": "Gender"
+          },
+          {
+            "name": "Category",
+            "dataType": "string",
+            "sourceColumn": "Category"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          },
+          {
+            "type": "calculated",
+            "name": "Gender Description",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": [
+              "IF('Status'[Gender]=\"M\",\"Male\",",
+              "IF('Status'[Gender]=\"F\",\"Female\",",
+              "IF('Status'[Gender]=BLANK(),\"Unmapped\",\"Prefer to self-describe",
+              "\")))"
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwdev database windows net;apadev\",",
+                "    dbo_vw_dimStatus = Source{[Schema=\"dbo\",Item=\"vw_dimStatus\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_vw_dimStatus, each ([IsActive] = true))",
+                "in",
+                "    #\"Filtered Rows\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "CalculationGroup 1",
+        "calculationGroup": {
+          "calculationItems": [
+            {
+              "name": "CalculationItem 1"
+            }
+          ]
+        },
+        "columns": [
+          {
+            "name": "CalculationItemColumn 1",
+            "dataType": "string",
+            "sourceColumn": "Name"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CalculationGroup 1",
+            "source": {
+              "type": "calculationGroup"
+            }
+          }
+        ]
       }
     ],
     "relationships": [
@@ -1086,7 +1111,7 @@
         "name": "f9265f55-1722-4fcd-9528-2f03d4ac3349",
         "fromTable": "vw_tbl_Fact_Registrations",
         "fromColumn": "MemberStatus_Key",
-        "toTable": "Max Action Status",
+        "toTable": "Member Status",
         "toColumn": "MemberStatusKey",
         "crossFilteringBehavior": "bothDirections"
       },
