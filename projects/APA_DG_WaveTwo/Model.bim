@@ -1,5 +1,5 @@
 {
-  "name": "APA_DG_WaveTwo",
+  "name": "SemanticModel",
   "compatibilityLevel": 1500,
   "model": {
     "culture": "en-US",
@@ -17,21 +17,22 @@
           "query": null
         },
         "credential": {
-          "AuthenticationKind": "UsernamePassword",
+          "AuthenticationKind": "OAuth2",
           "kind": "SQL",
           "path": "apadwprod.database.windows.net;apaprod",
-          "Username": "sqladm",
-          "EncryptConnection": true
+          "Expires": "Tue, 06 Oct 2020 18:26:32 GMT",
+          "RefreshToken": "********"
         }
       }
     ],
     "tables": [
       {
-        "name": "vw_dimClaimLogStatus",
+        "name": "Claims Log Status",
         "columns": [
           {
             "name": "LogStatusKey",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "LogStatusKey"
           },
           {
@@ -42,16 +43,19 @@
           {
             "name": "IsActive",
             "dataType": "boolean",
+            "isHidden": true,
             "sourceColumn": "IsActive"
           },
           {
             "name": "LastModified",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LastModified"
           },
           {
             "name": "LastUpdatedby",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "LastUpdatedby"
           }
         ],
@@ -73,7 +77,7 @@
         ]
       },
       {
-        "name": "vw_dimClaimsFlags",
+        "name": "Claims Flags",
         "columns": [
           {
             "name": "FlagKey",
@@ -118,16 +122,19 @@
           {
             "name": "IsActive",
             "dataType": "boolean",
+            "isHidden": true,
             "sourceColumn": "IsActive"
           },
           {
             "name": "LastModified",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LastModified"
           },
           {
             "name": "LastUpdatedby",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "LastUpdatedby"
           }
         ],
@@ -149,11 +156,12 @@
         ]
       },
       {
-        "name": "vw_dimClaimsProduct",
+        "name": "Claims Product",
         "columns": [
           {
             "name": "ClaimsProductKey",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "ClaimsProductKey"
           },
           {
@@ -174,26 +182,31 @@
           {
             "name": "IsActive",
             "dataType": "boolean",
+            "isHidden": true,
             "sourceColumn": "IsActive"
           },
           {
             "name": "LastModified",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LastModified"
           },
           {
             "name": "LastUpdatedby",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "LastUpdatedby"
           },
           {
             "name": "StartDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "StartDate"
           },
           {
             "name": "EndDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "EndDate"
           }
         ],
@@ -215,11 +228,12 @@
         ]
       },
       {
-        "name": "vw_dimCMPeriod",
+        "name": "CM Period",
         "columns": [
           {
             "name": "CMPeriodKey",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "CMPeriodKey"
           },
           {
@@ -230,16 +244,19 @@
           {
             "name": "IsActive",
             "dataType": "boolean",
+            "isHidden": true,
             "sourceColumn": "IsActive"
           },
           {
             "name": "LastModified",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LastModified"
           },
           {
             "name": "LastUpdatedby",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "LastUpdatedby"
           }
         ],
@@ -261,7 +278,7 @@
         ]
       },
       {
-        "name": "vw_dimDate",
+        "name": "Date",
         "columns": [
           {
             "name": "Date_Key",
@@ -311,11 +328,13 @@
           {
             "name": "LastUpdatedBy",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "LastUpdatedBy"
           },
           {
             "name": "LastModified",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LastModified"
           }
         ],
@@ -337,7 +356,7 @@
         ]
       },
       {
-        "name": "vw_dimDate_PaidThru",
+        "name": "Paid Thru Date",
         "columns": [
           {
             "name": "Date_Key",
@@ -399,7 +418,7 @@
             "name": "PaidThruFlag",
             "dataType": "int64",
             "isDataTypeInferred": true,
-            "expression": "if(vw_dimDate_PaidThru[date]>=TODAY(), 1,0)"
+            "expression": "if('Paid Thru Date'[date]>=TODAY(), 1,0)"
           }
         ],
         "partitions": [
@@ -420,16 +439,18 @@
         ]
       },
       {
-        "name": "vw_dimMember",
+        "name": "Member",
         "columns": [
           {
             "name": "MemberIDKey",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "MemberIDKey"
           },
           {
             "name": "Parent",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "Parent"
           },
           {
@@ -563,10 +584,10 @@
             "dataType": "string",
             "isDataTypeInferred": true,
             "expression": [
-              " if('vw_dimMember'[Designation]=\"AICP CANDIDATE\", \"AICP CANDIDATE\", ",
-              "if('vw_dimMember'[Designation]in {\"AICP\", \"AICP Candidate\", \"AICP CEP\", \"AICP CEP CTP\", \"AICP CEP CUD\", \"AICP CTP\",",
+              " if('Member'[Designation]=\"AICP CANDIDATE\", \"AICP CANDIDATE\", ",
+              "if('Member'[Designation]in {\"AICP\", \"AICP Candidate\", \"AICP CEP\", \"AICP CEP CTP\", \"AICP CEP CUD\", \"AICP CTP\",",
               "\"AICP CUD\", \"AICP, AICP CUD\", \"AICP, CTP\"}, \"AICP\",",
-              "if('vw_dimMember'[Designation] in {\"FAICP\", \"FAICP CTP\", \"FAICP CTP CEP\", \"FAICP CUD\"}, \"FAICP\", \"Unmapped\")))"
+              "if('Member'[Designation] in {\"FAICP\", \"FAICP CTP\", \"FAICP CTP CEP\", \"FAICP CUD\"}, \"FAICP\", \"Unmapped\")))"
             ]
           },
           {
@@ -574,7 +595,7 @@
             "name": "Age",
             "dataType": "double",
             "isDataTypeInferred": true,
-            "expression": " (DATEDIFF('vw_dimMember'[Birth_Date],TODAY(),DAY))/365"
+            "expression": " (DATEDIFF('Member'[Birth_Date],TODAY(),DAY))/365"
           }
         ],
         "partitions": [
@@ -597,22 +618,22 @@
           {
             "name": "_AICPStartNoDesignation",
             "expression": [
-              " CALCULATE(DISTINCTCOUNT(vw_dimMember[Member_ID]),",
-              "FILTER(vw_dimMember, vw_dimMember[AICP_START] <> BLANK()), ",
-              "FILTER(vw_dimProductCode, vw_dimProductCode[Product_Code] = \"APA\"),",
-              "FILTER(vw_dimStatus, vw_dimStatus[Status] = \"A\"),",
-              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] > TODAY()),",
-              "FILTER(vw_dimMember, vw_dimMember[_Designation] <> \"AICP\"))"
+              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "FILTER('Member', 'Member'[AICP_START] <> BLANK()), ",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()),",
+              "FILTER('Member', 'Member'[_Designation] <> \"AICP\"))"
             ]
           },
           {
             "name": "_AICPPaidThruNull",
             "expression": [
-              " CALCULATE(DISTINCTCOUNT(vw_dimMember[Member_ID]),",
-              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] = BLANK()),",
-              "FILTER(vw_dimProductCode, vw_dimProductCode[Product_Code] = \"APA\"),",
-              "FILTER(vw_dimStatus, vw_dimStatus[Status] = \"A\"), ",
-              "FILTER(vw_dimMember, vw_dimMember[_Designation] = \"AICP\"))",
+              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] = BLANK()),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"), ",
+              "FILTER('Member', 'Member'[_Designation] = \"AICP\"))",
               "",
               "",
               "",
@@ -622,25 +643,27 @@
           {
             "name": "_AICPPaidThruNoStart",
             "expression": [
-              " CALCULATE(DISTINCTCOUNT(vw_dimMember[Member_ID]),",
-              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] <> BLANK()), ",
-              "FILTER(vw_dimMember, vw_dimMember[AICP_START] = BLANK()), ",
-              "FILTER(vw_dimMember, vw_dimMember[_Designation] = \"AICP\"))"
+              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] <> BLANK()), ",
+              "FILTER('Member', 'Member'[AICP_START] = BLANK()), ",
+              "FILTER('Member', 'Member'[_Designation] = \"AICP\"))"
             ]
           }
         ]
       },
       {
-        "name": "vw_dimProductCode",
+        "name": "Product Code",
         "columns": [
           {
             "name": "ProductCodeKey",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "ProductCodeKey"
           },
           {
             "name": "ParentID",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "ParentID"
           },
           {
@@ -671,21 +694,25 @@
           {
             "name": "LastUpdatedBy",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "LastUpdatedBy"
           },
           {
             "name": "LastModified",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LastModified"
           },
           {
             "name": "IsActive",
             "dataType": "boolean",
+            "isHidden": true,
             "sourceColumn": "IsActive"
           },
           {
             "name": "StartDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "StartDate"
           },
           {
@@ -717,11 +744,12 @@
         ]
       },
       {
-        "name": "vw_dimMemberType",
+        "name": "Member Type",
         "columns": [
           {
             "name": "MemberTypeIDKey",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "MemberTypeIDKey"
           },
           {
@@ -730,43 +758,50 @@
             "sourceColumn": "Member_Type"
           },
           {
-            "name": "Description",
+            "name": "Member_Type Description",
             "dataType": "string",
             "sourceColumn": "Description"
           },
           {
             "name": "LastUpdatedBy",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "LastUpdatedBy"
           },
           {
             "name": "LastModified",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LastModified"
           },
           {
             "name": "IsActive",
             "dataType": "boolean",
+            "isHidden": true,
             "sourceColumn": "IsActive"
           },
           {
             "name": "StartDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "StartDate"
           },
           {
             "name": "EndDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "EndDate"
           },
           {
             "name": "Member_Record",
             "dataType": "boolean",
+            "isHidden": true,
             "sourceColumn": "Member_Record"
           },
           {
             "name": "Company_Record",
             "dataType": "boolean",
+            "isHidden": true,
             "sourceColumn": "Company_Record"
           },
           {
@@ -793,7 +828,7 @@
         ]
       },
       {
-        "name": "vw_dimRegistrantStatus",
+        "name": "Registrant Status",
         "columns": [
           {
             "name": "RegistrantStatusKey",
@@ -849,11 +884,12 @@
         ]
       },
       {
-        "name": "vw_dimRegistrantClass",
+        "name": "Registrant Class",
         "columns": [
           {
             "name": "RegistrantClassKey",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "RegistrantClassKey"
           },
           {
@@ -864,26 +900,31 @@
           {
             "name": "StartDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "StartDate"
           },
           {
             "name": "EndDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "EndDate"
           },
           {
             "name": "LastUpdatedBy",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "LastUpdatedBy"
           },
           {
             "name": "LastModified",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LastModified"
           },
           {
             "name": "IsActive",
             "dataType": "boolean",
+            "isHidden": true,
             "sourceColumn": "IsActive"
           }
         ],
@@ -905,7 +946,7 @@
         ]
       },
       {
-        "name": "vw_dimStatus",
+        "name": "Status",
         "columns": [
           {
             "name": "StatusKey",
@@ -930,26 +971,31 @@
           {
             "name": "LastUpdatedBy",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "LastUpdatedBy"
           },
           {
             "name": "LastModified",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LastModified"
           },
           {
             "name": "IsActive",
             "dataType": "boolean",
+            "isHidden": true,
             "sourceColumn": "IsActive"
           },
           {
             "name": "StartDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "StartDate"
           },
           {
             "name": "EndDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "EndDate"
           }
         ],
@@ -971,7 +1017,8 @@
         ]
       },
       {
-        "name": "vw_FactClaims",
+        "name": "Fact Claims - StarSchema",
+        "isHidden": true,
         "columns": [
           {
             "name": "ID_Claim",
@@ -1092,7 +1139,8 @@
         ]
       },
       {
-        "name": "vw_tbl_Fact_Registrations",
+        "name": "Fact Registrations",
+        "isHidden": true,
         "columns": [
           {
             "name": "Seqn",
@@ -1218,11 +1266,13 @@
         ]
       },
       {
-        "name": "vw_tblFactMember_IS",
+        "name": "Fact Member",
+        "isHidden": true,
         "columns": [
           {
             "name": "MemberIDKey",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "MemberIDKey"
           },
           {
@@ -1324,7 +1374,7 @@
         ]
       },
       {
-        "name": "vw_stg_Fact_Claims",
+        "name": "Fact Claims B",
         "columns": [
           {
             "name": "ID_Claim",
@@ -1497,142 +1547,144 @@
           {
             "name": "_selfreportedclaims",
             "expression": [
-              "CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
-              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Self_Reported]=TRUE() && ",
-              "vw_stg_Fact_Claims[Verified]=TRUE() &&",
-              "vw_stg_Fact_Claims[Credits]>8),",
-              "FILTER(vw_dimProductCode, vw_dimProductCode[Product_Code] = \"APA\"),",
-              "FILTER(vw_dimStatus, vw_dimStatus[Status] = \"A\"),",
-              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] > TODAY()))"
+              "CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Self_Reported]=TRUE() && ",
+              "'Fact Claims B'[Verified]=TRUE() &&",
+              "'Fact Claims B'[Credits]>8),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
             ]
           },
           {
             "name": "_AICPNoReporting",
             "expression": [
-              " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
-              "FILTER(vw_dimMember, vw_dimMember[Designation] = \"AICP\"), ",
-              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[CM_Period_Code] = BLANK()),",
-              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] = \"A\"))"
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Member', 'Member'[Designation] = \"AICP\"), ",
+              "FILTER('Fact Claims B', 'Fact Claims B'[CM_Period_Code] = BLANK()),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"A\"))"
             ]
           },
           {
             "name": "_NotRetExemption",
             "expression": [
-              " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
-              "FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] <> \"RET\"),",
-              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] = \"E_01\"),",
-              "FILTER(vw_dimProductCode, vw_dimProductCode[Product_Code] = \"APA\"),",
-              "FILTER(vw_dimStatus, vw_dimStatus[Status] = \"A\"),",
-              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] > TODAY()))"
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Member Type', 'Member Type'[Member_Type] <> \"RET\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_01\"),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
             ]
           },
           {
             "name": "_RetExemption",
             "expression": [
-              " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
-              "FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] = \"RET\"),",
-              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] <> \"E_01\"),",
-              "FILTER(vw_dimProductCode, vw_dimProductCode[Product_Code] = \"APA\"),",
-              "FILTER(vw_dimStatus, vw_dimStatus[Status] = \"A\"),",
-              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] > TODAY()))"
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Member Type', 'Member Type'[Member_Type] = \"RET\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] <> \"E_01\"),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
             ]
           },
           {
             "name": "_NotLifeExemption",
             "expression": [
-              " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
-              "FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] = \"LIFE\"),",
-              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] <> \"E_12\"),",
-              "FILTER(vw_dimProductCode, vw_dimProductCode[Product_Code] = \"APA\"),",
-              "FILTER(vw_dimStatus, vw_dimStatus[Status] = \"A\"),",
-              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] > TODAY()))"
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Member Type', 'Member Type'[Member_Type] = \"LIFE\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] <> \"E_12\"),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
             ]
           },
           {
             "name": "_UnEmployedExemption",
             "expression": [
-              " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
-              "FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] = \"MEM\"),",
-              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] = \"E_02\"),",
-              "FILTER(vw_dimProductCode, vw_dimProductCode[Product_Code] = \"APA\"),",
-              "FILTER(vw_dimStatus, vw_dimStatus[Status] = \"A\"),",
-              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] > TODAY()))"
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Member Type', 'Member Type'[Member_Type] = \"MEM\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_02\"),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
             ]
           },
           {
             "name": "_ActiveNoReportingPeriod",
             "expression": [
-              " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
               "--FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] = \"MEM\"),",
-              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] >= TODAY()),",
-              "FILTER(vw_dimStatus, vw_dimStatus[Status] = \"A\"),",
-              "FILTER(vw_dimProductCode, vw_dimProductCode[Product_Code] = \"APA\"),",
-              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] <> \"A\"))"
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] >= TODAY()),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] <> \"A\"))"
             ]
           },
           {
             "name": "_MoreActivePeriod",
             "expression": [
-              " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
-              "FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] = \"MEM\"),",
-              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] >= TODAY()),",
-              "FILTER(vw_dimStatus, vw_dimStatus[Status] = \"A\"),",
-              "FILTER(vw_dimProductCode, vw_dimProductCode[Product_Code] = \"APA\"),",
-              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] = \"A\"),",
-              "FILTER(vw_stg_Fact_Claims, COUNT(vw_stg_Fact_Claims[Log_Status]) > 2))"
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Member Type', 'Member Type'[Member_Type] = \"MEM\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] >= TODAY()),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"A\"),",
+              "FILTER('Fact Claims B', COUNT('Fact Claims B'[Log_Status]) > 2))"
             ]
           },
           {
             "name": "_AuthoringCredits",
             "expression": [
-              " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
-              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Self_Reported] = TRUE()),",
-              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Verified] = TRUE()),",
-              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Is_Author] = TRUE()),",
-              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Credits] > 16))"
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Self_Reported] = TRUE()),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Verified] = TRUE()),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Is_Author] = TRUE()),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Credits] > 16))"
             ]
           },
           {
             "name": "_ReinstatedNotEnoughCredits",
             "expression": [
-              " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
-              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] = \"R\"),",
-              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Credits] < 32),",
-              "FILTER(vw_dimProductCode, vw_dimProductCode[Product_Code] = \"APA\"),",
-              "FILTER(vw_dimStatus, vw_dimStatus[Status] = \"A\"),",
-              "FILTER(vw_dimDate_PaidThru, vw_dimDate_PaidThru[date] > TODAY()))"
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"R\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Credits] < 32),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
             ]
           },
           {
             "name": "_Member65ZeroCreditCheck",
             "expression": [
-              " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
-              "FILTER(vw_dimMember, vw_dimMember[Age] >= 65),",
-              "FILTER(vw_stg_cm_log, vw_stg_cm_log[credits_required] = 0),",
-              "FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] = \"RET\"))"
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Member', 'Member'[Age] >= 65),",
+              "FILTER('CM Log', 'CM Log'[credits_required] > 0),",
+              "FILTER('Member Type', 'Member Type'[Member_Type] = \"RET\"))"
             ]
           },
           {
             "name": "_VoluntaryLifeCreditCheck",
             "expression": [
-              " CALCULATE(DISTINCTCOUNT(vw_stg_Fact_Claims[Member_ID]),",
-              "FILTER(vw_stg_Fact_Claims, vw_stg_Fact_Claims[Log_Status] = \"E_13\"),",
-              "FILTER(vw_stg_cm_log, vw_stg_cm_log[credits_required] <> 16))"
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_13\"),",
+              "FILTER('CM Log', 'CM Log'[credits_required] <> 16))"
             ]
           }
         ]
       },
       {
-        "name": "stg dj_jobs_job",
+        "name": "Jobs",
         "columns": [
           {
             "name": "content_ptr_id",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "content_ptr_id"
           },
           {
             "name": "user_address_num",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "user_address_num"
           },
           {
@@ -1773,11 +1825,13 @@
           {
             "name": "LastUpdatedBy",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "LastUpdatedBy"
           },
           {
             "name": "LastModified",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LastModified"
           }
         ],
@@ -1801,70 +1855,70 @@
           {
             "name": "_NullContactUsPhone",
             "expression": [
-              "CALCULATE(COUNTROWS('stg dj_jobs_job'),'stg dj_jobs_job'[contact_us_phone] = BLANK())",
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[contact_us_phone] = BLANK())",
               ""
             ]
           },
           {
             "name": "_NullSalaryRange",
             "expression": [
-              "CALCULATE(COUNTROWS('stg dj_jobs_job'),'stg dj_jobs_job'[salary_range] = BLANK())",
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[salary_range] = BLANK())",
               ""
             ]
           },
           {
             "name": "_NullCity",
             "expression": [
-              "CALCULATE(COUNTROWS('stg dj_jobs_job'),'stg dj_jobs_job'[city] = BLANK())",
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[city] = BLANK())",
               ""
             ]
           },
           {
             "name": "_NullAddress1",
             "expression": [
-              "CALCULATE(COUNTROWS('stg dj_jobs_job'),'stg dj_jobs_job'[address1] = BLANK())",
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[address1] = BLANK())",
               ""
             ]
           },
           {
             "name": "_NullCountry",
             "expression": [
-              "CALCULATE(COUNTROWS('stg dj_jobs_job'),'stg dj_jobs_job'[country] = BLANK())",
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[country] = BLANK())",
               ""
             ]
           },
           {
             "name": "_NullContactUsEmail",
             "expression": [
-              "CALCULATE(COUNTROWS('stg dj_jobs_job'),'stg dj_jobs_job'[contact_us_email] = BLANK())",
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[contact_us_email] = BLANK())",
               ""
             ]
           },
           {
             "name": "_NullCompany",
             "expression": [
-              "CALCULATE(COUNTROWS('stg dj_jobs_job'),'stg dj_jobs_job'[company] = BLANK())",
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[company] = BLANK())",
               ""
             ]
           },
           {
             "name": "_NullState",
             "expression": [
-              "CALCULATE(COUNTROWS('stg dj_jobs_job'),'stg dj_jobs_job'[state] = BLANK())",
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[state] = BLANK())",
               ""
             ]
           },
           {
             "name": "_NullJobType",
             "expression": [
-              "CALCULATE(COUNTROWS('stg dj_jobs_job'),'stg dj_jobs_job'[job_type] = BLANK())",
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[job_type] = BLANK())",
               ""
             ]
           }
         ]
       },
       {
-        "name": "vw_DJ_IMIS_UserMapping",
+        "name": "CrossPlatformUserMapping",
         "columns": [
           {
             "name": "member_ID",
@@ -2105,11 +2159,12 @@
         ]
       },
       {
-        "name": "vw_stg_cm_log",
+        "name": "CM Log",
         "columns": [
           {
             "name": "id",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "id"
           },
           {
@@ -2125,11 +2180,13 @@
           {
             "name": "contact_id",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "contact_id"
           },
           {
             "name": "period_id",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "period_id"
           },
           {
@@ -2150,11 +2207,13 @@
           {
             "name": "begin_time",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "begin_time"
           },
           {
             "name": "end_time",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "end_time"
           },
           {
@@ -2165,36 +2224,43 @@
           {
             "name": "updated_time",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "updated_time"
           },
           {
             "name": "created_time",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "created_time"
           },
           {
             "name": "LastUpdatedBy",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "LastUpdatedBy"
           },
           {
             "name": "LastModified",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LastModified"
           },
           {
             "name": "IsActive",
             "dataType": "boolean",
+            "isHidden": true,
             "sourceColumn": "IsActive"
           },
           {
             "name": "StartDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "StartDate"
           },
           {
             "name": "EndDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "EndDate"
           }
         ],
@@ -2221,11 +2287,12 @@
         ]
       },
       {
-        "name": "vw_dimAICPExam",
+        "name": "AICP Exams",
         "columns": [
           {
             "name": "ExamIDKey",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "ExamIDKey"
           },
           {
@@ -2281,26 +2348,31 @@
           {
             "name": "LastUpdatedBy",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "LastUpdatedBy"
           },
           {
             "name": "LastModified",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LastModified"
           },
           {
             "name": "IsActive",
             "dataType": "boolean",
+            "isHidden": true,
             "sourceColumn": "IsActive"
           },
           {
             "name": "StartDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "StartDate"
           },
           {
             "name": "EndDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "EndDate"
           }
         ],
@@ -2324,27 +2396,28 @@
           {
             "name": "_AICPExamNotPassed",
             "expression": [
-              " CALCULATE(DISTINCTCOUNT(vw_dimMember[Member_ID]),",
-              "FILTER(vw_tblFactAICPExamScores, vw_tblFactAICPExamScores[Pass] = 0),",
-              "FILTER(vw_dimMember, vw_dimMember[_Designation] = \"AICP\"),",
-              "FILTER(vw_dimAICPExam, vw_dimAICPExam[IsActive] = TRUE()))"
+              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "FILTER('Exam Scores', 'Exam Scores'[Pass] = 0),",
+              "FILTER('Member', 'Member'[_Designation] = \"AICP\"),",
+              "FILTER('AICP Exams', 'AICP Exams'[IsActive] = TRUE()))"
             ]
           },
           {
             "name": "_ExamStartAfterEnd",
             "expression": [
-              " CALCULATE(DISTINCT(vw_dimAICPExam[ExamCode]), ",
-              "FILTER(vw_dimAICPExam, vw_dimAICPExam[ExamStartDate] > vw_dimAICPExam[ExamEndDate]))"
+              " CALCULATE(DISTINCT('AICP Exams'[ExamCode]), ",
+              "FILTER('AICP Exams', 'AICP Exams'[ExamStartDate] > 'AICP Exams'[ExamEndDate]))"
             ]
           }
         ]
       },
       {
-        "name": "vw_dimAICPExamRegistrantType",
+        "name": "Exam Registrant Type",
         "columns": [
           {
             "name": "RegistrantTypeIDKey",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "RegistrantTypeIDKey"
           },
           {
@@ -2360,26 +2433,31 @@
           {
             "name": "LastUpdatedBy",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "LastUpdatedBy"
           },
           {
             "name": "LastModified",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "LastModified"
           },
           {
             "name": "IsActive",
             "dataType": "boolean",
+            "isHidden": true,
             "sourceColumn": "IsActive"
           },
           {
             "name": "StartDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "StartDate"
           },
           {
             "name": "EndDate",
             "dataType": "dateTime",
+            "isHidden": true,
             "sourceColumn": "EndDate"
           }
         ],
@@ -2401,7 +2479,7 @@
         ]
       },
       {
-        "name": "vw_tblFactAICPExamScores",
+        "name": "Exam Scores",
         "columns": [
           {
             "name": "MemberIDKey",
@@ -2532,7 +2610,7 @@
         ]
       },
       {
-        "name": "vw_dg_historical_metrics",
+        "name": "DG Historical Metrics",
         "columns": [
           {
             "name": "ReportName",
@@ -2569,7 +2647,7 @@
             "name": "Calculated Column 1",
             "dataType": "int64",
             "isDataTypeInferred": true,
-            "expression": "YEAR(vw_dg_historical_metrics[LastModified])"
+            "expression": "YEAR('DG Historical Metrics'[LastModified])"
           }
         ],
         "partitions": [
@@ -2593,142 +2671,142 @@
     "relationships": [
       {
         "name": "ad1d9035-f7d5-4885-aefa-d3232ebe21ee",
-        "toTable": "vw_dimClaimLogStatus",
-        "toColumn": "LogStatusKey",
-        "fromTable": "vw_FactClaims",
-        "fromColumn": "LogStatusKey"
+        "fromTable": "Fact Claims - StarSchema",
+        "fromColumn": "LogStatusKey",
+        "toTable": "Claims Log Status",
+        "toColumn": "LogStatusKey"
       },
       {
         "name": "2af640da-72a8-4a29-83e7-740ee5d4022f",
-        "toTable": "vw_dimClaimsFlags",
-        "toColumn": "FlagKey",
-        "fromTable": "vw_FactClaims",
-        "fromColumn": "FlagKey"
+        "fromTable": "Fact Claims - StarSchema",
+        "fromColumn": "FlagKey",
+        "toTable": "Claims Flags",
+        "toColumn": "FlagKey"
       },
       {
         "name": "17d338a6-8fac-46fd-a244-4a8903cc1f9e",
-        "toTable": "vw_dimCMPeriod",
-        "toColumn": "CMPeriodKey",
-        "fromTable": "vw_FactClaims",
-        "fromColumn": "CMPeriodKey"
+        "fromTable": "Fact Claims - StarSchema",
+        "fromColumn": "CMPeriodKey",
+        "toTable": "CM Period",
+        "toColumn": "CMPeriodKey"
       },
       {
         "name": "72311351-51cd-45bf-b3f9-4c2375155985",
-        "fromColumn": "ID_Claim",
-        "toTable": "vw_FactClaims",
-        "toColumn": "ID_Claim",
         "fromCardinality": "one",
-        "fromTable": "vw_stg_Fact_Claims",
+        "fromTable": "Fact Claims B",
+        "fromColumn": "ID_Claim",
+        "toTable": "Fact Claims - StarSchema",
+        "toColumn": "ID_Claim",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "a8da065f-b61e-4b74-b22e-06cb18b7d03d",
-        "fromColumn": "MemberIDKey",
-        "toTable": "vw_FactClaims",
-        "toColumn": "MemberIDKey",
         "toCardinality": "many",
-        "fromTable": "vw_tblFactMember_IS",
+        "fromTable": "Fact Member",
+        "fromColumn": "MemberIDKey",
+        "toTable": "Fact Claims - StarSchema",
+        "toColumn": "MemberIDKey",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "7e5108b1-073f-47e9-b1a3-ea02054c7f1d",
-        "toTable": "vw_dimMemberType",
-        "toColumn": "MemberTypeIDKey",
-        "fromTable": "vw_tblFactMember_IS",
-        "fromColumn": "MemberTypeIDKey"
+        "fromTable": "Fact Member",
+        "fromColumn": "MemberTypeIDKey",
+        "toTable": "Member Type",
+        "toColumn": "MemberTypeIDKey"
       },
       {
         "name": "f66bd388-697c-4d27-b10f-bb012653c121",
-        "fromColumn": "MemberIDKey",
-        "toTable": "vw_tblFactMember_IS",
-        "toColumn": "MemberIDKey",
         "toCardinality": "many",
-        "fromTable": "vw_tbl_Fact_Registrations",
+        "fromTable": "Fact Registrations",
+        "fromColumn": "MemberIDKey",
+        "toTable": "Fact Member",
+        "toColumn": "MemberIDKey",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "e603d593-f74b-4bfd-9559-b396a11a030f",
-        "toTable": "vw_dimRegistrantStatus",
-        "toColumn": "RegistrantStatusKey",
-        "fromTable": "vw_tbl_Fact_Registrations",
-        "fromColumn": "RegistrantStatusKey"
+        "fromTable": "Fact Registrations",
+        "fromColumn": "RegistrantStatusKey",
+        "toTable": "Registrant Status",
+        "toColumn": "RegistrantStatusKey"
       },
       {
         "name": "117f9110-d11d-4efd-bf87-86a820bfb44e",
-        "toTable": "vw_dimRegistrantClass",
-        "toColumn": "RegistrantClassKey",
-        "fromTable": "vw_tbl_Fact_Registrations",
-        "fromColumn": "RegistrationClassKey"
+        "fromTable": "Fact Registrations",
+        "fromColumn": "RegistrationClassKey",
+        "toTable": "Registrant Class",
+        "toColumn": "RegistrantClassKey"
       },
       {
         "name": "07d0b937-c3ce-4441-ae11-ce405705f321",
-        "fromColumn": "member_ID",
-        "toTable": "vw_dimMember",
-        "toColumn": "Member_ID",
         "toCardinality": "many",
-        "fromTable": "vw_DJ_IMIS_UserMapping",
+        "fromTable": "CrossPlatformUserMapping",
+        "fromColumn": "member_ID",
+        "toTable": "Member",
+        "toColumn": "Member_ID",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "a6b77621-0d9d-4d39-99d9-ef5d1c55ee64",
-        "toTable": "vw_dimDate_PaidThru",
-        "toColumn": "Date_Key",
+        "fromTable": "Fact Member",
         "fromColumn": "Paid_Through_Key",
-        "fromTable": "vw_tblFactMember_IS",
+        "toTable": "Paid Thru Date",
+        "toColumn": "Date_Key",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "617e728d-06a3-492e-8e1b-e4307519ff13",
-        "toTable": "vw_dimMember",
-        "toColumn": "MemberIDKey",
+        "fromTable": "Fact Member",
         "fromColumn": "MemberIDKey",
-        "fromTable": "vw_tblFactMember_IS",
+        "toTable": "Member",
+        "toColumn": "MemberIDKey",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "571ce7e9-0fcc-49df-ba72-902a74a8af9c",
-        "toTable": "vw_dimProductCode",
-        "toColumn": "ProductCodeKey",
+        "fromTable": "Fact Member",
         "fromColumn": "ProductCodeKey",
-        "fromTable": "vw_tblFactMember_IS",
+        "toTable": "Product Code",
+        "toColumn": "ProductCodeKey",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "87d4dacb-824a-493d-90f2-6301b055ace4",
-        "toTable": "vw_dimStatus",
-        "toColumn": "StatusKey",
+        "fromTable": "Fact Member",
         "fromColumn": "StatusKey",
-        "fromTable": "vw_tblFactMember_IS",
+        "toTable": "Status",
+        "toColumn": "StatusKey",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "44aa1972-daff-4a51-a182-9977adad07a2",
-        "toTable": "vw_FactClaims",
-        "toColumn": "ID_Claim",
-        "fromTable": "vw_stg_cm_log",
-        "fromColumn": "id"
+        "fromTable": "CM Log",
+        "fromColumn": "id",
+        "toTable": "Fact Claims - StarSchema",
+        "toColumn": "ID_Claim"
       },
       {
         "name": "51436946-f016-4efc-8e2a-d74098d8006a",
-        "toTable": "vw_dimAICPExam",
-        "toColumn": "ExamIDKey",
-        "fromTable": "vw_tblFactAICPExamScores",
-        "fromColumn": "ExamIDKey"
+        "fromTable": "Exam Scores",
+        "fromColumn": "ExamIDKey",
+        "toTable": "AICP Exams",
+        "toColumn": "ExamIDKey"
       },
       {
         "name": "6735a402-0fd8-4abe-ac1e-5fc671447af9",
-        "toTable": "vw_dimAICPExamRegistrantType",
-        "toColumn": "RegistrantTypeIDKey",
-        "fromTable": "vw_tblFactAICPExamScores",
-        "fromColumn": "RegistrantTypeIDKey"
+        "fromTable": "Exam Scores",
+        "fromColumn": "RegistrantTypeIDKey",
+        "toTable": "Exam Registrant Type",
+        "toColumn": "RegistrantTypeIDKey"
       },
       {
         "name": "18656181-07ff-480c-ac12-8012ff48c703",
-        "fromColumn": "MemberIDKey",
-        "toTable": "vw_tblFactMember_IS",
-        "toColumn": "MemberIDKey",
         "toCardinality": "many",
-        "fromTable": "vw_tblFactAICPExamScores",
+        "fromTable": "Exam Scores",
+        "fromColumn": "MemberIDKey",
+        "toTable": "Fact Member",
+        "toColumn": "MemberIDKey",
         "crossFilteringBehavior": "bothDirections"
       }
     ],
@@ -2738,5 +2816,6 @@
         "value": "600"
       }
     ]
-  }
+  },
+  "id": "SemanticModel"
 }

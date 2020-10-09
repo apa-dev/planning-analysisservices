@@ -20,7 +20,7 @@
           "AuthenticationKind": "OAuth2",
           "kind": "SQL",
           "path": "apadwprod.database.windows.net;apaprod",
-          "Expires": "Fri, 18 Sep 2020 15:20:04 GMT",
+          "Expires": "Thu, 08 Oct 2020 22:21:16 GMT",
           "RefreshToken": "********"
         }
       },
@@ -40,7 +40,7 @@
           "AuthenticationKind": "OAuth2",
           "kind": "SQL",
           "path": "apadwprod.database.windows.net;APAPROD",
-          "Expires": "Fri, 18 Sep 2020 15:20:26 GMT",
+          "Expires": "Thu, 08 Oct 2020 22:21:32 GMT",
           "RefreshToken": "********"
         }
       }
@@ -303,11 +303,6 @@
             "sourceColumn": "SCHOOL_ID"
           },
           {
-            "name": "School_Name",
-            "dataType": "string",
-            "sourceColumn": "SCHOOL_OTHER"
-          },
-          {
             "name": "Degree_Level",
             "dataType": "string",
             "sourceColumn": "DEGREE_LEVEL"
@@ -490,6 +485,11 @@
             "expression": "if((DATEDIFF(TODAY(),Student[Degree_Date],YEAR))>4,1,0)"
           },
           {
+            "name": "School_Name",
+            "dataType": "string",
+            "sourceColumn": "SCHOOL_OTHER"
+          },
+          {
             "type": "calculated",
             "name": "DegreeDate<Today",
             "dataType": "int64",
@@ -515,6 +515,15 @@
         ],
         "measures": [
           {
+            "name": "_Stu>4",
+            "expression": [
+              "CALCULATE(DISTINCTCOUNT(Student[ID]),",
+              "Student[MoreThan4]=1",
+              ")"
+            ],
+            "formatString": "#,0"
+          },
+          {
             "name": "_DegreeDate>CurrentDate",
             "expression": [
               "CALCULATE(DISTINCTCOUNT(Student[ID]),",
@@ -536,15 +545,6 @@
             "expression": [
               "CALCULATE(DISTINCTCOUNT(Student[ID]),",
               "Student[Degree_Date]=BLANK())"
-            ],
-            "formatString": "#,0"
-          },
-          {
-            "name": "_Stu>4",
-            "expression": [
-              "CALCULATE(DISTINCTCOUNT(Student[ID]),",
-              "Student[MoreThan4]=1",
-              ")"
             ],
             "formatString": "#,0"
           }
@@ -1833,7 +1833,7 @@
               " IF(",
               "          CALCULATE(",
               "                 COUNTA('Member'[Email]),",
-              "                 FILTER('Member', 'Member'[Email] = EARLIEST('Member'[Email]) && SEARCH(\"@\", 'Member'[Email],1,0) <> 0 && 'Member'[Isactive]=TRUE )",
+              "                 FILTER('Member', 'Member'[Email] = EARLIEST('Member'[Email]) && SEARCH(\"@\", EARLIEST('Member'[Email]),1,0) <> 0 && 'Member'[Isactive]=TRUE )",
               "           )>1, ",
               "           1,",
               "           0",
