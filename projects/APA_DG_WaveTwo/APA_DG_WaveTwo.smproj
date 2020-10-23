@@ -13,7 +13,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Development' ">
     <OutputPath>bin\</OutputPath>
-    <DeploymentServerName>asazure://northcentralus.asazure.windows.net/apaprodas:rw</DeploymentServerName>
+    <DeploymentServerName>asazure://northcentralus.asazure.windows.net/apadevas:rw</DeploymentServerName>
     <DeploymentServerEdition>Developer</DeploymentServerEdition>
     <DeploymentServerVersion>Version_13_0</DeploymentServerVersion>
     <DeploymentServerDatabase>APA_DG_WaveTwo</DeploymentServerDatabase>

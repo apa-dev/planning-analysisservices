@@ -20,7 +20,7 @@
           "AuthenticationKind": "OAuth2",
           "kind": "SQL",
           "path": "apadwprod.database.windows.net;apaprod",
-          "Expires": "Tue, 20 Oct 2020 19:57:50 GMT",
+          "Expires": "Fri, 23 Oct 2020 17:30:29 GMT",
           "RefreshToken": "********"
         }
       }
@@ -1267,7 +1267,6 @@
       },
       {
         "name": "Fact Member",
-        "isHidden": true,
         "columns": [
           {
             "name": "MemberIDKey",
@@ -1278,66 +1277,79 @@
           {
             "name": "ProductTypeKey",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "ProductTypeKey"
           },
           {
             "name": "ProductCodeKey",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "ProductCodeKey"
           },
           {
             "name": "MemberTypeIDKey",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "MemberTypeIDKey"
           },
           {
             "name": "SalaryIDKey",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "SalaryIDKey"
           },
           {
             "name": "RaceIDKey",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "RaceIDKey"
           },
           {
             "name": "OrgKey",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "OrgKey"
           },
           {
             "name": "ChapterKey",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "ChapterKey"
           },
           {
             "name": "Trans_Date_Key",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Trans_Date_Key"
           },
           {
             "name": "Paid_Through_Key",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Paid_Through_Key"
           },
           {
             "name": "Home_Address_Key",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Home_Address_Key"
           },
           {
             "name": "Work_Address_Key",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "Work_Address_Key"
           },
           {
             "name": "StatusKey",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "StatusKey"
           },
           {
             "name": "MemberStatusKey",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "MemberStatusKey"
           },
           {
@@ -1348,11 +1360,13 @@
           {
             "name": "member_id",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "member_id"
           },
           {
             "name": "address_num",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "address_num"
           }
         ],
