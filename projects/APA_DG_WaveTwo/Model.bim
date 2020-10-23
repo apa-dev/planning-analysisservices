@@ -20,7 +20,7 @@
           "AuthenticationKind": "OAuth2",
           "kind": "SQL",
           "path": "apadwprod.database.windows.net;apaprod",
-          "Expires": "Tue, 06 Oct 2020 18:26:32 GMT",
+          "Expires": "Tue, 20 Oct 2020 19:57:50 GMT",
           "RefreshToken": "********"
         }
       }
@@ -1374,305 +1374,6 @@
         ]
       },
       {
-        "name": "Fact Claims B",
-        "columns": [
-          {
-            "name": "ID_Claim",
-            "dataType": "int64",
-            "sourceColumn": "ID_Claim"
-          },
-          {
-            "name": "Log_Status",
-            "dataType": "string",
-            "sourceColumn": "Log_Status"
-          },
-          {
-            "name": "CM_Period_Code",
-            "dataType": "string",
-            "sourceColumn": "CM_Period_Code"
-          },
-          {
-            "name": "Member_ID",
-            "dataType": "string",
-            "sourceColumn": "Member_ID"
-          },
-          {
-            "name": "Product_Major",
-            "dataType": "string",
-            "sourceColumn": "Product_Major"
-          },
-          {
-            "name": "Product_Minor",
-            "dataType": "string",
-            "sourceColumn": "Product_Minor"
-          },
-          {
-            "name": "Verified",
-            "dataType": "boolean",
-            "sourceColumn": "Verified"
-          },
-          {
-            "name": "Credits",
-            "dataType": "double",
-            "sourceColumn": "Credits"
-          },
-          {
-            "name": "Law_Credits",
-            "dataType": "double",
-            "sourceColumn": "Law_Credits"
-          },
-          {
-            "name": "Ethics_Credits",
-            "dataType": "double",
-            "sourceColumn": "Ethics_Credits"
-          },
-          {
-            "name": "Is_Speaker",
-            "dataType": "boolean",
-            "sourceColumn": "Is_Speaker"
-          },
-          {
-            "name": "Is_Author",
-            "dataType": "boolean",
-            "sourceColumn": "Is_Author"
-          },
-          {
-            "name": "Self_Reported",
-            "dataType": "boolean",
-            "sourceColumn": "Self_Reported"
-          },
-          {
-            "name": "Is_CarryOver",
-            "dataType": "boolean",
-            "sourceColumn": "Is_CarryOver"
-          },
-          {
-            "name": "Is_Probono",
-            "dataType": "boolean",
-            "sourceColumn": "Is_Probono"
-          },
-          {
-            "name": "Is_Deleted",
-            "dataType": "boolean",
-            "sourceColumn": "Is_Deleted"
-          },
-          {
-            "name": "Submitted_Time",
-            "dataType": "dateTime",
-            "sourceColumn": "Submitted_Time"
-          },
-          {
-            "name": "Member_Type",
-            "dataType": "string",
-            "sourceColumn": "Member_Type"
-          },
-          {
-            "name": "Salary_Range",
-            "dataType": "string",
-            "sourceColumn": "Salary_Range"
-          },
-          {
-            "name": "Race_ID",
-            "dataType": "string",
-            "sourceColumn": "Race_ID"
-          },
-          {
-            "name": "Origin",
-            "dataType": "string",
-            "sourceColumn": "Origin"
-          },
-          {
-            "name": "Primary_Chapter",
-            "dataType": "string",
-            "sourceColumn": "Primary_Chapter"
-          },
-          {
-            "name": "Gender",
-            "dataType": "string",
-            "sourceColumn": "Gender"
-          },
-          {
-            "name": "Status",
-            "dataType": "string",
-            "sourceColumn": "Status"
-          },
-          {
-            "name": "Category",
-            "dataType": "string",
-            "sourceColumn": "Category"
-          },
-          {
-            "name": "Member_Status",
-            "dataType": "string",
-            "sourceColumn": "Member_Status"
-          },
-          {
-            "name": "Address_Num1",
-            "dataType": "int64",
-            "sourceColumn": "Address_Num1"
-          },
-          {
-            "name": "Address_Num2",
-            "dataType": "int64",
-            "sourceColumn": "Address_Num2"
-          },
-          {
-            "name": "Lastupdated",
-            "dataType": "dateTime",
-            "sourceColumn": "Lastupdated"
-          },
-          {
-            "name": "LastModifiedBy",
-            "dataType": "string",
-            "sourceColumn": "LastModifiedBy"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_stg_Fact_Claims = Source{[Schema=\"dbo\",Item=\"vw_stg_Fact_Claims\"]}[Data]",
-                "in",
-                "    dbo_vw_stg_Fact_Claims"
-              ]
-            }
-          }
-        ],
-        "measures": [
-          {
-            "name": "_selfreportedclaims",
-            "expression": [
-              "CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Self_Reported]=TRUE() && ",
-              "'Fact Claims B'[Verified]=TRUE() &&",
-              "'Fact Claims B'[Credits]>8),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
-            ]
-          },
-          {
-            "name": "_AICPNoReporting",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Member', 'Member'[Designation] = \"AICP\"), ",
-              "FILTER('Fact Claims B', 'Fact Claims B'[CM_Period_Code] = BLANK()),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"A\"))"
-            ]
-          },
-          {
-            "name": "_NotRetExemption",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Member Type', 'Member Type'[Member_Type] <> \"RET\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_01\"),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
-            ]
-          },
-          {
-            "name": "_RetExemption",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Member Type', 'Member Type'[Member_Type] = \"RET\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] <> \"E_01\"),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
-            ]
-          },
-          {
-            "name": "_NotLifeExemption",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Member Type', 'Member Type'[Member_Type] = \"LIFE\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] <> \"E_12\"),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
-            ]
-          },
-          {
-            "name": "_UnEmployedExemption",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Member Type', 'Member Type'[Member_Type] = \"MEM\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_02\"),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
-            ]
-          },
-          {
-            "name": "_ActiveNoReportingPeriod",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "--FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] = \"MEM\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] >= TODAY()),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] <> \"A\"))"
-            ]
-          },
-          {
-            "name": "_MoreActivePeriod",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Member Type', 'Member Type'[Member_Type] = \"MEM\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] >= TODAY()),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"A\"),",
-              "FILTER('Fact Claims B', COUNT('Fact Claims B'[Log_Status]) > 2))"
-            ]
-          },
-          {
-            "name": "_AuthoringCredits",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Self_Reported] = TRUE()),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Verified] = TRUE()),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Is_Author] = TRUE()),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Credits] > 16))"
-            ]
-          },
-          {
-            "name": "_ReinstatedNotEnoughCredits",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"R\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Credits] < 32),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
-            ]
-          },
-          {
-            "name": "_Member65ZeroCreditCheck",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Member', 'Member'[Age] >= 65),",
-              "FILTER('CM Log', 'CM Log'[credits_required] > 0),",
-              "FILTER('Member Type', 'Member Type'[Member_Type] = \"RET\"))"
-            ]
-          },
-          {
-            "name": "_VoluntaryLifeCreditCheck",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_13\"),",
-              "FILTER('CM Log', 'CM Log'[credits_required] <> 16))"
-            ]
-          }
-        ]
-      },
-      {
         "name": "Jobs",
         "columns": [
           {
@@ -2664,6 +2365,316 @@
                 "    dbo_vw_dg_historical_metrics"
               ]
             }
+          }
+        ]
+      },
+      {
+        "name": "Fact Claims B",
+        "columns": [
+          {
+            "name": "ID_Claim",
+            "dataType": "int64",
+            "sourceColumn": "ID_Claim"
+          },
+          {
+            "name": "Log_Status",
+            "dataType": "string",
+            "sourceColumn": "Log_Status"
+          },
+          {
+            "name": "CM_Period_Code",
+            "dataType": "string",
+            "sourceColumn": "CM_Period_Code"
+          },
+          {
+            "name": "Member_ID",
+            "dataType": "string",
+            "sourceColumn": "Member_ID"
+          },
+          {
+            "name": "Product_Major",
+            "dataType": "string",
+            "sourceColumn": "Product_Major"
+          },
+          {
+            "name": "Product_Minor",
+            "dataType": "string",
+            "sourceColumn": "Product_Minor"
+          },
+          {
+            "name": "Verified",
+            "dataType": "boolean",
+            "sourceColumn": "Verified"
+          },
+          {
+            "name": "Credits",
+            "dataType": "double",
+            "sourceColumn": "Credits"
+          },
+          {
+            "name": "Law_Credits",
+            "dataType": "double",
+            "sourceColumn": "Law_Credits"
+          },
+          {
+            "name": "Ethics_Credits",
+            "dataType": "double",
+            "sourceColumn": "Ethics_Credits"
+          },
+          {
+            "name": "Is_Speaker",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Speaker"
+          },
+          {
+            "name": "Is_Author",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Author"
+          },
+          {
+            "name": "Self_Reported",
+            "dataType": "boolean",
+            "sourceColumn": "Self_Reported"
+          },
+          {
+            "name": "Is_CarryOver",
+            "dataType": "boolean",
+            "sourceColumn": "Is_CarryOver"
+          },
+          {
+            "name": "Is_Probono",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Probono"
+          },
+          {
+            "name": "Is_Deleted",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Deleted"
+          },
+          {
+            "name": "Submitted_Time",
+            "dataType": "dateTime",
+            "sourceColumn": "Submitted_Time"
+          },
+          {
+            "name": "Member_Type",
+            "dataType": "string",
+            "sourceColumn": "Member_Type"
+          },
+          {
+            "name": "Salary_Range",
+            "dataType": "string",
+            "sourceColumn": "Salary_Range"
+          },
+          {
+            "name": "Race_ID",
+            "dataType": "string",
+            "sourceColumn": "Race_ID"
+          },
+          {
+            "name": "Origin",
+            "dataType": "string",
+            "sourceColumn": "Origin"
+          },
+          {
+            "name": "Primary_Chapter",
+            "dataType": "string",
+            "sourceColumn": "Primary_Chapter"
+          },
+          {
+            "name": "Gender",
+            "dataType": "string",
+            "sourceColumn": "Gender"
+          },
+          {
+            "name": "Status",
+            "dataType": "string",
+            "sourceColumn": "Status"
+          },
+          {
+            "name": "Category",
+            "dataType": "string",
+            "sourceColumn": "Category"
+          },
+          {
+            "name": "Member_Status",
+            "dataType": "string",
+            "sourceColumn": "Member_Status"
+          },
+          {
+            "name": "Address_Num1",
+            "dataType": "int64",
+            "sourceColumn": "Address_Num1"
+          },
+          {
+            "name": "Address_Num2",
+            "dataType": "int64",
+            "sourceColumn": "Address_Num2"
+          },
+          {
+            "name": "Lastupdated",
+            "dataType": "dateTime",
+            "sourceColumn": "Lastupdated"
+          },
+          {
+            "name": "LastModifiedBy",
+            "dataType": "string",
+            "sourceColumn": "LastModifiedBy"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_stg_Fact_Claims = Source{[Schema=\"dbo\",Item=\"vw_stg_Fact_Claims\"]}[Data]",
+                "in",
+                "    dbo_vw_stg_Fact_Claims"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "_selfreportedclaims",
+            "expression": [
+              "CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Self_Reported]=TRUE() && ",
+              "'Fact Claims B'[Verified]=TRUE() &&",
+              "'Fact Claims B'[Credits]>8),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
+            ]
+          },
+          {
+            "name": "_AICPNoReporting",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Member', 'Member'[Designation] = \"AICP\"), ",
+              "FILTER('Fact Claims B', 'Fact Claims B'[CM_Period_Code] = BLANK()),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"A\"))"
+            ]
+          },
+          {
+            "name": "_NotRetExemption",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Member Type', 'Member Type'[Member_Type] <> \"RET\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_01\"),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
+            ]
+          },
+          {
+            "name": "_RetExemption",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Member Type', 'Member Type'[Member_Type] = \"RET\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] <> \"E_01\"),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
+            ]
+          },
+          {
+            "name": "_NotLifeExemption",
+            "expression": [
+              " CALCULATE([_ActiveAICP],",
+              "FILTER('Member Type', 'Member Type'[Member_Type] = \"LIFE\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] <> \"E_12\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"))",
+              ""
+            ]
+          },
+          {
+            "name": "_UnEmployedExemption",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Member Type', 'Member Type'[Member_Type] = \"MEM\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_02\"),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
+            ]
+          },
+          {
+            "name": "_ActiveNoReportingPeriod",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "--FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] = \"MEM\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] >= TODAY()),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] <> \"A\"))"
+            ]
+          },
+          {
+            "name": "_MoreActivePeriod",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Member Type', 'Member Type'[Member_Type] = \"MEM\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] >= TODAY()),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"A\"),",
+              "FILTER('Fact Claims B', COUNT('Fact Claims B'[Log_Status]) > 2))"
+            ]
+          },
+          {
+            "name": "_AuthoringCredits",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Self_Reported] = TRUE()),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Verified] = TRUE()),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Is_Author] = TRUE()),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Credits] > 16))"
+            ]
+          },
+          {
+            "name": "_ReinstatedNotEnoughCredits",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"R\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Credits] < 32),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
+            ]
+          },
+          {
+            "name": "_Member65ZeroCreditCheck",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Member', 'Member'[Age] >= 65),",
+              "FILTER('CM Log', 'CM Log'[credits_required] > 0),",
+              "FILTER('Member Type', 'Member Type'[Member_Type] = \"RET\"))"
+            ]
+          },
+          {
+            "name": "_VoluntaryLifeCreditCheck",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_13\"),",
+              "FILTER('CM Log', 'CM Log'[credits_required] <> 16))"
+            ]
+          },
+          {
+            "name": "_ActiveAICP",
+            "expression": [
+              " ",
+              "CALCULATE(",
+              "    DISTINCTCOUNT('Fact Claims B'[Member_ID]), ",
+              "    FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "    FILTER('Status', 'Status'[Status] = \"A\"),",
+              "    FILTER('Member', SEARCH(\"AICP\",'Member'[Designation],1,0))",
+              ")"
+            ]
           }
         ]
       }

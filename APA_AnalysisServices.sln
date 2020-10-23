@@ -7,9 +7,9 @@ Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "APA_Credits_AS", "projects\
 EndProject
 Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "APA_DG_Reports", "projects\APA_DG_Reports\APA_DG_Reports.smproj", "{70522082-56E3-4BD8-8C69-0F1175895EB4}"
 EndProject
-Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "APA_DG_WaveTwo", "projects\APA_DG_WaveTwo\APA_DG_WaveTwo.smproj", "{334ADF90-F8CF-4FE6-B865-430CE5CFFB1D}"
+Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "APA_DG_WaveTwo", "projects\APA_DG_WaveTwo\APA_DG_WaveTwo.smproj", "{507FEC18-E7B5-4044-9C88-AF5807B197C6}"
 EndProject
-Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "APA_Events_AS", "projects\APA_Events_AS\APA_Events_AS.smproj", "{EEF8B46C-7E22-43E7-9968-4C0683D4CE5C}"
+Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "APA_Registrations_AS", "projects\APA_Events_AS\APA_Registrations_AS.smproj", "{EEF8B46C-7E22-43E7-9968-4C0683D4CE5C}"
 EndProject
 Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "APA_Jobs_AS", "projects\APA_Jobs_AS\APA_Jobs_AS.smproj", "{B85CFAE8-F8DE-4100-8603-3DE4412C39CB}"
 EndProject
@@ -28,9 +28,9 @@ Global
 		{70522082-56E3-4BD8-8C69-0F1175895EB4}.Development|x86.ActiveCfg = Development|x86
 		{70522082-56E3-4BD8-8C69-0F1175895EB4}.Development|x86.Build.0 = Development|x86
 		{70522082-56E3-4BD8-8C69-0F1175895EB4}.Development|x86.Deploy.0 = Development|x86
-		{334ADF90-F8CF-4FE6-B865-430CE5CFFB1D}.Development|x86.ActiveCfg = Development|x86
-		{334ADF90-F8CF-4FE6-B865-430CE5CFFB1D}.Development|x86.Build.0 = Development|x86
-		{334ADF90-F8CF-4FE6-B865-430CE5CFFB1D}.Development|x86.Deploy.0 = Development|x86
+		{507FEC18-E7B5-4044-9C88-AF5807B197C6}.Development|x86.ActiveCfg = Development|x86
+		{507FEC18-E7B5-4044-9C88-AF5807B197C6}.Development|x86.Build.0 = Development|x86
+		{507FEC18-E7B5-4044-9C88-AF5807B197C6}.Development|x86.Deploy.0 = Development|x86
 		{EEF8B46C-7E22-43E7-9968-4C0683D4CE5C}.Development|x86.ActiveCfg = Development|x86
 		{EEF8B46C-7E22-43E7-9968-4C0683D4CE5C}.Development|x86.Build.0 = Development|x86
 		{EEF8B46C-7E22-43E7-9968-4C0683D4CE5C}.Development|x86.Deploy.0 = Development|x86
