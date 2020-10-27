@@ -17,11 +17,11 @@
           "query": null
         },
         "credential": {
-          "AuthenticationKind": "OAuth2",
+          "AuthenticationKind": "UsernamePassword",
           "kind": "SQL",
           "path": "apadwprod.database.windows.net;apaprod",
-          "Expires": "Fri, 23 Oct 2020 17:30:29 GMT",
-          "RefreshToken": "********"
+          "Username": "sqladm",
+          "EncryptConnection": true
         }
       }
     ],
@@ -585,9 +585,9 @@
             "isDataTypeInferred": true,
             "expression": [
               " if('Member'[Designation]=\"AICP CANDIDATE\", \"AICP CANDIDATE\", ",
-              "if('Member'[Designation]in {\"AICP\", \"AICP Candidate\", \"AICP CEP\", \"AICP CEP CTP\", \"AICP CEP CUD\", \"AICP CTP\",",
+              "\tif('Member'[Designation]in {\"AICP\", \"AICP Candidate\", \"AICP CEP\", \"AICP CEP CTP\", \"AICP CEP CUD\", \"AICP CTP\",",
               "\"AICP CUD\", \"AICP, AICP CUD\", \"AICP, CTP\"}, \"AICP\",",
-              "if('Member'[Designation] in {\"FAICP\", \"FAICP CTP\", \"FAICP CTP CEP\", \"FAICP CUD\"}, \"FAICP\", \"Unmapped\")))"
+              "\tif('Member'[Designation] in {\"FAICP\", \"FAICP CTP\", \"FAICP CTP CEP\", \"FAICP CUD\"}, \"FAICP\", \"Unmapped\")))"
             ]
           },
           {
@@ -612,42 +612,6 @@
                 "    dbo_vw_dimMember"
               ]
             }
-          }
-        ],
-        "measures": [
-          {
-            "name": "_AICPStartNoDesignation",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
-              "FILTER('Member', 'Member'[AICP_START] <> BLANK()), ",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()),",
-              "FILTER('Member', 'Member'[_Designation] <> \"AICP\"))"
-            ]
-          },
-          {
-            "name": "_AICPPaidThruNull",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] = BLANK()),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Status', 'Status'[Status] = \"A\"), ",
-              "FILTER('Member', 'Member'[_Designation] = \"AICP\"))",
-              "",
-              "",
-              "",
-              ""
-            ]
-          },
-          {
-            "name": "_AICPPaidThruNoStart",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] <> BLANK()), ",
-              "FILTER('Member', 'Member'[AICP_START] = BLANK()), ",
-              "FILTER('Member', 'Member'[_Designation] = \"AICP\"))"
-            ]
           }
         ]
       },
@@ -1565,71 +1529,6 @@
               ]
             }
           }
-        ],
-        "measures": [
-          {
-            "name": "_NullContactUsPhone",
-            "expression": [
-              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[contact_us_phone] = BLANK())",
-              ""
-            ]
-          },
-          {
-            "name": "_NullSalaryRange",
-            "expression": [
-              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[salary_range] = BLANK())",
-              ""
-            ]
-          },
-          {
-            "name": "_NullCity",
-            "expression": [
-              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[city] = BLANK())",
-              ""
-            ]
-          },
-          {
-            "name": "_NullAddress1",
-            "expression": [
-              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[address1] = BLANK())",
-              ""
-            ]
-          },
-          {
-            "name": "_NullCountry",
-            "expression": [
-              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[country] = BLANK())",
-              ""
-            ]
-          },
-          {
-            "name": "_NullContactUsEmail",
-            "expression": [
-              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[contact_us_email] = BLANK())",
-              ""
-            ]
-          },
-          {
-            "name": "_NullCompany",
-            "expression": [
-              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[company] = BLANK())",
-              ""
-            ]
-          },
-          {
-            "name": "_NullState",
-            "expression": [
-              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[state] = BLANK())",
-              ""
-            ]
-          },
-          {
-            "name": "_NullJobType",
-            "expression": [
-              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[job_type] = BLANK())",
-              ""
-            ]
-          }
         ]
       },
       {
@@ -2109,15 +2008,6 @@
         ],
         "measures": [
           {
-            "name": "_AICPExamNotPassed",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
-              "FILTER('Exam Scores', 'Exam Scores'[Pass] = 0),",
-              "FILTER('Member', 'Member'[_Designation] = \"AICP\"),",
-              "FILTER('AICP Exams', 'AICP Exams'[IsActive] = TRUE()))"
-            ]
-          },
-          {
             "name": "_ExamStartAfterEnd",
             "expression": [
               " CALCULATE(DISTINCT('AICP Exams'[ExamCode]), ",
@@ -2554,46 +2444,21 @@
         ],
         "measures": [
           {
-            "name": "_selfreportedclaims",
-            "expression": [
-              "CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Self_Reported]=TRUE() && ",
-              "'Fact Claims B'[Verified]=TRUE() &&",
-              "'Fact Claims B'[Credits]>8),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
-            ]
-          },
-          {
-            "name": "_AICPNoReporting",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Member', 'Member'[Designation] = \"AICP\"), ",
-              "FILTER('Fact Claims B', 'Fact Claims B'[CM_Period_Code] = BLANK()),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"A\"))"
-            ]
-          },
-          {
             "name": "_NotRetExemption",
             "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              " CALCULATE([_ActiveAICP],",
               "FILTER('Member Type', 'Member Type'[Member_Type] <> \"RET\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_01\"),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_01\")",
+              ")"
             ]
           },
           {
             "name": "_RetExemption",
             "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              " CALCULATE([_ActiveAICP],",
               "FILTER('Member Type', 'Member Type'[Member_Type] = \"RET\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] <> \"E_01\"),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] <> \"E_01\")",
+              ")"
             ]
           },
           {
@@ -2607,43 +2472,17 @@
             ]
           },
           {
-            "name": "_UnEmployedExemption",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Member Type', 'Member Type'[Member_Type] = \"MEM\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_02\"),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
-            ]
-          },
-          {
-            "name": "_ActiveNoReportingPeriod",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "--FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] = \"MEM\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] >= TODAY()),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] <> \"A\"))"
-            ]
-          },
-          {
             "name": "_MoreActivePeriod",
             "expression": [
               " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Member Type', 'Member Type'[Member_Type] = \"MEM\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] >= TODAY()),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
               "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"A\"),",
-              "FILTER('Fact Claims B', COUNT('Fact Claims B'[Log_Status]) > 2))"
+              "FILTER('Fact Claims B', COUNT('Fact Claims B'[Log_Status]) > 1))"
             ]
           },
           {
             "name": "_AuthoringCredits",
             "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              " CALCULATE([_ActiveAICP],",
               "FILTER('Fact Claims B', 'Fact Claims B'[Self_Reported] = TRUE()),",
               "FILTER('Fact Claims B', 'Fact Claims B'[Verified] = TRUE()),",
               "FILTER('Fact Claims B', 'Fact Claims B'[Is_Author] = TRUE()),",
@@ -2653,41 +2492,305 @@
           {
             "name": "_ReinstatedNotEnoughCredits",
             "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              " CALCULATE([_ActiveAICP],",
               "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"R\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Credits] < 32),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
+              "FILTER('Fact Claims B', 'Fact Claims B'[Credits] < 32)",
+              ")"
             ]
           },
           {
             "name": "_Member65ZeroCreditCheck",
             "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              " CALCULATE([_ActiveAICP],",
               "FILTER('Member', 'Member'[Age] >= 65),",
               "FILTER('CM Log', 'CM Log'[credits_required] > 0),",
-              "FILTER('Member Type', 'Member Type'[Member_Type] = \"RET\"))"
+              "FILTER('Member Type', 'Member Type'[Member_Type] = \"RET\"))",
+              ""
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Report Measures",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Values1",
+            "dataType": "boolean",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Values1]",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Values2",
+            "dataType": "boolean",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Values2]",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Values3",
+            "dataType": "boolean",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Values3]",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Values4",
+            "dataType": "boolean",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Values4]",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Values5",
+            "dataType": "boolean",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Values5]",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CalculatedTable 1",
+            "source": {
+              "type": "calculated",
+              "expression": " DATATABLE ()"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "_ActiveAPA",
+            "expression": [
+              "",
+              "CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]), ",
+              "    FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),\t",
+              "    FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()),",
+              "    FILTER('Status', 'Status'[Status] = \"A\")",
+              "    )"
             ]
           },
           {
             "name": "_VoluntaryLifeCreditCheck",
             "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              " CALCULATE([_ActiveAICP],",
               "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_13\"),",
               "FILTER('CM Log', 'CM Log'[credits_required] <> 16))"
+            ]
+          },
+          {
+            "name": "_SelfReportedClaims",
+            "expression": [
+              "CALCULATE([_ActiveAICP],",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Self_Reported]=TRUE() && ",
+              "'Fact Claims B'[Verified]=TRUE() &&",
+              "'Fact Claims B'[Credits]>8))"
+            ]
+          },
+          {
+            "name": "_UnEmployedExemptions",
+            "expression": [
+              " CALCULATE([_ActiveAICP],",
+              "FILTER('Member Type', 'Member Type'[Member_Type] = \"MEM\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_02\"))"
+            ]
+          },
+          {
+            "name": "_RetExemptionB",
+            "expression": [
+              " CALCULATE([_ActiveAICP],",
+              "FILTER('Member Type', 'Member Type'[Member_Type] = \"RET\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] <> \"E_01\")",
+              ")"
+            ]
+          },
+          {
+            "name": "_ReinstatedNotEnoughCreditsB",
+            "expression": [
+              " CALCULATE([_ActiveAICP],",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"R\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Credits] < 32)",
+              ")"
+            ]
+          },
+          {
+            "name": "_NullStateJobs",
+            "expression": "CALCULATE(COUNTROWS('Jobs'),'Jobs'[state] = BLANK())"
+          },
+          {
+            "name": "_NullSalaryRangeJobs",
+            "expression": [
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[salary_range] = BLANK())",
+              ""
+            ]
+          },
+          {
+            "name": "_NullJobTypeJobs",
+            "expression": [
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[job_type] = BLANK())",
+              ""
+            ]
+          },
+          {
+            "name": "_NullContactUsPhoneJobs",
+            "expression": "CALCULATE(COUNTROWS('Jobs'),'Jobs'[contact_us_phone] = BLANK())"
+          },
+          {
+            "name": "_NullCountryJobs",
+            "expression": [
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[country] = BLANK())",
+              ""
+            ]
+          },
+          {
+            "name": "_NullContactUsEmailJobs",
+            "expression": [
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[contact_us_email] = BLANK())",
+              ""
+            ]
+          },
+          {
+            "name": "_NullCompanyJobs",
+            "expression": [
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[company] = BLANK())",
+              ""
+            ]
+          },
+          {
+            "name": "_NullCityJobs",
+            "expression": [
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[city] = BLANK())",
+              ""
+            ]
+          },
+          {
+            "name": "_NullAddress1Jobs",
+            "expression": "CALCULATE(COUNTROWS('Jobs'),'Jobs'[address1] = BLANK())"
+          },
+          {
+            "name": "_NotLifeExemptionB",
+            "expression": [
+              " CALCULATE([_ActiveAICP],",
+              "FILTER('Member Type', 'Member Type'[Member_Type] = \"LIFE\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] <> \"E_12\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"))",
+              ""
+            ]
+          },
+          {
+            "name": "_MoreActivePeriodB",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"A\"),",
+              "FILTER('Fact Claims B', COUNT('Fact Claims B'[Log_Status]) > 1))"
+            ]
+          },
+          {
+            "name": "_Member65ZeroCreditCheckB",
+            "expression": [
+              " CALCULATE([_ActiveAICP],",
+              "FILTER('Member', 'Member'[Age] >= 65),",
+              "FILTER('CM Log', 'CM Log'[credits_required] > 0),",
+              "FILTER('Member Type', 'Member Type'[Member_Type] = \"RET\"))",
+              ""
+            ]
+          },
+          {
+            "name": "_AICPNoReporting",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Member', 'Member'[Designation] = \"AICP\"), ",
+              "FILTER('Fact Claims B', 'Fact Claims B'[CM_Period_Code] = BLANK()),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"A\"))"
+            ]
+          },
+          {
+            "name": "_AICPStartNoDesignation",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "FILTER('Member', 'Member'[AICP_START] <> BLANK()), ",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()),",
+              "FILTER('Member', 'Member'[_Designation] <> \"AICP\"))"
+            ]
+          },
+          {
+            "name": "_AICPExamNotPassed",
+            "expression": [
+              " CALCULATE([_ActiveAICP],",
+              "FILTER('Exam Scores', 'Exam Scores'[Pass] = 0),",
+              "FILTER('Member', 'Member'[_Designation] <> \"AICP Candidate\"),",
+              "FILTER('AICP Exams', 'AICP Exams'[IsActive] = TRUE()))"
+            ]
+          },
+          {
+            "name": "_ActiveNoReportingPeriod",
+            "expression": [
+              " ",
+              "CALCULATE([_ActiveAICP],",
+              "\tFILTER('CM Log', 'CM Log'[is_current] = 'CM Log'[is_current] = True),",
+              "\tFILTER('Fact Claims B', DISTINCTCOUNT('Fact Claims B'[ID_Claim]) = 0) ",
+              ")"
             ]
           },
           {
             "name": "_ActiveAICP",
             "expression": [
               " ",
-              "CALCULATE(",
-              "    DISTINCTCOUNT('Fact Claims B'[Member_ID]), ",
-              "    FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "    FILTER('Status', 'Status'[Status] = \"A\"),",
-              "    FILTER('Member', SEARCH(\"AICP\",'Member'[Designation],1,0))",
+              "CALCULATE([_ActiveAPA] , FILTER('Member', 'Member'[_Designation] <> \"Unmapped\")",
               ")"
+            ]
+          },
+          {
+            "name": "_AICPPaidThruNoStart",
+            "expression": [
+              " ",
+              "CALCULATE([_ActiveAICP],",
+              "\tFILTER('Paid Thru Date', 'Paid Thru Date'[date] <> BLANK()), ",
+              "\tFILTER('Member', 'Member'[AICP_START] = BLANK()), ",
+              "\tFILTER('Member', 'Member'[_Designation] <> \"AICP Candidate\")",
+              "\t)"
+            ]
+          },
+          {
+            "name": "_AuthoringCreditsB",
+            "expression": [
+              " CALCULATE([_ActiveAICP],",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Self_Reported] = TRUE()),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Verified] = TRUE()),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Is_Author] = TRUE()),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Credits] > 16))"
+            ]
+          },
+          {
+            "name": "_NotRetExemptionB",
+            "expression": [
+              " CALCULATE([_ActiveAICP],",
+              "FILTER('Member Type', 'Member Type'[Member_Type] <> \"RET\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_01\")",
+              ")"
+            ]
+          },
+          {
+            "name": "_AICPPaidThruNull",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] = BLANK()),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"), ",
+              "FILTER('Member', 'Member'[_Designation] = \"AICP\"))",
+              ""
             ]
           }
         ]
