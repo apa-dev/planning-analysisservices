@@ -196,18 +196,6 @@
             "dataType": "string",
             "isHidden": true,
             "sourceColumn": "LastUpdatedby"
-          },
-          {
-            "name": "StartDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "StartDate"
-          },
-          {
-            "name": "EndDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "EndDate"
           }
         ],
         "partitions": [
@@ -1357,7 +1345,6 @@
           {
             "name": "content_ptr_id",
             "dataType": "int64",
-            "isHidden": true,
             "sourceColumn": "content_ptr_id"
           },
           {
@@ -2005,15 +1992,6 @@
               ]
             }
           }
-        ],
-        "measures": [
-          {
-            "name": "_ExamStartAfterEnd",
-            "expression": [
-              " CALCULATE(DISTINCT('AICP Exams'[ExamCode]), ",
-              "FILTER('AICP Exams', 'AICP Exams'[ExamStartDate] > 'AICP Exams'[ExamEndDate]))"
-            ]
-          }
         ]
       },
       {
@@ -2444,61 +2422,6 @@
         ],
         "measures": [
           {
-            "name": "_NotRetExemption",
-            "expression": [
-              " CALCULATE([_ActiveAICP],",
-              "FILTER('Member Type', 'Member Type'[Member_Type] <> \"RET\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_01\")",
-              ")"
-            ]
-          },
-          {
-            "name": "_RetExemption",
-            "expression": [
-              " CALCULATE([_ActiveAICP],",
-              "FILTER('Member Type', 'Member Type'[Member_Type] = \"RET\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] <> \"E_01\")",
-              ")"
-            ]
-          },
-          {
-            "name": "_NotLifeExemption",
-            "expression": [
-              " CALCULATE([_ActiveAICP],",
-              "FILTER('Member Type', 'Member Type'[Member_Type] = \"LIFE\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] <> \"E_12\"),",
-              "FILTER('Status', 'Status'[Status] = \"A\"))",
-              ""
-            ]
-          },
-          {
-            "name": "_MoreActivePeriod",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"A\"),",
-              "FILTER('Fact Claims B', COUNT('Fact Claims B'[Log_Status]) > 1))"
-            ]
-          },
-          {
-            "name": "_AuthoringCredits",
-            "expression": [
-              " CALCULATE([_ActiveAICP],",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Self_Reported] = TRUE()),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Verified] = TRUE()),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Is_Author] = TRUE()),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Credits] > 16))"
-            ]
-          },
-          {
-            "name": "_ReinstatedNotEnoughCredits",
-            "expression": [
-              " CALCULATE([_ActiveAICP],",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"R\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Credits] < 32)",
-              ")"
-            ]
-          },
-          {
             "name": "_Member65ZeroCreditCheck",
             "expression": [
               " CALCULATE([_ActiveAICP],",
@@ -2516,7 +2439,7 @@
           {
             "type": "calculatedTableColumn",
             "name": "Values1",
-            "dataType": "boolean",
+            "dataType": "unknown",
             "isNameInferred": true,
             "isDataTypeInferred": true,
             "sourceColumn": "[Values1]",
@@ -2525,7 +2448,7 @@
           {
             "type": "calculatedTableColumn",
             "name": "Values2",
-            "dataType": "boolean",
+            "dataType": "unknown",
             "isNameInferred": true,
             "isDataTypeInferred": true,
             "sourceColumn": "[Values2]",
@@ -2534,7 +2457,7 @@
           {
             "type": "calculatedTableColumn",
             "name": "Values3",
-            "dataType": "boolean",
+            "dataType": "unknown",
             "isNameInferred": true,
             "isDataTypeInferred": true,
             "sourceColumn": "[Values3]",
@@ -2543,7 +2466,7 @@
           {
             "type": "calculatedTableColumn",
             "name": "Values4",
-            "dataType": "boolean",
+            "dataType": "unknown",
             "isNameInferred": true,
             "isDataTypeInferred": true,
             "sourceColumn": "[Values4]",
@@ -2552,7 +2475,7 @@
           {
             "type": "calculatedTableColumn",
             "name": "Values5",
-            "dataType": "boolean",
+            "dataType": "unknown",
             "isNameInferred": true,
             "isDataTypeInferred": true,
             "sourceColumn": "[Values5]",
@@ -2606,7 +2529,7 @@
             ]
           },
           {
-            "name": "_RetExemptionB",
+            "name": "_RetExemption",
             "expression": [
               " CALCULATE([_ActiveAICP],",
               "FILTER('Member Type', 'Member Type'[Member_Type] = \"RET\"),",
@@ -2615,7 +2538,7 @@
             ]
           },
           {
-            "name": "_ReinstatedNotEnoughCreditsB",
+            "name": "_ReinstatedNotEnoughCredits",
             "expression": [
               " CALCULATE([_ActiveAICP],",
               "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"R\"),",
@@ -2678,7 +2601,7 @@
             "expression": "CALCULATE(COUNTROWS('Jobs'),'Jobs'[address1] = BLANK())"
           },
           {
-            "name": "_NotLifeExemptionB",
+            "name": "_NotLifeExemption",
             "expression": [
               " CALCULATE([_ActiveAICP],",
               "FILTER('Member Type', 'Member Type'[Member_Type] = \"LIFE\"),",
@@ -2688,7 +2611,7 @@
             ]
           },
           {
-            "name": "_MoreActivePeriodB",
+            "name": "_MoreActivePeriod",
             "expression": [
               " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
               "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"A\"),",
@@ -2708,10 +2631,10 @@
           {
             "name": "_AICPNoReporting",
             "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Member', 'Member'[Designation] = \"AICP\"), ",
-              "FILTER('Fact Claims B', 'Fact Claims B'[CM_Period_Code] = BLANK()),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"A\"))"
+              " ",
+              "CALCULATE([_ActiveAICP],",
+              "\tFILTER('Fact Claims B', 'Fact Claims B'[CM_Period_Code] = BLANK()),",
+              "\tFILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"A\"))"
             ]
           },
           {
@@ -2728,10 +2651,12 @@
           {
             "name": "_AICPExamNotPassed",
             "expression": [
-              " CALCULATE([_ActiveAICP],",
-              "FILTER('Exam Scores', 'Exam Scores'[Pass] = 0),",
-              "FILTER('Member', 'Member'[_Designation] <> \"AICP Candidate\"),",
-              "FILTER('AICP Exams', 'AICP Exams'[IsActive] = TRUE()))"
+              " ",
+              "CALCULATE([_ActiveAICP],",
+              "\tFILTER('Exam Scores', 'Exam Scores'[Pass] = 0),",
+              "\tFILTER('Member', 'Member'[_Designation] <> \"AICP Candidate\"),",
+              "\tFILTER('AICP Exams', 'AICP Exams'[IsActive] = TRUE())",
+              "\t)"
             ]
           },
           {
@@ -2748,7 +2673,10 @@
             "name": "_ActiveAICP",
             "expression": [
               " ",
-              "CALCULATE([_ActiveAPA] , FILTER('Member', 'Member'[_Designation] <> \"Unmapped\")",
+              "CALCULATE([_ActiveAPA] , ",
+              "\tFILTER('Member', ",
+              "\t\tNOT('Member'[_Designation] IN { \"Unmapped\", \"AICP CAND\"})",
+              "\t)",
               ")"
             ]
           },
@@ -2764,22 +2692,13 @@
             ]
           },
           {
-            "name": "_AuthoringCreditsB",
+            "name": "_AuthoringCredits",
             "expression": [
               " CALCULATE([_ActiveAICP],",
               "FILTER('Fact Claims B', 'Fact Claims B'[Self_Reported] = TRUE()),",
               "FILTER('Fact Claims B', 'Fact Claims B'[Verified] = TRUE()),",
               "FILTER('Fact Claims B', 'Fact Claims B'[Is_Author] = TRUE()),",
               "FILTER('Fact Claims B', 'Fact Claims B'[Credits] > 16))"
-            ]
-          },
-          {
-            "name": "_NotRetExemptionB",
-            "expression": [
-              " CALCULATE([_ActiveAICP],",
-              "FILTER('Member Type', 'Member Type'[Member_Type] <> \"RET\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_01\")",
-              ")"
             ]
           },
           {
@@ -2791,6 +2710,23 @@
               "FILTER('Status', 'Status'[Status] = \"A\"), ",
               "FILTER('Member', 'Member'[_Designation] = \"AICP\"))",
               ""
+            ]
+          },
+          {
+            "name": "_ExamStartAfterEnd",
+            "expression": [
+              " CALCULATE(DISTINCT('AICP Exams'[ExamCode]), ",
+              "FILTER('AICP Exams', 'AICP Exams'[ExamStartDate] > 'AICP Exams'[ExamEndDate]))"
+            ]
+          },
+          {
+            "name": "_NotRetExemption",
+            "expression": [
+              " ",
+              "CALCULATE([_ActiveAICP],",
+              "\tFILTER('Member Type', 'Member Type'[Member_Type] <> \"RET\"),",
+              "\tFILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_01\")",
+              ")"
             ]
           }
         ]
