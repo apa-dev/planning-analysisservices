@@ -575,7 +575,7 @@
               " if('Member'[Designation]=\"AICP CANDIDATE\", \"AICP CANDIDATE\", ",
               "\tif('Member'[Designation]in {\"AICP\", \"AICP Candidate\", \"AICP CEP\", \"AICP CEP CTP\", \"AICP CEP CUD\", \"AICP CTP\",",
               "\"AICP CUD\", \"AICP, AICP CUD\", \"AICP, CTP\"}, \"AICP\",",
-              "\tif('Member'[Designation] in {\"FAICP\", \"FAICP CTP\", \"FAICP CTP CEP\", \"FAICP CUD\"}, \"FAICP\", \"Unmapped\")))"
+              "\tif('Member'[Designation] in {\"FAICP\", \"FAICP CTP\", \"FAICP CTP CEP\", \"FAICP CUD\"}, \"FAICP\", \"\")))"
             ]
           },
           {
@@ -2442,6 +2442,7 @@
             "dataType": "unknown",
             "isNameInferred": true,
             "isDataTypeInferred": true,
+            "isHidden": true,
             "sourceColumn": "[Values1]",
             "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
           },
@@ -2451,6 +2452,7 @@
             "dataType": "unknown",
             "isNameInferred": true,
             "isDataTypeInferred": true,
+            "isHidden": true,
             "sourceColumn": "[Values2]",
             "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
           },
@@ -2460,6 +2462,7 @@
             "dataType": "unknown",
             "isNameInferred": true,
             "isDataTypeInferred": true,
+            "isHidden": true,
             "sourceColumn": "[Values3]",
             "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
           },
@@ -2469,6 +2472,7 @@
             "dataType": "unknown",
             "isNameInferred": true,
             "isDataTypeInferred": true,
+            "isHidden": true,
             "sourceColumn": "[Values4]",
             "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
           },
@@ -2478,6 +2482,7 @@
             "dataType": "unknown",
             "isNameInferred": true,
             "isDataTypeInferred": true,
+            "isHidden": true,
             "sourceColumn": "[Values5]",
             "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
           }
@@ -2493,14 +2498,16 @@
         ],
         "measures": [
           {
-            "name": "_ActiveAPA",
+            "name": "_ActiveAICP",
             "expression": [
               "",
               "CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]), ",
-              "    FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),\t",
-              "    FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()),",
-              "    FILTER('Status', 'Status'[Status] = \"A\")",
-              "    )"
+              "    FILTER('Product Code', 'Product Code'[Product_Code] = \"AICP\"),\t",
+              "    FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY())",
+              "   -- FILTER('Status', 'Status'[Status] = \"A\"),",
+              "    --FILTER('Member', NOT( 'Member'[_Designation] IN {\"\", \"AICP CAND\"}))",
+              "    )",
+              " "
             ]
           },
           {
@@ -2660,24 +2667,11 @@
             ]
           },
           {
-            "name": "_ActiveNoReportingPeriod",
+            "name": "_ActiveNoActiveLog",
             "expression": [
               " ",
               "CALCULATE([_ActiveAICP],",
-              "\tFILTER('CM Log', 'CM Log'[is_current] = 'CM Log'[is_current] = True),",
-              "\tFILTER('Fact Claims B', DISTINCTCOUNT('Fact Claims B'[ID_Claim]) = 0) ",
-              ")"
-            ]
-          },
-          {
-            "name": "_ActiveAICP",
-            "expression": [
-              " ",
-              "CALCULATE([_ActiveAPA] , ",
-              "\tFILTER('Member', ",
-              "\t\tNOT('Member'[_Designation] IN { \"Unmapped\", \"AICP CAND\"})",
-              "\t)",
-              ")"
+              "\tFILTER('CM Log', 'CM Log'[is_current] = 'CM Log'[is_current] = True))"
             ]
           },
           {
@@ -2773,13 +2767,6 @@
         "crossFilteringBehavior": "bothDirections"
       },
       {
-        "name": "7e5108b1-073f-47e9-b1a3-ea02054c7f1d",
-        "fromTable": "Fact Member",
-        "fromColumn": "MemberTypeIDKey",
-        "toTable": "Member Type",
-        "toColumn": "MemberTypeIDKey"
-      },
-      {
         "name": "f66bd388-697c-4d27-b10f-bb012653c121",
         "toCardinality": "many",
         "fromTable": "Fact Registrations",
@@ -2871,6 +2858,14 @@
         "fromColumn": "MemberIDKey",
         "toTable": "Fact Member",
         "toColumn": "MemberIDKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "61437cab-62fb-465e-8d09-42ba6e1c68aa",
+        "fromTable": "Fact Member",
+        "fromColumn": "MemberTypeIDKey",
+        "toTable": "Member Type",
+        "toColumn": "MemberTypeIDKey",
         "crossFilteringBehavior": "bothDirections"
       }
     ],
