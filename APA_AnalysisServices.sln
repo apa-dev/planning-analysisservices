@@ -7,7 +7,7 @@ Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "APA_Credits_AS", "projects\
 EndProject
 Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "APA_DG_Reports", "projects\APA_DG_Reports\APA_DG_Reports.smproj", "{70522082-56E3-4BD8-8C69-0F1175895EB4}"
 EndProject
-Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "APA_DG_WaveTwo", "projects\APA_DG_WaveTwo\APA_DG_WaveTwo.smproj", "{334ADF90-F8CF-4FE6-B865-430CE5CFFB1D}"
+Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "APA_DG_WaveTwo", "projects\APA_DG_WaveTwo\APA_DG_WaveTwo.smproj", "{507FEC18-E7B5-4044-9C88-AF5807B197C6}"
 EndProject
 Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "APA_Events_AS", "projects\APA_Events_AS\APA_Events_AS.smproj", "{EEF8B46C-7E22-43E7-9968-4C0683D4CE5C}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "APA_Wave1_AS", "projects\APA_Wave1_AS\APA_Wave1_AS.smproj", "{8D28D155-FBC7-489F-99F4-BC4F05F9ADAF}"
 EndProject
 Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "APA_Content_AS", "APA_Content_AS\APA_Content_AS.smproj", "{8CE414BB-95B2-4C99-9E03-51BA72086E22}"
+EndProject
+Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "APA_Member_AS", "projects\APA_Member_AS\APA_Member_AS.smproj", "{28CAD235-7241-4FE5-BBEE-78C7E65BE7F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,9 +30,9 @@ Global
 		{70522082-56E3-4BD8-8C69-0F1175895EB4}.Development|x86.ActiveCfg = Development|x86
 		{70522082-56E3-4BD8-8C69-0F1175895EB4}.Development|x86.Build.0 = Development|x86
 		{70522082-56E3-4BD8-8C69-0F1175895EB4}.Development|x86.Deploy.0 = Development|x86
-		{334ADF90-F8CF-4FE6-B865-430CE5CFFB1D}.Development|x86.ActiveCfg = Development|x86
-		{334ADF90-F8CF-4FE6-B865-430CE5CFFB1D}.Development|x86.Build.0 = Development|x86
-		{334ADF90-F8CF-4FE6-B865-430CE5CFFB1D}.Development|x86.Deploy.0 = Development|x86
+		{507FEC18-E7B5-4044-9C88-AF5807B197C6}.Development|x86.ActiveCfg = Development|x86
+		{507FEC18-E7B5-4044-9C88-AF5807B197C6}.Development|x86.Build.0 = Development|x86
+		{507FEC18-E7B5-4044-9C88-AF5807B197C6}.Development|x86.Deploy.0 = Development|x86
 		{EEF8B46C-7E22-43E7-9968-4C0683D4CE5C}.Development|x86.ActiveCfg = Development|x86
 		{EEF8B46C-7E22-43E7-9968-4C0683D4CE5C}.Development|x86.Build.0 = Development|x86
 		{EEF8B46C-7E22-43E7-9968-4C0683D4CE5C}.Development|x86.Deploy.0 = Development|x86
@@ -43,6 +45,9 @@ Global
 		{8CE414BB-95B2-4C99-9E03-51BA72086E22}.Development|x86.ActiveCfg = Development|x86
 		{8CE414BB-95B2-4C99-9E03-51BA72086E22}.Development|x86.Build.0 = Development|x86
 		{8CE414BB-95B2-4C99-9E03-51BA72086E22}.Development|x86.Deploy.0 = Development|x86
+		{28CAD235-7241-4FE5-BBEE-78C7E65BE7F5}.Development|x86.ActiveCfg = Development|x86
+		{28CAD235-7241-4FE5-BBEE-78C7E65BE7F5}.Development|x86.Build.0 = Development|x86
+		{28CAD235-7241-4FE5-BBEE-78C7E65BE7F5}.Development|x86.Deploy.0 = Development|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
