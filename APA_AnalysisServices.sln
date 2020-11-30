@@ -17,6 +17,8 @@ Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "APA_Wave1_AS", "projects\AP
 EndProject
 Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "APA_Content_AS", "APA_Content_AS\APA_Content_AS.smproj", "{8CE414BB-95B2-4C99-9E03-51BA72086E22}"
 EndProject
+Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "APA_Member_AS", "projects\APA_Member_AS\APA_Member_AS.smproj", "{28CAD235-7241-4FE5-BBEE-78C7E65BE7F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Development|x86 = Development|x86
@@ -43,6 +45,9 @@ Global
 		{8CE414BB-95B2-4C99-9E03-51BA72086E22}.Development|x86.ActiveCfg = Development|x86
 		{8CE414BB-95B2-4C99-9E03-51BA72086E22}.Development|x86.Build.0 = Development|x86
 		{8CE414BB-95B2-4C99-9E03-51BA72086E22}.Development|x86.Deploy.0 = Development|x86
+		{28CAD235-7241-4FE5-BBEE-78C7E65BE7F5}.Development|x86.ActiveCfg = Development|x86
+		{28CAD235-7241-4FE5-BBEE-78C7E65BE7F5}.Development|x86.Build.0 = Development|x86
+		{28CAD235-7241-4FE5-BBEE-78C7E65BE7F5}.Development|x86.Deploy.0 = Development|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
