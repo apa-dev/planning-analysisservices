@@ -1340,6 +1340,9 @@
         ]
       },
       {
+        ]
+      },
+      {
         "name": "Jobs",
         "columns": [
           {
@@ -2424,6 +2427,308 @@
           {
             "name": "_Member65ZeroCreditCheck",
             "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Member', 'Member'[Age] >= 65),",
+              "FILTER('CM Log', 'CM Log'[credits_required] > 0),",
+              "FILTER('Member Type', 'Member Type'[Member_Type] = \"RET\"))"
+            ]
+          },
+          {
+            "name": "_selfreportedclaims",
+            "expression": [
+              "CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Self_Reported]=TRUE() && ",
+              "'Fact Claims B'[Verified]=TRUE() &&",
+              "'Fact Claims B'[Credits]>8),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
+            ]
+          },
+          {
+            "name": "_AICPNoReporting",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Member', 'Member'[Designation] = \"AICP\"), ",
+              "FILTER('Fact Claims B', 'Fact Claims B'[CM_Period_Code] = BLANK()),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"A\"))"
+            ]
+          },
+          {
+            "name": "_NotRetExemption",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Member Type', 'Member Type'[Member_Type] <> \"RET\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_01\"),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
+            ]
+          },
+          {
+            "name": "_RetExemption",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Member Type', 'Member Type'[Member_Type] = \"RET\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] <> \"E_01\"),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
+            ]
+          },
+          {
+            "name": "_NotLifeExemption",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Member Type', 'Member Type'[Member_Type] = \"LIFE\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] <> \"E_12\"),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
+            ]
+          },
+          {
+            "name": "_UnEmployedExemption",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Member Type', 'Member Type'[Member_Type] = \"MEM\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_02\"),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
+            ]
+          },
+          {
+            "name": "_ActiveNoReportingPeriod",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "--FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] = \"MEM\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] >= TODAY()),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] <> \"A\"))"
+            ]
+          },
+          {
+            "name": "_MoreActivePeriod",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Member Type', 'Member Type'[Member_Type] = \"MEM\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] >= TODAY()),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"A\"),",
+              "FILTER('Fact Claims B', COUNT('Fact Claims B'[Log_Status]) > 2))"
+            ]
+          },
+          {
+            "name": "_AuthoringCredits",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Self_Reported] = TRUE()),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Verified] = TRUE()),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Is_Author] = TRUE()),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Credits] > 16))"
+            ]
+          },
+          {
+            "name": "_ReinstatedNotEnoughCredits",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"R\"),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Credits] < 32),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
+            ]
+          },
+          {
+            "name": "_VoluntaryLifeCreditCheck",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
+              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_13\"),",
+              "FILTER('CM Log', 'CM Log'[credits_required] <> 16))"
+            ]
+          }
+        ]
+      }
+    ],
+        ]
+      },
+      {
+        "name": "Fact Claims B",
+        "columns": [
+          {
+            "name": "ID_Claim",
+            "dataType": "int64",
+            "sourceColumn": "ID_Claim"
+          },
+          {
+            "name": "Log_Status",
+            "dataType": "string",
+            "sourceColumn": "Log_Status"
+          },
+          {
+            "name": "CM_Period_Code",
+            "dataType": "string",
+            "sourceColumn": "CM_Period_Code"
+          },
+          {
+            "name": "Member_ID",
+            "dataType": "string",
+            "sourceColumn": "Member_ID"
+          },
+          {
+            "name": "Product_Major",
+            "dataType": "string",
+            "sourceColumn": "Product_Major"
+          },
+          {
+            "name": "Product_Minor",
+            "dataType": "string",
+            "sourceColumn": "Product_Minor"
+          },
+          {
+            "name": "Verified",
+            "dataType": "boolean",
+            "sourceColumn": "Verified"
+          },
+          {
+            "name": "Credits",
+            "dataType": "double",
+            "sourceColumn": "Credits"
+          },
+          {
+            "name": "Law_Credits",
+            "dataType": "double",
+            "sourceColumn": "Law_Credits"
+          },
+          {
+            "name": "Ethics_Credits",
+            "dataType": "double",
+            "sourceColumn": "Ethics_Credits"
+          },
+          {
+            "name": "Is_Speaker",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Speaker"
+          },
+          {
+            "name": "Is_Author",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Author"
+          },
+          {
+            "name": "Self_Reported",
+            "dataType": "boolean",
+            "sourceColumn": "Self_Reported"
+          },
+          {
+            "name": "Is_CarryOver",
+            "dataType": "boolean",
+            "sourceColumn": "Is_CarryOver"
+          },
+          {
+            "name": "Is_Probono",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Probono"
+          },
+          {
+            "name": "Is_Deleted",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Deleted"
+          },
+          {
+            "name": "Submitted_Time",
+            "dataType": "dateTime",
+            "sourceColumn": "Submitted_Time"
+          },
+          {
+            "name": "Member_Type",
+            "dataType": "string",
+            "sourceColumn": "Member_Type"
+          },
+          {
+            "name": "Salary_Range",
+            "dataType": "string",
+            "sourceColumn": "Salary_Range"
+          },
+          {
+            "name": "Race_ID",
+            "dataType": "string",
+            "sourceColumn": "Race_ID"
+          },
+          {
+            "name": "Origin",
+            "dataType": "string",
+            "sourceColumn": "Origin"
+          },
+          {
+            "name": "Primary_Chapter",
+            "dataType": "string",
+            "sourceColumn": "Primary_Chapter"
+          },
+          {
+            "name": "Gender",
+            "dataType": "string",
+            "sourceColumn": "Gender"
+          },
+          {
+            "name": "Status",
+            "dataType": "string",
+            "sourceColumn": "Status"
+          },
+          {
+            "name": "Category",
+            "dataType": "string",
+            "sourceColumn": "Category"
+          },
+          {
+            "name": "Member_Status",
+            "dataType": "string",
+            "sourceColumn": "Member_Status"
+          },
+          {
+            "name": "Address_Num1",
+            "dataType": "int64",
+            "sourceColumn": "Address_Num1"
+          },
+          {
+            "name": "Address_Num2",
+            "dataType": "int64",
+            "sourceColumn": "Address_Num2"
+          },
+          {
+            "name": "Lastupdated",
+            "dataType": "dateTime",
+            "sourceColumn": "Lastupdated"
+          },
+          {
+            "name": "LastModifiedBy",
+            "dataType": "string",
+            "sourceColumn": "LastModifiedBy"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_stg_Fact_Claims = Source{[Schema=\"dbo\",Item=\"vw_stg_Fact_Claims\"]}[Data]",
+                "in",
+                "    dbo_vw_stg_Fact_Claims"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "_Member65ZeroCreditCheck",
+            "expression": [
               " CALCULATE([_ActiveAICP],",
               "FILTER('Member', 'Member'[Age] >= 65),",
               "FILTER('CM Log', 'CM Log'[credits_required] > 0),",
@@ -2859,6 +3164,223 @@
         "toTable": "Fact Member",
         "toColumn": "MemberIDKey",
         "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "7e5108b1-073f-47e9-b1a3-ea02054c7f1d",
+        "fromTable": "Fact Member",
+        "fromColumn": "MemberTypeIDKey",
+        "toTable": "Member Type",
+        "toColumn": "MemberTypeIDKey"
+      }
+    ],
+    "roles": [
+      {
+        "name": "Admin",
+        "modelPermission": "administrator",
+        "members": [
+          {
+            "memberName": "Morgan.Diestler@rsmus.com",
+            "memberId": "Morgan.Diestler@rsmus.com",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "tjohnson@planning.org",
+            "memberId": "tjohnson@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "plowe@planning.org",
+            "memberId": "plowe@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "cmollet@planning.org",
+            "memberId": "cmollet@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "RWest@planning.org",
+            "memberId": "RWest@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "msullivan@planning.org",
+            "memberId": "msullivan@planning.org",
+            "identityProvider": "AzureAD"
+          }
+        ]
+      },
+      {
+        "name": "Read",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "ajimenez@planning.org",
+            "memberId": "ajimenez@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "anavarro@planning.org",
+            "memberId": "anavarro@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "bdonegan@planning.org",
+            "memberId": "bdonegan@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "cparra@planning.org",
+            "memberId": "cparra@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "epasi@planning.org",
+            "memberId": "epasi@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "ewilczek@planning.org",
+            "memberId": "ewilczek@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "fbraunstein@planning.org",
+            "memberId": "fbraunstein@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "jjordan@planning.org",
+            "memberId": "jjordan@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "kgems@planning.org",
+            "memberId": "kgems@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "kjacques@planning.org",
+            "memberId": "kjacques@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mkraus@planning.org",
+            "memberId": "mkraus@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mmarrero@planning.org",
+            "memberId": "mmarrero@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "rhoffman@planning.org",
+            "memberId": "rhoffman@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "rrewers@planning.org",
+            "memberId": "rrewers@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "rzack@planning.org",
+            "memberId": "rzack@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "sarteaga@planning.org",
+            "memberId": "sarteaga@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "usaenz@planning.org",
+            "memberId": "usaenz@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "wfrench@planning.org",
+            "memberId": "wfrench@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "ynoonoo@planning.org",
+            "memberId": "ynoonoo@planning.org",
+            "identityProvider": "AzureAD"
+          }
+        ]
+      },
+      {
+        "name": "SuperUser",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "akrakos@planning.org",
+            "memberId": "akrakos@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "amoore@planning.org",
+            "memberId": "amoore@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "balbrecht@planning.org",
+            "memberId": "balbrecht@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "bmissaggia@planning.org",
+            "memberId": "bmissaggia@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "crahill@planning.org",
+            "memberId": "crahill@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "jrolla@planning.org",
+            "memberId": "jrolla@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "kkazmierczak@planning.org",
+            "memberId": "kkazmierczak@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "llang@planning.org",
+            "memberId": "llang@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mferguson@planning.org",
+            "memberId": "mferguson@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mjimenez@planning.org",
+            "memberId": "mjimenez@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mjohnson@planning.org",
+            "memberId": "mjohnson@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mwelch@planning.org",
+            "memberId": "mwelch@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "rjassen@planning.org",
+            "memberId": "rjassen@planning.org",
+            "identityProvider": "AzureAD"
+          }
+        ]
       },
       {
         "name": "61437cab-62fb-465e-8d09-42ba6e1c68aa",
