@@ -32,8 +32,7 @@
           "AuthenticationKind": "OAuth2",
           "kind": "SQL",
           "path": "apadwprod.database.windows.net;apaprod",
-          "Expires": "Thu, 24 Sep 2020 22:26:12 GMT",
-          "RefreshToken": "********"
+          "Expires": "Thu, 11 Feb 2021 09:04:56 GMT"
         }
       }
     ],
@@ -597,8 +596,14 @@
             "name": "date",
             "dataType": "dateTime",
             "sourceColumn": "date",
-            "formatString": "General Date",
-            "sourceProviderType": "date"
+            "formatString": "Short Date",
+            "sourceProviderType": "date",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"DateTimeShortDatePattern\" />"
+              }
+            ]
           },
           {
             "name": "Day",
@@ -660,6 +665,13 @@
             "dataType": "dateTime",
             "isHidden": true,
             "sourceColumn": "LastModified"
+          },
+          {
+            "type": "calculated",
+            "name": "_ValidThruDate",
+            "dataType": "dateTime",
+            "isDataTypeInferred": true,
+            "expression": "EDATE(DATE([CalendarYear],[CalendarMonth],[Day]),3)"
           }
         ],
         "partitions": [
@@ -7674,16 +7686,6 @@
         "name": "\tAPA Admins ",
         "modelPermission": "administrator",
         "members": [
-          {
-            "memberName": "Ajay.Punyapu@rsmus.com",
-            "memberId": "Ajay.Punyapu@rsmus.com#AzureAD",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "Morgan.Diestler@rsmus.com",
-            "memberId": "Morgan.Diestler@rsmus.com#AzureAD",
-            "identityProvider": "AzureAD"
-          },
           {
             "memberName": "cmollet@planning.org",
             "memberId": "cmollet@planning.org#AzureAD",

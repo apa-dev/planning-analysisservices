@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Development</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8d28d155-fbc7-489f-99f4-bc4f05f9adaf}</ProjectGuid>
+    <ProjectGuid>{312fe741-b96b-408d-b445-35f1c913c69c}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>APA_Wave1_AS</RootNamespace>
     <AssemblyName>APA_Wave1_AS</AssemblyName>
