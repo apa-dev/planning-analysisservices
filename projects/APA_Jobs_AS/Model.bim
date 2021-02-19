@@ -1,5 +1,5 @@
 {
-  "name": "SemanticModel",
+  "name": "APA_Jobs_AS",
   "compatibilityLevel": 1500,
   "model": {
     "culture": "en-US",
@@ -18,6 +18,8 @@
         },
         "credential": {
           "AuthenticationKind": "UsernamePassword",
+          "kind": "SQL",
+          "path": "apadwprod.database.windows.net;apaprod",
           "Username": "sqladm",
           "EncryptConnection": true
         }
@@ -208,32 +210,26 @@
         "members": [
           {
             "memberName": "rwest@planning.org",
-            "memberId": "rwest@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "Morgan.Diestler@rsmus.com",
-            "memberId": "Morgan.Diestler@rsmus.com",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "tjohnson@planning.org",
-            "memberId": "tjohnson@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "plowe@planning.org",
-            "memberId": "plowe@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "cmollet@planning.org",
-            "memberId": "cmollet@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "msullivan@planning.org",
-            "memberId": "msullivan@planning.org",
             "identityProvider": "AzureAD"
           }
         ]
@@ -244,82 +240,66 @@
         "members": [
           {
             "memberName": "mferguson@planning.org",
-            "memberId": "mferguson@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "Akrakos@planning.org",
-            "memberId": "Akrakos@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mwalsh@planning.org",
-            "memberId": "mwalsh@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "jrolla@planning.org",
-            "memberId": "jrolla@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "RJassen@planning.org",
-            "memberId": "RJassen@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "balbrecht@planning.org",
-            "memberId": "balbrecht@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "amoore@planning.org",
-            "memberId": "amoore@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "bmissaggia@planning.org",
-            "memberId": "bmissaggia@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mjohnson@planning.org",
-            "memberId": "mjohnson@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kkazmierczak@planning.org",
-            "memberId": "kkazmierczak@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "crahill@planning.org",
-            "memberId": "crahill@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "MWelch@planning.org",
-            "memberId": "MWelch@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kschmidt@planning.org",
-            "memberId": "kschmidt@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "klennon@planning.org",
-            "memberId": "klennon@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mjimenez@planning.org",
-            "memberId": "mjimenez@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "llang@planning.org",
-            "memberId": "llang@planning.org",
             "identityProvider": "AzureAD"
           }
         ]
@@ -330,112 +310,90 @@
         "members": [
           {
             "memberName": "fbraunstein@planning.org",
-            "memberId": "fbraunstein@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "ewilczek@planning.org",
-            "memberId": "ewilczek@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "Sarteaga@planning.org",
-            "memberId": "Sarteaga@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rrewers@planning.org",
-            "memberId": "rrewers@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rhoffman@planning.org",
-            "memberId": "rhoffman@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kgems@planning.org",
-            "memberId": "kgems@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rscherzinger@planning.org",
-            "memberId": "rscherzinger@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "epasi@planning.org",
-            "memberId": "epasi@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "CParra@planning.org",
-            "memberId": "CParra@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rzack@planning.org",
-            "memberId": "rzack@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "chinshaw@planning.org",
-            "memberId": "chinshaw@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mmarrero@planning.org",
-            "memberId": "mmarrero@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "JJordan@planning.org",
-            "memberId": "JJordan@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "ajimenez@planning.org",
-            "memberId": "ajimenez@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "LJorgenson@planning.org",
-            "memberId": "LJorgenson@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kjacques@planning.org",
-            "memberId": "kjacques@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "bdonegan@planning.org",
-            "memberId": "bdonegan@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "anavarro@planning.org",
-            "memberId": "anavarro@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "wfrench@planning.org",
-            "memberId": "wfrench@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "ynoonoo@planning.org",
-            "memberId": "ynoonoo@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "usaenz@planning.org",
-            "memberId": "usaenz@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mkraus@planning.org",
-            "memberId": "mkraus@planning.org",
             "identityProvider": "AzureAD"
           }
         ],
@@ -466,6 +424,5 @@
         "value": "600"
       }
     ]
-  },
-  "id": "SemanticModel"
+  }
 }

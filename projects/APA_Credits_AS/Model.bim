@@ -1,5 +1,5 @@
 {
-  "name": "SemanticModel",
+  "name": "APA_Credits_AS",
   "compatibilityLevel": 1500,
   "model": {
     "culture": "en-US",
@@ -29,11 +29,10 @@
           "query": null
         },
         "credential": {
-          "AuthenticationKind": "UsernamePassword",
+          "AuthenticationKind": "OAuth2",
           "kind": "SQL",
           "path": "apadwprod.database.windows.net;apaprod",
-          "Username": "sqladm",
-          "EncryptConnection": true
+          "Expires": "Tue, 01 Dec 2020 13:18:53 GMT"
         }
       }
     ],
@@ -155,8 +154,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "query": " SELECT [dbo].[vw_dimAddress].* FROM [dbo].[vw_dimAddress]  WHERE (NOT(([IsActive] = 0)) OR [IsActive] IS NULL) ",
-              "dataSource": "AzureSqlDW  apadwprod.database.windows.net "
+              "dataSource": "AzureSqlDW  apadwprod.database.windows.net ",
+              "query": " SELECT [dbo].[vw_dimAddress].* FROM [dbo].[vw_dimAddress]  WHERE (NOT(([IsActive] = 0)) OR [IsActive] IS NULL) "
             },
             "annotations": [
               {
@@ -847,8 +846,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "query": " SELECT [dbo].[vw_dimClaimLogStatus].* FROM [dbo].[vw_dimClaimLogStatus]  WHERE ([IsActive] = 1) ",
-              "dataSource": "AzureSqlDW  apadwprod.database.windows.net "
+              "dataSource": "AzureSqlDW  apadwprod.database.windows.net ",
+              "query": " SELECT [dbo].[vw_dimClaimLogStatus].* FROM [dbo].[vw_dimClaimLogStatus]  WHERE ([IsActive] = 1) "
             },
             "annotations": [
               {
@@ -1225,8 +1224,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "query": " SELECT [dbo].[vw_dimClaimsFlags].* FROM [dbo].[vw_dimClaimsFlags]  WHERE ([IsActive] = 1) ",
-              "dataSource": "AzureSqlDW  apadwprod.database.windows.net "
+              "dataSource": "AzureSqlDW  apadwprod.database.windows.net ",
+              "query": " SELECT [dbo].[vw_dimClaimsFlags].* FROM [dbo].[vw_dimClaimsFlags]  WHERE ([IsActive] = 1) "
             },
             "annotations": [
               {
@@ -1781,8 +1780,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "query": " SELECT [dbo].[vw_dimClaimsProduct].* FROM [dbo].[vw_dimClaimsProduct]  WHERE ([IsActive] = 1) ",
-              "dataSource": "AzureSqlDW  apadwprod.database.windows.net "
+              "dataSource": "AzureSqlDW  apadwprod.database.windows.net ",
+              "query": " SELECT [dbo].[vw_dimClaimsProduct].* FROM [dbo].[vw_dimClaimsProduct]  WHERE ([IsActive] = 1) "
             },
             "annotations": [
               {
@@ -2237,6 +2236,22 @@
             "isHidden": true,
             "sourceColumn": "LastUpdatedby",
             "sourceProviderType": "varchar"
+          },
+          {
+            "type": "calculated",
+            "name": "Start Date",
+            "dataType": "dateTime",
+            "isDataTypeInferred": true,
+            "expression": [
+              "",
+              "var YearText = RIGHT([CM_PeriodCode],4)",
+              "var StartYear= IFERROR(",
+              "\t\tCONVERT(CONVERT(YearText, INTEGER),STRING),  //ISNUMERIC doesnt work in this environment soi convert to look for an error",
+              "\t\tCONVERT(YEAR(TODAY()) +5, STRING)) //Return five years from today for Candidates. No great reason. ",
+              "return ",
+              "DATEVALUE(CONCATENATE(\"1/1/\", StartYear))",
+              ""
+            ]
           }
         ],
         "partitions": [
@@ -2245,8 +2260,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "query": " SELECT [dbo].[vw_dimCMPeriod].* FROM [dbo].[vw_dimCMPeriod]  WHERE ([IsActive] = 1) ",
-              "dataSource": "AzureSqlDW  apadwprod.database.windows.net "
+              "dataSource": "AzureSqlDW  apadwprod.database.windows.net ",
+              "query": " SELECT [dbo].[vw_dimCMPeriod].* FROM [dbo].[vw_dimCMPeriod]  WHERE ([IsActive] = 1) "
             },
             "annotations": [
               {
@@ -2742,8 +2757,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "query": " SELECT [dbo].[vw_dimMember].* FROM [dbo].[vw_dimMember]  WHERE (NOT(([Isactive] = 0)) OR [Isactive] IS NULL) ",
-              "dataSource": "AzureSqlDW  apadwprod.database.windows.net "
+              "dataSource": "AzureSqlDW  apadwprod.database.windows.net ",
+              "query": " SELECT [dbo].[vw_dimMember].* FROM [dbo].[vw_dimMember]  WHERE (NOT(([Isactive] = 0)) OR [Isactive] IS NULL) "
             },
             "annotations": [
               {
@@ -3832,8 +3847,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "query": " SELECT [dbo].[vw_dimMemberStatus].* FROM [dbo].[vw_dimMemberStatus]  WHERE ([IsActive] = 1) ",
-              "dataSource": "AzureSqlDW  apadwprod.database.windows.net "
+              "dataSource": "AzureSqlDW  apadwprod.database.windows.net ",
+              "query": " SELECT [dbo].[vw_dimMemberStatus].* FROM [dbo].[vw_dimMemberStatus]  WHERE ([IsActive] = 1) "
             },
             "annotations": [
               {
@@ -4348,8 +4363,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "query": " SELECT [dbo].[vw_dimMemberType].* FROM [dbo].[vw_dimMemberType]  WHERE ([IsActive] = 1) ",
-              "dataSource": "AzureSqlDW  apadwprod.database.windows.net "
+              "dataSource": "AzureSqlDW  apadwprod.database.windows.net ",
+              "query": " SELECT [dbo].[vw_dimMemberType].* FROM [dbo].[vw_dimMemberType]  WHERE ([IsActive] = 1) "
             },
             "annotations": [
               {
@@ -4929,8 +4944,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "query": " SELECT [dbo].[vw_dimRace].* FROM [dbo].[vw_dimRace]  WHERE ([IsActive] = 1) ",
-              "dataSource": "AzureSqlDW  apadwprod.database.windows.net "
+              "dataSource": "AzureSqlDW  apadwprod.database.windows.net ",
+              "query": " SELECT [dbo].[vw_dimRace].* FROM [dbo].[vw_dimRace]  WHERE ([IsActive] = 1) "
             },
             "annotations": [
               {
@@ -5479,8 +5494,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "query": " SELECT [dbo].[vw_dimSalary].* FROM [dbo].[vw_dimSalary]  WHERE ([IsActive] = 1) ",
-              "dataSource": "AzureSqlDW  apadwprod.database.windows.net "
+              "dataSource": "AzureSqlDW  apadwprod.database.windows.net ",
+              "query": " SELECT [dbo].[vw_dimSalary].* FROM [dbo].[vw_dimSalary]  WHERE ([IsActive] = 1) "
             },
             "annotations": [
               {
@@ -5949,8 +5964,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "query": " SELECT [dbo].[vw_dimStatus].* FROM [dbo].[vw_dimStatus]  WHERE (NOT(([IsActive] = 0)) OR [IsActive] IS NULL) ",
-              "dataSource": "AzureSqlDW  apadwprod.database.windows.net "
+              "dataSource": "AzureSqlDW  apadwprod.database.windows.net ",
+              "query": " SELECT [dbo].[vw_dimStatus].* FROM [dbo].[vw_dimStatus]  WHERE (NOT(([IsActive] = 0)) OR [IsActive] IS NULL) "
             },
             "annotations": [
               {
@@ -6377,7 +6392,6 @@
           {
             "name": "ID_Claim",
             "dataType": "int64",
-            "isHidden": true,
             "sourceColumn": "ID_Claim",
             "sourceProviderType": "int"
           },
@@ -6508,6 +6522,7 @@
           {
             "name": "LastUpdatedby",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "LastUpdatedby",
             "sourceProviderType": "varchar"
           }
@@ -6518,8 +6533,8 @@
             "dataView": "full",
             "source": {
               "type": "query",
-              "query": " SELECT [dbo].[vw_FactClaims].* FROM [dbo].[vw_FactClaims] ",
-              "dataSource": "AzureSqlDW  apadwprod.database.windows.net "
+              "dataSource": "AzureSqlDW  apadwprod.database.windows.net ",
+              "query": " SELECT [dbo].[vw_FactClaims].* FROM [dbo].[vw_FactClaims] "
             }
           }
         ],
@@ -6696,111 +6711,221 @@
             }
           }
         ]
+      },
+      {
+        "name": "Report Measures",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Values1",
+            "dataType": "boolean",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "sourceColumn": "[Values1]",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Values2",
+            "dataType": "boolean",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "sourceColumn": "[Values2]",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Values3",
+            "dataType": "boolean",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "sourceColumn": "[Values3]",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Values4",
+            "dataType": "boolean",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "sourceColumn": "[Values4]",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Values5",
+            "dataType": "boolean",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "sourceColumn": "[Values5]",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CalculatedTable 1",
+            "source": {
+              "type": "calculated",
+              "expression": [
+                " DATATABLE (",
+                "    \"Values1\", BOOLEAN,",
+                "    \"Values2\", BOOLEAN,",
+                "    \"Values3\", BOOLEAN,",
+                "    \"Values4\", BOOLEAN,",
+                "    \"Values5\", BOOLEAN,",
+                "    {",
+                "        { 0, 0, 0, 0, 0 }",
+                "    })"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "_NPCClaims",
+            "expression": [
+              " ",
+              "CALCULATE(",
+              "\tDISTINCTCOUNT(Claims[ID_Claim]), ",
+              "\tFILTER('Claims Product', LEFT('Claims Product'[ClaimsProduct_Minor], 3) = \"NPC\" || SEARCH(\"CONF\", 'Claims Product'[ClaimsProduct_Major],1,0) > 0)",
+              "\t)"
+            ]
+          },
+          {
+            "name": "_LRNClaims",
+            "expression": [
+              " ",
+              "CALCULATE(",
+              "\tDISTINCTCOUNT(Claims[ID_Claim]), ",
+              "\tFILTER('Claims Product', LEFT('Claims Product'[ClaimsProduct_Minor],3) = \"LRN\")",
+              "\t)"
+            ]
+          },
+          {
+            "name": "_NPCClaims%",
+            "expression": [
+              " ",
+              "[_NPCClaims]/DISTINCTCOUNT(Claims[ID_Claim]) *100"
+            ]
+          },
+          {
+            "name": "_LRNClaims%",
+            "expression": [
+              " ",
+              "[_LRNClaims] / DISTINCTCOUNT(Claims[ID_Claim]) * 100"
+            ]
+          }
+        ]
       }
     ],
     "relationships": [
       {
         "name": "b64ef278-3234-4798-8a39-509646f5480d",
-        "fromTable": "Claims",
-        "fromColumn": "CMPeriodKey",
         "toTable": "CM Period",
         "toColumn": "CMPeriodKey",
+        "fromColumn": "CMPeriodKey",
+        "fromTable": "Claims",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "10453e59-2796-406f-ba8c-829f106defe5",
-        "fromTable": "Claims",
-        "fromColumn": "MemberIDKey",
         "toTable": "Member",
         "toColumn": "MemberIDKey",
+        "fromColumn": "MemberIDKey",
+        "fromTable": "Claims",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "91da5169-824b-4192-a86a-8e330bb6fb71",
-        "fromTable": "Claims",
-        "fromColumn": "MemberStatusKey",
         "toTable": "Member Status",
         "toColumn": "MemberStatusKey",
+        "fromColumn": "MemberStatusKey",
+        "fromTable": "Claims",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "d6ee2ad2-af80-41b6-80b4-7a290fc10848",
-        "fromTable": "Claims",
-        "fromColumn": "MemberTypeKey",
         "toTable": "Member Type",
         "toColumn": "MemberTypeIDKey",
+        "fromColumn": "MemberTypeKey",
+        "fromTable": "Claims",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "d36f3605-3f84-4cff-b027-48bda67b6621",
-        "fromTable": "Claims",
-        "fromColumn": "StatusKey",
         "toTable": "Status",
         "toColumn": "StatusKey",
+        "fromColumn": "StatusKey",
+        "fromTable": "Claims",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "13b85be6-61b9-4623-bba2-74c46e8f0e6b",
-        "fromTable": "Claims",
-        "fromColumn": "RaceKey",
         "toTable": "Ethnicity_Origin",
         "toColumn": "RaceIDKey",
+        "fromColumn": "RaceKey",
+        "fromTable": "Claims",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "aab953ac-ddef-4bb5-98c6-7b5cfb245fa9",
-        "fromTable": "Claims",
-        "fromColumn": "Addressnum1key",
         "toTable": "Address",
         "toColumn": "Address_Key",
+        "fromColumn": "Addressnum1key",
+        "fromTable": "Claims",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "97000f30-effc-4ef3-becf-bea6fc1db2cf",
-        "fromTable": "Claims",
-        "fromColumn": "LogStatusKey",
         "toTable": "Claim Log Status",
         "toColumn": "LogStatusKey",
+        "fromColumn": "LogStatusKey",
+        "fromTable": "Claims",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "8d42b51a-8273-4b2f-86e6-9a3736468fff",
-        "fromTable": "Claims",
-        "fromColumn": "FlagKey",
         "toTable": "Claims Flags",
         "toColumn": "FlagKey",
+        "fromColumn": "FlagKey",
+        "fromTable": "Claims",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "f09ceb1d-b8ef-4706-bb64-fcee60ada951",
-        "fromTable": "Claims",
-        "fromColumn": "ProductIDKey",
         "toTable": "Claims Product",
         "toColumn": "ClaimsProductKey",
+        "fromColumn": "ProductIDKey",
+        "fromTable": "Claims",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "cb5ae272-83ac-4eef-8194-420976f78c1a",
-        "fromTable": "Claims",
-        "fromColumn": "ChapterKey",
         "toTable": "Chapter",
         "toColumn": "ChapterKey",
+        "fromColumn": "ChapterKey",
+        "fromTable": "Claims",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "df08f1cb-becd-459d-a91e-d671afd56a8e",
-        "fromTable": "Claims",
-        "fromColumn": "SalaryKey",
         "toTable": "Salary",
         "toColumn": "SalaryID",
+        "fromColumn": "SalaryKey",
+        "fromTable": "Claims",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "de5475df-dd1b-4169-91cf-5a2d74ac1d5a",
-        "fromTable": "Claims",
-        "fromColumn": "SubmittedDateKey",
         "toTable": "Date",
         "toColumn": "Date_Key",
+        "fromColumn": "SubmittedDateKey",
+        "fromTable": "Claims",
         "crossFilteringBehavior": "bothDirections"
       }
     ],
@@ -6811,37 +6936,30 @@
         "members": [
           {
             "memberName": "msullivan@planning.org",
-            "memberId": "msullivan@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "jacob.petraitis@rsmus.com",
-            "memberId": "jacob.petraitis@rsmus.com",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "Morgan.Diestler@rsmus.com",
-            "memberId": "Morgan.Diestler@rsmus.com",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "cmollet@planning.org",
-            "memberId": "cmollet@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "tjohnson@planning.org",
-            "memberId": "tjohnson@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "plowe@planning.org",
-            "memberId": "plowe@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rwest@planning.org",
-            "memberId": "rwest@planning.org",
             "identityProvider": "AzureAD"
           }
         ]
@@ -6852,112 +6970,90 @@
         "members": [
           {
             "memberName": "fbraunstein@planning.org",
-            "memberId": "fbraunstein@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "ewilczek@planning.org",
-            "memberId": "ewilczek@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "Sarteaga@planning.org",
-            "memberId": "Sarteaga@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rrewers@planning.org",
-            "memberId": "rrewers@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rhoffman@planning.org",
-            "memberId": "rhoffman@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kgems@planning.org",
-            "memberId": "kgems@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rscherzinger@planning.org",
-            "memberId": "rscherzinger@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "epasi@planning.org",
-            "memberId": "epasi@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "CParra@planning.org",
-            "memberId": "CParra@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rzack@planning.org",
-            "memberId": "rzack@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "chinshaw@planning.org",
-            "memberId": "chinshaw@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mmarrero@planning.org",
-            "memberId": "mmarrero@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "JJordan@planning.org",
-            "memberId": "JJordan@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "ajimenez@planning.org",
-            "memberId": "ajimenez@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "LJorgenson@planning.org",
-            "memberId": "LJorgenson@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kjacques@planning.org",
-            "memberId": "kjacques@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "bdonegan@planning.org",
-            "memberId": "bdonegan@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "anavarro@planning.org",
-            "memberId": "anavarro@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "wfrench@planning.org",
-            "memberId": "wfrench@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "ynoonoo@planning.org",
-            "memberId": "ynoonoo@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "usaenz@planning.org",
-            "memberId": "usaenz@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mkraus@planning.org",
-            "memberId": "mkraus@planning.org",
             "identityProvider": "AzureAD"
           }
         ],
@@ -7024,82 +7120,66 @@
         "members": [
           {
             "memberName": "mferguson@planning.org",
-            "memberId": "mferguson@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "Akrakos@planning.org",
-            "memberId": "Akrakos@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mwalsh@planning.org",
-            "memberId": "mwalsh@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "jrolla@planning.org",
-            "memberId": "jrolla@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "RJassen@planning.org",
-            "memberId": "RJassen@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "balbrecht@planning.org",
-            "memberId": "balbrecht@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "amoore@planning.org",
-            "memberId": "amoore@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "bmissaggia@planning.org",
-            "memberId": "bmissaggia@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mjohnson@planning.org",
-            "memberId": "mjohnson@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "crahill@planning.org",
-            "memberId": "crahill@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "MWelch@planning.org",
-            "memberId": "MWelch@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kschmidt@planning.org",
-            "memberId": "kschmidt@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "klennon@planning.org",
-            "memberId": "klennon@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mjimenez@planning.org",
-            "memberId": "mjimenez@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "llang@planning.org",
-            "memberId": "llang@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kkazmierczak@planning.org",
-            "memberId": "kkazmierczak@planning.org",
             "identityProvider": "AzureAD"
           }
         ]
@@ -7111,6 +7191,5 @@
         "value": "600"
       }
     ]
-  },
-  "id": "SemanticModel"
+  }
 }

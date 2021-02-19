@@ -1,5 +1,5 @@
 {
-  "name": "SemanticModel",
+  "name": "APA_DG_Reports",
   "compatibilityLevel": 1500,
   "model": {
     "culture": "en-US",
@@ -20,8 +20,7 @@
           "AuthenticationKind": "OAuth2",
           "kind": "SQL",
           "path": "apadwprod.database.windows.net;apaprod",
-          "Expires": "Thu, 08 Oct 2020 22:21:16 GMT",
-          "RefreshToken": "********"
+          "Expires": "Tue, 01 Dec 2020 16:04:18 GMT"
         }
       },
       {
@@ -40,12 +39,1386 @@
           "AuthenticationKind": "OAuth2",
           "kind": "SQL",
           "path": "apadwprod.database.windows.net;APAPROD",
-          "Expires": "Thu, 08 Oct 2020 22:21:32 GMT",
-          "RefreshToken": "********"
+          "Expires": "Tue, 01 Dec 2020 16:04:38 GMT"
         }
       }
     ],
     "tables": [
+      {
+        "name": "Chapter",
+        "columns": [
+          {
+            "name": "ChapterKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "ChapterKey"
+          },
+          {
+            "name": "Chapter_Code",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Chapter_Code"
+          },
+          {
+            "name": "Primary Chapter",
+            "dataType": "string",
+            "sourceColumn": "Chapter_Minor"
+          },
+          {
+            "name": "Chapter_Major",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Chapter_Major"
+          },
+          {
+            "name": "Chapter Desc",
+            "dataType": "string",
+            "sourceColumn": "Description"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          },
+          {
+            "type": "calculated",
+            "name": "ChapterNotMailFlag",
+            "dataType": "int64",
+            "isDataTypeInferred": true
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimChapter = Source{[Schema=\"dbo\",Item=\"vw_dimChapter\"]}[Data]",
+                "in",
+                "    dbo_vw_dimChapter"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Paid Thru Date",
+        "columns": [
+          {
+            "name": "Date_Key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Date_Key"
+          },
+          {
+            "name": "date",
+            "dataType": "dateTime",
+            "sourceColumn": "date"
+          },
+          {
+            "name": "Day",
+            "dataType": "int64",
+            "sourceColumn": "Day"
+          },
+          {
+            "name": "FiscalMonth",
+            "dataType": "int64",
+            "sourceColumn": "FiscalMonth"
+          },
+          {
+            "name": "FiscalQuarter",
+            "dataType": "int64",
+            "sourceColumn": "FiscalQuarter"
+          },
+          {
+            "name": "FiscalYear",
+            "dataType": "int64",
+            "sourceColumn": "FiscalYear"
+          },
+          {
+            "name": "CalendarMonth",
+            "dataType": "int64",
+            "sourceColumn": "CalendarMonth"
+          },
+          {
+            "name": "CalendarQuarter",
+            "dataType": "int64",
+            "sourceColumn": "CalendarQuarter"
+          },
+          {
+            "name": "CalendarYear",
+            "dataType": "int64",
+            "sourceColumn": "CalendarYear"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "type": "calculated",
+            "name": "PaidThruFlag",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "expression": "if('Paid Thru Date'[date]>=TODAY(), 1,0)"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimDate_PaidThru = Source{[Schema=\"dbo\",Item=\"vw_dimDate_PaidThru\"]}[Data]",
+                "in",
+                "    dbo_vw_dimDate_PaidThru"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Member",
+        "columns": [
+          {
+            "name": "MemberIDKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "MemberIDKey"
+          },
+          {
+            "name": "Parent",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Parent"
+          },
+          {
+            "name": "Member_ID",
+            "dataType": "string",
+            "sourceColumn": "Member_ID"
+          },
+          {
+            "name": "First_Name",
+            "dataType": "string",
+            "sourceColumn": "First_Name"
+          },
+          {
+            "name": "Middle_Name",
+            "dataType": "string",
+            "sourceColumn": "Middle_Name"
+          },
+          {
+            "name": "Last_Name",
+            "dataType": "string",
+            "sourceColumn": "Last_Name"
+          },
+          {
+            "name": "Full_Name",
+            "dataType": "string",
+            "sourceColumn": "Full_Name"
+          },
+          {
+            "name": "Email",
+            "dataType": "string",
+            "sourceColumn": "Email"
+          },
+          {
+            "name": "Home_Phone",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Home_Phone"
+          },
+          {
+            "name": "Mobile_Phone",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Mobile_Phone"
+          },
+          {
+            "name": "Work_Phone",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Work_Phone"
+          },
+          {
+            "name": "Designation",
+            "dataType": "string",
+            "sourceColumn": "Designation"
+          },
+          {
+            "name": "Functional_Title",
+            "dataType": "string",
+            "sourceColumn": "Functional_Title"
+          },
+          {
+            "name": "Birth_Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Birth_Date"
+          },
+          {
+            "name": "JoinDate",
+            "dataType": "dateTime",
+            "sourceColumn": "JoinDate"
+          },
+          {
+            "name": "Cohort",
+            "dataType": "string",
+            "sourceColumn": "Cohort"
+          },
+          {
+            "name": "Merged_Date",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "Merged_Date"
+          },
+          {
+            "name": "Cohortquarter",
+            "dataType": "string",
+            "sourceColumn": "Cohortquarter"
+          },
+          {
+            "name": "Isactive",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "Isactive"
+          },
+          {
+            "name": "AICP_START",
+            "dataType": "dateTime",
+            "sourceColumn": "AICP_START"
+          },
+          {
+            "type": "calculated",
+            "name": "JoinDateFlag",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "expression": "IF('Member'[JoinDate]>TODAY(),1,0)"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          },
+          {
+            "name": "Cohort_MemberType",
+            "dataType": "string",
+            "sourceColumn": "Cohort_MemberType"
+          },
+          {
+            "name": "CO_ID",
+            "dataType": "string",
+            "sourceColumn": "CO_ID"
+          },
+          {
+            "name": "Date_Added",
+            "dataType": "dateTime",
+            "sourceColumn": "Date_Added"
+          },
+          {
+            "type": "calculated",
+            "name": "_Has_Duplicated_Email",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "expression": [
+              " IF(",
+              "          CALCULATE(",
+              "                 COUNTA('Member'[Email]),",
+              "                 FILTER('Member', 'Member'[Email] = EARLIEST('Member'[Email]) && SEARCH(\"@\", EARLIEST('Member'[Email]),1,0) <> 0 && 'Member'[Isactive]=TRUE )",
+              "           )>1, ",
+              "           1,",
+              "           0",
+              "     )",
+              ""
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimMember = Source{[Schema=\"dbo\",Item=\"vw_dimMember\"]}[Data]",
+                "in",
+                "    dbo_vw_dimMember"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "_JoinDateNull",
+            "expression": "CALCULATE(COUNTROWS('Member'), 'Member'[JoinDate] = BLANK())",
+            "formatString": "#,0"
+          },
+          {
+            "name": "_JoinDateGreaterThanToday",
+            "expression": " COUNTROWS(FILTER('Member',NOT(ISBLANK('Member'[JoinDate]))&&'Member'[JoinDate]>TODAY()))",
+            "formatString": "#,0"
+          },
+          {
+            "name": "_NullEmail",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "FILTER('Member','Member'[Email]=BLANK()||'Member'[Email]=\"UNMAPPED\"),",
+              "FILTER('Status','Status'[Status]=\"A\"),",
+              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
+              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()))",
+              ""
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "_FuncTitleNull",
+            "expression": [
+              " CALCULATE(COUNT('Member'[Member_ID]),",
+              "FILTER('Member','Member'[Functional_Title]=BLANK() || 'Member'[Functional_Title]=\"Unmapped\"),",
+              "FILTER('Status','Status'[Status]=\"A\"),",
+              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
+              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()))"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "_DateAddedNull",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "FILTER('Status','Status'[Status]=\"A\"),",
+              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
+              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
+              "FILTER('Member','Member'[Date_Added]=BLANK()))"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "_GPBMMembStatus",
+            "expression": [
+              " CALCULATE(COUNT('Member'[Member_ID]), ",
+              "FILTER('Member','Member'[CO_ID]=BLANK()), ",
+              "FILTER('Member Type', 'Member Type'[Member Type] = \"GPBM\"),",
+              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
+              "FILTER('Status','Status'[Status]=\"A\"),",
+              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()))"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "_BlankChapter",
+            "expression": [
+              "",
+              "CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "FILTER('Status','Status'[Status]=\"A\"),",
+              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
+              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
+              "FILTER(Chapter,Chapter[Primary Chapter]=BLANK()||Chapter[Primary Chapter]=\"UNMAPPED\"),",
+              "FILTER('Name','Name'[COUNTRY]=\"UNITED STATES\"))"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "_XMEM AND NOM W/PT>=Current Date",
+            "expression": [
+              "",
+              "CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "FILTER('Status','Status'[Status]=\"A\"),",
+              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
+              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
+              "FILTER('Member Type','Member Type'[Member Type]=\"XMEM\"||'Member Type'[Member Type]=\"NOM\"))"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "_CHO Null Category",
+            "expression": [
+              "",
+              "CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "FILTER('Status','Status'[Status]=\"A\"),",
+              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
+              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
+              "FILTER('Member Type','Member Type'[Member Type]=\"CHO\"))"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "_Null Join Date",
+            "expression": [
+              "CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "FILTER('Status','Status'[Status]=\"A\"),",
+              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
+              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
+              "FILTER('Member','Member'[JoinDate]=BLANK()))"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "_JOINDATE>TODAY",
+            "expression": [
+              "CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "FILTER('Status','Status'[Status]=\"A\"),",
+              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
+              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
+              "FILTER('Member','Member'[JoinDateFlag]=1))"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "_DupeEmaill",
+            "expression": [
+              " Format(CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "FILTER('Member','Member'[_Has_Duplicated_Email]=1),",
+              "FILTER('Status','Status'[Status]=\"A\"),",
+              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
+              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY())),\"#,0\")"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Status",
+        "columns": [
+          {
+            "name": "StatusKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "StatusKey"
+          },
+          {
+            "name": "Status",
+            "dataType": "string",
+            "sourceColumn": "Status"
+          },
+          {
+            "name": "Gender",
+            "dataType": "string",
+            "sourceColumn": "Gender"
+          },
+          {
+            "name": "Category",
+            "dataType": "string",
+            "sourceColumn": "Category"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          },
+          {
+            "type": "calculated",
+            "name": "Gender Desc",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": [
+              "IF('Status'[Gender]=\"M\",\"Male\",IF('Status'[Gender]=\"F\",\"Female\",IF('Status'[Gender]=BLANK(),\"Unmapped\",\"Prefer to self-describe",
+              "\")))"
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimStatus = Source{[Schema=\"dbo\",Item=\"vw_dimStatus\"]}[Data]",
+                "in",
+                "    dbo_vw_dimStatus"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "_StatusNull",
+            "expression": " CALCULATE( COUNTROWS('Status'), 'Status'[Status]= BLANK())"
+          },
+          {
+            "name": "_NullCategory",
+            "expression": " CALCULATE(COUNTROWS('Status'), 'Status'[Category]=BLANK())"
+          }
+        ]
+      },
+      {
+        "name": "Max Action Status",
+        "columns": [
+          {
+            "name": "MemberStatusKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "MemberStatusKey"
+          },
+          {
+            "name": "Member_Status",
+            "dataType": "string",
+            "sourceColumn": "Member_Status"
+          },
+          {
+            "name": "Description",
+            "dataType": "string",
+            "sourceColumn": "Description"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          },
+          {
+            "name": "Complimentary",
+            "dataType": "boolean",
+            "sourceColumn": "Complimentary"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimMemberStatus = Source{[Schema=\"dbo\",Item=\"vw_dimMemberStatus\"]}[Data]",
+                "in",
+                "    dbo_vw_dimMemberStatus"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "_Max Action Status Nul",
+            "expression": [
+              "",
+              "CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "FILTER('Status','Status'[Status]=\"A\"),",
+              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
+              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
+              "FILTER('Max Action Status','Max Action Status'[Member_Status]=BLANK()))"
+            ],
+            "formatString": "#,0"
+          }
+        ]
+      },
+      {
+        "name": "Ethnicity_Origin",
+        "columns": [
+          {
+            "name": "RaceIDKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "RaceIDKey"
+          },
+          {
+            "name": "RaceID",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "RaceID"
+          },
+          {
+            "name": "Ethnicity - Detailed",
+            "dataType": "string",
+            "sourceColumn": "Ethnicity"
+          },
+          {
+            "name": "Ethnicity - Simple",
+            "dataType": "string",
+            "sourceColumn": "Custom_Rollup"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          },
+          {
+            "name": "Origin",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Origin"
+          },
+          {
+            "name": "Origin - Detailed",
+            "dataType": "string",
+            "sourceColumn": "OriginDescription"
+          },
+          {
+            "type": "calculated",
+            "name": "Origin - Simple",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": [
+              "   IF(Ethnicity_Origin[Origin - Detailed]=\"Not Spanish, Hispanic, Latino\",\"Not Spanish, Hispanic, Latino\",",
+              "    IF(Ethnicity_Origin[Origin - Detailed]=\"Mexican, Mexican American, Chicano\", \"Spanish, Hispanic, Latino\",     IF(Ethnicity_Origin[Origin - Detailed]=\"Other Spanish, Hispanic, Latino (please specify)\",\"Spanish, Hispanic, Latino\",",
+              "    IF(Ethnicity_Origin[Origin - Detailed]=\"Puerto Rican\",\"Spanish, Hispanic, Latino\",IF(Ethnicity_Origin[Origin - Detailed]=\"Cuban\",\"Spanish, Hispanic, Latino\",\"Unmapped\")))))"
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimRace = Source{[Schema=\"dbo\",Item=\"vw_dimRace\"]}[Data]",
+                "in",
+                "    dbo_vw_dimRace"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "_RaceNull",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]), ",
+              "FILTER(Ethnicity_Origin,Ethnicity_Origin[Ethnicity - Detailed]=\"Blank\"||Ethnicity_Origin[Ethnicity - Detailed]=\"UNMAPPED\"),",
+              "FILTER('Status','Status'[Status]=\"A\"),",
+              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
+              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()))"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "_OriginNull",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "FILTER('Status','Status'[Status]=\"A\"),",
+              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
+              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
+              "FILTER(Ethnicity_Origin,Ethnicity_Origin[Origin - Simple]=BLANK()||Ethnicity_Origin[Origin - Simple]=\"UNMAPPED\"",
+              "||Ethnicity_Origin[Ethnicity - Simple]=\"Blank\"))"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "_ Unmapped Ethnicity Detailed",
+            "expression": [
+              "",
+              "CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "FILTER('Status','Status'[Status]=\"A\"),",
+              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
+              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
+              "FILTER(Ethnicity_Origin,Ethnicity_Origin[Ethnicity - Detailed]=\"Unmapped\"",
+              "|| Ethnicity_Origin[Ethnicity - Detailed]=\"Blank\"))"
+            ],
+            "formatString": "#,0"
+          }
+        ]
+      },
+      {
+        "name": "Salary",
+        "columns": [
+          {
+            "name": "SalaryIDKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "SalaryIDKey"
+          },
+          {
+            "name": "SalaryID",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "SalaryID"
+          },
+          {
+            "name": "Description",
+            "dataType": "string",
+            "sourceColumn": "Description"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimSalary = Source{[Schema=\"dbo\",Item=\"vw_dimSalary\"]}[Data]",
+                "in",
+                "    dbo_vw_dimSalary"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Member Type",
+        "columns": [
+          {
+            "name": "MemberTypeIDKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "MemberTypeIDKey"
+          },
+          {
+            "name": "Member Type",
+            "dataType": "string",
+            "sourceColumn": "Member_Type"
+          },
+          {
+            "name": "Member Type Desc",
+            "dataType": "string",
+            "sourceColumn": "Description"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          },
+          {
+            "name": "Member_Record",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "Member_Record"
+          },
+          {
+            "name": "Company_Record",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "Company_Record"
+          },
+          {
+            "name": "Dues_Code_1",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Dues_Code_1"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimMemberType = Source{[Schema=\"dbo\",Item=\"vw_dimMemberType\"]}[Data]",
+                "in",
+                "    dbo_vw_dimMemberType"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Product",
+        "columns": [
+          {
+            "name": "ProductCodeKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "ProductCodeKey"
+          },
+          {
+            "name": "ParentID",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "ParentID"
+          },
+          {
+            "name": "Product_Code",
+            "dataType": "string",
+            "sourceColumn": "Product_Code"
+          },
+          {
+            "name": "Product_Major",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Product_Major"
+          },
+          {
+            "name": "Product_Minor",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Product_Minor"
+          },
+          {
+            "name": "Title",
+            "dataType": "string",
+            "sourceColumn": "Title"
+          },
+          {
+            "name": "Description",
+            "dataType": "string",
+            "sourceColumn": "Description"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          },
+          {
+            "name": "Prod_Type",
+            "dataType": "string",
+            "sourceColumn": "Prod_Type"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimProductCode = Source{[Schema=\"dbo\",Item=\"vw_dimProductCode\"]}[Data]",
+                "in",
+                "    dbo_vw_dimProductCode"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Product Type",
+        "columns": [
+          {
+            "name": "ProductTypeKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "ProductTypeKey"
+          },
+          {
+            "name": "ParentID",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "ParentID"
+          },
+          {
+            "name": "Product_Type",
+            "dataType": "string",
+            "sourceColumn": "Product_Type"
+          },
+          {
+            "name": "Description",
+            "dataType": "string",
+            "sourceColumn": "Description"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimProductType = Source{[Schema=\"dbo\",Item=\"vw_dimProductType\"]}[Data]",
+                "in",
+                "    dbo_vw_dimProductType"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Home Address",
+        "columns": [
+          {
+            "name": "Address_Key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Address_Key"
+          },
+          {
+            "name": "Address_Num",
+            "dataType": "int64",
+            "sourceColumn": "Address_Num"
+          },
+          {
+            "name": "Purpose",
+            "dataType": "string",
+            "sourceColumn": "Purpose"
+          },
+          {
+            "name": "Company",
+            "dataType": "string",
+            "sourceColumn": "Company"
+          },
+          {
+            "name": "FullAddress",
+            "dataType": "string",
+            "sourceColumn": "FullAddress"
+          },
+          {
+            "name": "Street",
+            "dataType": "string",
+            "sourceColumn": "Street"
+          },
+          {
+            "name": "City",
+            "dataType": "string",
+            "sourceColumn": "City"
+          },
+          {
+            "name": "State",
+            "dataType": "string",
+            "sourceColumn": "State"
+          },
+          {
+            "name": "Country",
+            "dataType": "string",
+            "sourceColumn": "Country"
+          },
+          {
+            "name": "Zip",
+            "dataType": "string",
+            "sourceColumn": "Zip"
+          },
+          {
+            "name": "County",
+            "dataType": "string",
+            "sourceColumn": "County"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimAddress = Source{[Schema=\"dbo\",Item=\"vw_dimAddress\"]}[Data]",
+                "in",
+                "    dbo_vw_dimAddress"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "_Home Address >1",
+            "expression": [
+              "CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "FILTER('Status','Status'[Status]=\"A\"),",
+              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
+              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
+              "FILTER('Home Address',[_Address Num Count (Home)]>1))",
+              ""
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "_Address Num Count (Home)",
+            "expression": [
+              "COUNT('Home Address'[Address_Num])",
+              ""
+            ],
+            "formatString": "#,0"
+          }
+        ]
+      },
+      {
+        "name": "Work Address",
+        "columns": [
+          {
+            "name": "Address_Key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Address_Key"
+          },
+          {
+            "name": "Address_Num",
+            "dataType": "int64",
+            "sourceColumn": "Address_Num"
+          },
+          {
+            "name": "Purpose",
+            "dataType": "string",
+            "sourceColumn": "Purpose"
+          },
+          {
+            "name": "Company",
+            "dataType": "string",
+            "sourceColumn": "Company"
+          },
+          {
+            "name": "FullAddress",
+            "dataType": "string",
+            "sourceColumn": "FullAddress"
+          },
+          {
+            "name": "Street",
+            "dataType": "string",
+            "sourceColumn": "Street"
+          },
+          {
+            "name": "City",
+            "dataType": "string",
+            "sourceColumn": "City"
+          },
+          {
+            "name": "State",
+            "dataType": "string",
+            "sourceColumn": "State"
+          },
+          {
+            "name": "Country",
+            "dataType": "string",
+            "sourceColumn": "Country"
+          },
+          {
+            "name": "Zip",
+            "dataType": "string",
+            "sourceColumn": "Zip"
+          },
+          {
+            "name": "County",
+            "dataType": "string",
+            "sourceColumn": "County"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimAddress = Source{[Schema=\"dbo\",Item=\"vw_dimAddress\"]}[Data]",
+                "in",
+                "    dbo_vw_dimAddress"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "_ Address Num Count (Work)",
+            "expression": "COUNT('Work Address'[Address_Num])",
+            "formatString": "#,0"
+          },
+          {
+            "name": "_Work Address >1",
+            "expression": [
+              "CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "FILTER('Status','Status'[Status]=\"A\"),",
+              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
+              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
+              "FILTER('Work Address',[_ Address Num Count (Work)]>1))"
+            ],
+            "formatString": "#,0"
+          }
+        ]
+      },
       {
         "name": "FactMember_IS",
         "isHidden": true,
@@ -524,15 +1897,6 @@
             "formatString": "#,0"
           },
           {
-            "name": "_DegreeDate>CurrentDate",
-            "expression": [
-              "CALCULATE(DISTINCTCOUNT(Student[ID]),",
-              "Student[GradYearLimit]=1",
-              ")"
-            ],
-            "formatString": "#,0"
-          },
-          {
             "name": "_DegreeDate<CurrentDate",
             "expression": [
               "CALCULATE(DISTINCTCOUNT(Student[ID]),",
@@ -545,6 +1909,15 @@
             "expression": [
               "CALCULATE(DISTINCTCOUNT(Student[ID]),",
               "Student[Degree_Date]=BLANK())"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "_DegreeDate>CurrentDate",
+            "expression": [
+              "CALCULATE(DISTINCTCOUNT(Student[ID]),",
+              "Student[GradYearLimit]=1",
+              ")"
             ],
             "formatString": "#,0"
           }
@@ -1496,1506 +2869,131 @@
             }
           }
         ]
-      },
-      {
-        "name": "Chapter",
-        "columns": [
-          {
-            "name": "ChapterKey",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "ChapterKey"
-          },
-          {
-            "name": "Chapter_Code",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "Chapter_Code"
-          },
-          {
-            "name": "Primary Chapter",
-            "dataType": "string",
-            "sourceColumn": "Chapter_Minor"
-          },
-          {
-            "name": "Chapter_Major",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "Chapter_Major"
-          },
-          {
-            "name": "Chapter Desc",
-            "dataType": "string",
-            "sourceColumn": "Description"
-          },
-          {
-            "name": "LastUpdatedBy",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedBy"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "StartDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "StartDate"
-          },
-          {
-            "name": "EndDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "EndDate"
-          },
-          {
-            "type": "calculated",
-            "name": "ChapterNotMailFlag",
-            "dataType": "int64",
-            "isDataTypeInferred": true
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_dimChapter = Source{[Schema=\"dbo\",Item=\"vw_dimChapter\"]}[Data]",
-                "in",
-                "    dbo_vw_dimChapter"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "Paid Thru Date",
-        "columns": [
-          {
-            "name": "Date_Key",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "Date_Key"
-          },
-          {
-            "name": "date",
-            "dataType": "dateTime",
-            "sourceColumn": "date"
-          },
-          {
-            "name": "Day",
-            "dataType": "int64",
-            "sourceColumn": "Day"
-          },
-          {
-            "name": "FiscalMonth",
-            "dataType": "int64",
-            "sourceColumn": "FiscalMonth"
-          },
-          {
-            "name": "FiscalQuarter",
-            "dataType": "int64",
-            "sourceColumn": "FiscalQuarter"
-          },
-          {
-            "name": "FiscalYear",
-            "dataType": "int64",
-            "sourceColumn": "FiscalYear"
-          },
-          {
-            "name": "CalendarMonth",
-            "dataType": "int64",
-            "sourceColumn": "CalendarMonth"
-          },
-          {
-            "name": "CalendarQuarter",
-            "dataType": "int64",
-            "sourceColumn": "CalendarQuarter"
-          },
-          {
-            "name": "CalendarYear",
-            "dataType": "int64",
-            "sourceColumn": "CalendarYear"
-          },
-          {
-            "name": "LastUpdatedBy",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedBy"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "type": "calculated",
-            "name": "PaidThruFlag",
-            "dataType": "int64",
-            "isDataTypeInferred": true,
-            "expression": "if('Paid Thru Date'[date]>=TODAY(), 1,0)"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_dimDate_PaidThru = Source{[Schema=\"dbo\",Item=\"vw_dimDate_PaidThru\"]}[Data]",
-                "in",
-                "    dbo_vw_dimDate_PaidThru"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "Member",
-        "columns": [
-          {
-            "name": "MemberIDKey",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "MemberIDKey"
-          },
-          {
-            "name": "Parent",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "Parent"
-          },
-          {
-            "name": "Member_ID",
-            "dataType": "string",
-            "sourceColumn": "Member_ID"
-          },
-          {
-            "name": "First_Name",
-            "dataType": "string",
-            "sourceColumn": "First_Name"
-          },
-          {
-            "name": "Middle_Name",
-            "dataType": "string",
-            "sourceColumn": "Middle_Name"
-          },
-          {
-            "name": "Last_Name",
-            "dataType": "string",
-            "sourceColumn": "Last_Name"
-          },
-          {
-            "name": "Full_Name",
-            "dataType": "string",
-            "sourceColumn": "Full_Name"
-          },
-          {
-            "name": "Email",
-            "dataType": "string",
-            "sourceColumn": "Email"
-          },
-          {
-            "name": "Home_Phone",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "Home_Phone"
-          },
-          {
-            "name": "Mobile_Phone",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "Mobile_Phone"
-          },
-          {
-            "name": "Work_Phone",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "Work_Phone"
-          },
-          {
-            "name": "Designation",
-            "dataType": "string",
-            "sourceColumn": "Designation"
-          },
-          {
-            "name": "Functional_Title",
-            "dataType": "string",
-            "sourceColumn": "Functional_Title"
-          },
-          {
-            "name": "Birth_Date",
-            "dataType": "dateTime",
-            "sourceColumn": "Birth_Date"
-          },
-          {
-            "name": "JoinDate",
-            "dataType": "dateTime",
-            "sourceColumn": "JoinDate"
-          },
-          {
-            "name": "Cohort",
-            "dataType": "string",
-            "sourceColumn": "Cohort"
-          },
-          {
-            "name": "Merged_Date",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "Merged_Date"
-          },
-          {
-            "name": "Cohortquarter",
-            "dataType": "string",
-            "sourceColumn": "Cohortquarter"
-          },
-          {
-            "name": "Isactive",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "Isactive"
-          },
-          {
-            "name": "AICP_START",
-            "dataType": "dateTime",
-            "sourceColumn": "AICP_START"
-          },
-          {
-            "type": "calculated",
-            "name": "JoinDateFlag",
-            "dataType": "int64",
-            "isDataTypeInferred": true,
-            "expression": "IF('Member'[JoinDate]>TODAY(),1,0)"
-          },
-          {
-            "name": "LastUpdatedBy",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedBy"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "StartDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "StartDate"
-          },
-          {
-            "name": "EndDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "EndDate"
-          },
-          {
-            "name": "Cohort_MemberType",
-            "dataType": "string",
-            "sourceColumn": "Cohort_MemberType"
-          },
-          {
-            "name": "CO_ID",
-            "dataType": "string",
-            "sourceColumn": "CO_ID"
-          },
-          {
-            "name": "Date_Added",
-            "dataType": "dateTime",
-            "sourceColumn": "Date_Added"
-          },
-          {
-            "type": "calculated",
-            "name": "_Has_Duplicated_Email",
-            "dataType": "int64",
-            "isDataTypeInferred": true,
-            "expression": [
-              " IF(",
-              "          CALCULATE(",
-              "                 COUNTA('Member'[Email]),",
-              "                 FILTER('Member', 'Member'[Email] = EARLIEST('Member'[Email]) && SEARCH(\"@\", EARLIEST('Member'[Email]),1,0) <> 0 && 'Member'[Isactive]=TRUE )",
-              "           )>1, ",
-              "           1,",
-              "           0",
-              "     )",
-              ""
-            ]
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_dimMember = Source{[Schema=\"dbo\",Item=\"vw_dimMember\"]}[Data]",
-                "in",
-                "    dbo_vw_dimMember"
-              ]
-            }
-          }
-        ],
-        "measures": [
-          {
-            "name": "_JoinDateNull",
-            "expression": "CALCULATE(COUNTROWS('Member'), 'Member'[JoinDate] = BLANK())",
-            "formatString": "#,0"
-          },
-          {
-            "name": "_JoinDateGreaterThanToday",
-            "expression": " COUNTROWS(FILTER('Member',NOT(ISBLANK('Member'[JoinDate]))&&'Member'[JoinDate]>TODAY()))",
-            "formatString": "#,0"
-          },
-          {
-            "name": "_FuncTitleNull",
-            "expression": [
-              " CALCULATE(COUNT('Member'[Member_ID]),",
-              "FILTER('Member','Member'[Functional_Title]=BLANK() || 'Member'[Functional_Title]=\"Unmapped\"),",
-              "FILTER('Status','Status'[Status]=\"A\"),",
-              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
-              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()))"
-            ],
-            "formatString": "#,0"
-          },
-          {
-            "name": "_DateAddedNull",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
-              "FILTER('Status','Status'[Status]=\"A\"),",
-              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
-              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
-              "FILTER('Member','Member'[Date_Added]=BLANK()))"
-            ],
-            "formatString": "#,0"
-          },
-          {
-            "name": "_GPBMMembStatus",
-            "expression": [
-              " CALCULATE(COUNT('Member'[Member_ID]), ",
-              "FILTER('Member','Member'[CO_ID]=BLANK()), ",
-              "FILTER('Member Type', 'Member Type'[Member Type] = \"GPBM\"),",
-              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
-              "FILTER('Status','Status'[Status]=\"A\"),",
-              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()))"
-            ],
-            "formatString": "#,0"
-          },
-          {
-            "name": "_BlankChapter",
-            "expression": [
-              "",
-              "CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
-              "FILTER('Status','Status'[Status]=\"A\"),",
-              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
-              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
-              "FILTER(Chapter,Chapter[Primary Chapter]=BLANK()||Chapter[Primary Chapter]=\"UNMAPPED\"),",
-              "FILTER('Name','Name'[COUNTRY]=\"UNITED STATES\"))"
-            ],
-            "formatString": "#,0"
-          },
-          {
-            "name": "_XMEM AND NOM W/PT>=Current Date",
-            "expression": [
-              "",
-              "CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
-              "FILTER('Status','Status'[Status]=\"A\"),",
-              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
-              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
-              "FILTER('Member Type','Member Type'[Member Type]=\"XMEM\"||'Member Type'[Member Type]=\"NOM\"))"
-            ],
-            "formatString": "#,0"
-          },
-          {
-            "name": "_CHO Null Category",
-            "expression": [
-              "",
-              "CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
-              "FILTER('Status','Status'[Status]=\"A\"),",
-              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
-              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
-              "FILTER('Member Type','Member Type'[Member Type]=\"CHO\"))"
-            ],
-            "formatString": "#,0"
-          },
-          {
-            "name": "_Null Join Date",
-            "expression": [
-              "CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
-              "FILTER('Status','Status'[Status]=\"A\"),",
-              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
-              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
-              "FILTER('Member','Member'[JoinDate]=BLANK()))"
-            ],
-            "formatString": "#,0"
-          },
-          {
-            "name": "_JOINDATE>TODAY",
-            "expression": [
-              "CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
-              "FILTER('Status','Status'[Status]=\"A\"),",
-              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
-              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
-              "FILTER('Member','Member'[JoinDateFlag]=1))"
-            ],
-            "formatString": "#,0"
-          },
-          {
-            "name": "_NullEmail",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
-              "FILTER('Member','Member'[Email]=BLANK()||'Member'[Email]=\"UNMAPPED\"),",
-              "FILTER('Status','Status'[Status]=\"A\"),",
-              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
-              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()))",
-              ""
-            ],
-            "formatString": "#,0"
-          },
-          {
-            "name": "_DupeEmaill",
-            "expression": [
-              " Format(CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
-              "FILTER('Member','Member'[_Has_Duplicated_Email]=1),",
-              "FILTER('Status','Status'[Status]=\"A\"),",
-              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
-              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY())),\"#,0\")"
-            ]
-          }
-        ]
-      },
-      {
-        "name": "Status",
-        "columns": [
-          {
-            "name": "StatusKey",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "StatusKey"
-          },
-          {
-            "name": "Status",
-            "dataType": "string",
-            "sourceColumn": "Status"
-          },
-          {
-            "name": "Gender",
-            "dataType": "string",
-            "sourceColumn": "Gender"
-          },
-          {
-            "name": "Category",
-            "dataType": "string",
-            "sourceColumn": "Category"
-          },
-          {
-            "name": "LastUpdatedBy",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedBy"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "StartDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "StartDate"
-          },
-          {
-            "name": "EndDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "EndDate"
-          },
-          {
-            "type": "calculated",
-            "name": "Gender Desc",
-            "dataType": "string",
-            "isDataTypeInferred": true,
-            "expression": [
-              "IF('Status'[Gender]=\"M\",\"Male\",IF('Status'[Gender]=\"F\",\"Female\",IF('Status'[Gender]=BLANK(),\"Unmapped\",\"Prefer to self-describe",
-              "\")))"
-            ]
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_dimStatus = Source{[Schema=\"dbo\",Item=\"vw_dimStatus\"]}[Data]",
-                "in",
-                "    dbo_vw_dimStatus"
-              ]
-            }
-          }
-        ],
-        "measures": [
-          {
-            "name": "_StatusNull",
-            "expression": " CALCULATE( COUNTROWS('Status'), 'Status'[Status]= BLANK())"
-          },
-          {
-            "name": "_NullCategory",
-            "expression": " CALCULATE(COUNTROWS('Status'), 'Status'[Category]=BLANK())"
-          }
-        ]
-      },
-      {
-        "name": "Max Action Status",
-        "columns": [
-          {
-            "name": "MemberStatusKey",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "MemberStatusKey"
-          },
-          {
-            "name": "Member_Status",
-            "dataType": "string",
-            "sourceColumn": "Member_Status"
-          },
-          {
-            "name": "Description",
-            "dataType": "string",
-            "sourceColumn": "Description"
-          },
-          {
-            "name": "LastUpdatedBy",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedBy"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "StartDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "StartDate"
-          },
-          {
-            "name": "EndDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "EndDate"
-          },
-          {
-            "name": "Complimentary",
-            "dataType": "boolean",
-            "sourceColumn": "Complimentary"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_dimMemberStatus = Source{[Schema=\"dbo\",Item=\"vw_dimMemberStatus\"]}[Data]",
-                "in",
-                "    dbo_vw_dimMemberStatus"
-              ]
-            }
-          }
-        ],
-        "measures": [
-          {
-            "name": "_Max Action Status Nul",
-            "expression": [
-              "",
-              "CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
-              "FILTER('Status','Status'[Status]=\"A\"),",
-              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
-              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
-              "FILTER('Max Action Status','Max Action Status'[Member_Status]=BLANK()))"
-            ],
-            "formatString": "#,0"
-          }
-        ]
-      },
-      {
-        "name": "Ethnicity_Origin",
-        "columns": [
-          {
-            "name": "RaceIDKey",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "RaceIDKey"
-          },
-          {
-            "name": "RaceID",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "RaceID"
-          },
-          {
-            "name": "Ethnicity - Detailed",
-            "dataType": "string",
-            "sourceColumn": "Ethnicity"
-          },
-          {
-            "name": "Ethnicity - Simple",
-            "dataType": "string",
-            "sourceColumn": "Custom_Rollup"
-          },
-          {
-            "name": "LastUpdatedBy",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedBy"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "StartDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "StartDate"
-          },
-          {
-            "name": "EndDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "EndDate"
-          },
-          {
-            "name": "Origin",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "Origin"
-          },
-          {
-            "name": "Origin - Detailed",
-            "dataType": "string",
-            "sourceColumn": "OriginDescription"
-          },
-          {
-            "type": "calculated",
-            "name": "Origin - Simple",
-            "dataType": "string",
-            "isDataTypeInferred": true,
-            "expression": [
-              "   IF(Ethnicity_Origin[Origin - Detailed]=\"Not Spanish, Hispanic, Latino\",\"Not Spanish, Hispanic, Latino\",",
-              "    IF(Ethnicity_Origin[Origin - Detailed]=\"Mexican, Mexican American, Chicano\", \"Spanish, Hispanic, Latino\",     IF(Ethnicity_Origin[Origin - Detailed]=\"Other Spanish, Hispanic, Latino (please specify)\",\"Spanish, Hispanic, Latino\",",
-              "    IF(Ethnicity_Origin[Origin - Detailed]=\"Puerto Rican\",\"Spanish, Hispanic, Latino\",IF(Ethnicity_Origin[Origin - Detailed]=\"Cuban\",\"Spanish, Hispanic, Latino\",\"Unmapped\")))))"
-            ]
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_dimRace = Source{[Schema=\"dbo\",Item=\"vw_dimRace\"]}[Data]",
-                "in",
-                "    dbo_vw_dimRace"
-              ]
-            }
-          }
-        ],
-        "measures": [
-          {
-            "name": "_RaceNull",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]), ",
-              "FILTER(Ethnicity_Origin,Ethnicity_Origin[Ethnicity - Detailed]=\"Blank\"||Ethnicity_Origin[Ethnicity - Detailed]=\"UNMAPPED\"),",
-              "FILTER('Status','Status'[Status]=\"A\"),",
-              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
-              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()))"
-            ],
-            "formatString": "#,0"
-          },
-          {
-            "name": "_OriginNull",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
-              "FILTER('Status','Status'[Status]=\"A\"),",
-              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
-              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
-              "FILTER(Ethnicity_Origin,Ethnicity_Origin[Origin - Simple]=BLANK()||Ethnicity_Origin[Origin - Simple]=\"UNMAPPED\"",
-              "||Ethnicity_Origin[Ethnicity - Simple]=\"Blank\"))"
-            ],
-            "formatString": "#,0"
-          },
-          {
-            "name": "_ Unmapped Ethnicity Detailed",
-            "expression": [
-              "",
-              "CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
-              "FILTER('Status','Status'[Status]=\"A\"),",
-              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
-              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
-              "FILTER(Ethnicity_Origin,Ethnicity_Origin[Ethnicity - Detailed]=\"Unmapped\"",
-              "|| Ethnicity_Origin[Ethnicity - Detailed]=\"Blank\"))"
-            ],
-            "formatString": "#,0"
-          }
-        ]
-      },
-      {
-        "name": "Salary",
-        "columns": [
-          {
-            "name": "SalaryIDKey",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "SalaryIDKey"
-          },
-          {
-            "name": "SalaryID",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "SalaryID"
-          },
-          {
-            "name": "Description",
-            "dataType": "string",
-            "sourceColumn": "Description"
-          },
-          {
-            "name": "LastUpdatedBy",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedBy"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "StartDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "StartDate"
-          },
-          {
-            "name": "EndDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "EndDate"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_dimSalary = Source{[Schema=\"dbo\",Item=\"vw_dimSalary\"]}[Data]",
-                "in",
-                "    dbo_vw_dimSalary"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "Member Type",
-        "columns": [
-          {
-            "name": "MemberTypeIDKey",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "MemberTypeIDKey"
-          },
-          {
-            "name": "Member Type",
-            "dataType": "string",
-            "sourceColumn": "Member_Type"
-          },
-          {
-            "name": "Member Type Desc",
-            "dataType": "string",
-            "sourceColumn": "Description"
-          },
-          {
-            "name": "LastUpdatedBy",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedBy"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "StartDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "StartDate"
-          },
-          {
-            "name": "EndDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "EndDate"
-          },
-          {
-            "name": "Member_Record",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "Member_Record"
-          },
-          {
-            "name": "Company_Record",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "Company_Record"
-          },
-          {
-            "name": "Dues_Code_1",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "Dues_Code_1"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_dimMemberType = Source{[Schema=\"dbo\",Item=\"vw_dimMemberType\"]}[Data]",
-                "in",
-                "    dbo_vw_dimMemberType"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "Product",
-        "columns": [
-          {
-            "name": "ProductCodeKey",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "ProductCodeKey"
-          },
-          {
-            "name": "ParentID",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "ParentID"
-          },
-          {
-            "name": "Product_Code",
-            "dataType": "string",
-            "sourceColumn": "Product_Code"
-          },
-          {
-            "name": "Product_Major",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "Product_Major"
-          },
-          {
-            "name": "Product_Minor",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "Product_Minor"
-          },
-          {
-            "name": "Title",
-            "dataType": "string",
-            "sourceColumn": "Title"
-          },
-          {
-            "name": "Description",
-            "dataType": "string",
-            "sourceColumn": "Description"
-          },
-          {
-            "name": "LastUpdatedBy",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedBy"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "StartDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "StartDate"
-          },
-          {
-            "name": "EndDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "EndDate"
-          },
-          {
-            "name": "Prod_Type",
-            "dataType": "string",
-            "sourceColumn": "Prod_Type"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_dimProductCode = Source{[Schema=\"dbo\",Item=\"vw_dimProductCode\"]}[Data]",
-                "in",
-                "    dbo_vw_dimProductCode"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "Product Type",
-        "columns": [
-          {
-            "name": "ProductTypeKey",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "ProductTypeKey"
-          },
-          {
-            "name": "ParentID",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "ParentID"
-          },
-          {
-            "name": "Product_Type",
-            "dataType": "string",
-            "sourceColumn": "Product_Type"
-          },
-          {
-            "name": "Description",
-            "dataType": "string",
-            "sourceColumn": "Description"
-          },
-          {
-            "name": "LastUpdatedBy",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedBy"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "StartDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "StartDate"
-          },
-          {
-            "name": "EndDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "EndDate"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_dimProductType = Source{[Schema=\"dbo\",Item=\"vw_dimProductType\"]}[Data]",
-                "in",
-                "    dbo_vw_dimProductType"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "Home Address",
-        "columns": [
-          {
-            "name": "Address_Key",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "Address_Key"
-          },
-          {
-            "name": "Address_Num",
-            "dataType": "int64",
-            "sourceColumn": "Address_Num"
-          },
-          {
-            "name": "Purpose",
-            "dataType": "string",
-            "sourceColumn": "Purpose"
-          },
-          {
-            "name": "Company",
-            "dataType": "string",
-            "sourceColumn": "Company"
-          },
-          {
-            "name": "FullAddress",
-            "dataType": "string",
-            "sourceColumn": "FullAddress"
-          },
-          {
-            "name": "Street",
-            "dataType": "string",
-            "sourceColumn": "Street"
-          },
-          {
-            "name": "City",
-            "dataType": "string",
-            "sourceColumn": "City"
-          },
-          {
-            "name": "State",
-            "dataType": "string",
-            "sourceColumn": "State"
-          },
-          {
-            "name": "Country",
-            "dataType": "string",
-            "sourceColumn": "Country"
-          },
-          {
-            "name": "Zip",
-            "dataType": "string",
-            "sourceColumn": "Zip"
-          },
-          {
-            "name": "County",
-            "dataType": "string",
-            "sourceColumn": "County"
-          },
-          {
-            "name": "LastUpdatedBy",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedBy"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "StartDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "StartDate"
-          },
-          {
-            "name": "EndDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "EndDate"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_dimAddress = Source{[Schema=\"dbo\",Item=\"vw_dimAddress\"]}[Data]",
-                "in",
-                "    dbo_vw_dimAddress"
-              ]
-            }
-          }
-        ],
-        "measures": [
-          {
-            "name": "_Home Address >1",
-            "expression": [
-              "CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
-              "FILTER('Status','Status'[Status]=\"A\"),",
-              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
-              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
-              "FILTER('Home Address',[_Address Num Count (Home)]>1))",
-              ""
-            ],
-            "formatString": "#,0"
-          },
-          {
-            "name": "_Address Num Count (Home)",
-            "expression": [
-              "COUNT('Home Address'[Address_Num])",
-              ""
-            ],
-            "formatString": "#,0"
-          }
-        ]
-      },
-      {
-        "name": "Work Address",
-        "columns": [
-          {
-            "name": "Address_Key",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "Address_Key"
-          },
-          {
-            "name": "Address_Num",
-            "dataType": "int64",
-            "sourceColumn": "Address_Num"
-          },
-          {
-            "name": "Purpose",
-            "dataType": "string",
-            "sourceColumn": "Purpose"
-          },
-          {
-            "name": "Company",
-            "dataType": "string",
-            "sourceColumn": "Company"
-          },
-          {
-            "name": "FullAddress",
-            "dataType": "string",
-            "sourceColumn": "FullAddress"
-          },
-          {
-            "name": "Street",
-            "dataType": "string",
-            "sourceColumn": "Street"
-          },
-          {
-            "name": "City",
-            "dataType": "string",
-            "sourceColumn": "City"
-          },
-          {
-            "name": "State",
-            "dataType": "string",
-            "sourceColumn": "State"
-          },
-          {
-            "name": "Country",
-            "dataType": "string",
-            "sourceColumn": "Country"
-          },
-          {
-            "name": "Zip",
-            "dataType": "string",
-            "sourceColumn": "Zip"
-          },
-          {
-            "name": "County",
-            "dataType": "string",
-            "sourceColumn": "County"
-          },
-          {
-            "name": "LastUpdatedBy",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedBy"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "StartDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "StartDate"
-          },
-          {
-            "name": "EndDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "EndDate"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_dimAddress = Source{[Schema=\"dbo\",Item=\"vw_dimAddress\"]}[Data]",
-                "in",
-                "    dbo_vw_dimAddress"
-              ]
-            }
-          }
-        ],
-        "measures": [
-          {
-            "name": "_ Address Num Count (Work)",
-            "expression": "COUNT('Work Address'[Address_Num])",
-            "formatString": "#,0"
-          },
-          {
-            "name": "_Work Address >1",
-            "expression": [
-              "CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
-              "FILTER('Status','Status'[Status]=\"A\"),",
-              "FILTER('Product','Product'[Product_Code]=\"APA\"),",
-              "FILTER('Paid Thru Date','Paid Thru Date'[date]>=TODAY()),",
-              "FILTER('Work Address',[_ Address Num Count (Work)]>1))"
-            ],
-            "formatString": "#,0"
-          }
-        ]
       }
     ],
     "relationships": [
       {
         "name": "18481ea8-e51a-4c86-996b-247ec431b167",
-        "fromTable": "FactMember_IS",
-        "fromColumn": "ChapterKey",
         "toTable": "Chapter",
-        "toColumn": "ChapterKey"
+        "toColumn": "ChapterKey",
+        "fromTable": "FactMember_IS",
+        "fromColumn": "ChapterKey"
       },
       {
         "name": "9764ae75-0201-403e-afe5-3614918d916a",
-        "fromTable": "FactMember_IS",
-        "fromColumn": "MemberStatusKey",
         "toTable": "Max Action Status",
-        "toColumn": "MemberStatusKey"
+        "toColumn": "MemberStatusKey",
+        "fromTable": "FactMember_IS",
+        "fromColumn": "MemberStatusKey"
       },
       {
         "name": "416540b5-6e37-49ab-a957-d0334c6ceda8",
-        "fromTable": "FactMember_IS",
-        "fromColumn": "ProductTypeKey",
         "toTable": "Product Type",
-        "toColumn": "ProductTypeKey"
+        "toColumn": "ProductTypeKey",
+        "fromTable": "FactMember_IS",
+        "fromColumn": "ProductTypeKey"
       },
       {
         "name": "f8b1053f-a297-4f47-85c6-d603dd7ee80b",
-        "fromTable": "FactMember_IS",
-        "fromColumn": "SalaryIDKey",
         "toTable": "Salary",
-        "toColumn": "SalaryIDKey"
+        "toColumn": "SalaryIDKey",
+        "fromTable": "FactMember_IS",
+        "fromColumn": "SalaryIDKey"
       },
       {
         "name": "fa930e63-dd94-4478-a37c-3d5f8ef84055",
-        "fromCardinality": "one",
-        "fromTable": "Name",
         "fromColumn": "memberidkey",
         "toTable": "Member",
         "toColumn": "MemberIDKey",
+        "fromCardinality": "one",
+        "fromTable": "Name",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "b1424fe2-31a8-4139-ae9e-8fd9f0af10f9",
-        "fromTable": "Race",
-        "fromColumn": "raceidkey",
         "toTable": "Ethnicity_Origin",
-        "toColumn": "RaceIDKey"
+        "toColumn": "RaceIDKey",
+        "fromTable": "Race",
+        "fromColumn": "raceidkey"
       },
       {
         "name": "524bb4fd-2ddb-4a16-b37b-84824cd24b53",
-        "fromTable": "FactMember_IS",
-        "fromColumn": "MemberIDKey",
         "toTable": "Member",
         "toColumn": "MemberIDKey",
+        "fromColumn": "MemberIDKey",
+        "fromTable": "FactMember_IS",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "b6d5a75c-5a07-4070-aeba-18c89c74e3ee",
-        "fromTable": "FactMember_IS",
-        "fromColumn": "RaceIDKey",
         "toTable": "Ethnicity_Origin",
         "toColumn": "RaceIDKey",
+        "fromColumn": "RaceIDKey",
+        "fromTable": "FactMember_IS",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "9d2c04cd-0642-4e8b-b823-f8b60f60d2aa",
-        "fromTable": "FactMember_IS",
-        "fromColumn": "MemberTypeIDKey",
         "toTable": "Member Type",
         "toColumn": "MemberTypeIDKey",
+        "fromColumn": "MemberTypeIDKey",
+        "fromTable": "FactMember_IS",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "74dadda1-f6e9-41bb-93d4-024be7d4b043",
-        "fromTable": "FactMember_IS",
-        "fromColumn": "Home_Address_Key",
         "toTable": "Work Address",
         "toColumn": "Address_Key",
+        "fromColumn": "Home_Address_Key",
+        "fromTable": "FactMember_IS",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "848a1e95-f2f2-444b-a7ab-c7626e1f1fac",
-        "fromTable": "FactMember_IS",
-        "fromColumn": "Work_Address_Key",
         "toTable": "Home Address",
         "toColumn": "Address_Key",
+        "fromColumn": "Work_Address_Key",
+        "fromTable": "FactMember_IS",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "f813c9e9-ee2b-4562-9ed0-ddbed0bb20eb",
-        "fromTable": "FactMember_IS",
-        "fromColumn": "address_num",
         "toTable": "Address Preferred",
         "toColumn": "Address_Num",
+        "fromColumn": "address_num",
+        "fromTable": "FactMember_IS",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "10cadbf0-5ce9-4f26-917c-10ef093cd658",
-        "fromTable": "FactMember_IS",
-        "fromColumn": "Paid_Through_Key",
         "toTable": "Paid Thru Date",
         "toColumn": "Date_Key",
+        "fromColumn": "Paid_Through_Key",
+        "fromTable": "FactMember_IS",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "eeea049b-a418-45f6-8ad9-2d02b626a9b5",
-        "fromTable": "FactMember_IS",
-        "fromColumn": "StatusKey",
         "toTable": "Status",
         "toColumn": "StatusKey",
+        "fromColumn": "StatusKey",
+        "fromTable": "FactMember_IS",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "0fba4069-0253-4ff8-89b0-bd703d3dc6b6",
-        "fromTable": "FactMember_IS",
-        "fromColumn": "ProductCodeKey",
         "toTable": "Product",
         "toColumn": "ProductCodeKey",
+        "fromColumn": "ProductCodeKey",
+        "fromTable": "FactMember_IS",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "1555da4f-deca-4c7d-875a-4cefa3d73dab",
-        "fromTable": "Student",
-        "fromColumn": "memberidkey",
         "toTable": "Member",
         "toColumn": "MemberIDKey",
+        "fromColumn": "memberidkey",
+        "fromTable": "Student",
         "crossFilteringBehavior": "bothDirections"
       }
     ],
@@ -3005,33 +3003,27 @@
         "modelPermission": "administrator",
         "members": [
           {
-            "memberName": "rwest@planning.org",
-            "memberId": "rwest@planning.org",
+            "memberName": "msullivan@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "Morgan.Diestler@rsmus.com",
-            "memberId": "Morgan.Diestler@rsmus.com",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "tjohnson@planning.org",
-            "memberId": "tjohnson@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "plowe@planning.org",
-            "memberId": "plowe@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "cmollet@planning.org",
-            "memberId": "cmollet@planning.org",
             "identityProvider": "AzureAD"
           },
           {
-            "memberName": "msullivan@planning.org",
-            "memberId": "msullivan@planning.org",
+            "memberName": "rwest@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "plowe@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "tjohnson@planning.org",
             "identityProvider": "AzureAD"
           }
         ]
@@ -3042,112 +3034,90 @@
         "members": [
           {
             "memberName": "fbraunstein@planning.org",
-            "memberId": "fbraunstein@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "ewilczek@planning.org",
-            "memberId": "ewilczek@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "Sarteaga@planning.org",
-            "memberId": "Sarteaga@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rrewers@planning.org",
-            "memberId": "rrewers@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rhoffman@planning.org",
-            "memberId": "rhoffman@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kgems@planning.org",
-            "memberId": "kgems@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rscherzinger@planning.org",
-            "memberId": "rscherzinger@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "epasi@planning.org",
-            "memberId": "epasi@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "CParra@planning.org",
-            "memberId": "CParra@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rzack@planning.org",
-            "memberId": "rzack@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "chinshaw@planning.org",
-            "memberId": "chinshaw@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mmarrero@planning.org",
-            "memberId": "mmarrero@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "JJordan@planning.org",
-            "memberId": "JJordan@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "ajimenez@planning.org",
-            "memberId": "ajimenez@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "LJorgenson@planning.org",
-            "memberId": "LJorgenson@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kjacques@planning.org",
-            "memberId": "kjacques@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "bdonegan@planning.org",
-            "memberId": "bdonegan@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "anavarro@planning.org",
-            "memberId": "anavarro@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "wfrench@planning.org",
-            "memberId": "wfrench@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "ynoonoo@planning.org",
-            "memberId": "ynoonoo@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "usaenz@planning.org",
-            "memberId": "usaenz@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mkraus@planning.org",
-            "memberId": "mkraus@planning.org",
             "identityProvider": "AzureAD"
           }
         ],
@@ -3214,82 +3184,66 @@
         "members": [
           {
             "memberName": "mferguson@planning.org",
-            "memberId": "mferguson@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "Akrakos@planning.org",
-            "memberId": "Akrakos@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "jrolla@planning.org",
-            "memberId": "jrolla@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "RJassen@planning.org",
-            "memberId": "RJassen@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "balbrecht@planning.org",
-            "memberId": "balbrecht@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "amoore@planning.org",
-            "memberId": "amoore@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "bmissaggia@planning.org",
-            "memberId": "bmissaggia@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mjohnson@planning.org",
-            "memberId": "mjohnson@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kkazmierczak@planning.org",
-            "memberId": "kkazmierczak@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "crahill@planning.org",
-            "memberId": "crahill@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "MWelch@planning.org",
-            "memberId": "MWelch@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kschmidt@planning.org",
-            "memberId": "kschmidt@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "klennon@planning.org",
-            "memberId": "klennon@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mjimenez@planning.org",
-            "memberId": "mjimenez@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "llang@planning.org",
-            "memberId": "llang@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mwalsh@planning.org",
-            "memberId": "mwalsh@planning.org",
             "identityProvider": "AzureAD"
           }
         ]
@@ -3301,6 +3255,5 @@
         "value": "600"
       }
     ]
-  },
-  "id": "SemanticModel"
+  }
 }

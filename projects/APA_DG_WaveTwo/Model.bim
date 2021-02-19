@@ -1,8 +1,9 @@
 {
-  "name": "SemanticModel",
+  "name": "APA_DG_WaveTwo",
   "compatibilityLevel": 1500,
   "model": {
     "culture": "en-US",
+    "discourageImplicitMeasures": true,
     "dataSources": [
       {
         "type": "structured",
@@ -17,266 +18,14 @@
           "query": null
         },
         "credential": {
-          "AuthenticationKind": "UsernamePassword",
+          "AuthenticationKind": "OAuth2",
           "kind": "SQL",
           "path": "apadwprod.database.windows.net;apaprod",
-          "Username": "sqladm",
-          "EncryptConnection": true
+          "Expires": "Fri, 19 Feb 2021 13:19:07 GMT"
         }
       }
     ],
     "tables": [
-      {
-        "name": "Claims Log Status",
-        "columns": [
-          {
-            "name": "LogStatusKey",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "LogStatusKey"
-          },
-          {
-            "name": "Log_Status",
-            "dataType": "string",
-            "sourceColumn": "Log_Status"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "LastUpdatedby",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedby"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_dimClaimLogStatus = Source{[Schema=\"dbo\",Item=\"vw_dimClaimLogStatus\"]}[Data]",
-                "in",
-                "    dbo_vw_dimClaimLogStatus"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "Claims Flags",
-        "columns": [
-          {
-            "name": "FlagKey",
-            "dataType": "int64",
-            "sourceColumn": "FlagKey"
-          },
-          {
-            "name": "Verified",
-            "dataType": "boolean",
-            "sourceColumn": "Verified"
-          },
-          {
-            "name": "Is_Speaker",
-            "dataType": "boolean",
-            "sourceColumn": "Is_Speaker"
-          },
-          {
-            "name": "Is_Author",
-            "dataType": "boolean",
-            "sourceColumn": "Is_Author"
-          },
-          {
-            "name": "Self_Reported",
-            "dataType": "boolean",
-            "sourceColumn": "Self_Reported"
-          },
-          {
-            "name": "Is_CarryOver",
-            "dataType": "boolean",
-            "sourceColumn": "Is_CarryOver"
-          },
-          {
-            "name": "Is_Probono",
-            "dataType": "boolean",
-            "sourceColumn": "Is_Probono"
-          },
-          {
-            "name": "Is_Deleted",
-            "dataType": "boolean",
-            "sourceColumn": "Is_Deleted"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "LastUpdatedby",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedby"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_dimClaimsFlags = Source{[Schema=\"dbo\",Item=\"vw_dimClaimsFlags\"]}[Data]",
-                "in",
-                "    dbo_vw_dimClaimsFlags"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "Claims Product",
-        "columns": [
-          {
-            "name": "ClaimsProductKey",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "ClaimsProductKey"
-          },
-          {
-            "name": "ClaimsProduct_Major",
-            "dataType": "string",
-            "sourceColumn": "ClaimsProduct_Major"
-          },
-          {
-            "name": "ClaimsProduct_Minor",
-            "dataType": "string",
-            "sourceColumn": "ClaimsProduct_Minor"
-          },
-          {
-            "name": "ClaimsProduct_Description",
-            "dataType": "string",
-            "sourceColumn": "ClaimsProduct_Description"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "LastUpdatedby",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedby"
-          },
-          {
-            "name": "StartDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "StartDate"
-          },
-          {
-            "name": "EndDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "EndDate"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_dimClaimsProduct = Source{[Schema=\"dbo\",Item=\"vw_dimClaimsProduct\"]}[Data]",
-                "in",
-                "    dbo_vw_dimClaimsProduct"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "CM Period",
-        "columns": [
-          {
-            "name": "CMPeriodKey",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "CMPeriodKey"
-          },
-          {
-            "name": "CM_PeriodCode",
-            "dataType": "string",
-            "sourceColumn": "CM_PeriodCode"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "LastUpdatedby",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedby"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_dimCMPeriod = Source{[Schema=\"dbo\",Item=\"vw_dimCMPeriod\"]}[Data]",
-                "in",
-                "    dbo_vw_dimCMPeriod"
-              ]
-            }
-          }
-        ]
-      },
       {
         "name": "Date",
         "columns": [
@@ -596,6 +345,86 @@
             "dataType": "double",
             "isDataTypeInferred": true,
             "expression": " (DATEDIFF('Member'[Birth_Date],TODAY(),DAY))/365"
+          },
+          {
+            "type": "calculated",
+            "name": "_ActiveLogs",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "expression": [
+              "",
+              "VAR logs = CALCULATE(DISTINCTCOUNT(Claims[log_id]),",
+              " \tFILTER('Claims', 'Claims'[is_current] = True))",
+              " \t",
+              " RETURN",
+              "    IF ( ISBLANK(logs), 0, logs) --returning a zero instead of empty \t"
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "_Is_CurrentAPA",
+            "dataType": "boolean",
+            "isDataTypeInferred": true,
+            "expression": [
+              "IF(",
+              "  \tCALCULATE(COUNTROWS('Fact Claims - StarSchema'),",
+              "     \t\tFILTER('Paid Thru Date','Paid Thru Date'[date] > Now()),",
+              "     \t \tFILTER('Product Code','Product Code'[Product_Code] = \"APA\"),",
+              "      \t\tFILTER('Status', 'Status'[Status] = \"A\")) >0",
+              "      ,True,False)"
+            ],
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
+          },
+          {
+            "type": "calculated",
+            "name": "_YearsAICP",
+            "dataType": "double",
+            "isDataTypeInferred": true,
+            "expression": [
+              "",
+              "VAR AsOfDate = TODAY()",
+              "",
+              "RETURN",
+              "DATEDIFF('Member'[AICP_START], AsOfDate, DAY)/365"
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "_Divisions",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": [
+              " ",
+              "VAR __DISTINCT_VALUES_COUNT = DISTINCTCOUNT('Product Code'[Product_Code])",
+              "VAR __MAX_VALUES_TO_SHOW = 100",
+              "var Logic_=IF(",
+              "\t\t__DISTINCT_VALUES_COUNT > __MAX_VALUES_TO_SHOW,",
+              "\t\tCONCATENATE(",
+              "\t\t\tCONCATENATEX(",
+              "\t\t\t\tTOPN(",
+              "\t\t\t\t\t__MAX_VALUES_TO_SHOW,",
+              "\t\t\t\t\tVALUES('Product Code'[Product_Code]),",
+              "\t\t\t\t\t'Product Code'[Product_Code],",
+              "\t\t\t\t\tASC",
+              "\t\t\t\t),",
+              "\t\t\t\t'Product Code'[Product_Code],",
+              "\t\t\t\t\", \",",
+              "\t\t\t\t'Product Code'[Product_Code],",
+              "\t\t\t\tASC",
+              "\t\t\t),",
+              "\t\t\t\", etc.\"",
+              "\t\t),",
+              "\t\tCONCATENATEX(",
+              "\t\t\tVALUES('Product Code'[Product_Code]),",
+              "\t\t\t'Product Code'[Product_Code],",
+              "\t\t\t\", \",",
+              "\t\t\t'Product Code'[Product_Code],",
+              "\t\t\tASC",
+              "\t\t)",
+              "\t)",
+              "return",
+              "Logic_"
+            ]
           }
         ],
         "partitions": [
@@ -612,42 +441,6 @@
                 "    dbo_vw_dimMember"
               ]
             }
-          }
-        ],
-        "measures": [
-          {
-            "name": "_AICPStartNoDesignation",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
-              "FILTER('Member', 'Member'[AICP_START] <> BLANK()), ",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()),",
-              "FILTER('Member', 'Member'[_Designation] <> \"AICP\"))"
-            ]
-          },
-          {
-            "name": "_AICPPaidThruNull",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] = BLANK()),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Status', 'Status'[Status] = \"A\"), ",
-              "FILTER('Member', 'Member'[_Designation] = \"AICP\"))",
-              "",
-              "",
-              "",
-              ""
-            ]
-          },
-          {
-            "name": "_AICPPaidThruNoStart",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] <> BLANK()), ",
-              "FILTER('Member', 'Member'[AICP_START] = BLANK()), ",
-              "FILTER('Member', 'Member'[_Designation] = \"AICP\"))"
-            ]
           }
         ]
       },
@@ -828,6 +621,435 @@
         ]
       },
       {
+        "name": "Status",
+        "columns": [
+          {
+            "name": "StatusKey",
+            "dataType": "int64",
+            "sourceColumn": "StatusKey"
+          },
+          {
+            "name": "Status",
+            "dataType": "string",
+            "sourceColumn": "Status"
+          },
+          {
+            "name": "Gender",
+            "dataType": "string",
+            "sourceColumn": "Gender"
+          },
+          {
+            "name": "Category",
+            "dataType": "string",
+            "sourceColumn": "Category"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimStatus = Source{[Schema=\"dbo\",Item=\"vw_dimStatus\"]}[Data]",
+                "in",
+                "    dbo_vw_dimStatus"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Fact Member",
+        "isHidden": true,
+        "columns": [
+          {
+            "name": "MemberIDKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "MemberIDKey"
+          },
+          {
+            "name": "ProductTypeKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductTypeKey"
+          },
+          {
+            "name": "ProductCodeKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductCodeKey"
+          },
+          {
+            "name": "MemberTypeIDKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberTypeIDKey"
+          },
+          {
+            "name": "SalaryIDKey",
+            "dataType": "int64",
+            "sourceColumn": "SalaryIDKey"
+          },
+          {
+            "name": "RaceIDKey",
+            "dataType": "int64",
+            "sourceColumn": "RaceIDKey"
+          },
+          {
+            "name": "OrgKey",
+            "dataType": "int64",
+            "sourceColumn": "OrgKey"
+          },
+          {
+            "name": "ChapterKey",
+            "dataType": "int64",
+            "sourceColumn": "ChapterKey"
+          },
+          {
+            "name": "Trans_Date_Key",
+            "dataType": "int64",
+            "sourceColumn": "Trans_Date_Key"
+          },
+          {
+            "name": "Paid_Through_Key",
+            "dataType": "int64",
+            "sourceColumn": "Paid_Through_Key"
+          },
+          {
+            "name": "Home_Address_Key",
+            "dataType": "int64",
+            "sourceColumn": "Home_Address_Key"
+          },
+          {
+            "name": "Work_Address_Key",
+            "dataType": "int64",
+            "sourceColumn": "Work_Address_Key"
+          },
+          {
+            "name": "StatusKey",
+            "dataType": "int64",
+            "sourceColumn": "StatusKey"
+          },
+          {
+            "name": "MemberStatusKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberStatusKey"
+          },
+          {
+            "name": "IsCurrent",
+            "dataType": "boolean",
+            "sourceColumn": "IsCurrent"
+          },
+          {
+            "name": "member_id",
+            "dataType": "string",
+            "sourceColumn": "member_id"
+          },
+          {
+            "name": "address_num",
+            "dataType": "int64",
+            "sourceColumn": "address_num"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_tblFactMember_IS = Source{[Schema=\"dbo\",Item=\"vw_tblFactMember_IS\"]}[Data]",
+                "in",
+                "    dbo_vw_tblFactMember_IS"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Claims Log Status",
+        "columns": [
+          {
+            "name": "LogStatusKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "LogStatusKey"
+          },
+          {
+            "name": "Log_Status",
+            "dataType": "string",
+            "sourceColumn": "Log_Status"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "LastUpdatedby",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedby"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimClaimLogStatus = Source{[Schema=\"dbo\",Item=\"vw_dimClaimLogStatus\"]}[Data]",
+                "in",
+                "    dbo_vw_dimClaimLogStatus"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Claims Flags",
+        "columns": [
+          {
+            "name": "FlagKey",
+            "dataType": "int64",
+            "sourceColumn": "FlagKey"
+          },
+          {
+            "name": "Verified",
+            "dataType": "boolean",
+            "sourceColumn": "Verified"
+          },
+          {
+            "name": "Is_Speaker",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Speaker"
+          },
+          {
+            "name": "Is_Author",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Author"
+          },
+          {
+            "name": "Self_Reported",
+            "dataType": "boolean",
+            "sourceColumn": "Self_Reported"
+          },
+          {
+            "name": "Is_CarryOver",
+            "dataType": "boolean",
+            "sourceColumn": "Is_CarryOver"
+          },
+          {
+            "name": "Is_Probono",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Probono"
+          },
+          {
+            "name": "Is_Deleted",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Deleted"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "LastUpdatedby",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedby"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimClaimsFlags = Source{[Schema=\"dbo\",Item=\"vw_dimClaimsFlags\"]}[Data]",
+                "in",
+                "    dbo_vw_dimClaimsFlags"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Claims Product",
+        "columns": [
+          {
+            "name": "ClaimsProductKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "ClaimsProductKey"
+          },
+          {
+            "name": "ClaimsProduct_Major",
+            "dataType": "string",
+            "sourceColumn": "ClaimsProduct_Major"
+          },
+          {
+            "name": "ClaimsProduct_Minor",
+            "dataType": "string",
+            "sourceColumn": "ClaimsProduct_Minor"
+          },
+          {
+            "name": "ClaimsProduct_Description",
+            "dataType": "string",
+            "sourceColumn": "ClaimsProduct_Description"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "LastUpdatedby",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedby"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimClaimsProduct = Source{[Schema=\"dbo\",Item=\"vw_dimClaimsProduct\"]}[Data]",
+                "in",
+                "    dbo_vw_dimClaimsProduct"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "CM Period",
+        "columns": [
+          {
+            "name": "CMPeriodKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "CMPeriodKey"
+          },
+          {
+            "name": "CM_PeriodCode",
+            "dataType": "string",
+            "sourceColumn": "CM_PeriodCode"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "LastUpdatedby",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedby"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimCMPeriod = Source{[Schema=\"dbo\",Item=\"vw_dimCMPeriod\"]}[Data]",
+                "in",
+                "    dbo_vw_dimCMPeriod"
+              ]
+            }
+          }
+        ]
+      },
+      {
         "name": "Registrant Status",
         "columns": [
           {
@@ -940,77 +1162,6 @@
                 "    dbo_vw_dimRegistrantClass = Source{[Schema=\"dbo\",Item=\"vw_dimRegistrantClass\"]}[Data]",
                 "in",
                 "    dbo_vw_dimRegistrantClass"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "Status",
-        "columns": [
-          {
-            "name": "StatusKey",
-            "dataType": "int64",
-            "sourceColumn": "StatusKey"
-          },
-          {
-            "name": "Status",
-            "dataType": "string",
-            "sourceColumn": "Status"
-          },
-          {
-            "name": "Gender",
-            "dataType": "string",
-            "sourceColumn": "Gender"
-          },
-          {
-            "name": "Category",
-            "dataType": "string",
-            "sourceColumn": "Category"
-          },
-          {
-            "name": "LastUpdatedBy",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedBy"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "StartDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "StartDate"
-          },
-          {
-            "name": "EndDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "EndDate"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_dimStatus = Source{[Schema=\"dbo\",Item=\"vw_dimStatus\"]}[Data]",
-                "in",
-                "    dbo_vw_dimStatus"
               ]
             }
           }
@@ -1266,122 +1417,8 @@
         ]
       },
       {
-        "name": "Fact Member",
-        "isHidden": true,
-        "columns": [
-          {
-            "name": "MemberIDKey",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "MemberIDKey"
-          },
-          {
-            "name": "ProductTypeKey",
-            "dataType": "int64",
-            "sourceColumn": "ProductTypeKey"
-          },
-          {
-            "name": "ProductCodeKey",
-            "dataType": "int64",
-            "sourceColumn": "ProductCodeKey"
-          },
-          {
-            "name": "MemberTypeIDKey",
-            "dataType": "int64",
-            "sourceColumn": "MemberTypeIDKey"
-          },
-          {
-            "name": "SalaryIDKey",
-            "dataType": "int64",
-            "sourceColumn": "SalaryIDKey"
-          },
-          {
-            "name": "RaceIDKey",
-            "dataType": "int64",
-            "sourceColumn": "RaceIDKey"
-          },
-          {
-            "name": "OrgKey",
-            "dataType": "int64",
-            "sourceColumn": "OrgKey"
-          },
-          {
-            "name": "ChapterKey",
-            "dataType": "int64",
-            "sourceColumn": "ChapterKey"
-          },
-          {
-            "name": "Trans_Date_Key",
-            "dataType": "int64",
-            "sourceColumn": "Trans_Date_Key"
-          },
-          {
-            "name": "Paid_Through_Key",
-            "dataType": "int64",
-            "sourceColumn": "Paid_Through_Key"
-          },
-          {
-            "name": "Home_Address_Key",
-            "dataType": "int64",
-            "sourceColumn": "Home_Address_Key"
-          },
-          {
-            "name": "Work_Address_Key",
-            "dataType": "int64",
-            "sourceColumn": "Work_Address_Key"
-          },
-          {
-            "name": "StatusKey",
-            "dataType": "int64",
-            "sourceColumn": "StatusKey"
-          },
-          {
-            "name": "MemberStatusKey",
-            "dataType": "int64",
-            "sourceColumn": "MemberStatusKey"
-          },
-          {
-            "name": "IsCurrent",
-            "dataType": "boolean",
-            "sourceColumn": "IsCurrent"
-          },
-          {
-            "name": "member_id",
-            "dataType": "string",
-            "sourceColumn": "member_id"
-          },
-          {
-            "name": "address_num",
-            "dataType": "int64",
-            "sourceColumn": "address_num"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_tblFactMember_IS = Source{[Schema=\"dbo\",Item=\"vw_tblFactMember_IS\"]}[Data]",
-                "in",
-                "    dbo_vw_tblFactMember_IS"
-              ]
-            }
-          }
-        ]
-      },
-      {
         "name": "Jobs",
         "columns": [
-          {
-            "name": "content_ptr_id",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "content_ptr_id"
-          },
           {
             "name": "user_address_num",
             "dataType": "int64",
@@ -1389,138 +1426,55 @@
             "sourceColumn": "user_address_num"
           },
           {
-            "name": "address1",
+            "name": "Address1",
             "dataType": "string",
             "sourceColumn": "address1"
           },
           {
-            "name": "address2",
+            "name": "Address2",
             "dataType": "string",
             "sourceColumn": "address2"
           },
           {
-            "name": "city",
+            "name": "City",
             "dataType": "string",
             "sourceColumn": "city"
           },
           {
-            "name": "state",
+            "name": "State",
             "dataType": "string",
             "sourceColumn": "state"
           },
           {
-            "name": "zip_code",
-            "dataType": "string",
-            "sourceColumn": "zip_code"
-          },
-          {
-            "name": "country",
+            "name": "Country",
             "dataType": "string",
             "sourceColumn": "country"
           },
           {
-            "name": "job_type",
-            "dataType": "string",
-            "sourceColumn": "job_type"
-          },
-          {
-            "name": "display_contact_info",
-            "dataType": "boolean",
-            "sourceColumn": "display_contact_info"
-          },
-          {
-            "name": "contact_us_first_name",
-            "dataType": "string",
-            "sourceColumn": "contact_us_first_name"
-          },
-          {
-            "name": "contact_us_last_name",
-            "dataType": "string",
-            "sourceColumn": "contact_us_last_name"
-          },
-          {
-            "name": "contact_us_email",
-            "dataType": "string",
-            "sourceColumn": "contact_us_email"
-          },
-          {
-            "name": "contact_us_phone",
-            "dataType": "string",
-            "sourceColumn": "contact_us_phone"
-          },
-          {
-            "name": "company",
+            "name": "Company",
             "dataType": "string",
             "sourceColumn": "company"
           },
           {
-            "name": "contact_us_address1",
-            "dataType": "string",
-            "sourceColumn": "contact_us_address1"
-          },
-          {
-            "name": "contact_us_address2",
-            "dataType": "string",
-            "sourceColumn": "contact_us_address2"
-          },
-          {
-            "name": "contact_us_city",
-            "dataType": "string",
-            "sourceColumn": "contact_us_city"
-          },
-          {
-            "name": "contact_us_country",
-            "dataType": "string",
-            "sourceColumn": "contact_us_country"
-          },
-          {
-            "name": "contact_us_state",
-            "dataType": "string",
-            "sourceColumn": "contact_us_state"
-          },
-          {
-            "name": "contact_us_user_address_num",
-            "dataType": "int64",
-            "sourceColumn": "contact_us_user_address_num"
-          },
-          {
-            "name": "contact_us_zip_code",
-            "dataType": "string",
-            "sourceColumn": "contact_us_zip_code"
-          },
-          {
-            "name": "salary_range",
-            "dataType": "string",
-            "sourceColumn": "salary_range"
-          },
-          {
-            "name": "post_time",
-            "dataType": "dateTime",
-            "sourceColumn": "post_time"
-          },
-          {
-            "name": "legacy_id",
-            "dataType": "int64",
-            "sourceColumn": "legacy_id"
-          },
-          {
             "name": "voter_voice_checksum",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "voter_voice_checksum"
           },
           {
-            "name": "latitude",
+            "name": "Latitude",
             "dataType": "double",
             "sourceColumn": "latitude"
           },
           {
-            "name": "longitude",
+            "name": "Longitude",
             "dataType": "double",
             "sourceColumn": "longitude"
           },
           {
             "name": "zip_code_extension",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "zip_code_extension"
           },
           {
@@ -1534,6 +1488,97 @@
             "dataType": "dateTime",
             "isHidden": true,
             "sourceColumn": "LastModified"
+          },
+          {
+            "name": "Zip Code",
+            "dataType": "string",
+            "sourceColumn": "zip_code"
+          },
+          {
+            "name": "Job Type",
+            "dataType": "string",
+            "sourceColumn": "job_type"
+          },
+          {
+            "name": "Show Contact Info",
+            "dataType": "boolean",
+            "sourceColumn": "display_contact_info"
+          },
+          {
+            "name": "Contact Us First Name",
+            "dataType": "string",
+            "sourceColumn": "contact_us_first_name"
+          },
+          {
+            "name": "Contact Us Last Name",
+            "dataType": "string",
+            "sourceColumn": "contact_us_last_name"
+          },
+          {
+            "name": "Contact Us Email",
+            "dataType": "string",
+            "sourceColumn": "contact_us_email"
+          },
+          {
+            "name": "Contact Us Phone",
+            "dataType": "string",
+            "sourceColumn": "contact_us_phone"
+          },
+          {
+            "name": "Contact Us Address 1",
+            "dataType": "string",
+            "sourceColumn": "contact_us_address1"
+          },
+          {
+            "name": "Contact Us Address 2",
+            "dataType": "string",
+            "sourceColumn": "contact_us_address2"
+          },
+          {
+            "name": "Contact Us City",
+            "dataType": "string",
+            "sourceColumn": "contact_us_city"
+          },
+          {
+            "name": "Contact Us Country",
+            "dataType": "string",
+            "sourceColumn": "contact_us_country"
+          },
+          {
+            "name": "Contact Us State",
+            "dataType": "string",
+            "sourceColumn": "contact_us_state"
+          },
+          {
+            "name": "Contact Us User Address Num",
+            "dataType": "int64",
+            "sourceColumn": "contact_us_user_address_num"
+          },
+          {
+            "name": "Contact Us Zip Code",
+            "dataType": "string",
+            "sourceColumn": "contact_us_zip_code"
+          },
+          {
+            "name": "Salary Range",
+            "dataType": "string",
+            "sourceColumn": "salary_range"
+          },
+          {
+            "name": "Post Time",
+            "dataType": "dateTime",
+            "sourceColumn": "post_time"
+          },
+          {
+            "name": "Legacy ID",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "legacy_id"
+          },
+          {
+            "name": "Content ID",
+            "dataType": "int64",
+            "sourceColumn": "content_ptr_id"
           }
         ],
         "partitions": [
@@ -1556,63 +1601,63 @@
           {
             "name": "_NullContactUsPhone",
             "expression": [
-              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[contact_us_phone] = BLANK())",
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[Contact Us Phone] = BLANK())",
               ""
             ]
           },
           {
             "name": "_NullSalaryRange",
             "expression": [
-              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[salary_range] = BLANK())",
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[Salary Range] = BLANK())",
               ""
             ]
           },
           {
             "name": "_NullCity",
             "expression": [
-              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[city] = BLANK())",
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[City] = BLANK())",
               ""
             ]
           },
           {
             "name": "_NullAddress1",
             "expression": [
-              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[address1] = BLANK())",
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[Address1] = BLANK())",
               ""
             ]
           },
           {
             "name": "_NullCountry",
             "expression": [
-              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[country] = BLANK())",
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[Country] = BLANK())",
               ""
             ]
           },
           {
             "name": "_NullContactUsEmail",
             "expression": [
-              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[contact_us_email] = BLANK())",
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[Contact Us Email] = BLANK())",
               ""
             ]
           },
           {
             "name": "_NullCompany",
             "expression": [
-              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[company] = BLANK())",
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[Company] = BLANK())",
               ""
             ]
           },
           {
             "name": "_NullState",
             "expression": [
-              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[state] = BLANK())",
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[State] = BLANK())",
               ""
             ]
           },
           {
             "name": "_NullJobType",
             "expression": [
-              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[job_type] = BLANK())",
+              "CALCULATE(COUNTROWS('Jobs'),'Jobs'[Job Type] = BLANK())",
               ""
             ]
           }
@@ -1860,134 +1905,6 @@
         ]
       },
       {
-        "name": "CM Log",
-        "columns": [
-          {
-            "name": "id",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "id"
-          },
-          {
-            "name": "status",
-            "dataType": "string",
-            "sourceColumn": "status"
-          },
-          {
-            "name": "is_current",
-            "dataType": "boolean",
-            "sourceColumn": "is_current"
-          },
-          {
-            "name": "contact_id",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "contact_id"
-          },
-          {
-            "name": "period_id",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "period_id"
-          },
-          {
-            "name": "credits_required",
-            "dataType": "double",
-            "sourceColumn": "credits_required"
-          },
-          {
-            "name": "ethics_credits_required",
-            "dataType": "double",
-            "sourceColumn": "ethics_credits_required"
-          },
-          {
-            "name": "law_credits_required",
-            "dataType": "double",
-            "sourceColumn": "law_credits_required"
-          },
-          {
-            "name": "begin_time",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "begin_time"
-          },
-          {
-            "name": "end_time",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "end_time"
-          },
-          {
-            "name": "reinstatement_end_time",
-            "dataType": "dateTime",
-            "sourceColumn": "reinstatement_end_time"
-          },
-          {
-            "name": "updated_time",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "updated_time"
-          },
-          {
-            "name": "created_time",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "created_time"
-          },
-          {
-            "name": "LastUpdatedBy",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedBy"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "StartDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "StartDate"
-          },
-          {
-            "name": "EndDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "EndDate"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_stg_cm_log = Source{[Schema=\"dbo\",Item=\"vw_stg_cm_log\"]}[Data]",
-                "in",
-                "    dbo_vw_stg_cm_log"
-              ]
-            }
-          }
-        ],
-        "hierarchies": [
-          {
-            "name": "Hierarchy1"
-          }
-        ]
-      },
-      {
         "name": "AICP Exams",
         "columns": [
           {
@@ -2091,24 +2008,6 @@
                 "    dbo_vw_dimAICPExam"
               ]
             }
-          }
-        ],
-        "measures": [
-          {
-            "name": "_AICPExamNotPassed",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
-              "FILTER('Exam Scores', 'Exam Scores'[Pass] = 0),",
-              "FILTER('Member', 'Member'[_Designation] = \"AICP\"),",
-              "FILTER('AICP Exams', 'AICP Exams'[IsActive] = TRUE()))"
-            ]
-          },
-          {
-            "name": "_ExamStartAfterEnd",
-            "expression": [
-              " CALCULATE(DISTINCT('AICP Exams'[ExamCode]), ",
-              "FILTER('AICP Exams', 'AICP Exams'[ExamStartDate] > 'AICP Exams'[ExamEndDate]))"
-            ]
           }
         ]
       },
@@ -2369,7 +2268,236 @@
         ]
       },
       {
-        "name": "Fact Claims B",
+        "name": "Report Measures",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Calculation",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Calculation]"
+          },
+          {
+            "type": "calculated",
+            "name": "Calculated Column 1",
+            "dataType": "int64",
+            "isDataTypeInferred": true
+          },
+          {
+            "type": "calculated",
+            "name": "Calculated Column 2",
+            "dataType": "int64",
+            "isDataTypeInferred": true
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CalculatedTable 1",
+            "source": {
+              "type": "calculated",
+              "expression": "TOPN(0, ROW(\"Calculation\", \"\"))"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "_ActiveAICP",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Claims'[Member_ID]), ",
+              "    FILTER('Product Code', 'Product Code'[Product_Code] = \"AICP\"),",
+              "    FILTER('Paid Thru Date', 'Paid Thru Date'[date] >= NOW()),",
+              "    FILTER('Status', 'Status'[Status] = \"A\"),",
+              "    FILTER('Member','Member'[_Designation] in {\"AICP\", \"FAICP\"})",
+              ")"
+            ]
+          },
+          {
+            "name": "_ActiveAPA",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT(Claims[Member_ID]), ",
+              "    FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
+              "    FILTER('Paid Thru Date', 'Paid Thru Date'[date] >= NOW()),",
+              "    FILTER('Status', 'Status'[Status] = \"A\")",
+              ")"
+            ]
+          },
+          {
+            "name": "_AuthoringCredits",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT(Claims[log_id]),",
+              "\tFILTER('Claims', 'Claims'[Self_Reported] = True ",
+              "\t\t&& Claims[Verified] = True",
+              "\t\t&& 'Claims'[Is_Author] = True",
+              "\t\t&& SUM('Claims'[Credits]) > 16",
+              "\t\t&& Claims[is_current] = True)",
+              "\t)"
+            ]
+          },
+          {
+            "name": "_RetNoExemption",
+            "expression": [
+              " CALCULATE([_ActiveAICP],",
+              "\tFILTER('Member Type', 'Member Type'[Member_Type] = \"RET\"),",
+              "\tFILTER('Claims Log Status', NOT('Claims Log Status'[Log_Status] IN { \"E_01\", \"C\" })),",
+              "\tFILTER('Claims', 'Claims'[is_current] = True)",
+              "\t)",
+              ""
+            ]
+          },
+          {
+            "name": "_NotRetWithExemption",
+            "expression": [
+              " CALCULATE([_ActiveAICP],",
+              "\tFILTER('Claims Log Status', 'Claims Log Status'[Log_Status] = \"E01\"),",
+              "\tFILTER('Claims', 'Claims'[is_current] = True && NOT(Claims[Member_Type] IN {\"RET\", \"LIFE\"}))",
+              "\t)"
+            ]
+          },
+          {
+            "name": "_VoluntaryLifeCreditCheck",
+            "expression": [
+              " CALCULATE([_ActiveAICP],",
+              "\tFILTER('Claims', 'Claims'[Log_Status] = \"E_13\" && ",
+              "\t\t'Claims'[credits_required] <> 16 &&",
+              "\t\t'Claims'[is_current] = TRUE)",
+              "\t)"
+            ]
+          },
+          {
+            "name": "_ReinstatedNotEnoughCredits",
+            "expression": [
+              " CALCULATE([_ActiveAICP],",
+              "\tFILTER('Claims', 'Claims'[is_current] = True && ",
+              "\t\t'Claims'[Log_Status] = \"R\" &&",
+              "\t\tSUM('Claims'[Credits]) < 32)",
+              "\t)"
+            ]
+          },
+          {
+            "name": "_NoActiveLogs",
+            "expression": [
+              " ",
+              "\tCALCULATE([_ActiveAICP],",
+              "\t\tFILTER('Member', 'Member'[_ActiveLogs] < 1)",
+              "    \t)"
+            ]
+          },
+          {
+            "name": "_MultipleActiveLogs",
+            "expression": [
+              " CALCULATE([_ActiveAICP],",
+              "FILTER('Member', 'Member'[_ActiveLogs]>1 ))",
+              ""
+            ]
+          },
+          {
+            "name": "_OverSelfReportedLimit",
+            "expression": [
+              "",
+              "CALCULATE(DISTINCTCOUNT('Claims'[log_id]),",
+              "\tFILTER('Claims Flags', 'Claims Flags'[Self_Reported] = True() &&",
+              "\t\t\t'Claims Flags'[Verified] = True()),\t",
+              "\tFILTER('Claims', SUM('Claims'[Credits])>8 && ",
+              "\t\t'Claims'[is_current]=True),",
+              "\tFILTER('Claims Log Status', 'Claims Log Status'[Log_Status] IN {\"A\", \"G\", \"R\"})",
+              ")"
+            ]
+          },
+          {
+            "name": "_AICPSubscrNoDesignation",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "FILTER('Product Code', 'Product Code'[Product_Code] = \"AICP\"),",
+              "FILTER('Status', 'Status'[Status] = \"A\"),",
+              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()),",
+              "FILTER('Member', NOT('Member'[_Designation] IN {\"AICP\", \"FAICP\"}))",
+              ")"
+            ]
+          },
+          {
+            "name": "_AICPDesignationNoSubscr",
+            "expression": [
+              " CALCULATE(DISTINCTCOUNT('Claims'[Member_ID]), ",
+              "    FILTER('Product Code', 'Product Code'[Product_Code]=\"AICP\"),",
+              "    FILTER('Paid Thru Date', 'Paid Thru Date'[date] < NOW()),",
+              "    FILTER('Member','Member'[_Designation] in {\"AICP\", \"FAICP\"})",
+              ")"
+            ]
+          },
+          {
+            "name": "_LifeNoExemption",
+            "expression": [
+              " CALCULATE([_ActiveAICP],",
+              "\tFILTER('Member Type', 'Member Type'[Member_Type] = \"LIFE\"),",
+              "\tFILTER('Claims', Claims[is_current] = True),",
+              "\tFILTER('Claims Log Status', 'Claims Log Status'[Log_Status] <> \"E_13\"))"
+            ]
+          },
+          {
+            "name": "_AICPExamNotPassed",
+            "expression": [
+              " CALCULATE([_ActiveAICP],",
+              "FILTER('Exam Scores', 'Exam Scores'[Pass] = 0),",
+              "FILTER('AICP Exams', 'AICP Exams'[IsActive] = TRUE())",
+              ")"
+            ]
+          },
+          {
+            "name": "_AICPNoStart",
+            "expression": [
+              " CALCULATE([_ActiveAICP], ",
+              "\t\tFILTER('Member', 'Member'[AICP_START] = Blank())",
+              "\t\t)"
+            ]
+          },
+          {
+            "name": "_RetCreditCheck",
+            "expression": [
+              " CALCULATE([_ActiveAICP],",
+              "\tFILTER('Member Type', 'Member Type'[Member_Type] = \"RET\"),",
+              "\tFILTER('Claims', 'Claims'[is_current] = True && Claims[credits_required] <> 0.00)",
+              ")"
+            ]
+          },
+          {
+            "name": "_65NotRet",
+            "expression": [
+              " CALCULATE([_ActiveAICP],",
+              "\tFILTER('Member Type', NOT('Member Type'[Member_Type] in {\"RET\", \"LIFE\"})),",
+              "\tFILTER('Member', 'Member'[Age] > 65)",
+              "\t)"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "CalculationGroup 1",
+        "calculationGroup": {
+          "calculationItems": [
+            {
+              "name": "CalculationItem 1"
+            }
+          ]
+        },
+        "columns": [
+          {
+            "name": "CalculationItemColumn 1",
+            "dataType": "string",
+            "sourceColumn": "Name"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CalculationGroup 1",
+            "source": {
+              "type": "calculationGroup"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Claims",
         "columns": [
           {
             "name": "ID_Claim",
@@ -2520,6 +2648,31 @@
             "name": "LastModifiedBy",
             "dataType": "string",
             "sourceColumn": "LastModifiedBy"
+          },
+          {
+            "name": "log_id",
+            "dataType": "int64",
+            "sourceColumn": "log_id"
+          },
+          {
+            "name": "credits_required",
+            "dataType": "double",
+            "sourceColumn": "credits_required"
+          },
+          {
+            "name": "is_current",
+            "dataType": "boolean",
+            "sourceColumn": "is_current"
+          },
+          {
+            "name": "begin_time",
+            "dataType": "dateTime",
+            "sourceColumn": "begin_time"
+          },
+          {
+            "name": "end_time",
+            "dataType": "dateTime",
+            "sourceColumn": "end_time"
           }
         ],
         "partitions": [
@@ -2537,321 +2690,141 @@
               ]
             }
           }
-        ],
-        "measures": [
-          {
-            "name": "_Member65ZeroCreditCheck",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Member', 'Member'[Age] >= 65),",
-              "FILTER('CM Log', 'CM Log'[credits_required] > 0),",
-              "FILTER('Member Type', 'Member Type'[Member_Type] = \"RET\"))"
-            ]
-          },
-          {
-            "name": "_selfreportedclaims",
-            "expression": [
-              "CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Self_Reported]=TRUE() && ",
-              "'Fact Claims B'[Verified]=TRUE() &&",
-              "'Fact Claims B'[Credits]>8),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
-            ]
-          },
-          {
-            "name": "_AICPNoReporting",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Member', 'Member'[Designation] = \"AICP\"), ",
-              "FILTER('Fact Claims B', 'Fact Claims B'[CM_Period_Code] = BLANK()),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"A\"))"
-            ]
-          },
-          {
-            "name": "_NotRetExemption",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Member Type', 'Member Type'[Member_Type] <> \"RET\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_01\"),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
-            ]
-          },
-          {
-            "name": "_RetExemption",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Member Type', 'Member Type'[Member_Type] = \"RET\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] <> \"E_01\"),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
-            ]
-          },
-          {
-            "name": "_NotLifeExemption",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Member Type', 'Member Type'[Member_Type] = \"LIFE\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] <> \"E_12\"),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
-            ]
-          },
-          {
-            "name": "_UnEmployedExemption",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Member Type', 'Member Type'[Member_Type] = \"MEM\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_02\"),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
-            ]
-          },
-          {
-            "name": "_ActiveNoReportingPeriod",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "--FILTER(vw_dimMemberType, vw_dimMemberType[Member_Type] = \"MEM\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] >= TODAY()),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] <> \"A\"))"
-            ]
-          },
-          {
-            "name": "_MoreActivePeriod",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Member Type', 'Member Type'[Member_Type] = \"MEM\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] >= TODAY()),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"A\"),",
-              "FILTER('Fact Claims B', COUNT('Fact Claims B'[Log_Status]) > 2))"
-            ]
-          },
-          {
-            "name": "_AuthoringCredits",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Self_Reported] = TRUE()),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Verified] = TRUE()),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Is_Author] = TRUE()),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Credits] > 16))"
-            ]
-          },
-          {
-            "name": "_ReinstatedNotEnoughCredits",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"R\"),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Credits] < 32),",
-              "FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "FILTER('Status', 'Status'[Status] = \"A\"),",
-              "FILTER('Paid Thru Date', 'Paid Thru Date'[date] > TODAY()))"
-            ]
-          },
-          {
-            "name": "_VoluntaryLifeCreditCheck",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]),",
-              "FILTER('Fact Claims B', 'Fact Claims B'[Log_Status] = \"E_13\"),",
-              "FILTER('CM Log', 'CM Log'[credits_required] <> 16))"
-            ]
-          }
-        ]
-      },
-      {
-        "name": "Report Measures",
-        "columns": [
-          {
-            "type": "calculatedTableColumn",
-            "name": "Calculation",
-            "dataType": "string",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[Calculation]"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "CalculatedTable 1",
-            "source": {
-              "type": "calculated",
-              "expression": "TOPN(0, ROW(\"Calculation\", \"\"))"
-            }
-          }
-        ],
-        "measures": [
-          {
-            "name": "_ActiveAICP",
-            "expression": [
-              " CALCULATE([_ActiveAPA], ",
-              "    FILTER('Product Code', 'Product Code'[Product_Code] = \"AICP\"),",
-              "    FILTER('Paid Thru Date', 'Paid Thru Date'[date] >= NOW()),",
-              "    FILTER('Status', 'Status'[Status] = \"A\")",
-              ")"
-            ]
-          },
-          {
-            "name": "_ActiveAPA",
-            "expression": [
-              " CALCULATE(DISTINCTCOUNT('Fact Claims B'[Member_ID]), ",
-              "    FILTER('Product Code', 'Product Code'[Product_Code] = \"APA\"),",
-              "    FILTER('Paid Thru Date', 'Paid Thru Date'[date] >= NOW()),",
-              "    FILTER('Status', 'Status'[Status] = \"A\")",
-              ")"
-            ]
-          }
         ]
       }
     ],
     "relationships": [
       {
-        "name": "ad1d9035-f7d5-4885-aefa-d3232ebe21ee",
-        "fromTable": "Fact Claims - StarSchema",
-        "fromColumn": "LogStatusKey",
-        "toTable": "Claims Log Status",
-        "toColumn": "LogStatusKey"
-      },
-      {
-        "name": "2af640da-72a8-4a29-83e7-740ee5d4022f",
-        "fromTable": "Fact Claims - StarSchema",
-        "fromColumn": "FlagKey",
-        "toTable": "Claims Flags",
-        "toColumn": "FlagKey"
-      },
-      {
-        "name": "17d338a6-8fac-46fd-a244-4a8903cc1f9e",
-        "fromTable": "Fact Claims - StarSchema",
-        "fromColumn": "CMPeriodKey",
-        "toTable": "CM Period",
-        "toColumn": "CMPeriodKey"
-      },
-      {
-        "name": "72311351-51cd-45bf-b3f9-4c2375155985",
-        "fromCardinality": "one",
-        "fromTable": "Fact Claims B",
-        "fromColumn": "ID_Claim",
-        "toTable": "Fact Claims - StarSchema",
-        "toColumn": "ID_Claim",
-        "crossFilteringBehavior": "bothDirections"
-      },
-      {
-        "name": "a8da065f-b61e-4b74-b22e-06cb18b7d03d",
-        "toCardinality": "many",
+        "name": "7e5108b1-073f-47e9-b1a3-ea02054c7f1d",
+        "toTable": "Member Type",
+        "toColumn": "MemberTypeIDKey",
         "fromTable": "Fact Member",
-        "fromColumn": "MemberIDKey",
-        "toTable": "Fact Claims - StarSchema",
-        "toColumn": "MemberIDKey",
-        "crossFilteringBehavior": "bothDirections"
-      },
-      {
-        "name": "f66bd388-697c-4d27-b10f-bb012653c121",
-        "toCardinality": "many",
-        "fromTable": "Fact Registrations",
-        "fromColumn": "MemberIDKey",
-        "toTable": "Fact Member",
-        "toColumn": "MemberIDKey",
-        "crossFilteringBehavior": "bothDirections"
-      },
-      {
-        "name": "e603d593-f74b-4bfd-9559-b396a11a030f",
-        "fromTable": "Fact Registrations",
-        "fromColumn": "RegistrantStatusKey",
-        "toTable": "Registrant Status",
-        "toColumn": "RegistrantStatusKey"
-      },
-      {
-        "name": "117f9110-d11d-4efd-bf87-86a820bfb44e",
-        "fromTable": "Fact Registrations",
-        "fromColumn": "RegistrationClassKey",
-        "toTable": "Registrant Class",
-        "toColumn": "RegistrantClassKey"
-      },
-      {
-        "name": "07d0b937-c3ce-4441-ae11-ce405705f321",
-        "toCardinality": "many",
-        "fromTable": "CrossPlatformUserMapping",
-        "fromColumn": "member_ID",
-        "toTable": "Member",
-        "toColumn": "Member_ID",
-        "crossFilteringBehavior": "bothDirections"
+        "fromColumn": "MemberTypeIDKey"
       },
       {
         "name": "a6b77621-0d9d-4d39-99d9-ef5d1c55ee64",
-        "fromTable": "Fact Member",
-        "fromColumn": "Paid_Through_Key",
         "toTable": "Paid Thru Date",
         "toColumn": "Date_Key",
+        "fromColumn": "Paid_Through_Key",
+        "fromTable": "Fact Member",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "617e728d-06a3-492e-8e1b-e4307519ff13",
-        "fromTable": "Fact Member",
-        "fromColumn": "MemberIDKey",
         "toTable": "Member",
         "toColumn": "MemberIDKey",
+        "fromColumn": "MemberIDKey",
+        "fromTable": "Fact Member",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "571ce7e9-0fcc-49df-ba72-902a74a8af9c",
-        "fromTable": "Fact Member",
-        "fromColumn": "ProductCodeKey",
         "toTable": "Product Code",
         "toColumn": "ProductCodeKey",
+        "fromColumn": "ProductCodeKey",
+        "fromTable": "Fact Member",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "87d4dacb-824a-493d-90f2-6301b055ace4",
-        "fromTable": "Fact Member",
-        "fromColumn": "StatusKey",
         "toTable": "Status",
         "toColumn": "StatusKey",
+        "fromColumn": "StatusKey",
+        "fromTable": "Fact Member",
         "crossFilteringBehavior": "bothDirections"
       },
       {
-        "name": "44aa1972-daff-4a51-a182-9977adad07a2",
-        "fromTable": "CM Log",
-        "fromColumn": "id",
+        "name": "ad1d9035-f7d5-4885-aefa-d3232ebe21ee",
+        "toTable": "Claims Log Status",
+        "toColumn": "LogStatusKey",
+        "fromTable": "Fact Claims - StarSchema",
+        "fromColumn": "LogStatusKey"
+      },
+      {
+        "name": "2af640da-72a8-4a29-83e7-740ee5d4022f",
+        "toTable": "Claims Flags",
+        "toColumn": "FlagKey",
+        "fromTable": "Fact Claims - StarSchema",
+        "fromColumn": "FlagKey"
+      },
+      {
+        "name": "17d338a6-8fac-46fd-a244-4a8903cc1f9e",
+        "toTable": "CM Period",
+        "toColumn": "CMPeriodKey",
+        "fromTable": "Fact Claims - StarSchema",
+        "fromColumn": "CMPeriodKey"
+      },
+      {
+        "name": "a8da065f-b61e-4b74-b22e-06cb18b7d03d",
+        "fromColumn": "MemberIDKey",
         "toTable": "Fact Claims - StarSchema",
-        "toColumn": "ID_Claim"
-      },
-      {
-        "name": "51436946-f016-4efc-8e2a-d74098d8006a",
-        "fromTable": "Exam Scores",
-        "fromColumn": "ExamIDKey",
-        "toTable": "AICP Exams",
-        "toColumn": "ExamIDKey"
-      },
-      {
-        "name": "6735a402-0fd8-4abe-ac1e-5fc671447af9",
-        "fromTable": "Exam Scores",
-        "fromColumn": "RegistrantTypeIDKey",
-        "toTable": "Exam Registrant Type",
-        "toColumn": "RegistrantTypeIDKey"
-      },
-      {
-        "name": "18656181-07ff-480c-ac12-8012ff48c703",
+        "toColumn": "MemberIDKey",
         "toCardinality": "many",
-        "fromTable": "Exam Scores",
+        "fromTable": "Fact Member",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "f66bd388-697c-4d27-b10f-bb012653c121",
         "fromColumn": "MemberIDKey",
         "toTable": "Fact Member",
         "toColumn": "MemberIDKey",
+        "toCardinality": "many",
+        "fromTable": "Fact Registrations",
         "crossFilteringBehavior": "bothDirections"
       },
       {
-        "name": "7e5108b1-073f-47e9-b1a3-ea02054c7f1d",
-        "fromTable": "Fact Member",
-        "fromColumn": "MemberTypeIDKey",
-        "toTable": "Member Type",
-        "toColumn": "MemberTypeIDKey"
+        "name": "e603d593-f74b-4bfd-9559-b396a11a030f",
+        "toTable": "Registrant Status",
+        "toColumn": "RegistrantStatusKey",
+        "fromTable": "Fact Registrations",
+        "fromColumn": "RegistrantStatusKey"
+      },
+      {
+        "name": "117f9110-d11d-4efd-bf87-86a820bfb44e",
+        "toTable": "Registrant Class",
+        "toColumn": "RegistrantClassKey",
+        "fromTable": "Fact Registrations",
+        "fromColumn": "RegistrationClassKey"
+      },
+      {
+        "name": "07d0b937-c3ce-4441-ae11-ce405705f321",
+        "fromColumn": "member_ID",
+        "toTable": "Member",
+        "toColumn": "Member_ID",
+        "toCardinality": "many",
+        "fromTable": "CrossPlatformUserMapping",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "51436946-f016-4efc-8e2a-d74098d8006a",
+        "toTable": "AICP Exams",
+        "toColumn": "ExamIDKey",
+        "fromTable": "Exam Scores",
+        "fromColumn": "ExamIDKey"
+      },
+      {
+        "name": "6735a402-0fd8-4abe-ac1e-5fc671447af9",
+        "toTable": "Exam Registrant Type",
+        "toColumn": "RegistrantTypeIDKey",
+        "fromTable": "Exam Scores",
+        "fromColumn": "RegistrantTypeIDKey"
+      },
+      {
+        "name": "18656181-07ff-480c-ac12-8012ff48c703",
+        "fromColumn": "MemberIDKey",
+        "toTable": "Fact Member",
+        "toColumn": "MemberIDKey",
+        "toCardinality": "many",
+        "fromTable": "Exam Scores",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "fe8d4329-70aa-437f-a19d-5ad1210de2a5",
+        "toTable": "Fact Claims - StarSchema",
+        "toColumn": "ID_Claim",
+        "fromColumn": "ID_Claim",
+        "fromTable": "Claims",
+        "crossFilteringBehavior": "bothDirections"
       }
     ],
     "roles": [
@@ -2861,52 +2834,58 @@
         "members": [
           {
             "memberName": "akrakos@planning.org",
-            "memberId": "akrakos@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "amoore@planning.org",
-            "memberId": "amoore@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "balbrecht@planning.org",
-            "memberId": "balbrecht@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "bmissaggia@planning.org",
-            "memberId": "bmissaggia@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kkazmierczak@planning.org",
-            "memberId": "kkazmierczak@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "llang@planning.org",
-            "memberId": "llang@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mferguson@planning.org",
-            "memberId": "mferguson@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mjimenez@planning.org",
-            "memberId": "mjimenez@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "MWelch@planning.org",
-            "memberId": "MWelch@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "RJassen@planning.org",
-            "memberId": "RJassen@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "anavarro@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "rsullivan@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "jrolla@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "fbraunstein@planning.org",
             "identityProvider": "AzureAD"
           }
         ]
@@ -2917,27 +2896,22 @@
         "members": [
           {
             "memberName": "plowe@planning.org",
-            "memberId": "plowe@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "msullivan@planning.org",
-            "memberId": "msullivan@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "RWest@planning.org",
-            "memberId": "RWest@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "tjohnson@planning.org",
-            "memberId": "tjohnson@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "cmollet@planning.org",
-            "memberId": "cmollet@planning.org",
             "identityProvider": "AzureAD"
           }
         ]
@@ -2948,72 +2922,54 @@
         "members": [
           {
             "memberName": "ajimenez@planning.org",
-            "memberId": "ajimenez@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "anavarro@planning.org",
-            "memberId": "anavarro@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "bdonegan@planning.org",
-            "memberId": "bdonegan@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "cparra@planning.org",
-            "memberId": "cparra@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "epasi@planning.org",
-            "memberId": "epasi@planning.org",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "fbraunstein@planning.org",
-            "memberId": "fbraunstein@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kgems@planning.org",
-            "memberId": "kgems@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mkraus@planning.org",
-            "memberId": "mkraus@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mmarrero@planning.org",
-            "memberId": "mmarrero@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rrewers@planning.org",
-            "memberId": "rrewers@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rzack@planning.org",
-            "memberId": "rzack@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "SArteaga@planning.org",
-            "memberId": "SArteaga@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "wfrench@planning.org",
-            "memberId": "wfrench@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "ynoonoo@planning.org",
-            "memberId": "ynoonoo@planning.org",
             "identityProvider": "AzureAD"
           }
         ],
@@ -3064,6 +3020,5 @@
         "value": "600"
       }
     ]
-  },
-  "id": "SemanticModel"
+  }
 }

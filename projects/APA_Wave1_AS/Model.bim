@@ -32,7 +32,7 @@
           "AuthenticationKind": "OAuth2",
           "kind": "SQL",
           "path": "apadwprod.database.windows.net;apaprod",
-          "Expires": "Thu, 11 Feb 2021 09:04:56 GMT"
+          "Expires": "Fri, 19 Feb 2021 09:03:12 GMT"
         }
       }
     ],
@@ -5885,7 +5885,7 @@
             "dataType": "string",
             "isDataTypeInferred": true,
             "expression": [
-              "IF('Status'[Gender]=\"M\",\"Male\",IF('Status'[Gender]=\"F\",\"Female\",IF('Status'[Gender]=BLANK(),\"Unmapped\",\"Prefer to self-describe",
+              "IF('Status'[Gender]=\"M\",\"Male\",IF('Status'[Gender]=\"F\",\"Female\",IF('Status'[Gender]=BLANK(),\"Data Not Reported\",\"Prefer to self-describe",
               "\")))"
             ]
           },
@@ -7719,92 +7719,97 @@
         "members": [
           {
             "memberName": "Joy.Cruz@rsmus.com",
-            "memberId": "Joy.Cruz@rsmus.com#AzureAD",
+            "memberId": "Joy.Cruz@rsmus.com",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "Akrakos@planning.org",
-            "memberId": "Akrakos@planning.org#AzureAD",
+            "memberId": "Akrakos@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mferguson@planning.org",
-            "memberId": "mferguson@planning.org#AzureAD",
+            "memberId": "mferguson@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "klennon@planning.org",
-            "memberId": "klennon@planning.org#AzureAD",
+            "memberId": "klennon@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "llang@planning.org",
-            "memberId": "llang@planning.org#AzureAD",
+            "memberId": "llang@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kkazmierczak@planning.org",
-            "memberId": "kkazmierczak@planning.org#AzureAD",
+            "memberId": "kkazmierczak@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mwalsh@planning.org",
-            "memberId": "mwalsh@planning.org#AzureAD",
+            "memberId": "mwalsh@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kschmidt@planning.org",
-            "memberId": "kschmidt@planning.org#AzureAD",
+            "memberId": "kschmidt@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mjimenez@planning.org",
-            "memberId": "mjimenez@planning.org#AzureAD",
+            "memberId": "mjimenez@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "MWelch@planning.org",
-            "memberId": "MWelch@planning.org#AzureAD",
+            "memberId": "MWelch@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "balbrecht@planning.org",
-            "memberId": "balbrecht@planning.org#AzureAD",
+            "memberId": "balbrecht@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mjohnson@planning.org",
-            "memberId": "mjohnson@planning.org#AzureAD",
+            "memberId": "mjohnson@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "RJassen@planning.org",
-            "memberId": "RJassen@planning.org#AzureAD",
+            "memberId": "RJassen@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "crahill@planning.org",
-            "memberId": "crahill@planning.org#AzureAD",
+            "memberId": "crahill@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "bmissaggia@planning.org",
-            "memberId": "bmissaggia@planning.org#AzureAD",
+            "memberId": "bmissaggia@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "RRegalado@planning.org",
-            "memberId": "RRegalado@planning.org#AzureAD",
+            "memberId": "RRegalado@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "amoore@planning.org",
-            "memberId": "amoore@planning.org#AzureAD",
+            "memberId": "amoore@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "jrolla@planning.org",
-            "memberId": "jrolla@planning.org#AzureAD",
+            "memberId": "jrolla@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "fbraunstein@planning.org",
+            "memberId": "fbraunstein@planning.org",
             "identityProvider": "AzureAD"
           }
         ]
@@ -7815,112 +7820,107 @@
         "members": [
           {
             "memberName": "Sarteaga@planning.org",
-            "memberId": "Sarteaga@planning.org#AzureAD",
+            "memberId": "Sarteaga@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mmarrero@planning.org",
-            "memberId": "mmarrero@planning.org#AzureAD",
+            "memberId": "mmarrero@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kgems@planning.org",
-            "memberId": "kgems@planning.org#AzureAD",
+            "memberId": "kgems@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "CParra@planning.org",
-            "memberId": "CParra@planning.org#AzureAD",
+            "memberId": "CParra@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rhoffman@planning.org",
-            "memberId": "rhoffman@planning.org#AzureAD",
+            "memberId": "rhoffman@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "LJorgenson@planning.org",
-            "memberId": "LJorgenson@planning.org#AzureAD",
+            "memberId": "LJorgenson@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "ynoonoo@planning.org",
-            "memberId": "ynoonoo@planning.org#AzureAD",
+            "memberId": "ynoonoo@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mkraus@planning.org",
-            "memberId": "mkraus@planning.org#AzureAD",
+            "memberId": "mkraus@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "bdonegan@planning.org",
-            "memberId": "bdonegan@planning.org#AzureAD",
+            "memberId": "bdonegan@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rrewers@planning.org",
-            "memberId": "rrewers@planning.org#AzureAD",
+            "memberId": "rrewers@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "epasi@planning.org",
-            "memberId": "epasi@planning.org#AzureAD",
+            "memberId": "epasi@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "JJordan@planning.org",
-            "memberId": "JJordan@planning.org#AzureAD",
+            "memberId": "JJordan@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "chinshaw@planning.org",
-            "memberId": "chinshaw@planning.org#AzureAD",
+            "memberId": "chinshaw@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kjacques@planning.org",
-            "memberId": "kjacques@planning.org#AzureAD",
+            "memberId": "kjacques@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "ewilczek@planning.org",
-            "memberId": "ewilczek@planning.org#AzureAD",
+            "memberId": "ewilczek@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "anavarro@planning.org",
-            "memberId": "anavarro@planning.org#AzureAD",
+            "memberId": "anavarro@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "ajimenez@planning.org",
-            "memberId": "ajimenez@planning.org#AzureAD",
-            "identityProvider": "AzureAD"
-          },
-          {
-            "memberName": "fbraunstein@planning.org",
-            "memberId": "fbraunstein@planning.org#AzureAD",
+            "memberId": "ajimenez@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rscherzinger@planning.org",
-            "memberId": "rscherzinger@planning.org#AzureAD",
+            "memberId": "rscherzinger@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rzack@planning.org",
-            "memberId": "rzack@planning.org#AzureAD",
+            "memberId": "rzack@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "wfrench@planning.org",
-            "memberId": "wfrench@planning.org#AzureAD",
+            "memberId": "wfrench@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "usaenz@planning.org",
-            "memberId": "usaenz@planning.org#AzureAD",
+            "memberId": "usaenz@planning.org",
             "identityProvider": "AzureAD"
           }
         ],
