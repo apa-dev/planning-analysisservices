@@ -1,5 +1,5 @@
 {
-  "name": "APA_DG_WaveTwo",
+  "name": "SemanticModel",
   "compatibilityLevel": 1500,
   "model": {
     "culture": "en-US",
@@ -26,6 +26,256 @@
       }
     ],
     "tables": [
+      {
+        "name": "Claims Log Status",
+        "columns": [
+          {
+            "name": "LogStatusKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "LogStatusKey"
+          },
+          {
+            "name": "Log_Status",
+            "dataType": "string",
+            "sourceColumn": "Log_Status"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "LastUpdatedby",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedby"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimClaimLogStatus = Source{[Schema=\"dbo\",Item=\"vw_dimClaimLogStatus\"]}[Data]",
+                "in",
+                "    dbo_vw_dimClaimLogStatus"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Claims Flags",
+        "columns": [
+          {
+            "name": "FlagKey",
+            "dataType": "int64",
+            "sourceColumn": "FlagKey"
+          },
+          {
+            "name": "Verified",
+            "dataType": "boolean",
+            "sourceColumn": "Verified"
+          },
+          {
+            "name": "Is_Speaker",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Speaker"
+          },
+          {
+            "name": "Is_Author",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Author"
+          },
+          {
+            "name": "Self_Reported",
+            "dataType": "boolean",
+            "sourceColumn": "Self_Reported"
+          },
+          {
+            "name": "Is_CarryOver",
+            "dataType": "boolean",
+            "sourceColumn": "Is_CarryOver"
+          },
+          {
+            "name": "Is_Probono",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Probono"
+          },
+          {
+            "name": "Is_Deleted",
+            "dataType": "boolean",
+            "sourceColumn": "Is_Deleted"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "LastUpdatedby",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedby"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimClaimsFlags = Source{[Schema=\"dbo\",Item=\"vw_dimClaimsFlags\"]}[Data]",
+                "in",
+                "    dbo_vw_dimClaimsFlags"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Claims Product",
+        "columns": [
+          {
+            "name": "ClaimsProductKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "ClaimsProductKey"
+          },
+          {
+            "name": "ClaimsProduct_Major",
+            "dataType": "string",
+            "sourceColumn": "ClaimsProduct_Major"
+          },
+          {
+            "name": "ClaimsProduct_Minor",
+            "dataType": "string",
+            "sourceColumn": "ClaimsProduct_Minor"
+          },
+          {
+            "name": "ClaimsProduct_Description",
+            "dataType": "string",
+            "sourceColumn": "ClaimsProduct_Description"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "LastUpdatedby",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedby"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimClaimsProduct = Source{[Schema=\"dbo\",Item=\"vw_dimClaimsProduct\"]}[Data]",
+                "in",
+                "    dbo_vw_dimClaimsProduct"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "CM Period",
+        "columns": [
+          {
+            "name": "CMPeriodKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "CMPeriodKey"
+          },
+          {
+            "name": "CM_PeriodCode",
+            "dataType": "string",
+            "sourceColumn": "CM_PeriodCode"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "LastUpdatedby",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedby"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimCMPeriod = Source{[Schema=\"dbo\",Item=\"vw_dimCMPeriod\"]}[Data]",
+                "in",
+                "    dbo_vw_dimCMPeriod"
+              ]
+            }
+          }
+        ]
+      },
       {
         "name": "Date",
         "columns": [
@@ -621,435 +871,6 @@
         ]
       },
       {
-        "name": "Status",
-        "columns": [
-          {
-            "name": "StatusKey",
-            "dataType": "int64",
-            "sourceColumn": "StatusKey"
-          },
-          {
-            "name": "Status",
-            "dataType": "string",
-            "sourceColumn": "Status"
-          },
-          {
-            "name": "Gender",
-            "dataType": "string",
-            "sourceColumn": "Gender"
-          },
-          {
-            "name": "Category",
-            "dataType": "string",
-            "sourceColumn": "Category"
-          },
-          {
-            "name": "LastUpdatedBy",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedBy"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "StartDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "StartDate"
-          },
-          {
-            "name": "EndDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "EndDate"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_dimStatus = Source{[Schema=\"dbo\",Item=\"vw_dimStatus\"]}[Data]",
-                "in",
-                "    dbo_vw_dimStatus"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "Fact Member",
-        "isHidden": true,
-        "columns": [
-          {
-            "name": "MemberIDKey",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "MemberIDKey"
-          },
-          {
-            "name": "ProductTypeKey",
-            "dataType": "int64",
-            "sourceColumn": "ProductTypeKey"
-          },
-          {
-            "name": "ProductCodeKey",
-            "dataType": "int64",
-            "sourceColumn": "ProductCodeKey"
-          },
-          {
-            "name": "MemberTypeIDKey",
-            "dataType": "int64",
-            "sourceColumn": "MemberTypeIDKey"
-          },
-          {
-            "name": "SalaryIDKey",
-            "dataType": "int64",
-            "sourceColumn": "SalaryIDKey"
-          },
-          {
-            "name": "RaceIDKey",
-            "dataType": "int64",
-            "sourceColumn": "RaceIDKey"
-          },
-          {
-            "name": "OrgKey",
-            "dataType": "int64",
-            "sourceColumn": "OrgKey"
-          },
-          {
-            "name": "ChapterKey",
-            "dataType": "int64",
-            "sourceColumn": "ChapterKey"
-          },
-          {
-            "name": "Trans_Date_Key",
-            "dataType": "int64",
-            "sourceColumn": "Trans_Date_Key"
-          },
-          {
-            "name": "Paid_Through_Key",
-            "dataType": "int64",
-            "sourceColumn": "Paid_Through_Key"
-          },
-          {
-            "name": "Home_Address_Key",
-            "dataType": "int64",
-            "sourceColumn": "Home_Address_Key"
-          },
-          {
-            "name": "Work_Address_Key",
-            "dataType": "int64",
-            "sourceColumn": "Work_Address_Key"
-          },
-          {
-            "name": "StatusKey",
-            "dataType": "int64",
-            "sourceColumn": "StatusKey"
-          },
-          {
-            "name": "MemberStatusKey",
-            "dataType": "int64",
-            "sourceColumn": "MemberStatusKey"
-          },
-          {
-            "name": "IsCurrent",
-            "dataType": "boolean",
-            "sourceColumn": "IsCurrent"
-          },
-          {
-            "name": "member_id",
-            "dataType": "string",
-            "sourceColumn": "member_id"
-          },
-          {
-            "name": "address_num",
-            "dataType": "int64",
-            "sourceColumn": "address_num"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_tblFactMember_IS = Source{[Schema=\"dbo\",Item=\"vw_tblFactMember_IS\"]}[Data]",
-                "in",
-                "    dbo_vw_tblFactMember_IS"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "Claims Log Status",
-        "columns": [
-          {
-            "name": "LogStatusKey",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "LogStatusKey"
-          },
-          {
-            "name": "Log_Status",
-            "dataType": "string",
-            "sourceColumn": "Log_Status"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "LastUpdatedby",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedby"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_dimClaimLogStatus = Source{[Schema=\"dbo\",Item=\"vw_dimClaimLogStatus\"]}[Data]",
-                "in",
-                "    dbo_vw_dimClaimLogStatus"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "Claims Flags",
-        "columns": [
-          {
-            "name": "FlagKey",
-            "dataType": "int64",
-            "sourceColumn": "FlagKey"
-          },
-          {
-            "name": "Verified",
-            "dataType": "boolean",
-            "sourceColumn": "Verified"
-          },
-          {
-            "name": "Is_Speaker",
-            "dataType": "boolean",
-            "sourceColumn": "Is_Speaker"
-          },
-          {
-            "name": "Is_Author",
-            "dataType": "boolean",
-            "sourceColumn": "Is_Author"
-          },
-          {
-            "name": "Self_Reported",
-            "dataType": "boolean",
-            "sourceColumn": "Self_Reported"
-          },
-          {
-            "name": "Is_CarryOver",
-            "dataType": "boolean",
-            "sourceColumn": "Is_CarryOver"
-          },
-          {
-            "name": "Is_Probono",
-            "dataType": "boolean",
-            "sourceColumn": "Is_Probono"
-          },
-          {
-            "name": "Is_Deleted",
-            "dataType": "boolean",
-            "sourceColumn": "Is_Deleted"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "LastUpdatedby",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedby"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_dimClaimsFlags = Source{[Schema=\"dbo\",Item=\"vw_dimClaimsFlags\"]}[Data]",
-                "in",
-                "    dbo_vw_dimClaimsFlags"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "Claims Product",
-        "columns": [
-          {
-            "name": "ClaimsProductKey",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "ClaimsProductKey"
-          },
-          {
-            "name": "ClaimsProduct_Major",
-            "dataType": "string",
-            "sourceColumn": "ClaimsProduct_Major"
-          },
-          {
-            "name": "ClaimsProduct_Minor",
-            "dataType": "string",
-            "sourceColumn": "ClaimsProduct_Minor"
-          },
-          {
-            "name": "ClaimsProduct_Description",
-            "dataType": "string",
-            "sourceColumn": "ClaimsProduct_Description"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "LastUpdatedby",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedby"
-          },
-          {
-            "name": "StartDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "StartDate"
-          },
-          {
-            "name": "EndDate",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "EndDate"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_dimClaimsProduct = Source{[Schema=\"dbo\",Item=\"vw_dimClaimsProduct\"]}[Data]",
-                "in",
-                "    dbo_vw_dimClaimsProduct"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "CM Period",
-        "columns": [
-          {
-            "name": "CMPeriodKey",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "CMPeriodKey"
-          },
-          {
-            "name": "CM_PeriodCode",
-            "dataType": "string",
-            "sourceColumn": "CM_PeriodCode"
-          },
-          {
-            "name": "IsActive",
-            "dataType": "boolean",
-            "isHidden": true,
-            "sourceColumn": "IsActive"
-          },
-          {
-            "name": "LastModified",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "LastModified"
-          },
-          {
-            "name": "LastUpdatedby",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "LastUpdatedby"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Partition",
-            "dataView": "full",
-            "source": {
-              "type": "m",
-              "expression": [
-                "let",
-                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
-                "    dbo_vw_dimCMPeriod = Source{[Schema=\"dbo\",Item=\"vw_dimCMPeriod\"]}[Data]",
-                "in",
-                "    dbo_vw_dimCMPeriod"
-              ]
-            }
-          }
-        ]
-      },
-      {
         "name": "Registrant Status",
         "columns": [
           {
@@ -1162,6 +983,77 @@
                 "    dbo_vw_dimRegistrantClass = Source{[Schema=\"dbo\",Item=\"vw_dimRegistrantClass\"]}[Data]",
                 "in",
                 "    dbo_vw_dimRegistrantClass"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Status",
+        "columns": [
+          {
+            "name": "StatusKey",
+            "dataType": "int64",
+            "sourceColumn": "StatusKey"
+          },
+          {
+            "name": "Status",
+            "dataType": "string",
+            "sourceColumn": "Status"
+          },
+          {
+            "name": "Gender",
+            "dataType": "string",
+            "sourceColumn": "Gender"
+          },
+          {
+            "name": "Category",
+            "dataType": "string",
+            "sourceColumn": "Category"
+          },
+          {
+            "name": "LastUpdatedBy",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastUpdatedBy"
+          },
+          {
+            "name": "LastModified",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "LastModified"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "isHidden": true,
+            "sourceColumn": "IsActive"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_dimStatus = Source{[Schema=\"dbo\",Item=\"vw_dimStatus\"]}[Data]",
+                "in",
+                "    dbo_vw_dimStatus"
               ]
             }
           }
@@ -1411,6 +1303,114 @@
                 "    dbo_vw_tbl_Fact_Registrations = Source{[Schema=\"dbo\",Item=\"vw_tbl_Fact_Registrations\"]}[Data]",
                 "in",
                 "    dbo_vw_tbl_Fact_Registrations"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Fact Member",
+        "isHidden": true,
+        "columns": [
+          {
+            "name": "MemberIDKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "MemberIDKey"
+          },
+          {
+            "name": "ProductTypeKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductTypeKey"
+          },
+          {
+            "name": "ProductCodeKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductCodeKey"
+          },
+          {
+            "name": "MemberTypeIDKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberTypeIDKey"
+          },
+          {
+            "name": "SalaryIDKey",
+            "dataType": "int64",
+            "sourceColumn": "SalaryIDKey"
+          },
+          {
+            "name": "RaceIDKey",
+            "dataType": "int64",
+            "sourceColumn": "RaceIDKey"
+          },
+          {
+            "name": "OrgKey",
+            "dataType": "int64",
+            "sourceColumn": "OrgKey"
+          },
+          {
+            "name": "ChapterKey",
+            "dataType": "int64",
+            "sourceColumn": "ChapterKey"
+          },
+          {
+            "name": "Trans_Date_Key",
+            "dataType": "int64",
+            "sourceColumn": "Trans_Date_Key"
+          },
+          {
+            "name": "Paid_Through_Key",
+            "dataType": "int64",
+            "sourceColumn": "Paid_Through_Key"
+          },
+          {
+            "name": "Home_Address_Key",
+            "dataType": "int64",
+            "sourceColumn": "Home_Address_Key"
+          },
+          {
+            "name": "Work_Address_Key",
+            "dataType": "int64",
+            "sourceColumn": "Work_Address_Key"
+          },
+          {
+            "name": "StatusKey",
+            "dataType": "int64",
+            "sourceColumn": "StatusKey"
+          },
+          {
+            "name": "MemberStatusKey",
+            "dataType": "int64",
+            "sourceColumn": "MemberStatusKey"
+          },
+          {
+            "name": "IsCurrent",
+            "dataType": "boolean",
+            "sourceColumn": "IsCurrent"
+          },
+          {
+            "name": "member_id",
+            "dataType": "string",
+            "sourceColumn": "member_id"
+          },
+          {
+            "name": "address_num",
+            "dataType": "int64",
+            "sourceColumn": "address_num"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/apadwprod database windows net;apaprod\",",
+                "    dbo_vw_tblFactMember_IS = Source{[Schema=\"dbo\",Item=\"vw_tblFactMember_IS\"]}[Data]",
+                "in",
+                "    dbo_vw_tblFactMember_IS"
               ]
             }
           }
@@ -2695,135 +2695,135 @@
     ],
     "relationships": [
       {
-        "name": "7e5108b1-073f-47e9-b1a3-ea02054c7f1d",
-        "toTable": "Member Type",
-        "toColumn": "MemberTypeIDKey",
-        "fromTable": "Fact Member",
-        "fromColumn": "MemberTypeIDKey"
-      },
-      {
-        "name": "a6b77621-0d9d-4d39-99d9-ef5d1c55ee64",
-        "toTable": "Paid Thru Date",
-        "toColumn": "Date_Key",
-        "fromColumn": "Paid_Through_Key",
-        "fromTable": "Fact Member",
-        "crossFilteringBehavior": "bothDirections"
-      },
-      {
-        "name": "617e728d-06a3-492e-8e1b-e4307519ff13",
-        "toTable": "Member",
-        "toColumn": "MemberIDKey",
-        "fromColumn": "MemberIDKey",
-        "fromTable": "Fact Member",
-        "crossFilteringBehavior": "bothDirections"
-      },
-      {
-        "name": "571ce7e9-0fcc-49df-ba72-902a74a8af9c",
-        "toTable": "Product Code",
-        "toColumn": "ProductCodeKey",
-        "fromColumn": "ProductCodeKey",
-        "fromTable": "Fact Member",
-        "crossFilteringBehavior": "bothDirections"
-      },
-      {
-        "name": "87d4dacb-824a-493d-90f2-6301b055ace4",
-        "toTable": "Status",
-        "toColumn": "StatusKey",
-        "fromColumn": "StatusKey",
-        "fromTable": "Fact Member",
-        "crossFilteringBehavior": "bothDirections"
-      },
-      {
         "name": "ad1d9035-f7d5-4885-aefa-d3232ebe21ee",
-        "toTable": "Claims Log Status",
-        "toColumn": "LogStatusKey",
         "fromTable": "Fact Claims - StarSchema",
-        "fromColumn": "LogStatusKey"
+        "fromColumn": "LogStatusKey",
+        "toTable": "Claims Log Status",
+        "toColumn": "LogStatusKey"
       },
       {
         "name": "2af640da-72a8-4a29-83e7-740ee5d4022f",
-        "toTable": "Claims Flags",
-        "toColumn": "FlagKey",
         "fromTable": "Fact Claims - StarSchema",
-        "fromColumn": "FlagKey"
+        "fromColumn": "FlagKey",
+        "toTable": "Claims Flags",
+        "toColumn": "FlagKey"
       },
       {
         "name": "17d338a6-8fac-46fd-a244-4a8903cc1f9e",
-        "toTable": "CM Period",
-        "toColumn": "CMPeriodKey",
         "fromTable": "Fact Claims - StarSchema",
-        "fromColumn": "CMPeriodKey"
+        "fromColumn": "CMPeriodKey",
+        "toTable": "CM Period",
+        "toColumn": "CMPeriodKey"
       },
       {
         "name": "a8da065f-b61e-4b74-b22e-06cb18b7d03d",
+        "toCardinality": "many",
+        "fromTable": "Fact Member",
         "fromColumn": "MemberIDKey",
         "toTable": "Fact Claims - StarSchema",
         "toColumn": "MemberIDKey",
-        "toCardinality": "many",
-        "fromTable": "Fact Member",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "f66bd388-697c-4d27-b10f-bb012653c121",
+        "toCardinality": "many",
+        "fromTable": "Fact Registrations",
         "fromColumn": "MemberIDKey",
         "toTable": "Fact Member",
         "toColumn": "MemberIDKey",
-        "toCardinality": "many",
-        "fromTable": "Fact Registrations",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "e603d593-f74b-4bfd-9559-b396a11a030f",
-        "toTable": "Registrant Status",
-        "toColumn": "RegistrantStatusKey",
         "fromTable": "Fact Registrations",
-        "fromColumn": "RegistrantStatusKey"
+        "fromColumn": "RegistrantStatusKey",
+        "toTable": "Registrant Status",
+        "toColumn": "RegistrantStatusKey"
       },
       {
         "name": "117f9110-d11d-4efd-bf87-86a820bfb44e",
-        "toTable": "Registrant Class",
-        "toColumn": "RegistrantClassKey",
         "fromTable": "Fact Registrations",
-        "fromColumn": "RegistrationClassKey"
+        "fromColumn": "RegistrationClassKey",
+        "toTable": "Registrant Class",
+        "toColumn": "RegistrantClassKey"
       },
       {
         "name": "07d0b937-c3ce-4441-ae11-ce405705f321",
+        "toCardinality": "many",
+        "fromTable": "CrossPlatformUserMapping",
         "fromColumn": "member_ID",
         "toTable": "Member",
         "toColumn": "Member_ID",
-        "toCardinality": "many",
-        "fromTable": "CrossPlatformUserMapping",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "a6b77621-0d9d-4d39-99d9-ef5d1c55ee64",
+        "fromTable": "Fact Member",
+        "fromColumn": "Paid_Through_Key",
+        "toTable": "Paid Thru Date",
+        "toColumn": "Date_Key",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "617e728d-06a3-492e-8e1b-e4307519ff13",
+        "fromTable": "Fact Member",
+        "fromColumn": "MemberIDKey",
+        "toTable": "Member",
+        "toColumn": "MemberIDKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "571ce7e9-0fcc-49df-ba72-902a74a8af9c",
+        "fromTable": "Fact Member",
+        "fromColumn": "ProductCodeKey",
+        "toTable": "Product Code",
+        "toColumn": "ProductCodeKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "87d4dacb-824a-493d-90f2-6301b055ace4",
+        "fromTable": "Fact Member",
+        "fromColumn": "StatusKey",
+        "toTable": "Status",
+        "toColumn": "StatusKey",
         "crossFilteringBehavior": "bothDirections"
       },
       {
         "name": "51436946-f016-4efc-8e2a-d74098d8006a",
-        "toTable": "AICP Exams",
-        "toColumn": "ExamIDKey",
         "fromTable": "Exam Scores",
-        "fromColumn": "ExamIDKey"
+        "fromColumn": "ExamIDKey",
+        "toTable": "AICP Exams",
+        "toColumn": "ExamIDKey"
       },
       {
         "name": "6735a402-0fd8-4abe-ac1e-5fc671447af9",
-        "toTable": "Exam Registrant Type",
-        "toColumn": "RegistrantTypeIDKey",
         "fromTable": "Exam Scores",
-        "fromColumn": "RegistrantTypeIDKey"
+        "fromColumn": "RegistrantTypeIDKey",
+        "toTable": "Exam Registrant Type",
+        "toColumn": "RegistrantTypeIDKey"
       },
       {
         "name": "18656181-07ff-480c-ac12-8012ff48c703",
+        "toCardinality": "many",
+        "fromTable": "Exam Scores",
         "fromColumn": "MemberIDKey",
         "toTable": "Fact Member",
         "toColumn": "MemberIDKey",
-        "toCardinality": "many",
-        "fromTable": "Exam Scores",
         "crossFilteringBehavior": "bothDirections"
       },
       {
+        "name": "7e5108b1-073f-47e9-b1a3-ea02054c7f1d",
+        "fromTable": "Fact Member",
+        "fromColumn": "MemberTypeIDKey",
+        "toTable": "Member Type",
+        "toColumn": "MemberTypeIDKey"
+      },
+      {
         "name": "fe8d4329-70aa-437f-a19d-5ad1210de2a5",
+        "fromTable": "Claims",
+        "fromColumn": "ID_Claim",
         "toTable": "Fact Claims - StarSchema",
         "toColumn": "ID_Claim",
-        "fromColumn": "ID_Claim",
-        "fromTable": "Claims",
         "crossFilteringBehavior": "bothDirections"
       }
     ],
@@ -2834,58 +2834,72 @@
         "members": [
           {
             "memberName": "akrakos@planning.org",
+            "memberId": "akrakos@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "amoore@planning.org",
+            "memberId": "amoore@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "balbrecht@planning.org",
+            "memberId": "balbrecht@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "bmissaggia@planning.org",
+            "memberId": "bmissaggia@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kkazmierczak@planning.org",
+            "memberId": "kkazmierczak@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "llang@planning.org",
+            "memberId": "llang@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mferguson@planning.org",
+            "memberId": "mferguson@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mjimenez@planning.org",
+            "memberId": "mjimenez@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "MWelch@planning.org",
+            "memberId": "MWelch@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "RJassen@planning.org",
+            "memberId": "RJassen@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "anavarro@planning.org",
+            "memberId": "anavarro@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rsullivan@planning.org",
+            "memberId": "rsullivan@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "jrolla@planning.org",
+            "memberId": "jrolla@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "fbraunstein@planning.org",
+            "memberId": "fbraunstein@planning.org#AzureAD",
             "identityProvider": "AzureAD"
           }
         ]
@@ -2896,22 +2910,32 @@
         "members": [
           {
             "memberName": "plowe@planning.org",
+            "memberId": "plowe@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "msullivan@planning.org",
+            "memberId": "msullivan@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "RWest@planning.org",
+            "memberId": "RWest@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "tjohnson@planning.org",
+            "memberId": "tjohnson@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "cmollet@planning.org",
+            "memberId": "cmollet@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mgranja@planning.org",
+            "memberId": "mgranja@planning.org",
             "identityProvider": "AzureAD"
           }
         ]
@@ -2922,54 +2946,67 @@
         "members": [
           {
             "memberName": "ajimenez@planning.org",
+            "memberId": "ajimenez@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "anavarro@planning.org",
+            "memberId": "anavarro@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "bdonegan@planning.org",
+            "memberId": "bdonegan@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "cparra@planning.org",
+            "memberId": "cparra@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "epasi@planning.org",
+            "memberId": "epasi@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "kgems@planning.org",
+            "memberId": "kgems@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mkraus@planning.org",
+            "memberId": "mkraus@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "mmarrero@planning.org",
+            "memberId": "mmarrero@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rrewers@planning.org",
+            "memberId": "rrewers@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rzack@planning.org",
+            "memberId": "rzack@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "SArteaga@planning.org",
+            "memberId": "SArteaga@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "wfrench@planning.org",
+            "memberId": "wfrench@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "ynoonoo@planning.org",
+            "memberId": "ynoonoo@planning.org",
             "identityProvider": "AzureAD"
           }
         ],
@@ -3020,5 +3057,6 @@
         "value": "600"
       }
     ]
-  }
+  },
+  "id": "SemanticModel"
 }
