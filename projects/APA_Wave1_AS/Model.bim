@@ -32,7 +32,7 @@
           "AuthenticationKind": "OAuth2",
           "kind": "SQL",
           "path": "apadwprod.database.windows.net;apaprod",
-          "Expires": "Fri, 19 Feb 2021 09:03:12 GMT"
+          "Expires": "Fri, 26 Feb 2021 20:13:02 GMT"
         }
       }
     ],
@@ -1823,7 +1823,6 @@
           {
             "name": "Isactive",
             "dataType": "boolean",
-            "isHidden": true,
             "sourceColumn": "Isactive"
           },
           {
@@ -1845,6 +1844,44 @@
               "           1,",
               "           0",
               "     )"
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "_Active_Divisions",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": [
+              " ",
+              "VAR __DISTINCT_VALUES_COUNT = DISTINCTCOUNT('Product'[Description])",
+              "VAR __MAX_VALUES_TO_SHOW = 100",
+              "var Logic_=IF(",
+              "\t\t__DISTINCT_VALUES_COUNT > __MAX_VALUES_TO_SHOW,",
+              "\t\tCONCATENATE(",
+              "\t\t\tCALCULATE(CONCATENATEX(",
+              "\t\t\t\tTOPN(",
+              "\t\t\t\t\t__MAX_VALUES_TO_SHOW,",
+              "\t\t\t\t\tVALUES('Product'[Description]),",
+              "\t\t\t\t\t'Product'[Description],",
+              "\t\t\t\t\tASC",
+              "\t\t\t\t),",
+              "\t\t\t\t'Product'[Description],",
+              "\t\t\t\t\", \",",
+              "\t\t\t\t'Product'[Description],",
+              "\t\t\t\tASC",
+              "\t\t\t),'Product'[Prod_Type]=\"SEC\",'Status'[Status]=\"A\",'Paid Thru Date'[date]>=TODAY()),",
+              "\t\t\tBLANK()",
+              "\t\t),",
+              "\t\tCALCULATE(CONCATENATEX(",
+              "\t\t\tVALUES('Product'[Description]),",
+              "\t\t\t'Product'[Description],",
+              "\t\t\t\", \",",
+              "\t\t\t'Product'[Description],",
+              "\t\t\tASC",
+              "\t\t),'Product'[Prod_Type]=\"SEC\",'Status'[Status]=\"A\",'Paid Thru Date'[date]>=TODAY())",
+              "\t)",
+              "return",
+              "Logic_"
             ]
           }
         ],
@@ -7688,27 +7725,32 @@
         "members": [
           {
             "memberName": "cmollet@planning.org",
-            "memberId": "cmollet@planning.org#AzureAD",
+            "memberId": "cmollet@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "rwest@planning.org",
-            "memberId": "rwest@planning.org#AzureAD",
+            "memberId": "rwest@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "plowe@planning.org",
-            "memberId": "plowe@planning.org#AzureAD",
+            "memberId": "plowe@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "msullivan@planning.org",
-            "memberId": "msullivan@planning.org#AzureAD",
+            "memberId": "msullivan@planning.org",
             "identityProvider": "AzureAD"
           },
           {
             "memberName": "tjohnson@planning.org",
-            "memberId": "tjohnson@planning.org#AzureAD",
+            "memberId": "tjohnson@planning.org",
+            "identityProvider": "AzureAD"
+          },
+          {
+            "memberName": "mgranja@planning.org",
+            "memberId": "mgranja@planning.org",
             "identityProvider": "AzureAD"
           }
         ]
