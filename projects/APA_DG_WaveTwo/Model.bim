@@ -21,7 +21,7 @@
           "AuthenticationKind": "OAuth2",
           "kind": "SQL",
           "path": "apadwprod.database.windows.net;apaprod",
-          "Expires": "Fri, 19 Feb 2021 13:19:07 GMT"
+          "Expires": "Tue, 09 Mar 2021 19:19:31 GMT"
         }
       }
     ],
@@ -43,7 +43,6 @@
           {
             "name": "IsActive",
             "dataType": "boolean",
-            "isHidden": true,
             "sourceColumn": "IsActive"
           },
           {
@@ -181,7 +180,6 @@
           {
             "name": "IsActive",
             "dataType": "boolean",
-            "isHidden": true,
             "sourceColumn": "IsActive"
           },
           {
@@ -243,7 +241,6 @@
           {
             "name": "IsActive",
             "dataType": "boolean",
-            "isHidden": true,
             "sourceColumn": "IsActive"
           },
           {
@@ -583,10 +580,12 @@
             "dataType": "string",
             "isDataTypeInferred": true,
             "expression": [
-              " if('Member'[Designation]=\"AICP CANDIDATE\", \"AICP CANDIDATE\", ",
-              "if('Member'[Designation]in {\"AICP\", \"AICP Candidate\", \"AICP CEP\", \"AICP CEP CTP\", \"AICP CEP CUD\", \"AICP CTP\",",
-              "\"AICP CUD\", \"AICP, AICP CUD\", \"AICP, CTP\"}, \"AICP\",",
-              "if('Member'[Designation] in {\"FAICP\", \"FAICP CTP\", \"FAICP CTP CEP\", \"FAICP CUD\"}, \"FAICP\", \"Unmapped\")))"
+              "IF(CONTAINSSTRING('Member'[Designation], \"AICP CANDIDATE\"), \"AICP CANDIDATE\",",
+              "\tIF(CONTAINSSTRING('Member'[Designation],\"FAICP\"), \"FAICP\",",
+              "\t\tIF(CONTAINSSTRING('Member'[Designation],\"AICP\"), \"AICP\", \"Unmapped\")",
+              "\t)",
+              ")",
+              ""
             ]
           },
           {
@@ -820,7 +819,6 @@
           {
             "name": "IsActive",
             "dataType": "boolean",
-            "isHidden": true,
             "sourceColumn": "IsActive"
           },
           {
@@ -967,7 +965,6 @@
           {
             "name": "IsActive",
             "dataType": "boolean",
-            "isHidden": true,
             "sourceColumn": "IsActive"
           }
         ],
@@ -1026,7 +1023,6 @@
           {
             "name": "IsActive",
             "dataType": "boolean",
-            "isHidden": true,
             "sourceColumn": "IsActive"
           },
           {
@@ -2395,9 +2391,8 @@
             "name": "_OverSelfReportedLimit",
             "expression": [
               "",
-              "CALCULATE(DISTINCTCOUNT('Claims'[log_id]),",
-              "\tFILTER('Claims Flags', 'Claims Flags'[Self_Reported] = True() &&",
-              "\t\t\t'Claims Flags'[Verified] = True()),\t",
+              "CALCULATE(DISTINCTCOUNT('Member'[Member_ID]),",
+              "\tFILTER('Claims Flags', 'Claims Flags'[Self_Reported] = True()),\t",
               "\tFILTER('Claims', SUM('Claims'[Credits])>8 && ",
               "\t\t'Claims'[is_current]=True),",
               "\tFILTER('Claims Log Status', 'Claims Log Status'[Log_Status] IN {\"A\", \"G\", \"R\"})",
