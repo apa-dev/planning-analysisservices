@@ -1438,6 +1438,28 @@
             ]
           }
         ],
+        "hierarchies": [
+          {
+            "name": "CalendarTime",
+            "levels": [
+              {
+                "name": "CalendarYear",
+                "ordinal": 0,
+                "column": "CalendarYear"
+              },
+              {
+                "name": "CalendarQuarter",
+                "ordinal": 1,
+                "column": "CalendarQuarter"
+              },
+              {
+                "name": "CalendarMonth",
+                "ordinal": 2,
+                "column": "CalendarMonth"
+              }
+            ]
+          }
+        ],
         "annotations": [
           {
             "name": "_TM_ExtProp_QueryDefinition",
@@ -1882,6 +1904,42 @@
               "\t)",
               "return",
               "Logic_"
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "JoinQuarter",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "expression": "QUARTER('Member'[JoinDate])"
+          },
+          {
+            "type": "calculated",
+            "name": "JoinYear",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "expression": "Year([JoinDate])"
+          },
+          {
+            "type": "calculated",
+            "name": "JoinMonth",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "expression": "MONTH('Member'[JoinDate])"
+          },
+          {
+            "type": "calculated",
+            "name": "_Designation",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": [
+              "IF('Member'[Designation] = \"\", \"None\",",
+              "\tIF(CONTAINSSTRING('Member'[Designation], \"AICP CANDIDATE\"), \"AICP CANDIDATE\",",
+              "\t\tIF(CONTAINSSTRING('Member'[Designation],\"FAICP\"), \"FAICP\",",
+              "\t\t\tIF(CONTAINSSTRING('Member'[Designation],\"AICP\"), \"AICP\", \"Unmapped\")",
+              "\t\t)",
+              "\t)",
+              ")"
             ]
           }
         ],
@@ -7623,13 +7681,6 @@
         "crossFilteringBehavior": "bothDirections"
       },
       {
-        "name": "831e0fdb-719a-41cb-9975-0bdc8072e79f",
-        "fromTable": "vw_tblFactMember_IS",
-        "fromColumn": "Trans_Date_Key",
-        "toTable": "Trans Date",
-        "toColumn": "Date_Key"
-      },
-      {
         "name": "6f21406d-f3fe-45d8-8c3f-30af51301541",
         "fromTable": "vw_tblFactMember_IS",
         "fromColumn": "Work_Address_Key",
@@ -7686,14 +7737,6 @@
         "crossFilteringBehavior": "bothDirections"
       },
       {
-        "name": "a83d3d31-e2f3-4b53-919b-1609f0bd0b7a",
-        "fromTable": "vw_tblFactMember_IS",
-        "fromColumn": "Paid_Through_Key",
-        "toTable": "Paid Thru Date",
-        "toColumn": "Date_Key",
-        "crossFilteringBehavior": "bothDirections"
-      },
-      {
         "name": "26c8ee41-a791-4806-817b-1d8d9a419a2e",
         "fromTable": "vw_tblFactMember_IS",
         "fromColumn": "ChapterKey",
@@ -7715,6 +7758,21 @@
         "fromColumn": "RaceIDKey",
         "toTable": "Ethnicity_Origin",
         "toColumn": "RaceIDKey",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "831e0fdb-719a-41cb-9975-0bdc8072e79f",
+        "fromTable": "vw_tblFactMember_IS",
+        "fromColumn": "Trans_Date_Key",
+        "toTable": "Trans Date",
+        "toColumn": "Date_Key"
+      },
+      {
+        "name": "a83d3d31-e2f3-4b53-919b-1609f0bd0b7a",
+        "fromTable": "vw_tblFactMember_IS",
+        "fromColumn": "Paid_Through_Key",
+        "toTable": "Paid Thru Date",
+        "toColumn": "Date_Key",
         "crossFilteringBehavior": "bothDirections"
       }
     ],
